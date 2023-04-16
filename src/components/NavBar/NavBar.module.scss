@@ -18,6 +18,9 @@
     button {
       display: inline;
     }
+    .access {
+      @include secondary-button;
+    }
   }
   .links,
   .buttons {
@@ -31,14 +34,18 @@
       a {
         text-decoration: none;
       }
+      .flag {
+        border-radius: 20px;
+        margin-bottom: -4px;
+      }
     }
   }
   .links::after {
     content: "";
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 0;
-    bottom: 20px;
+    bottom: 10px;
     width: 1px;
     background-color: $fontColor;
   }
