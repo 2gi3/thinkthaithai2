@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  background: red;
+  display: flex;
+  justify-content: space-between;
+  .brand {
+    padding: 20px 40px 20px 40px;
+    font-size: 28px;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 40px;
+    background-color: aqua;
+    li {
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
