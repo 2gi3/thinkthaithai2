@@ -5,12 +5,17 @@ import styles from "@/styles/Home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { changeCurrency } from "@/redux/slices/currencySlice";
+// import { getExchangeRate } from "@/functions";
+import { useEffect, useState } from "react";
+import { useExchangeRate } from "@/functions/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const currency = useSelector((state: RootState) => state.currency.value);
   const dispatch = useDispatch();
+  const exchangeRate = useExchangeRate(currency);
+
   return (
     <>
       <Head>
@@ -25,9 +30,9 @@ export default function Home() {
             aria-label="Change currency"
             onClick={() => dispatch(changeCurrency("GBP"))}
           >
-            USD
+            {currency}
           </button>
-          <div>{currency}</div>
+          <div>{exchangeRate !== null ? exchangeRate : "Loading..."}</div>
         </div>
       </main>
     </>

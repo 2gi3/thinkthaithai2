@@ -8,6 +8,21 @@ import { changeCurrency } from "@/redux/slices/currencySlice";
 const NavBar = () => {
   const currency = useSelector((state: RootState) => state.currency.value);
   const dispatch = useDispatch();
+  const currencies = [
+    { currency: "AUD", country: "Australia" },
+    { currency: "CAD", country: "Canada" },
+    { currency: "CNY", country: "China" },
+    { currency: "EUR", country: "European Union" },
+    { currency: "GBP", country: "United Kingdom" },
+    { currency: "HKD", country: "Hong Kong" },
+    { currency: "JPY", country: "Japan" },
+    { currency: "KRW", country: "South Korea" },
+    { currency: "NZD", country: "New Zealand" },
+    { currency: "THB", country: "Thailand" },
+    { currency: "TWD", country: "Taiwan" },
+    { currency: "USD", country: "United States" },
+  ];
+
   return (
     <nav className={styles.container}>
       <div className={styles.brand}>
@@ -30,7 +45,10 @@ const NavBar = () => {
         </ul>
         <ul className={styles.buttons}>
           <li>
-            <button>
+            <button
+              aria-label="Change currency"
+              onClick={() => console.log("THB")}
+            >
               <Image
                 className={styles.flag}
                 height={20}
@@ -50,6 +68,21 @@ const NavBar = () => {
           </li>
         </ul>
         <button className={styles.access}>Log In</button>
+      </div>
+      <div className={styles.currencyList}>
+        <ul>
+          {currencies.map(({ currency, country }) => (
+            <li key={currency}>
+              <button
+                aria-label={`Select ${currency} currency`}
+                onClick={() => dispatch(changeCurrency(currency))}
+              >
+                <span>{currency}</span>
+                {country}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );
