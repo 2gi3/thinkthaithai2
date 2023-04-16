@@ -1,25 +1,37 @@
 import styles from "./NavBar.module.scss";
+import Link from "next/link";
 
 const NavBar = () => {
   return (
     <nav className={styles.container}>
       <div className={styles.brand}>
-        <a href="/">ThinkThaiThai</a>
+        <Link href="/">ThinkThaiThai</Link>
       </div>
-      <ul className={styles.links}>
-        <li>
-          <a href="/">About Me</a>
-        </li>
-        <li>
-          <a href="/">Price</a>
-        </li>
-        <li>
-          <a href="/">Feedbacks</a>
-        </li>
-        <li>
-          <a href="/">Free Courses</a>
-        </li>
-      </ul>
+      <div className={styles.navigation}>
+        <ul className={styles.links}>
+          <li>
+            <Link href="/">About Me</Link>
+          </li>
+          <li>
+            <Link href="/">Price</Link>
+          </li>
+          <li>
+            <Link href="/">Feedbacks</Link>
+          </li>
+          <li>
+            <Link href="/">Free Courses</Link>
+          </li>
+        </ul>
+        <ul className={styles.buttons}>
+          <li>
+            <button>ENG</button>
+          </li>
+          <li>
+            <button>USD</button>
+          </li>
+        </ul>
+        <button>Log In</button>
+      </div>
     </nav>
   );
 };
