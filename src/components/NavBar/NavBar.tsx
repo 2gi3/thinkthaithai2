@@ -8,6 +8,7 @@ import {
   toggleCurrencySelector,
 } from "@/redux/slices/currencySlice";
 import CurrencyToggle from "../Currency/CurrencyToggle";
+import LanguageSelector from "../Language/languageSetector";
 
 const NavBar = () => {
   const currency = useSelector((state: RootState) => state.currency.value);
@@ -60,7 +61,7 @@ const NavBar = () => {
         </ul>
         <ul className={styles.buttons}>
           <li>
-            <button
+            {/* <button
               aria-label="Change currency"
               onClick={() => console.log("THB")}
             >
@@ -71,7 +72,8 @@ const NavBar = () => {
                 src="/images/FlagBritish.webp"
                 alt="British flag"
               />
-            </button>
+            </button> */}
+            <LanguageSelector />
           </li>
           <li>
             <CurrencyToggle label={currency} />

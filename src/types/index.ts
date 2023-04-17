@@ -8,3 +8,8 @@ export type LayoutProps = {
     value: string
     selectorIsOpen: boolean
   }
+
+  export interface LocaleToLanguage {
+    [key: string]: string;
+  }
+  

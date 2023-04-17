@@ -19,9 +19,6 @@
     button {
       display: inline;
     }
-    .access {
-      @include secondary-button;
-    }
   }
   .links,
   .buttons {
@@ -34,10 +31,6 @@
     li {
       a {
         text-decoration: none;
-      }
-      .flag {
-        border-radius: 20px;
-        margin-bottom: -4px;
       }
     }
   }
@@ -53,18 +46,18 @@
   .currencyList {
     position: absolute;
     background-color: white;
-    top: 20px;
+    top: 40px;
     left: 50%;
     transform: translate(-50%);
     width: 280px;
     padding-bottom: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
     .title {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 20px 0;
+      padding: 10px 10px 0;
       button {
         @include secondary-button;
       }
@@ -101,6 +94,10 @@
     .currencyList {
       width: 420px;
       top: 60px;
+      border-radius: 20px;
+      .title {
+        padding: 20px 20px 0;
+      }
       ul {
         display: flex;
         flex-wrap: wrap;
@@ -112,6 +109,10 @@
           @include secondary-font;
           width: 150px;
           button {
+            span {
+              @include secondary-font;
+              width: 42px;
+            }
             padding: 20px 0;
           }
         }

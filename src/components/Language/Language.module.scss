@@ -1,0 +1,23 @@
+@use "@/styles" as *;
+
+.LanguageButton {
+  position: relative;
+  img {
+    border-radius: 20px;
+    margin-bottom: -4px;
+  }
+}
+.languageList {
+  position: absolute;
+  top: 60px;
+  background-color: white;
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    li {
+      border-bottom: 1px solid #dddddd;
+      padding: 10px;
+    }
+  }
+}
