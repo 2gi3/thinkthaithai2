@@ -6,4 +6,5 @@ export type LayoutProps = {
 
   export interface CurrencyState {
     value: string
+    selectorIsOpen: boolean
   }

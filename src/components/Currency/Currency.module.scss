@@ -1,0 +1,12 @@
+@use "@/styles" as *;
+
+.container {
+  p {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.currencyToggle {
+  @include secondary-font;
+}

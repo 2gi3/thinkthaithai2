@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   @include secondary-font;
   .brand {
     padding: 20px 40px 20px 40px;
@@ -48,5 +49,73 @@
     bottom: 10px;
     width: 1px;
     background-color: $fontColor;
+  }
+  .currencyList {
+    position: absolute;
+    background-color: white;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 280px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px 0;
+      button {
+        @include secondary-button;
+      }
+    }
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      column-gap: 10px;
+      width: 100%;
+      padding: 10px;
+      li {
+        font-size: 12px;
+        width: 120px;
+        button {
+          width: -webkit-fill-available;
+          padding: 14px 0;
+          border-bottom: 1px solid #dddddd;
+          display: flex;
+          justify-content: left;
+          span {
+            width: 36px;
+            @include tertiary-font;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .container {
+    .currencyList {
+      width: 420px;
+      top: 60px;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        column-gap: 40px;
+        width: 100%;
+        padding: 20px;
+        li {
+          @include secondary-font;
+          width: 150px;
+          button {
+            padding: 20px 0;
+          }
+        }
+      }
+    }
   }
 }

@@ -3,11 +3,22 @@ import styles from "./NavBar.module.scss";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { changeCurrency } from "@/redux/slices/currencySlice";
+import {
+  changeCurrency,
+  toggleCurrencySelector,
+} from "@/redux/slices/currencySlice";
+import CurrencyToggle from "../Currency/CurrencyToggle";
 
 const NavBar = () => {
   const currency = useSelector((state: RootState) => state.currency.value);
+  const currenciesSelectorIsOpen = useSelector(
+    (state: RootState) => state.currency.selectorIsOpen
+  );
   const dispatch = useDispatch();
+  const handleCurrencyChange = (newCurrency: string) => {
+    dispatch(changeCurrency(newCurrency));
+    dispatch(toggleCurrencySelector());
+  };
   const currencies = [
     { currency: "AUD", country: "Australia" },
     { currency: "CAD", country: "Canada" },
@@ -21,6 +32,10 @@ const NavBar = () => {
     { currency: "THB", country: "Thailand" },
     { currency: "TWD", country: "Taiwan" },
     { currency: "USD", country: "United States" },
+    { currency: "INR", country: "India" },
+    { currency: "RUB", country: "Russia" },
+    { currency: "BRL", country: "Brazil" },
+    { currency: "MXN", country: "Mexico" },
   ];
 
   return (
@@ -59,31 +74,34 @@ const NavBar = () => {
             </button>
           </li>
           <li>
-            <button
-              aria-label="Change currency"
-              onClick={() => dispatch(changeCurrency("GBP"))}
-            >
-              {currency}
-            </button>
+            <CurrencyToggle label={currency} />
           </li>
         </ul>
-        <button className={styles.access}>Log In</button>
+        <button className={styles.access}>Log&nbsp;In</button>
       </div>
-      <div className={styles.currencyList}>
-        <ul>
-          {currencies.map(({ currency, country }) => (
-            <li key={currency}>
-              <button
-                aria-label={`Select ${currency} currency`}
-                onClick={() => dispatch(changeCurrency(currency))}
-              >
-                <span>{currency}</span>
-                {country}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {currenciesSelectorIsOpen ? (
+        <div className={styles.currencyList}>
+          <div className={styles.title}>
+            <p>Select your currency</p>
+            <CurrencyToggle label="X" />
+          </div>
+          <ul>
+            {currencies.map(({ currency, country }) => (
+              <li key={currency}>
+                <button
+                  aria-label={`Select ${currency} currency`}
+                  onClick={() => handleCurrencyChange(currency)}
+                >
+                  <span>{currency} </span>
+                  {country}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <></>
+      )}
     </nav>
   );
 };

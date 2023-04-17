@@ -1,8 +1,8 @@
 $primaryFontSize: 28px;
 $primaryFontWeight: 700;
 $secondaryFontSize: 16px;
-$secondatyFontWeight: 500;
-$tertiareFontSize: 14px;
+$secondaryFontWeight: 500;
+$tertiaryFontSize: 14px;
 $fontColor: #505050;
 @mixin primary-font($size: $primaryFontSize, $weight: $primaryFontWeight) {
   font-size: $size;
@@ -12,7 +12,7 @@ $fontColor: #505050;
 
 @mixin secondary-font(
   $size: $secondaryFontSize,
-  $weight: $secondatyFontWeight
+  $weight: $secondaryFontWeight
 ) {
   font-size: $size;
   font-weight: $weight;

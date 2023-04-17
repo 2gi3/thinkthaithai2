@@ -6,6 +6,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: CurrencyState = {
   value: 'USD',
+  selectorIsOpen: false
 }
 
 export const currencySlice = createSlice({
@@ -16,9 +17,12 @@ export const currencySlice = createSlice({
     changeCurrency: (state, action: PayloadAction<string>) => {
       state.value = action.payload
     },
+    toggleCurrencySelector: (state) => {
+      state.selectorIsOpen = !state.selectorIsOpen
+    },
   },
 })
 
-export const { changeCurrency } = currencySlice.actions
+export const { changeCurrency, toggleCurrencySelector } = currencySlice.actions
 
 export default currencySlice.reducer
