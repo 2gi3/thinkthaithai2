@@ -9,6 +9,8 @@ import {
 } from "@/redux/slices/currencySlice";
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
 //--test translatins --START--
 import { useTranslation } from "next-i18next";
@@ -16,6 +18,7 @@ import { useTranslation } from "next-i18next";
 
 const NavBar = () => {
   const { t } = useTranslation("common");
+  const [toggleIsOpen, setToggleIsOpen] = useState(false);
 
   const currency = useSelector((state: RootState) => state.currency.value);
   const currenciesSelectorIsOpen = useSelector(
@@ -47,10 +50,16 @@ const NavBar = () => {
 
   return (
     <nav className={styles.container}>
+      <button
+        className={styles.toggle}
+        onClick={() => setToggleIsOpen(!toggleIsOpen)}
+      >
+        {toggleIsOpen ? <FaTimes /> : <FaBars />}
+      </button>
       <div className={styles.brand}>
         <Link href="/">ThinkThaiThai</Link>
       </div>
-      <div className={styles.navigation}>
+      <div className={toggleIsOpen ? styles.navigation : styles.hide}>
         <ul className={styles.links}>
           <li>
             <Link href="/">{t("about me")}</Link>
@@ -67,18 +76,6 @@ const NavBar = () => {
         </ul>
         <ul className={styles.buttons}>
           <li>
-            {/* <button
-              aria-label="Change currency"
-              onClick={() => console.log("THB")}
-            >
-              <Image
-                className={styles.flag}
-                height={20}
-                width={30}
-                src="/images/FlagBritish.webp"
-                alt="British flag"
-              />
-            </button> */}
             <LanguageSelector />
           </li>
           <li>

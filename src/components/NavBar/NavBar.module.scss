@@ -4,17 +4,27 @@
   background-color: $backgroundColor;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   position: relative;
   @include secondary-font;
+  #hide {
+    display: unset;
+  }
+  .toggle {
+    display: none;
+  }
   .brand {
     padding: 20px 40px 20px 40px;
     @include primary-font;
   }
-  .navigation {
+  .navigation,
+  .hide {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: right;
     margin-right: 40px;
     button {
       display: inline;
@@ -29,6 +39,7 @@
     padding: 20px;
     list-style-type: none;
     li {
+      min-width: max-content;
       a {
         text-decoration: none;
       }
@@ -117,6 +128,62 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 999px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+    .navigation,
+    .hide {
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 599px) {
+  .container {
+    align-items: start;
+    .hide {
+      display: none;
+    }
+    .toggle {
+      display: block;
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      padding: 5px 10px;
+      svg {
+        height: 28px;
+        width: 28px;
+      }
+    }
+    .navigation {
+      flex-direction: column;
+      position: absolute;
+      align-items: end;
+      width: 200px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      top: 65px;
+      right: 40px;
+      margin-right: 0;
+    }
+    .links,
+    .buttons {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .links::after {
+      top: unset;
+      right: 0;
+      left: 0;
+      bottom: 0px;
+      width: 112px;
+      height: 1px;
     }
   }
 }

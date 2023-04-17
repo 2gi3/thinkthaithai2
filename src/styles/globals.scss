@@ -28,6 +28,7 @@ body {
 }
 button {
   all: unset;
+  min-width: max-content;
   &:hover {
     cursor: pointer;
   }
