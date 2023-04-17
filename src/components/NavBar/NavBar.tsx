@@ -10,7 +10,13 @@ import {
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
 
+//--test translatins --START--
+import { useTranslation } from "next-i18next";
+//--test translatins --START--
+
 const NavBar = () => {
+  const { t } = useTranslation("common");
+
   const currency = useSelector((state: RootState) => state.currency.value);
   const currenciesSelectorIsOpen = useSelector(
     (state: RootState) => state.currency.selectorIsOpen
@@ -47,16 +53,16 @@ const NavBar = () => {
       <div className={styles.navigation}>
         <ul className={styles.links}>
           <li>
-            <Link href="/">About Me</Link>
+            <Link href="/">{t("about me")}</Link>
           </li>
           <li>
-            <Link href="/">Price</Link>
+            <Link href="/">{t("price")}</Link>
           </li>
           <li>
-            <Link href="/">Feedbacks</Link>
+            <Link href="/">{t("feedbacks")}</Link>
           </li>
           <li>
-            <Link href="/">Free Courses</Link>
+            <Link href="/">{t("free courses")}</Link>
           </li>
         </ul>
         <ul className={styles.buttons}>
@@ -79,7 +85,7 @@ const NavBar = () => {
             <CurrencyToggle label={currency} />
           </li>
         </ul>
-        <button className={styles.access}>Log&nbsp;In</button>
+        <button className={styles.access}>{t("log in")}</button>
       </div>
       {currenciesSelectorIsOpen ? (
         <div className={styles.currencyList}>

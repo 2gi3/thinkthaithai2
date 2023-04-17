@@ -3,8 +3,10 @@ import type { AppProps } from "next/app";
 import { store } from "@/redux/store";
 import { Provider } from "react-redux";
 import Layout from "@/components/Layout";
+import { appWithTranslation } from "next-i18next";
+// import i18n from "../../next-i18next.config";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Layout>
@@ -13,3 +15,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </Provider>
   );
 }
+
+export default appWithTranslation(App);
