@@ -51,15 +51,21 @@ describe("Languages", () => {
   });
 });
 
-// describe("Currency", () => {
-//     beforeEach(() => {
-//       cy.visit("/");
-//     });
+describe("Currency", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
 
-//     it("Should display or hide a list of currencies according to the toggle button", () => {
-
-//     });
-//     it("Should display the correct price in the selected currency", () => {
-
-//     });
-//   });
+  it.only("Should display or hide a list of currencies according to the toggle button", () => {
+    cy.findByTestId("currency_code").contains("USD");
+    cy.findByTestId("currency_rate").should("have.text", "5");
+    // cy.findByText('Toggle available currencies').should('not.exist')
+    cy.get(".Currency_currencyToggle__AZ3vm")
+      .contains("USD")
+      .should("not.contain", "GBP")
+      .click();
+    cy.findByRole("button", { name: /GBP/i }).click();
+    cy.findByTestId("currency_code").contains("GBP");
+    cy.findByTestId("currency_rate").should("have.text", "4.44");
+  });
+});

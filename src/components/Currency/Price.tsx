@@ -10,9 +10,11 @@ const Price = () => {
   const exchangeRate = useExchangeRate(currency);
   return (
     <div className={styles.container}>
-      <p>
+      <p data-testid="currency_code">
         {currency}
-        <span>{exchangeRate !== null ? exchangeRate : "Loading..."}</span>
+        <span data-testid="currency_rate">
+          {exchangeRate !== null ? exchangeRate : "Loading..."}
+        </span>
       </p>
     </div>
   );
