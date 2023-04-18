@@ -24,18 +24,32 @@ describe("Navigation", () => {
   });
 });
 
-// describe("Languages", () => {
-//     beforeEach(() => {
-//       cy.visit("/");
-//     });
+describe("Languages", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
 
-//     it("Should display or hide a list of languages according to the toggle button", () => {
+  it("Should display or hide the list of languages according to the toggle button and translate website correctly", () => {
+    const languageToggle = cy.findByRole("button", {
+      name: /Select a language/i,
+    });
 
-//     });
-//     it("Should change the website language to the selected one", () => {
-
-//     });
-//   });
+    languageToggle.should("exist");
+    const japaneseLanguageButton = cy.findByText("Japanese");
+    japaneseLanguageButton.should("not.exist");
+    languageToggle.click();
+    japaneseLanguageButton.should("exist");
+    cy.findByRole("button", {
+      name: /select Japanese language/i,
+    }).click();
+    cy.findByRole("link", { name: "フィードバック" }).should("be.visible");
+    cy.findByRole("link", { name: "About Me" }).should("not.exist");
+    cy.findByRole("button", {
+      name: /select Japanese language/i,
+    }).should("not.exist");
+    cy.get("h1").contains("目標を達成しましょう！");
+  });
+});
 
 // describe("Currency", () => {
 //     beforeEach(() => {

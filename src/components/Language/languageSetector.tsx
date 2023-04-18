@@ -23,6 +23,7 @@ const LanguageSelector = () => {
   return (
     <>
       <button
+        data-testid="language-toggle"
         className={styles.LanguageButton}
         aria-label="Select a language"
         onClick={() => setSelectorIsOpen(!selectorIsOpen)}
@@ -40,7 +41,12 @@ const LanguageSelector = () => {
           <ul>
             {locales?.map((l) => (
               <li>
-                <button key={l} onClick={() => handleClick(l)}>
+                <button
+                  data-testid={localeToLanguage[l]}
+                  aria-label={`select ${localeToLanguage[l]} language`}
+                  key={l}
+                  onClick={() => handleClick(l)}
+                >
                   {localeToLanguage[l]}
                 </button>
               </li>
