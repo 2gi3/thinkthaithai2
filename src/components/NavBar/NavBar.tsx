@@ -1,52 +1,21 @@
-import Image from "next/image";
 import styles from "./NavBar.module.scss";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import {
-  changeCurrency,
-  toggleCurrencySelector,
-} from "@/redux/slices/currencySlice";
+
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useState } from "react";
 
-//--test translatins --START--
 import { useTranslation } from "next-i18next";
-//--test translatins --START--
+import { CurrencyList } from "../Currency/CurrencyList";
 
 const NavBar = () => {
   const { t } = useTranslation("common");
   const [toggleIsOpen, setToggleIsOpen] = useState(false);
 
   const currency = useSelector((state: RootState) => state.currency.value);
-  const currenciesSelectorIsOpen = useSelector(
-    (state: RootState) => state.currency.selectorIsOpen
-  );
-  const dispatch = useDispatch();
-  const handleCurrencyChange = (newCurrency: string) => {
-    dispatch(changeCurrency(newCurrency));
-    dispatch(toggleCurrencySelector());
-  };
-  const currencies = [
-    { currency: "AUD", country: "Australia" },
-    { currency: "CAD", country: "Canada" },
-    { currency: "CNY", country: "China" },
-    { currency: "EUR", country: "European Union" },
-    { currency: "GBP", country: "United Kingdom" },
-    { currency: "HKD", country: "Hong Kong" },
-    { currency: "JPY", country: "Japan" },
-    { currency: "KRW", country: "South Korea" },
-    { currency: "NZD", country: "New Zealand" },
-    { currency: "THB", country: "Thailand" },
-    { currency: "TWD", country: "Taiwan" },
-    { currency: "USD", country: "United States" },
-    { currency: "INR", country: "India" },
-    { currency: "RUB", country: "Russia" },
-    { currency: "BRL", country: "Brazil" },
-    { currency: "MXN", country: "Mexico" },
-  ];
 
   return (
     <nav className={styles.container}>
@@ -62,16 +31,16 @@ const NavBar = () => {
       <div className={toggleIsOpen ? styles.navigation : styles.hide}>
         <ul className={styles.links}>
           <li>
-            <Link href="/">{t("about me")}</Link>
+            <Link href="/aboutme">{t("about me")}</Link>
           </li>
           <li>
-            <Link href="/">{t("price")}</Link>
+            <Link href="/price">{t("price")}</Link>
           </li>
           <li>
-            <Link href="/">{t("feedbacks")}</Link>
+            <Link href="/feedbacks">{t("feedbacks")}</Link>
           </li>
           <li>
-            <Link href="/">{t("free courses")}</Link>
+            <Link href="/courses">{t("free courses")}</Link>
           </li>
         </ul>
         <ul className={styles.buttons}>
@@ -82,31 +51,11 @@ const NavBar = () => {
             <CurrencyToggle label={currency} />
           </li>
         </ul>
-        <button className={styles.access}>{t("log in")}</button>
+        <Link href="/access" className={styles.access}>
+          {t("log in")}
+        </Link>
       </div>
-      {currenciesSelectorIsOpen ? (
-        <div className={styles.currencyList}>
-          <div className={styles.title}>
-            <p>Select your currency</p>
-            <CurrencyToggle label="X" />
-          </div>
-          <ul>
-            {currencies.map(({ currency, country }) => (
-              <li key={currency}>
-                <button
-                  aria-label={`Select ${currency} currency`}
-                  onClick={() => handleCurrencyChange(currency)}
-                >
-                  <span>{currency} </span>
-                  {country}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <></>
-      )}
+      <CurrencyList />
     </nav>
   );
 };

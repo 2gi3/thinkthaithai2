@@ -1,16 +1,21 @@
-// export const getExchangeRate= async (newRate: string, baseCurrency = 'USD', amount = 5) =>{
+import { NextApiResponse } from "next";
 
-//     try {
-//         const raw = await fetch(`https://api.coinbase.com/v2/exchange-rates?currency=${baseCurrency}`);
-//         const {data} = await raw.json();
-//         const newCurrencyValue = data.rates[newRate] * amount
-        
-//         return newCurrencyValue
-    
-       
-//       } catch (error) {
-//         console.error(error)
-//       }
+export const handleMockGetRequest = (data: any, delay: number, res: NextApiResponse<any>)=>{
+    return new Promise((resolve, reject) => {
 
-// }
-
+      setTimeout(() => {
+        try {  
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Content-Type', 'application/json');
+          res.statusCode = 200;
+          res.end(JSON.stringify(data));
+          resolve(data);
+        } catch (error) {
+          console.error(error);
+          res.statusCode = 500;
+          res.end('Error fetching mock data');
+          reject(error);
+        }
+      }, delay);
+    });
+  }

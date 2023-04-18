@@ -7,19 +7,10 @@ import Price from "@/components/Currency/Price";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
-export const Footer = () => {
-  const { t } = useTranslation("common");
-
-  return (
-    <footer>
-      <p>{t("about me")}</p>
-    </footer>
-  );
-};
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { t } = useTranslation("homepage");
   const { locale } = useRouter();
   const currency = useSelector((state: RootState) => state.currency.value);
 
@@ -31,13 +22,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <header>
         <div>
-          <Footer />
-          <h1>{locale}</h1>
+          <h1>{t("title")}</h1>
+          <ul>
+            {t("Learn Thai Language With")}
+            <li>{t("Customised Lessons")}</li>
+            <li>{t("Study material")}</li>
+            <li>{t("& Homeworks")}</li>
+          </ul>
+          <div>
+            <button>{t("Start Now")}</button>
+            <p>
+              {t("The trial lesson is")}&nbsp;
+              <span>{t("Only")}</span>
+            </p>
+            <Price />
+          </div>
         </div>
-        <Price />
-      </main>
+      </header>
+      <main className={styles.main}></main>
     </>
   );
 }

@@ -12,4 +12,10 @@ export type LayoutProps = {
   export interface LocaleToLanguage {
     [key: string]: string;
   }
+
+  export interface Currency {
+    currency: string;
+    country: string;
+  }
+  
   

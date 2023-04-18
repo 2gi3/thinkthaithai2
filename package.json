@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -23,5 +24,11 @@
     "react-redux": "^8.0.5",
     "sass": "^1.62.0",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
+    "@types/testing-library__cypress": "^5.0.9",
+    "cypress": "^12.10.0",
+    "eslint-plugin-cypress": "^2.13.2"
   }
 }
