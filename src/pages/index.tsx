@@ -32,7 +32,7 @@ export default function Home() {
 
         <meta
           property="og:image"
-          content={"https://www.thikthaithai.com/1.png"}
+          content={"https://thinkthaithai-draft.netlify.app/1.png"}
         />
 
         <link rel="icon" href="/logo.webp" />
