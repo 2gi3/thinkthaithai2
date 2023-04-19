@@ -10,6 +10,7 @@
 }
 .languageList {
   position: absolute;
+  z-index: 2;
   top: 60px;
   background-color: white;
   ul {
