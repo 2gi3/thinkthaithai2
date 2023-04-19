@@ -40,11 +40,10 @@ const LanguageSelector = () => {
         <div className={styles.languageList}>
           <ul>
             {locales?.map((l) => (
-              <li>
+              <li key={l}>
                 <button
                   data-testid={localeToLanguage[l]}
                   aria-label={`select ${localeToLanguage[l]} language`}
-                  key={l}
                   onClick={() => handleClick(l)}
                 >
                   {localeToLanguage[l]}
