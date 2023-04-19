@@ -67,7 +67,45 @@ export default function Home() {
           <img loading="eager" src="/heroNoBG.webp" />
         </picture>
       </header>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <div className={styles.courses}>
+          <div>
+            <h2>{t("Speaking & Listening")}</h2>
+            <p>
+              {t(
+                "Simulate real life situations\nWatch Thai drama\nlearn your favourite songs\nand listen to podcasts"
+              )}
+            </p>
+          </div>
+          <div>
+            <h2>{t("Reading & Writing")}</h2>
+            <p>
+              {t(
+                "Thai alphabet and grammar\nLearn & practice Thai tones\nUse primary school books\nQuick daily exercises "
+              )}
+            </p>
+          </div>
+          <div>
+            <h2>
+              <span>{t("Gain the ")}</span>
+              {t("Confidence")}
+            </h2>
+            <p>
+              {t(
+                "to engage in daily conversations,\nexplore Thai social media, chats, news and literature"
+              )}
+            </p>
+          </div>
+        </div>
+        <div className={styles.teacher}>
+          <iframe
+            src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
+            width="274"
+            height="205"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </main>
     </>
   );
 }

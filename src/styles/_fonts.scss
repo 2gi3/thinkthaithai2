@@ -5,6 +5,7 @@ $secondaryFontSize: 16px;
 $secondaryFontWeight: 500;
 $tertiaryFontSize: 14px;
 $fontColor: #505050;
+$pLineHeight: 20px;
 
 @mixin primary-font($size: $primaryFontSize, $weight: $primaryFontWeight) {
   font-size: $size;
