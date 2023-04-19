@@ -98,19 +98,42 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.teacher}>
-          <iframe
-            src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
-            width="274"
-            height="205"
-            loading="lazy"
-          ></iframe>
+          <div className={styles.video}>
+            <h2>{t("My name is Natt")}</h2>
+            <iframe
+              src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
+              width="274"
+              height="205"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div className={styles.introduction}>
+            <p>
+              {t(
+                "In my 5 years of experience,\nI have guided hundreds of students\nFrom beginners to advanced, on the path to ,"
+              )}
+              <span>{t("Success")}</span>
+            </p>
+            <p>
+              {t(
+                "Whether you’re learning Thai\nfor Business, Holidays, Family reasons,\nor you want to enjoy some Thai Drama.\nI will adapt my lessons to your goals and learning style. \nFind out more about Me\nAnd feel free to Contact Me if you have any questions"
+              )}
+            </p>
+            {/* <Link href="/aboutme">{t("About Me")}</Link> */}
+            {/* <p>{t("And feel free to")}</p>
+            <button>{t("Contact Me")}</button>
+            <p>{t("if you have any questions")}</p> */}
+          </div>
         </div>
+        <Contacts />
       </main>
     </>
   );
 }
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
+import Contacts from "@/components/Contacts/Contacts";
 
 export async function getStaticProps({ locale }: any) {
   return {
