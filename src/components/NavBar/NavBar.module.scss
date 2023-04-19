@@ -15,7 +15,7 @@
     display: none;
   }
   .brand {
-    padding: $baseS $base;
+    padding: $base $baseL;
     @include primary-font;
   }
   .navigation,
@@ -24,7 +24,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: right;
-    margin-right: $base;
+    margin-right: $baseL;
     button {
       display: inline;
     }
@@ -34,8 +34,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: $baseS;
-    padding: $baseS;
+    gap: $base;
+    padding: $base;
     list-style-type: none;
     li {
       min-width: max-content;
@@ -47,11 +47,11 @@
   .links::after {
     content: "";
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 0;
-    bottom: 10px;
+    bottom: 15px;
     width: 1px;
-    background-color: $fontColor;
+    background-color: #999999;
   }
 }
 
@@ -59,6 +59,9 @@
   .container {
     display: flex;
     flex-direction: column-reverse;
+    .brand {
+      padding-top: $baseS;
+    }
     .navigation,
     .hide {
       margin-right: 0;
@@ -75,8 +78,8 @@
     .toggle {
       display: block;
       position: absolute;
-      top: 8px;
-      right: 22px;
+      top: 16px;
+      right: 30px;
       padding: 5px 10px;
       svg {
         height: 28px;
@@ -90,17 +93,20 @@
       align-items: end;
       width: 160px;
       background-color: white;
-      padding: $baseS;
+      padding: $base;
       border-radius: 12px;
       top: 65px;
-      right: $base;
+      right: $baseL;
       margin-right: 0;
+    }
+    .navigation > a {
+      padding: 5px 11px;
     }
     .links,
     .buttons {
       flex-direction: column;
       align-items: flex-end;
-      padding: $base;
+      padding: $baseS;
     }
     .links::after {
       top: unset;
