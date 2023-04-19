@@ -1,3 +1,17 @@
-$primaryColor: red;
-$secondaryColor: blue;
-$backgroundColor: #eeeeee;
+@use "./measures" as *;
+
+$primaryColor: #8f79ff;
+$primaryColorLight: #eae6ff;
+$secondaryColor: #ff8900;
+$secondaryColorLight: #ffdfba;
+$backgroundColor: linear-gradient(3deg, #eeeeee, #ffffff);
+$shadow: -1px 1px 1px rgba(80, 80, 80, 0.2);
+
+@mixin gradient-text($color1: $primaryColor, $color2: $primaryColorLight) {
+  width: max-content;
+  background-image: linear-gradient(3deg, $color1, $color2);
+  background-clip: text;
+  color: transparent;
+  margin-bottom: $base;
+  filter: drop-shadow(-1px 1px 1px rgba(80, 80, 80, 0.5));
+}

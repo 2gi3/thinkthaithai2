@@ -7,7 +7,7 @@ const CurrencyToggle = ({ label }: { label: string }) => {
   return (
     <button
       className={styles.currencyToggle}
-      aria-label={`Toggle selection of available currencies`}
+      aria-label={`Toggle available currencies`}
       onClick={() => dispatch(toggleCurrencySelector())}
     >
       {label}

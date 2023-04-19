@@ -18,12 +18,27 @@ export default function Home() {
     <>
       <Head>
         <title>ThinkThaiThai</title>
-        <meta name="description" content="Achieve your Thai language Goals!" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Learn thai test" />
+        {/* <meta property="og:image" content="/1.png" /> */}
+        <meta property="og:url" content="https://www.thikthaithai.com/" />
+        <meta property="og:type" content="website" />
+
+        <meta property="og:title" content="Achieve Your Thai Language Goals!" />
+
+        <meta
+          property="og:description"
+          content="Teaching and guiding you through every step of your learning journey"
+        />
+
+        <meta
+          property="og:image"
+          content={"https://www.thikthaithai.com/1.png"}
+        />
+
+        <link rel="icon" href="/logo.webp" />
       </Head>
-      <header>
-        <div>
+      <header className={styles.header}>
+        <div className={styles.title}>
           <h1>{t("title")}</h1>
           <ul>
             {t("Learn Thai Language With")}
@@ -33,13 +48,24 @@ export default function Home() {
           </ul>
           <div>
             <button>{t("Start Now")}</button>
-            <p>
-              {t("The trial lesson is")}&nbsp;
-              <span>{t("Only")}</span>
-            </p>
-            <Price />
+            <div className={styles.underText}>
+              <p>
+                {t("The trial lesson is")}&nbsp;
+                <span>{t("Only")}</span>
+              </p>
+              <Price />
+            </div>
           </div>
         </div>
+        <picture>
+          <source
+            media="(max-width: 568px)"
+            srcSet="/fullMobile.webp 568w"
+            sizes="100vw"
+          />
+          <source srcSet="/heroNoBG.webp 1280w" sizes="1280px" />
+          <img loading="eager" src="/heroNoBG.webp" />
+        </picture>
       </header>
       <main className={styles.main}></main>
     </>

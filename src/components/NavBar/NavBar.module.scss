@@ -1,7 +1,6 @@
 @use "@/styles" as *;
 
 .container {
-  background-color: $backgroundColor;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -16,7 +15,7 @@
     display: none;
   }
   .brand {
-    padding: 20px 40px 20px 40px;
+    padding: $baseS $base;
     @include primary-font;
   }
   .navigation,
@@ -25,7 +24,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: right;
-    margin-right: 40px;
+    margin-right: $base;
     button {
       display: inline;
     }
@@ -35,8 +34,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: $baseS;
+    padding: $baseS;
     list-style-type: none;
     li {
       min-width: max-content;
@@ -76,8 +75,8 @@
     .toggle {
       display: block;
       position: absolute;
-      top: 15px;
-      right: 30px;
+      top: 8px;
+      right: 22px;
       padding: 5px 10px;
       svg {
         height: 28px;
@@ -87,19 +86,21 @@
     .navigation {
       flex-direction: column;
       position: absolute;
+      z-index: 2;
       align-items: end;
-      width: 200px;
+      width: 160px;
       background-color: white;
-      padding: 20px;
+      padding: $baseS;
       border-radius: 12px;
       top: 65px;
-      right: 40px;
+      right: $base;
       margin-right: 0;
     }
     .links,
     .buttons {
       flex-direction: column;
       align-items: flex-end;
+      padding: $base;
     }
     .links::after {
       top: unset;

@@ -1,7 +1,7 @@
 export default function About() {
   return (
-    <div>
+    <header>
       <h1>Log&nbsp;In</h1>
-    </div>
+    </header>
   );
 }
