@@ -10,7 +10,7 @@ const Contacts = () => {
           <li>
             <a href="https://www.instagram.com/thaiwithnatt" target="blank">
               <Image
-                src="/logo-ig-png-32461-64x64.ico"
+                src="/instagramIcon.webp"
                 width="55"
                 height="55"
                 alt="Instagram"
