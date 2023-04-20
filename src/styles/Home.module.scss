@@ -93,11 +93,12 @@
       }
     }
     h2 {
-      @include gradient-text();
+      @include gradient-text($lightAngle: 1deg);
       margin-bottom: 0;
     }
     a {
       @include primary-button($lightAngle: 1deg);
+      box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.4);
       margin-left: -1px;
     }
   }

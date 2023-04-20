@@ -141,7 +141,6 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <Contacts />
       </main>
     </>
   );
