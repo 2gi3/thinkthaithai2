@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { t } = useTranslation("homepage");
+  const [showContacts, setShowContacts] = useState(false);
   const { locale } = useRouter();
   const currency = useSelector((state: RootState) => state.currency.value);
 
@@ -116,13 +117,30 @@ export default function Home() {
             </p>
             <p>
               {t(
-                "Whether you’re learning Thai\nfor Business, Holidays, Family reasons,\nor you want to enjoy some Thai Drama.\nI will adapt my lessons to your goals and learning style. \nFind out more about Me\nAnd feel free to Contact Me if you have any questions"
+                "Whether you’re learning Thai\nfor Business, Holidays, Family reasons,\nor you want to enjoy some Thai Drama.\nI will adapt my lessons to your goals and learning style. \nFind out more"
               )}
+              <Link href="/aboutme">{t("About Me")}</Link>
             </p>
-            {/* <Link href="/aboutme">{t("About Me")}</Link> */}
-            {/* <p>{t("And feel free to")}</p>
-            <button>{t("Contact Me")}</button>
-            <p>{t("if you have any questions")}</p> */}
+            <div>
+              {t("And feel free to")}{" "}
+              <button
+                onClick={() => setShowContacts(!showContacts)}
+                className={styles.contactsToggle}
+              >
+                {t("Contact Me")}
+              </button>
+            </div>
+            <p>{t("if you have any questions")}</p>
+            {showContacts ? (
+              <div className={styles.homepageContacts}>
+                <button onClick={() => setShowContacts(!showContacts)}>
+                  X
+                </button>
+                <Contacts />
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className={styles.price}>
@@ -149,6 +167,7 @@ export default function Home() {
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import Contacts from "@/components/Contacts/Contacts";
+import { useState } from "react";
 
 export async function getStaticProps({ locale }: any) {
   return {

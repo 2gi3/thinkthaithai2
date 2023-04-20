@@ -30,6 +30,8 @@
   }
 }
 .main {
+  position: relative;
+
   .courses {
     display: flex;
     flex-wrap: wrap;
@@ -51,11 +53,28 @@
     }
   }
   .teacher {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: 24px;
+    .homepageContacts {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      background: white;
+      padding: 0 36px;
+      border-radius: 12px;
+      height: 140px;
+      button {
+        position: absolute;
+        top: $base;
+        right: $baseL;
+      }
+    }
     .video {
       h2 {
         margin-bottom: $base;
@@ -73,6 +92,11 @@
       max-width: 300px;
       p {
         line-height: $pLineHeight;
+      }
+      .contactsToggle,
+      a {
+        color: blue;
+        text-decoration: underline;
       }
     }
   }
