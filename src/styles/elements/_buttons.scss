@@ -8,7 +8,7 @@
 // }
 @mixin primary-button($color1: $secondaryColor, $color2: $secondaryColorLight) {
   width: max-content;
-  background-image: linear-gradient(5deg, $color1, $color2);
+  background-image: linear-gradient(15deg, $color1, $color2);
   padding: 13px 26px;
   border-radius: $base;
   font-weight: 700;

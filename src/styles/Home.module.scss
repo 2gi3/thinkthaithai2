@@ -5,7 +5,7 @@
   justify-content: center;
   margin: $baseXL 0;
   .title {
-    width: max-content;
+    // width: max-content;
     // margin: $baseL;
     .underText {
       margin-top: $base;
@@ -50,11 +50,39 @@
       }
     }
   }
+  .teacher {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+    .video {
+      h2 {
+        margin-bottom: $base;
+        text-align: center;
+      }
+      margin: $baseXL;
+      width: max-content;
+      iframe {
+        width: 300px;
+        border-radius: $base;
+      }
+    }
+    .introduction {
+      max-width: 300px;
+      p {
+        line-height: $pLineHeight;
+      }
+    }
+  }
 }
 
 /* Mobile */
 @media (max-width: 599px) {
   .header {
+    .title {
+      margin: $baseL;
+    }
     picture {
       display: none;
     }
