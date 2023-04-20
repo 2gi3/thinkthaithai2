@@ -125,6 +125,22 @@ export default function Home() {
             <p>{t("if you have any questions")}</p> */}
           </div>
         </div>
+        <div className={styles.price}>
+          <h2>{t("Start Learning Now!")}</h2>
+          <div>
+            <p>
+              {t("The trial lesson is")}&nbsp;
+              <span>{t("Only")}</span>
+            </p>
+            <Price />
+          </div>
+          <Link href="/price">{t("More About Pricing")}</Link>
+          <div className={styles.underText}>
+            <p>
+              {t("Learning materials, homeworks and exercices always included")}
+            </p>
+          </div>
+        </div>
         <Contacts />
       </main>
     </>

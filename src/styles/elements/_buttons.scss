@@ -6,9 +6,13 @@
 //   border: 1px solid $fontColor;
 //   border-radius: 10px;
 // }
-@mixin primary-button($color1: $secondaryColor, $color2: $secondaryColorLight) {
+@mixin primary-button(
+  $color1: $secondaryColor,
+  $color2: $secondaryColorLight,
+  $lightAngle: 15deg
+) {
   width: max-content;
-  background-image: linear-gradient(15deg, $color1, $color2);
+  background-image: linear-gradient($lightAngle, $color1, $color2);
   padding: 13px 26px;
   border-radius: $base;
   font-weight: 700;

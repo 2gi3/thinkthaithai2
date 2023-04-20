@@ -66,6 +66,7 @@
       iframe {
         width: 300px;
         border-radius: $base;
+        border: 1px solid black;
       }
     }
     .introduction {
@@ -73,6 +74,31 @@
       p {
         line-height: $pLineHeight;
       }
+    }
+  }
+  .price {
+    margin: $baseXL;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $baseL 0;
+    gap: 12px;
+    & > div:first-of-type {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: $base;
+      p {
+        min-width: max-content;
+      }
+    }
+    h2 {
+      @include gradient-text();
+      margin-bottom: 0;
+    }
+    a {
+      @include primary-button($lightAngle: 1deg);
+      margin-left: -1px;
     }
   }
 }
