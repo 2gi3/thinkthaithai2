@@ -7,7 +7,9 @@ const Footer = () => {
   const { t } = useTranslation("common");
   return (
     <footer>
-      <Contacts />
+      <div className={styles.contactsContainer}>
+        <Contacts />
+      </div>
       <div className={styles.credits}>
         <div className={styles.image}>
           <Image
@@ -24,6 +26,9 @@ const Footer = () => {
           <p>{t("London")}</p>
         </div>
       </div>
+      <p className={styles.copyRights}>
+        Giuseppe Ippolito © 2023 All rights reserved
+      </p>
     </footer>
   );
 };
