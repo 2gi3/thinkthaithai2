@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import { Document, Model } from "mongoose";
+
 
 export type LayoutProps = {
     children: ReactNode
@@ -17,5 +19,17 @@ export type LayoutProps = {
     currency: string;
     country: string;
   }
+
+  export interface IStudent {
+    name: string;
+    email: string;
+    password: string;
+    fundedLessons?: number;
+  }
+  
+  export interface IStudentDocument extends IStudent, Document {}
+  
+  export interface IStudentModel extends Model<IStudentDocument> {}
+  
   
   
