@@ -8,3 +8,5 @@ export const nameRegex: RegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*){0,34}
 // Matches a password with 8-20 characters, at least one uppercase letter, and at least one special character
 // Allows for a wide range of special characters (including common punctuation and symbols)
 export const passwordRegex: RegExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{8,20}$/;
+
+export const imageURLRegex: RegExp = /^https:\/\/res\.cloudinary\.com\/.*/;

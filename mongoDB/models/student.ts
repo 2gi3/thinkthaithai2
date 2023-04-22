@@ -1,5 +1,5 @@
 import { Schema, model, models, Types } from "mongoose";
-import { emailRegex, nameRegex, passwordRegex } from "../../regEx";
+import { emailRegex, imageURLRegex, nameRegex, passwordRegex } from "../../regEx";
 import { IStudentDocument, IStudentModel  } from "@/types";
 
 
@@ -28,10 +28,11 @@ const StudentSchema = new Schema<IStudentDocument, IStudentModel>(
       required: true,
       unique: false,
     },
-    imageUrl: {
+    imageURL: {
       type: String,
       required: false,
-      unique:false
+      unique:false,
+      match: [imageURLRegex, 'Please make sure the URL matches the regEx']
     },
     fundedLessons: {
       type: Number,

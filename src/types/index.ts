@@ -26,7 +26,7 @@ export type LayoutProps = {
     password: string;
     fundedLessons?: number;
     imageFile?: string;
-    imageUrl?: string;
+    imageURL?: string;
   }
   
   export interface IStudentDocument extends IStudent, Document {}
