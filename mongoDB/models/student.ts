@@ -28,7 +28,11 @@ const StudentSchema = new Schema<IStudentDocument, IStudentModel>(
       required: true,
       unique: false,
     },
-
+    imageUrl: {
+      type: String,
+      required: false,
+      unique:false
+    },
     fundedLessons: {
       type: Number,
       required: false,

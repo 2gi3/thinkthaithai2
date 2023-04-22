@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { IStudent } from "@/types";
 
 const CreateStudentForm = () => {
+  const [preview, setPreview] = useState<string>("");
   const [formData, setFormData] = useState<IStudent>({
     name: "",
     email: "",
     password: "",
     fundedLessons: 0,
+    imageFile: preview,
   });
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(JSON.stringify(formData));
     try {
       const response = await fetch("/api/students", {
         method: "POST",
@@ -37,6 +40,27 @@ const CreateStudentForm = () => {
       [event.target.name]: event.target.value,
     }));
   };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      setPreview("");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+      console.log(preview);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      imageFile: preview,
+    }));
+  }, [preview]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -78,6 +102,21 @@ const CreateStudentForm = () => {
           name="fundedLessons"
           value={formData.fundedLessons}
           onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="image">Image:</label>
+        {preview ? (
+          <img src={preview} alt="Preview" style={{ maxWidth: "200px" }} />
+        ) : (
+          <div>No image selected</div>
+        )}
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          onChange={handleImageChange}
         />
       </div>
       <button type="submit">Create Student</button>
