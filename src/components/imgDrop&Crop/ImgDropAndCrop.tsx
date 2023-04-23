@@ -8,7 +8,7 @@ const ImgDropAndCrop = () => {
         <section>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
+            <p>Drag and drop some files here, or click to select files</p>
           </div>
         </section>
       )}

@@ -7,6 +7,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/src/ReactCrop.scss";
 import { Crop, PixelCrop } from "react-image-crop/dist/types";
 
+// "image/*": [".png", ".gif", ".jpeg", ".jpg"],
 const CreateStudentForm = () => {
   const [crop, setCrop] = useState<Crop>({
     unit: "px", // Can be 'px' or '%'
@@ -57,6 +58,11 @@ const CreateStudentForm = () => {
 
   const imageMaxSize = 10024;
   const handleOnDrop = (files: any, rejectedFiles?: any) => {
+    if (files.length === 0 || !(files[0] instanceof Blob)) {
+      console.error("Invalid file");
+      return;
+    }
+
     rejectedFiles && console.log(rejectedFiles);
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -178,12 +184,11 @@ const CreateStudentForm = () => {
               <ReactCrop
                 aspect={1}
                 circularCrop={true}
+                // maxHeight={120}
+                // maxWidth={120}
                 crop={crop}
                 onChange={(newCrop) => setCrop(newCrop)}
-                onComplete={onCropComplete}
-                onDragStart={(e: any) => onDragStart(e)}
                 onDragEnd={(e: any) => handleDragEnd(e)}
-                // onComplete={(crop) => console.log(crop)}
               >
                 <img
                   src={preCropImg}
@@ -198,16 +203,17 @@ const CreateStudentForm = () => {
             </>
           ) : (
             <Dropzone
+              accept={{ Image: [".png", ".jpg", ".jpeg", ".gif"] }}
               maxSize={imageMaxSize}
               multiple={false}
               onDrop={(acceptedFiles) => handleOnDrop(acceptedFiles)}
             >
               {({ getRootProps, getInputProps }) => (
                 <section>
-                  <div {...getRootProps()}>
+                  <div {...getRootProps()} style={{ height: "200px" }}>
                     <input {...getInputProps()} />
                     <p>
-                      Drag 'n' drop some files here, or click to select files
+                      Drag and drop some files here, or click to select files
                     </p>
                   </div>
                 </section>
