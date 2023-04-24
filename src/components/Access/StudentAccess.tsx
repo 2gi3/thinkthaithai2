@@ -204,7 +204,7 @@ const CreateStudentForm = () => {
           ) : (
             <Dropzone
               accept={{ Image: [".png", ".jpg", ".jpeg", ".gif"] }}
-              maxSize={imageMaxSize}
+              // maxSize={imageMaxSize}
               multiple={false}
               onDrop={(acceptedFiles) => handleOnDrop(acceptedFiles)}
             >

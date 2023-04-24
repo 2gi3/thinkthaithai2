@@ -5,14 +5,21 @@ import { Provider } from "react-redux";
 import Layout from "@/components/Layout";
 import { appWithTranslation } from "next-i18next";
 // import i18n from "../../next-i18next.config";
+import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 
-function App({ Component, pageProps }: AppProps) {
+function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </SessionProvider>
   );
 }
 

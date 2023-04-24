@@ -11,9 +11,14 @@ export async function handlePost(req: NextApiRequest, res: NextApiResponse){
     let imageURL
     // await cloudinary.uploader.upload(`./images/${req.body.imageFile}`).then((result : any) =>console.log(result))
 
-    await cloudinary.uploader.upload(req.body.imageFile, {public_id: "Test file"})
+    await cloudinary.uploader.upload(req.body.imageFile,
+       {folder: "thinkthaithaiDEV/stydents",
+       public_id: "Test file",
+       tag: 'student_profile',
+      transformation:[{width:"150", crop: "scale"},{fetch_format: "webp"},{ quality: "auto"}]}   
+       )
     .then((data: any) => {
-      // console.log(data);
+      console.log(data);
       imageURL =data.secure_url;
     }).catch((err: any) => {
       console.log(err);
