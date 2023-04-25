@@ -7,7 +7,10 @@ export default function About() {
     return (
       <div>
         <h1>Welcome, {session.user.email}</h1>
-        <button onClick={() => signIn()}></button>
+        {session.user.image && (
+          <img src={session.user.image} alt="profile picture" />
+        )}
+        <button onClick={() => signOut()}>Log&nbsp;out</button>
       </div>
     );
   } else {

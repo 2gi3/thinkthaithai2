@@ -56,7 +56,6 @@ const CreateStudentForm = () => {
     }));
   };
 
-  const imageMaxSize = 10024;
   const handleOnDrop = (files: any, rejectedFiles?: any) => {
     if (files.length === 0 || !(files[0] instanceof Blob)) {
       console.error("Invalid file");
