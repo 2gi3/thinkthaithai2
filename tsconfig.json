@@ -20,7 +20,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "mongoDB/models/student.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "mongoDB/models/student.ts", "mongoDB/clientPromise.js"],
   "exclude": ["node_modules"],
   "types": [
     "aria-query"

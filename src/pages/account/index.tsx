@@ -3,7 +3,9 @@ import { useSession, signOut } from "next-auth/react";
 
 const Account = () => {
   const { data: session, status } = useSession({ required: true });
-  if (status === "authenticated" && session && session.user) {
+  if (status === "loading") {
+    return <p>Checking Authentication...</p>;
+  } else if (status === "authenticated" && session && session.user) {
     return (
       <div>
         <h1>Welcome, {session.user.email}</h1>

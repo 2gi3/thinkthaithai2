@@ -17,7 +17,7 @@ export function middleware(req: NextRequest, res :NextResponse) {
       const cookie = req.cookies.get('auth')?.valueOf()
       const allCookies = req.cookies
 
-    console.log(allCookies)
+    // console.log(allCookies)
 //   return NextResponse.redirect(new URL('/about-2', request.url))
 return response
 }
