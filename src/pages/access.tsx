@@ -6,17 +6,17 @@ import { FormEvent, useState } from "react";
 
 export default function About() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable SSL certificate checks --USE ONLY ON DEVELOPMENT ENVIRONMENT--
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   const { push } = useRouter();
+  // SIGN IN ROUTE http://localhost:3000/api/auth/signin
 
   const handleLogOut = async () => {
     const data = await signOut({ redirect: true, callbackUrl: "/" });
-    // push(data.url);
   };
 
   const handleLogIn = (provider: string) => {
-    signIn(provider);
+    signIn(provider, { redirect: true, callbackUrl: "/account" });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -27,21 +27,22 @@ export default function About() {
       return false;
     }
 
-    console.log("before");
-    signIn("email", { email, redirect: false });
-    console.log("after");
+    signIn("email", { email });
   };
 
-  if (session && session.user) {
-    return (
-      <div>
-        <h1>Welcome, {session.user.email}</h1>
-        {session.user.image && (
-          <img src={session.user.image} alt="profile picture" />
-        )}
-        <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
-      </div>
-    );
+  // if (session && session.user) {
+  //   push("/account");
+  //   // return (
+  //   //   <div>
+  //   //     <h1>Welcome, {session.user.email}</h1>
+  //   //     {session.user.image && (
+  //   //       <img src={session.user.image} alt="profile picture" />
+  //   //     )}
+  //   //     <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
+  //   //   </div>
+  //   // );
+  if (status === "loading") {
+    return <p>Loading...</p>;
   } else {
     return (
       <div>

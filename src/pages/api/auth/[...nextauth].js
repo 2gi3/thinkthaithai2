@@ -12,10 +12,12 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
     EmailProvider({
       server: {
@@ -27,10 +29,13 @@ export default NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
+      callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
   ],
   pages: {
-    access: "/access",
+    signOut: "/",
+    // signIn: "/access",
+    // newUser: "/account",
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.JWT_SECRET,

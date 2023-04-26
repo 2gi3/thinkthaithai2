@@ -3,6 +3,11 @@ import { useSession, signOut } from "next-auth/react";
 
 const Account = () => {
   const { data: session, status } = useSession({ required: true });
+
+  const handleLogOut = async () => {
+    const data = await signOut({ redirect: true, callbackUrl: "/" });
+  };
+
   if (status === "loading") {
     return <p>Checking Authentication...</p>;
   } else if (status === "authenticated" && session && session.user) {
@@ -12,13 +17,13 @@ const Account = () => {
         {session.user.image && (
           <img src={session.user.image} alt="profile picture" />
         )}
-        <button onClick={() => signOut()}>Log&nbsp;out</button>
+        <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
       </div>
     );
   } else {
     {
       redirect: {
-        destination: "/access";
+        destination: "/api/auth/signin";
       }
     }
   }

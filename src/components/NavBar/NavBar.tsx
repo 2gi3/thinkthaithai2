@@ -2,6 +2,7 @@ import styles from "./NavBar.module.scss";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { useSession, signOut } from "next-auth/react";
 
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
@@ -14,8 +15,12 @@ import { CurrencyList } from "../Currency/CurrencyList";
 const NavBar = () => {
   const { t } = useTranslation("common");
   const [toggleIsOpen, setToggleIsOpen] = useState(false);
-
+  const { data: session, status } = useSession();
   const currency = useSelector((state: RootState) => state.currency.value);
+
+  const handleLogOut = async () => {
+    const data = await signOut({ redirect: true, callbackUrl: "/" });
+  };
 
   return (
     <nav className={styles.container}>
@@ -51,9 +56,13 @@ const NavBar = () => {
             <CurrencyToggle label={currency} />
           </li>
         </ul>
-        <Link href="/access" className={styles.access}>
-          {t("log in")}
-        </Link>
+        {status === "authenticated" && session ? (
+          <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
+        ) : (
+          <Link href="/access" className={styles.access}>
+            {t("log in")}
+          </Link>
+        )}
       </div>
       <CurrencyList />
     </nav>
