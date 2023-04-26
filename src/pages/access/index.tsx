@@ -1,4 +1,5 @@
 import StudentAccess from "@/components/Access/StudentAccess";
+import styles from "./access.module.scss";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { BsGoogle, BsFacebook } from "react-icons/bs";
@@ -30,31 +31,20 @@ export default function About() {
     signIn("email", { email });
   };
 
-  // if (session && session.user) {
-  //   push("/account");
-  //   // return (
-  //   //   <div>
-  //   //     <h1>Welcome, {session.user.email}</h1>
-  //   //     {session.user.image && (
-  //   //       <img src={session.user.image} alt="profile picture" />
-  //   //     )}
-  //   //     <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
-  //   //   </div>
-  //   // );
   if (status === "loading") {
     return <p>Loading...</p>;
   } else {
     return (
-      <div>
-        <h1>log&nbsp;in&nbsp;by:</h1>
+      <div className={styles.access}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <label>Email address</label>
+          <label>Email </label>
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           ></input>
-          <button type="submit">Log in</button>
+          <button type="submit">Log in with Email</button>
         </form>
+        <p>or</p>
         <button onClick={() => handleLogIn("google")}>
           <BsGoogle /> Log in with Google
         </button>
