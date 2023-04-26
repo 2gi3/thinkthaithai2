@@ -37,9 +37,11 @@ export default function About() {
     return (
       <div className={styles.access}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <label>Email </label>
+          {/* <label>Email </label> */}
           <input
             type="email"
+            placeholder="Email"
+            autoFocus={true}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
           <button type="submit">Log in with Email</button>
