@@ -4,10 +4,10 @@ import { useExchangeRate } from "@/functions/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
-const Price = () => {
+const Price = ({ USD }: { USD: number }) => {
   const currency = useSelector((state: RootState) => state.currency.value);
   const dispatch = useDispatch();
-  const exchangeRate = useExchangeRate(currency);
+  const exchangeRate = useExchangeRate(currency, USD);
   return (
     <div className={styles.container}>
       <p data-testid="currency_code">
