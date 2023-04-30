@@ -13,7 +13,9 @@ export function middleware(req: NextRequest, res :NextResponse) {
     // response.headers.forEach(header => console.log(header))
     response.headers.set('authorised-student', 'true')
     response.cookies.delete('second')
-    response.cookies.set('is auth', 'true')
+    response.cookies.set('is auth', 'true', {
+        httpOnly: true
+    })
       const cookie = req.cookies.get('auth')?.valueOf()
       const allCookies = req.cookies
 

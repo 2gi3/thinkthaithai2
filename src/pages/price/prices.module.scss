@@ -1,0 +1,9 @@
+@use "@/styles" as *;
+
+.container {
+  button {
+    margin: $base;
+    padding: $baseS $base;
+    border: 1px solid $fontColor;
+  }
+}
