@@ -10,6 +10,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 // 20 Lessons: 380USD
 
 export default function Prices() {
+  // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
   const [amount, setAmount] = useState<number>();

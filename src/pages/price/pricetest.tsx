@@ -62,7 +62,7 @@ export default function PriceTest() {
     "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
     currency: "USD",
     components: "buttons",
-    disableFunding: [FUNDING.CREDIT],
+    // disableFunding: [FUNDING.CREDIT],
   };
 
   const onApprove = async (data: any, actions: any) => {
@@ -150,37 +150,42 @@ export default function PriceTest() {
         </button>
       </main>
       {product && (
-        <PayPalScriptProvider options={initialOptions}>
-          <PayPalButtons
-            createOrder={() => {
-              return fetch("/api/payment", {
-                method: "POST",
-                headers: {
-                  "content-type": "application-json",
-                },
-                body: JSON.stringify({
-                  product,
-                }),
-              }).then((res: any) => {
-                if (res.ok) return res;
-                return res
-                  .json()
-                  .then((json: any) => Promise.reject(json))
-                  .then(({ id }: any) => {
-                    return id;
-                  })
-                  .catch((e: any) => console.error(e.error));
-              });
-            }}
-            onApprove={onApprove}
-            onError={() =>
-              setErrorMessage(
-                "An error occurred while loading the PayPal button. Please refresh the page and try again."
-              )
-            }
-            style={{ color: "blue", shape: "rect" }}
-          />
-        </PayPalScriptProvider>
+        <div key={product}>
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons
+              createOrder={() => {
+                return fetch("/api/payment", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    product,
+                  }),
+                }).then((res: any) => {
+                  if (res.ok) {
+                    console.log(res);
+                    return res;
+                  }
+                  return res
+                    .json()
+                    .then((json: any) => Promise.reject(json))
+                    .then(({ id }: any) => {
+                      return id;
+                    })
+                    .catch((e: any) => console.error(e.error));
+                });
+              }}
+              onApprove={onApprove}
+              onError={() =>
+                setErrorMessage(
+                  "An error occurred while loading the PayPal button. Please refresh the page and try again."
+                )
+              }
+              style={{ color: "blue", shape: "rect" }}
+            />
+          </PayPalScriptProvider>
+        </div>
       )}
       {orderId && (
         <div>
