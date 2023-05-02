@@ -30,11 +30,8 @@ export default async function handler(
      if(req.method === 'OPTIONS'){
        handleOptions(res)
      } else if(req.method === "POST") {
-      console.log('req.body.product '+ req.body.product )
       const price = products[req.body.product]      
-      console.log('price'+ price)
-      const request = new paypal.orders.OrdersCreateRequest()      
-      console.log('request'+ request)
+      const request = new paypal.orders.OrdersCreateRequest()    
       request.prefer('return=representation')
       request.requestBody({
         intent: 'CAPTURE',
@@ -68,9 +65,13 @@ export default async function handler(
 
 
       try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Content-Type", "application/json");
         const order =await paypalClient.execute(request)
         console.log(order.result.id)
-        // res.json({id: order.result.id})
+        res.status(200).json({id: order.result.id})
 
 
       }catch (e:any) {

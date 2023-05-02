@@ -1,3 +1,5 @@
+// delete this page after the payment page is fully tested
+
 import styles from "./prices.module.scss";
 import Price from "@/components/Currency/Price";
 import Link from "next/link";

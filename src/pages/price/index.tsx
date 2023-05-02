@@ -15,6 +15,13 @@ export default function Prices() {
   const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
   const [amount, setAmount] = useState<number>();
   const [orderId, setOrderId] = useState<string>();
+  const [product, setProduct] = useState<string | null>(null);
+
+  const products = {
+    "5 lessons": 109,
+    "10 lessons": 209,
+    "20 Lessons": 380,
+  };
 
   const initialOptions = {
     "client-id": clientId!,
@@ -39,7 +46,20 @@ export default function Prices() {
         <p> Personalised homeworks and study material are always included</p>
       </header>
       <main>
-        <button>
+        <button onClick={() => console.log("hello world")}>
+          Trial lesson <Price USD={5} />
+        </button>
+        <button onClick={() => setProduct("5 lessons")}>
+          5 lessons <Price USD={products["5 lessons"]} />
+        </button>
+        <button onClick={() => setProduct("10 lessons")}>
+          10 lessons <Price USD={products["10 lessons"]} />
+        </button>
+        <button onClick={() => setProduct("20 Lessons")}>
+          20 lessons <Price USD={products["20 Lessons"]} />
+        </button>
+
+        {/* <button>
           Trial lesson <Price USD={5} />{" "}
         </button>
         <button onClick={() => setAmount(109)}>
@@ -50,21 +70,27 @@ export default function Prices() {
         </button>
         <button onClick={() => setAmount(380)}>
           20 lessons <Price USD={380} />{" "}
-        </button>
+        </button> */}
         <PayPalScriptProvider options={initialOptions}>
-          {amount && (
-            <div key={amount}>
+          {product && (
+            <div key={product}>
               <PayPalButtons
-                createOrder={(data: any, actions: any) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: `${amount}`,
-                        },
-                      },
-                    ],
+                createOrder={async (data: any, actions: any) => {
+                  const response = await fetch("/api/payment", {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      product,
+                    }),
                   });
+                  const { id: orderId } = await response.json();
+                  setOrderId(orderId);
+                  console.log("orderID is: " + orderId);
+
+                  // console.log("orderID from back-end is: " + orderId.id);
+                  return orderId;
                 }}
                 onApprove={onApprove}
               />
