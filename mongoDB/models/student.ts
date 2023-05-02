@@ -6,33 +6,21 @@ import { IStudentDocument, IStudentModel  } from "@/types";
 
 const StudentSchema = new Schema<IStudentDocument, IStudentModel>(
   {
-    name: {
-      type: String,
-      required: true,
-      lowercase: true,
-      unique: false,
-      trim: true,
-      match: [nameRegex, " Your name cannot be longer than 35 characters"],
+    _id: {
+      $oid: "string"
     },
-
-    email: {
-      type: String,
-      required: true,
-      unique: false,
-      trim: true,
-      match: [emailRegex, "Please provide a valid email address"],
+    provider: "string",
+    type: "string",
+    providerAccountId: "string",
+    access_token: "string",
+    expires_at: {
+      $numberInt: "number"
     },
-
-    password: {
-      type: String,
-      required: true,
-      unique: false,
-    },
-    imageURL: {
-      type: String,
-      required: false,
-      unique:false,
-      match: [imageURLRegex, 'Please make sure the URL matches the regEx']
+    scope: "string",
+    token_type: "string",
+    id_token: "string",
+    userId: {
+      $oid: "string"
     },
     fundedLessons: {
       type: Number,
@@ -41,7 +29,15 @@ const StudentSchema = new Schema<IStudentDocument, IStudentModel>(
         50,
         "If you would like to buy more than 50 lessons please contact the teacher",
       ],
-    }
+    },
+    startedCourses: {
+      type: [String],
+      default: [],
+    },
+    completedCourses: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true }
 );

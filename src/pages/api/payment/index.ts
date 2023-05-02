@@ -1,5 +1,6 @@
 import { handleOptions } from "@/functions/back-end";
 import { NextApiRequest, NextApiResponse } from "next";
+import {getSession} from 'next-auth/react'
 // import paypal from "paypal-rest-sdk";
 const paypal = require('@paypal/checkout-server-sdk')
 
@@ -27,9 +28,16 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
   ) {
-     if(req.method === 'OPTIONS'){
+    const session = await getSession({req})
+
+  //   if(!session) { console.log('Not authenticated')
+  //   return res.send('You are not authenticated')
+  // } else
+   if(req.method === 'OPTIONS'){
        handleOptions(res)
      } else if(req.method === "POST") {
+
+
       const price = products[req.body.product]      
       const request = new paypal.orders.OrdersCreateRequest()    
       request.prefer('return=representation')
@@ -66,11 +74,11 @@ export default async function handler(
 
       try {
         res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    res.setHeader("Content-Type", "application/json");
+        res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        res.setHeader("Content-Type", "application/json");
         const order =await paypalClient.execute(request)
-        console.log(order.result.id)
+        console.log(order.result)
         res.status(200).json({id: order.result.id})
 
 
@@ -78,6 +86,25 @@ export default async function handler(
         console.log(e)
         res.status(500).json({error: e.message})
       }
+    } else if(req.method === "PATCH"){
+      console.log(req.body)
+      const request = new paypal.orders.OrdersGetRequest(req.body.orderId);
+      const response = await paypalClient.execute(request);
+      console.log('---CHECK ORDER STATUS---\n')
+      console.log(JSON.stringify(response.result));
+      console.log('---DATA TO BE SAVED--- \n')
+      const paidLessons = {
+        studentName: req.body.studentName,
+        studentEmail: req.body.studentEmail,
+        transactionID: response.result.id,
+        paymentEmail: response.result.payment_source.paypal.email_address,
+        paymentName: response.result.payment_source.paypal.name.given_name,
+        paymentSurname: response.result.payment_source.paypal.name.surname,
+        amountPaid: response.result.purchase_units[0].amount.value,
+        currency: response.result.purchase_units[0].amount.currency_code,
+        dateOfPurchase: response.result.create_time,
+      }
+      console.log(paidLessons)
     }
 
 

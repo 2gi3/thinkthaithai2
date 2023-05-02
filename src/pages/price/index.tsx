@@ -1,19 +1,16 @@
 import styles from "./prices.module.scss";
 import Price from "@/components/Currency/Price";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import paypal from "paypal-rest-sdk";
+import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
-// 5lessons: 109USD,
-// 10 lessons: 209USD,
-// 20 Lessons: 380USD
+import { useSession } from "next-auth/react";
 
 export default function Prices() {
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
+  const { data } = useSession();
+  const student = data?.user;
+  console.log(student);
+
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
-  const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
-  const [amount, setAmount] = useState<number>();
   const [orderId, setOrderId] = useState<string>();
   const [product, setProduct] = useState<string | null>(null);
 
@@ -32,7 +29,19 @@ export default function Prices() {
     try {
       const details = await actions.order.capture();
       setOrderId(details.id);
-      alert("Transaction completed by " + details.payer.name.given_name + "!");
+      fetch("/api/payment", {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          orderId: details.id,
+          studentEmail: student?.email,
+          studentName: student?.name,
+        }),
+      });
+      console.log("onApprove details:" + JSON.stringify(details));
+      // alert("Transaction completed by " + details.payer.name.given_name + "!");
     } catch (error) {
       console.log(error);
     }
@@ -58,19 +67,6 @@ export default function Prices() {
         <button onClick={() => setProduct("20 Lessons")}>
           20 lessons <Price USD={products["20 Lessons"]} />
         </button>
-
-        {/* <button>
-          Trial lesson <Price USD={5} />{" "}
-        </button>
-        <button onClick={() => setAmount(109)}>
-          5 lessons <Price USD={109} />{" "}
-        </button>
-        <button onClick={() => setAmount(209)}>
-          10 lessons <Price USD={209} />{" "}
-        </button>
-        <button onClick={() => setAmount(380)}>
-          20 lessons <Price USD={380} />{" "}
-        </button> */}
         <PayPalScriptProvider options={initialOptions}>
           {product && (
             <div key={product}>
