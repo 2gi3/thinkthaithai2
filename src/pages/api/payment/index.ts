@@ -1,6 +1,20 @@
 import { handleOptions } from "@/functions/back-end";
 import { NextApiRequest, NextApiResponse } from "next";
 import {getSession} from 'next-auth/react'
+
+
+
+
+import { MongoClient } from "mongodb";
+
+// @ts-ignore
+import clientPromise from "../../../../mongoDB/clientPromise";
+
+
+
+
+
+// import { dbConnect } from '../../../../mongoDB';
 // import paypal from "paypal-rest-sdk";
 const paypal = require('@paypal/checkout-server-sdk')
 
@@ -78,7 +92,7 @@ export default async function handler(
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         res.setHeader("Content-Type", "application/json");
         const order =await paypalClient.execute(request)
-        console.log(order.result)
+        // console.log(order.result)
         res.status(200).json({id: order.result.id})
 
 
@@ -87,13 +101,13 @@ export default async function handler(
         res.status(500).json({error: e.message})
       }
     } else if(req.method === "PATCH"){
-      console.log(req.body)
+      // console.log(req.body)
       const request = new paypal.orders.OrdersGetRequest(req.body.orderId);
       const response = await paypalClient.execute(request);
-      console.log('---CHECK ORDER STATUS---\n')
-      console.log(JSON.stringify(response.result));
-      console.log('---DATA TO BE SAVED--- \n')
-      const paidLessons = {
+      // console.log('---CHECK ORDER STATUS---\n')
+      // console.log(JSON.stringify(response.result));
+      // console.log('---DATA TO BE SAVED--- \n')
+      const payment = {
         studentName: req.body.studentName,
         studentEmail: req.body.studentEmail,
         transactionID: response.result.id,
@@ -104,103 +118,33 @@ export default async function handler(
         currency: response.result.purchase_units[0].amount.currency_code,
         dateOfPurchase: response.result.create_time,
       }
-      console.log(paidLessons)
+      // @ts-ignore
+      const client= await clientPromise;
+      const db = client.db();
+     const student = await db.collection("users").findOne({ email: payment.studentEmail });
+  // console.log(student)
+
+  if (student) {
+    const amountPaid = Number(response.result.purchase_units[0].amount.value)
+    const addedLessons = amountPaid === 109.00 ? 5 : 
+                     amountPaid === 209.00 ? 10 : 
+                     amountPaid === 380.00 ? 20 : 0;
+
+
+    const paidLessons = student.paidLessons || 0;
+    console.log( amountPaid)
+    console.log( addedLessons)
+    const totalLessons = paidLessons + addedLessons
+    await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
+
+    res.status(200).json({ message: "Payment successful." });
+  } else {
+    res.status(404).json({ message: "User not found." });
+  }
+
     }
 
 
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// interface PaymentRequest {
-//   product: string;
-// }
-
-// // Configure the PayPal SDK
-// paypal.configure({
-//   mode: "sandbox", // Change to "live" for production
-//   client_id: process.env.PAYPAL_CLIENT_ID!,
-//   client_secret: process.env.PAYPAL_CLIENT_SECRET!,
-// });
-
-// // API endpoint handler
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   if (req.method === "POST") {
-//     try {
-//       // Get the payment details from the client
-//       const { product }: PaymentRequest = req.body;
-//       const price = products[product];
-
-
-
-//       // Create the PayPal payment request
-//       const createPaymentJson = {
-//         intent: "sale",
-//         payer: {
-//           payment_method: "paypal",
-//         },
-//         redirect_urls: {
-//           return_url: "http://localhost:3000/success",
-//           cancel_url: "http://localhost:3000/cancel",
-//         },
-//         transactions: [
-//           {
-//             amount: {
-//               total: price.toString(),
-//               currency: "USD",
-//             },
-//             description: "Lesson Payment",
-//           },
-//         ],
-//       };
-
-//       // Send the payment request to PayPal
-//       const response = await new Promise((resolve, reject) => {
-//         paypal.payment.create(createPaymentJson, (error, payment) => {
-//           if (error) {
-//             reject(error);
-//           } else {
-//             resolve(payment);
-//           }
-//         });
-//       });
-
-//       // Return the payment ID to the client
-//       // @ts-ignore
-//       res.status(200).json({ paymentId: response.id });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ message: "Internal Server Error" });
-//     }
-//   } else {
-//     res.status(405).json({ message: "Method Not Allowed" });
-//   }
-// }
