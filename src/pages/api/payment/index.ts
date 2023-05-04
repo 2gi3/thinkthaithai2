@@ -1,21 +1,9 @@
 import { handleOptions } from "@/functions/back-end";
 import { NextApiRequest, NextApiResponse } from "next";
 import {getSession} from 'next-auth/react'
-
-
-
-
-import { MongoClient } from "mongodb";
-
 // @ts-ignore
 import clientPromise from "../../../../mongoDB/clientPromise";
 
-
-
-
-
-// import { dbConnect } from '../../../../mongoDB';
-// import paypal from "paypal-rest-sdk";
 const paypal = require('@paypal/checkout-server-sdk')
 
 interface Products {
@@ -44,12 +32,11 @@ export default async function handler(
   ) {
     const session = await getSession({req})
 
-  //   if(!session) { console.log('Not authenticated')
-  //   return res.send('You are not authenticated')
-  // } else
    if(req.method === 'OPTIONS'){
        handleOptions(res)
      } else if(req.method === "POST") {
+      //This receives the product from the client, uses the product name to create a paypal order with the status of created, 
+      // and sends the order ID to the client for confirmation ( the client will automatically confirm and then do a patch request to this endpoint)
 
 
       const price = products[req.body.product]      
@@ -92,7 +79,6 @@ export default async function handler(
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         res.setHeader("Content-Type", "application/json");
         const order =await paypalClient.execute(request)
-        // console.log(order.result)
         res.status(200).json({id: order.result.id})
 
 
@@ -101,29 +87,27 @@ export default async function handler(
         res.status(500).json({error: e.message})
       }
     } else if(req.method === "PATCH"){
-      // console.log(req.body)
+      // This receives the order ID from the client, checks with paypal that the order has been approved and paid,
+      //then updates the number of lessons left in the student's account in the database.
+      
       const request = new paypal.orders.OrdersGetRequest(req.body.orderId);
       const response = await paypalClient.execute(request);
-      // console.log('---CHECK ORDER STATUS---\n')
-      // console.log(JSON.stringify(response.result));
-      // console.log('---DATA TO BE SAVED--- \n')
-      const payment = {
-        studentName: req.body.studentName,
-        studentEmail: req.body.studentEmail,
-        transactionID: response.result.id,
-        paymentEmail: response.result.payment_source.paypal.email_address,
-        paymentName: response.result.payment_source.paypal.name.given_name,
-        paymentSurname: response.result.payment_source.paypal.name.surname,
-        amountPaid: response.result.purchase_units[0].amount.value,
-        currency: response.result.purchase_units[0].amount.currency_code,
-        dateOfPurchase: response.result.create_time,
-      }
+      // const payment = {
+      //   studentName: req.body.studentName,
+      //   studentEmail: req.body.studentEmail,
+      //   transactionID: response.result.id,
+      //   paymentEmail: response.result.payment_source.paypal.email_address,
+      //   paymentName: response.result.payment_source.paypal.name.given_name,
+      //   paymentSurname: response.result.payment_source.paypal.name.surname,
+      //   amountPaid: response.result.purchase_units[0].amount.value,
+      //   currency: response.result.purchase_units[0].amount.currency_code,
+      //   dateOfPurchase: response.result.create_time,
+      // }
       // @ts-ignore
       const client= await clientPromise;
       const db = client.db();
-     const student = await db.collection("users").findOne({ email: payment.studentEmail });
-  // console.log(student)
-
+     const student = await db.collection("users").findOne({ email: req.body.studentEmail });
+  
   if (student) {
     const amountPaid = Number(response.result.purchase_units[0].amount.value)
     const addedLessons = amountPaid === 109.00 ? 5 : 

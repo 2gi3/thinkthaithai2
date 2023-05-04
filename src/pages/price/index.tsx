@@ -26,6 +26,8 @@ export default function Prices() {
   };
 
   const onApprove = async (data: any, actions: any) => {
+    // When the order is created in the server with the status of CREATED and the order ID is returned by the createOrder prop in the PaypalButtons,
+    // this function takes the order id and approves the order automatically, then sends the order details to the server to update the database
     try {
       const details = await actions.order.capture();
       setOrderId(details.id);
@@ -71,7 +73,8 @@ export default function Prices() {
           {product && (
             <div key={product}>
               <PayPalButtons
-                createOrder={async (data: any, actions: any) => {
+                createOrder={async () => {
+                  // The order is created in the server for safety reasons
                   const response = await fetch("/api/payment", {
                     method: "POST",
                     headers: {
@@ -83,9 +86,6 @@ export default function Prices() {
                   });
                   const { id: orderId } = await response.json();
                   setOrderId(orderId);
-                  console.log("orderID is: " + orderId);
-
-                  // console.log("orderID from back-end is: " + orderId.id);
                   return orderId;
                 }}
                 onApprove={onApprove}
