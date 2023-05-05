@@ -13,7 +13,7 @@ const Account = () => {
   } else if (status === "authenticated" && session && session.user) {
     return (
       <div>
-        <h1>Welcome, {session.user.email}</h1>
+        <h1>{session.user.name}</h1>
         {session.user.image && (
           <img src={session.user.image} alt="profile picture" />
         )}
