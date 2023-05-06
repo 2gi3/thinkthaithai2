@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { dbConnect } from '../../../mongoDB';
 import StudentModel from 'mongoDB/models/student';
+// @ts-ignore
+import clientPromise from "mongoDB/clientPromise";
 const cloudinary = require('cloudinary').v2;
 const bcrypt = require('bcrypt');
 
@@ -34,4 +36,23 @@ export async function handlePost(req: NextApiRequest, res: NextApiResponse){
       console.error(error);
       res.status(500).json({ message: 'Error creating account' });
     }
+}
+
+
+export async function handleGet(req: NextApiRequest, res: NextApiResponse){
+  // @ts-ignore
+  const client = await clientPromise;
+  const db = client.db();
+  
+  try {
+    const students = await db.collection("users").find().toArray();
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json({ ...students });
+  }  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server side error' });
+  }
 }

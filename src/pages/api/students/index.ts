@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {getSession} from 'next-auth/react'
 import { handleOptions } from '@/functions/back-end';
-import { handlePost } from '@/functions/back-end/students';
+import { handleGet, handlePost } from '@/functions/back-end/students';
 
 const jwt = require('jsonwebtoken')
 
@@ -24,9 +24,9 @@ export default async function handler(
       handlePost(req, res)
       break;
 
-    // case 'GET':
-    //   // Handle GET request
-    //   break;
+    case 'GET':
+     handleGet(req,res)      
+      break;
 
     // case 'PUT':
     //   // Handle PUT request
