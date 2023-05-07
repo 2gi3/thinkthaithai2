@@ -1,4 +1,5 @@
 import { NextApiResponse } from "next";
+import {FetcherArgs} from '@/types'
 
 export const handleMockGetRequest = (data: any, delay: number, res: NextApiResponse<any>)=>{
     return new Promise((resolve, reject) => {
@@ -19,3 +20,8 @@ export const handleMockGetRequest = (data: any, delay: number, res: NextApiRespo
       }, delay);
     });
   }
+
+  export const fetcherStudent = async (...args: FetcherArgs) => {
+    const response = await fetch(...args).then((res) => res.json());    
+    return  response
+  };

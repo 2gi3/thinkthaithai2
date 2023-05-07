@@ -48,6 +48,8 @@ export interface IStudent {
 export interface IStudentDocument extends IStudent, Document {}
 
 export interface IStudentModel extends Model<IStudentDocument> {}
+
+export type FetcherArgs = [RequestInfo, RequestInit?];
   
   
   

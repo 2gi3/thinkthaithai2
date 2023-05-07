@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTranslation } from "next-i18next";
 import { CurrencyList } from "../Currency/CurrencyList";
@@ -17,6 +18,13 @@ const NavBar = () => {
   const [toggleIsOpen, setToggleIsOpen] = useState(false);
   const { data: session, status } = useSession();
   const currency = useSelector((state: RootState) => state.currency.value);
+  const router = useRouter();
+  const { pathname } = router;
+
+  useEffect(() => {
+    setToggleIsOpen(false);
+    console.log(pathname)
+  }, [pathname]);
 
   const handleLogOut = async () => {
     const data = await signOut({ redirect: true, callbackUrl: "/" });
@@ -36,16 +44,16 @@ const NavBar = () => {
       <div className={toggleIsOpen ? styles.navigation : styles.hide}>
         <ul className={styles.links}>
           <li>
-            <Link href="/aboutme">{t("about me")}</Link>
+            <Link href="/aboutme" id={ pathname=== "/aboutme"? styles.selected : ''}>{t("about me")}</Link>
           </li>
           <li>
-            <Link href="/price">{t("price")}</Link>
+            <Link href="/price" id={ pathname=== "/price"? styles.selected : ''}>{t("price")}</Link>
           </li>
           <li>
-            <Link href="/feedbacks">{t("feedbacks")}</Link>
+            <Link href="/feedbacks" id={ pathname=== "/feedbacks"? styles.selected : ''}>{t("feedbacks")}</Link>
           </li>
           <li>
-            <Link href="/courses">{t("free courses")}</Link>
+            <Link href="/courses" id={ pathname=== "/courses"? styles.selected : ''}>{t("free courses")}</Link>
           </li>
         </ul>
         <ul className={styles.buttons}>
@@ -56,14 +64,19 @@ const NavBar = () => {
             <CurrencyToggle label={currency} />
           </li>
         </ul>
-        {status === "authenticated" && session ? (
+        {status === "authenticated" && session ? (<>
           <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
+          <Link href="/account" className={styles.account} id={ pathname=== "/account"? styles.selected : ''}>
+              {session?.user?.image  ?
+               <img width={36} height={36} src={session.user.image} alt="profile picture" />
+          : <p>Profile</p>} </Link>
+          </>
         ) : (
-          <Link href="/access" className={styles.access}>
+          <Link href="/access" id={ pathname=== "/access"? styles.selected : ''} className={styles.access}>
             {t("log in")}
           </Link>
-        )}
-      </div>
+        )}   
+        </div>
       <CurrencyList />
     </nav>
   );

@@ -40,7 +40,7 @@ header {
     @include primary-button();
   }
 }
-button {
+button, a {
   all: unset;
   box-sizing: border-box;
   min-width: max-content;

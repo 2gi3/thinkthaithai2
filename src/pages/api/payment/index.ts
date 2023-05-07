@@ -113,11 +113,7 @@ export default async function handler(
     const addedLessons = amountPaid === 109.00 ? 5 : 
                      amountPaid === 209.00 ? 10 : 
                      amountPaid === 380.00 ? 20 : 0;
-
-
     const paidLessons = student.paidLessons || 0;
-    console.log( amountPaid)
-    console.log( addedLessons)
     const totalLessons = paidLessons + addedLessons
     await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
 

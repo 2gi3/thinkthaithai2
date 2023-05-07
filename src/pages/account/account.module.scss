@@ -1,1 +1,19 @@
 @use "@/styles" as *;
+
+.container{
+   margin: $baseL;
+   header{
+    display: flex;
+    justify-content: space-between;
+   h2{
+    margin: $base 0;
+    max-width: max-content;
+    background-color: red;
+   }
+  
+}
+div{
+    margin: $base 0;
+}
+   
+}

@@ -25,6 +25,9 @@ export default async function handler(
       break;
 
     case 'GET':
+      // Get one student by email: /api/students?searchBy=email&value=<EMAIL>
+      // Get one student by id: /api/students?searchBy=id&value=<ID>
+      // Get all students: /api/students
      handleGet(req,res)      
       break;
 
