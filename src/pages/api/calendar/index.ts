@@ -8,4 +8,4 @@ OAuthClient.setCredentials({refresh_token: process.env.OAUTH_REFRESH_TOKEN})
 
 const calendar = google.calendar({version:'v3', auth: OAuthClient})
 
-// min 18:00
+// 18:00

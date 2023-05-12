@@ -27,8 +27,7 @@ What follows is a list of all the necessary environment variables:
 
     NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=http://localhost:3000/api/TEST_API/MOCK_currencyExchange
 
-    MONGODB_URI=mongodb+srv://gippolito:X1EwL6fEattX1p8R@cluster0.9gv9iib.mongodb.net/?retryWrites=true&w=majority
-
+    MONGODB_URI=
 
     CLOUDINARY_URL=
 
