@@ -25,22 +25,22 @@ export interface IStudent {
   name?: string;
   email: string;
   password?: string;
-  type:string;
-  providerAccountId:string;
+  type?:string;
+  providerAccountId?:string;
   fundedLessons?: number;
   imageFile?: string;
-  access_token:string;
+  access_token?:string;
   imageURL?: string;
   startedCourses?: string[];
   completedCourses?: string[];
   provider?: string;
-  expires_at: {
+  expires_at?: {
     $numberInt: number
   },
-  scope: string,
-  token_type: string,
-  id_token: string,
-  userId: {
+  scope?: string,
+  token_type?: string,
+  id_token?: string,
+  userId?: {
     $oid: string
   },
 }
