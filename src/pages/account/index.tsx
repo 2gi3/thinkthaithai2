@@ -3,6 +3,7 @@ import styles from "./account.module.scss";
 import { useSession, signOut } from "next-auth/react";
 import useSWR from 'swr';
 import Image from "next/image";
+import Calendly from "@/components/calendar";
 
 const Account = () => {
 
@@ -34,6 +35,7 @@ const Account = () => {
         <div>
         <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
         </div>
+        <Calendly />
       </div>
     );
   } else {

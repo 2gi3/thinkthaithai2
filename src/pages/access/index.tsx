@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { BsGoogle, BsFacebook } from "react-icons/bs";
 import { FormEvent, useState } from "react";
+import Spinner from "@/components/Spinner";
 
 export default function About() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable SSL certificate checks --USE ONLY ON DEVELOPMENT ENVIRONMENT--
@@ -32,7 +33,7 @@ export default function About() {
   };
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Spinner diameter={88}/>;
   } else {
     return (
       <div className={styles.access}>

@@ -27,6 +27,8 @@ What follows is a list of all the necessary environment variables:
 
     NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=http://localhost:3000/api/TEST_API/MOCK_currencyExchange
 
+    OAUTH_REFRESH_TOKEN=
+
     MONGODB_URI=
 
     CLOUDINARY_URL=
@@ -57,7 +59,11 @@ What follows is a list of all the necessary environment variables:
     EMAIL_SERVER_PORT=587
     EMAIL_FROM= Your email, 
 
+## Payments
 
+The paypal order is created in the server, see the PDF in the documentation directory to find a diagram of the logic.
+
+[Payment flow](https://lucid.app/lucidchart/4b5a8ddb-e13c-45a9-b0a5-b99c8daa633d/edit?viewport_loc=-616%2C671%2C2585%2C964%2C0_0&invitationId=inv_fae12b37-73ff-4859-a6cf-e65c5e02d586)
 
 
 

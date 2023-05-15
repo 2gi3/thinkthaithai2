@@ -51,5 +51,7 @@ export interface IStudentModel extends Model<IStudentDocument> {}
 
 export type FetcherArgs = [RequestInfo, RequestInit?];
   
-  
+export interface SpinnerProps {
+  diameter: number;
+}
   
