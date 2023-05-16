@@ -22,3 +22,63 @@
         }
     }
 }
+
+// .studentsList{
+//     display: flex;
+//     flex-direction: column;
+//     .student{
+//         margin: $baseS $base;
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: space-between;
+//         padding: $baseS;
+//         box-shadow: -1px 1px 2px #555555;
+//         border-radius: $baseS;
+//     }
+// }
+
+.studentsList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .student, .headerRow{
+        max-width: 440px;
+        margin: $baseS $base;
+        display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    box-shadow: -1px 1px 2px #555555;
+        border-radius: $baseS;
+        padding: $baseS;
+    gap: $baseS;
+    span{
+        display: none;
+    }
+    &:hover{
+        transform: translate(-1px, 1px);
+        background-color: #ffffff;
+    }
+    }
+}
+
+@media (max-width: 499px) {
+    .studentsList{
+        // align-items: start;
+        margin:$baseS $base ;
+        .headerRow{
+            display: none;
+        }
+    .student{
+        width: 220px;
+        margin: $baseS $base;
+        display: flex;
+        flex-direction: column;
+    box-shadow: -1px 1px 2px #555555;
+        border-radius: $baseS;
+        padding: $baseS;
+    gap: $baseS;
+    span{
+        display: inline-block;
+    }
+}
+  }
+}

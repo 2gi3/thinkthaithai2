@@ -2,11 +2,25 @@
 
 .container{
     display: block;
+    position: relative;
     margin: auto;
         border-radius: 50%;
-        border: 2px solid $primaryColor;
-        border-top-color: $secondaryColor;
+
+        background: linear-gradient($primaryColor, $secondaryColor);
+
         animation: spin 1500ms ease-out infinite;
+        &::after{
+            content: ' ';
+            position: absolute;
+            z-index: 1;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            background: $backgroundColor;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
       }
       
       @keyframes spin {

@@ -49,6 +49,15 @@ export interface IStudentDocument extends IStudent, Document {}
 
 export interface IStudentModel extends Model<IStudentDocument> {}
 
+export interface databaseStudent {
+  email: string;
+  emailVerified: null | boolean;
+  image?: string;
+  name?: string;
+  paidLessons?: number;
+  _id: string;
+}
+
 export type FetcherArgs = [RequestInfo, RequestInit?];
   
 export interface SpinnerProps {
