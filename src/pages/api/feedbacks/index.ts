@@ -23,7 +23,6 @@ export default async function handler(
         break;
 
         case 'POST':
-            console.log(req.body)
             const { name, job, location, title, body } = req.body;
             let imageURL
 
@@ -42,7 +41,6 @@ export default async function handler(
                   try {
                     await dbConnect();
                     const newFeedback = new FeedbackModel({ name, job, location, title, body, imageURL });                  
-                    console.log(newFeedback)
                     await newFeedback.save();
                     res.setHeader('Content-Type', 'application/json');
                     res.status(200).json({ message: 'Feedback created successfully!' });
@@ -52,6 +50,33 @@ export default async function handler(
                   } finally {
                     res.end();
                   }
+      break;
+      case 'GET':
+        res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Content-Type', 'application/json');
+
+  try {
+    await dbConnect();
+    const feedbacks = await FeedbackModel.find({});
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error retrieving feedbacks' });
+  }
+        break;
+
+        case 'DELETE':
+      try {
+        await dbConnect();
+        const { _id } = req.body;
+        await FeedbackModel.findByIdAndDelete(_id);
+        res.status(200).json({ message: 'Feedback deleted successfully!' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error deleting feedback' });
+      }
       break;
     }
 

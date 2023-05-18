@@ -1,0 +1,8 @@
+@use "./index.scss" as *;
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
