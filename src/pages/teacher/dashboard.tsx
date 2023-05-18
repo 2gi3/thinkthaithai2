@@ -12,8 +12,8 @@ const Dashboard = () => {
 
     return (
   <div className={styles.container}>
-    <Link href='#'>Students&nbsp;<FaArrowRight /></Link>
-    <Link href='#'>Feedbacks&nbsp;<FaArrowRight /></Link>
+    <Link href='/teacher/students'>Students&nbsp;<FaArrowRight /></Link>
+    <Link href='/teacher/feedbacks'>Feedbacks&nbsp;<FaArrowRight /></Link>
     <Link href='#'>Lessons&nbsp;<FaArrowRight /></Link>
     <Link href='#'>Courses&nbsp;<FaArrowRight /></Link>
   </div>

@@ -64,3 +64,15 @@ export interface SpinnerProps {
   diameter: number;
 }
   
+export interface IFeedback {
+  name:string;
+  job:string;
+  location:string;
+  title:string;
+  body:string;
+  imageFile?:string;
+  imageURL?:string;
+}
+export interface IFeedbackDocument extends IFeedback, Document {}
+
+export interface IFeedbackModel extends Model<IFeedbackDocument> {}
