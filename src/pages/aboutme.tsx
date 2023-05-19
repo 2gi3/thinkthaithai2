@@ -18,6 +18,22 @@ export default function About() {
         <Image src='/aboutMe1.webp' alt="Teacher Natt" width={320} height={320} />
       </div>
     </header>
+    <main>
+    <div>
+        <Image src='/aboutMe2.webp' alt="Teacher Natt" width={320} height={320} />
+      </div>
+      <div>
+        <p>I have experience working with students of all levels and ages, and I use a variety of teaching methods to make sure that each student gets the individual attention they need.</p>
+        <p>My goal is to help You learn to speak Thai with confidence and understand our beautiful culture on a deeper level.</p>
+        <p>In my free time, I enjoy watching movies, learning new languages, surfing the internet, and travelling.
+Currently, I'm learning Japanese, so I understand the challenges of learning a second language from both a teacher's and a student's point of view.</p>
+        <p>Thank you for taking the time to learn more about me and my teaching style. I look forward to helping you achieve your language goals!</p>
+      </div>
+    </main>
+    <div className={styles.CTA}>
+        <p>Don&apos;t take my word for it!</p>
+        <Link href='/feedbacks'> See what me students say about me</Link>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,10 @@
 @use './index.scss' as *;
 
 .container{
+    max-width: 1000px;
+    margin: auto;
     header{
+        margin: $baseXL auto;
         display: flex;
         flex-wrap: wrap-reverse;
         justify-content: space-around;
@@ -35,6 +38,28 @@
             }
         }
     }
+    main{
+       margin-top: -$baseL;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        justify-content: space-around;
+        align-items: center;
+        p{max-width: 300px;
+        margin-bottom: $baseS;}
+        div{
+            &:first-child{
+               display: none;
+            }
+        }
+    }
+    .CTA{
+        margin: $baseXL auto;
+        width: max-content;
+        P{margin: $baseS 0}
+        a{
+            @include secondary-button;
+        }
+    }
 }
 @media (min-width: 599px) {
     .container{
@@ -55,7 +80,7 @@
     .container{
         header{
             div{
-                max-width: 320px;
+                // max-width: 320px;
                 &:first-child{
                     height: 320px;
                     display: flex;
@@ -73,6 +98,19 @@
             }
 
         }
+        main{
+            margin: $baseXL auto;
+            padding: $base 0;
+            div{
+                &:first-child{
+                   display: block;
+                   img{
+                    border-radius: $baseS;
+                   }
+                }
+            }
+        }
+       
     }
 
 
