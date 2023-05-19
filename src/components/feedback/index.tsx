@@ -33,7 +33,7 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
             height === 'max-content'? setHeight('88px'): setHeight('max-content')
             
         }}>expand</button>}
-        <div>
+        <div className={styles.footer}>
           <p>
             {feedback.name}, <span>{feedback.job}</span>
           </p>

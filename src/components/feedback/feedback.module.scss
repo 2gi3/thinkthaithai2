@@ -29,5 +29,8 @@
         right: $baseS;
         background-color: #ffffff;
     }
+    .footer{
+        @include tertiary-font;
+    }
     
 }

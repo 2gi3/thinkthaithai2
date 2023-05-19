@@ -1,0 +1,79 @@
+@use './index.scss' as *;
+
+.container{
+    header{
+        display: flex;
+        flex-wrap: wrap-reverse;
+        justify-content: space-around;
+        align-items: center;
+        div{
+            // max-width: 320px;
+            &:first-child{
+                height: 320px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                p{
+                    max-width: 300px;
+                }
+                h1{
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            &:nth-child(2){
+                width: 100%;
+                max-width: 600px;
+                margin: auto;
+                img{
+                    width: 100%;
+                    max-width: 600px;
+                    object-position: bottom;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 599px) {
+    .container{
+        header{
+            div{
+                &:nth-child(2){
+                    img{
+                        border-radius: $baseS;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media (min-width: 799px) {
+    .container{
+        header{
+            div{
+                max-width: 320px;
+                &:first-child{
+                    height: 320px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+                &:nth-child(2){
+                    max-width: 320px;
+                    margin: unset;
+                    img{
+                        border-radius: $baseS;
+                    }
+                }
+            }
+
+        }
+    }
+
+
+}

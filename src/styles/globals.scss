@@ -29,6 +29,9 @@ header {
   h1 {
     @include gradient-text();
   }
+  h2{
+    @include gradient-text($secondaryColor, $secondaryColorLight)
+  }
   ul {
     margin: $baseM 0;
     li {
