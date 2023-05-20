@@ -19,7 +19,6 @@
     "@types/react-dom": "18.0.11",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.36.1",
-    "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "googleapis": "^118.0.0",
     "jsonwebtoken": "^9.0.0",
@@ -45,6 +44,10 @@
     "@types/paypal-rest-sdk": "^1.7.6",
     "@types/testing-library__cypress": "^5.0.9",
     "cypress": "^12.10.0",
-    "eslint-plugin-cypress": "^2.13.2"
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-cypress": "^2.13.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8"
   }
 }

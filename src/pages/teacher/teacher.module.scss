@@ -1,13 +1,14 @@
 @use '@/styles' as *;
 
-.container{
+.container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     max-width: 380px;
     margin: auto;
-    a{
+
+    a {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -17,68 +18,63 @@
         padding: $baseS;
         width: 130px;
         background-color: aqua;
-        svg{
+
+        svg {
             margin-left: $baseS;
         }
     }
 }
 
-// .studentsList{
-//     display: flex;
-//     flex-direction: column;
-//     .student{
-//         margin: $baseS $base;
-//         display: flex;
-//         flex-wrap: wrap;
-//         justify-content: space-between;
-//         padding: $baseS;
-//         box-shadow: -1px 1px 2px #555555;
-//         border-radius: $baseS;
-//     }
-// }
-
-.studentsList{
+.studentsList {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .student, .headerRow{
+
+    .student,
+    .headerRow {
         max-width: 440px;
         margin: $baseS $base;
         display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    box-shadow: -1px 1px 2px #555555;
+        grid-template-columns: 2fr 1fr 1fr;
+        box-shadow: -1px 1px 2px #555555;
         border-radius: $baseS;
         padding: $baseS;
-    gap: $baseS;
-    span{
-        display: none;
-    }
-    &:hover{
-        transform: translate(-1px, 1px);
-        background-color: #ffffff;
-    }
+        gap: $baseS;
+        background-image: linear-gradient(9deg, #ebebeb, #ffffff);
+
+        span {
+            display: none;
+        }
+
+        &:hover {
+            transform: translate(-1px, 1px);
+            background-image: none;
+        }
     }
 }
 
 @media (max-width: 499px) {
-    .studentsList{
+    .studentsList {
         // align-items: start;
-        margin:$baseS $base ;
-        .headerRow{
+        margin: $baseS $base ;
+
+        .headerRow {
             display: none;
         }
-    .student{
-        width: 220px;
-        margin: $baseS $base;
-        display: flex;
-        flex-direction: column;
-    box-shadow: -1px 1px 2px #555555;
-        border-radius: $baseS;
-        padding: $baseS;
-    gap: $baseS;
-    span{
-        display: inline-block;
+
+        .student {
+            width: 220px;
+            margin: $baseS $base;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -1px 1px 2px #555555;
+            border-radius: $baseS;
+            padding: $baseS;
+            gap: $baseS;
+
+            span {
+                display: inline-block;
+            }
+        }
     }
-}
-  }
 }

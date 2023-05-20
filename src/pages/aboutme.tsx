@@ -32,7 +32,7 @@ Currently, I'm learning Japanese, so I understand the challenges of learning a s
     </main>
     <div className={styles.CTA}>
         <p>Don&apos;t take my word for it!</p>
-        <Link href='/feedbacks'> See what me students say about me</Link>
+        <Link href='/feedbacks'> See what my students say about me</Link>
       </div>
     </div>
   );
