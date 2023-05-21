@@ -1,0 +1,11 @@
+@use '@/styles' as *;
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: $base;
+
+    button {
+        @include secondary-button
+    }
+}

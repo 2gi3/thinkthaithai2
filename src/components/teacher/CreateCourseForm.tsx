@@ -1,18 +1,6 @@
+import styles from './teacher.module.scss'
+import { ICourse } from '@/types';
 import { FormEvent, useState } from 'react';
-
-export interface ICourse {
-    title: string;
-    description: string;
-    status: string;
-    level: string;
-    prerequisites: string[];
-    introduction: Array<{
-        videoURL: string;
-        header: string;
-        body: string;
-        footer: string;
-    }>;
-}
 
 const CreateCourseForm = () => {
     const [title, setTitle] = useState('');
@@ -42,7 +30,7 @@ const CreateCourseForm = () => {
         };
 
         try {
-            const response = await fetch('/api/courses', {
+            const response = await fetch('http://localhost:3000/api/courses', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -93,7 +81,7 @@ const CreateCourseForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
             <label htmlFor="title">Title</label>
             <input
                 type="text"

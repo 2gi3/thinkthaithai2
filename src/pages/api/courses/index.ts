@@ -3,22 +3,6 @@ import { getSession } from 'next-auth/react'
 import { handleOptions } from '@/functions/back-end';
 import { dbConnect } from '../../../../mongoDB';
 import CourseModel from 'mongoDB/models/course';
-// import FeedbackModel from 'mongoDB/models/feedback';
-
-// export interface ICourse {
-//     title: string;
-//     description: string;
-//     status: string;
-//     level: string;
-//     prerequisites: string[];
-//     introduction: Array<{
-//       videoURL: string;
-//       header: string;
-//       body: string;
-//       footer: string;
-//     }>;
-//   }
-
 
 
 export default async function handler(
@@ -50,21 +34,21 @@ export default async function handler(
                 res.end();
             }
             break;
-        // case 'GET':
-        //     res.setHeader('Access-Control-Allow-Origin', '*');
-        //     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-        //     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        //     res.setHeader('Content-Type', 'application/json');
+        case 'GET':
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            res.setHeader('Content-Type', 'application/json');
 
-        //     try {
-        //         await dbConnect();
-        //         const feedbacks = await FeedbackModel.find({});
-        //         res.status(200).json(feedbacks);
-        //     } catch (error) {
-        //         console.error(error);
-        //         res.status(500).json({ message: 'Error retrieving feedbacks' });
-        //     }
-        //     break;
+            try {
+                await dbConnect();
+                const courses = await CourseModel.find({});
+                res.status(200).json(courses);
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ message: 'Error retrieving courses' });
+            }
+            break;
 
         // case 'DELETE':
         // try {
