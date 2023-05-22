@@ -12,20 +12,20 @@ export const getStaticProps = async () => {
   return { props: { feedbacks }, revalidate: 60 };
 };
 
-export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] } ) {
+export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
   console.log(feedbacks)
   return (
     <>
-    <header>
-      <h1>What&nbsp;My&nbsp;Students&nbsp;Say</h1>
-    </header>
-    <main className={styles.main}>
-      {feedbacks.map((feedback : DatabaseFeedback)=>{
-        return(
-          <Feedback feedback={feedback} />
-        )
-      })}
-    </main>
+      <header>
+        <h1>What&nbsp;My&nbsp;Students&nbsp;Say</h1>
+      </header>
+      <main className={styles.main}>
+        {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
+          return (
+            <Feedback feedback={feedback} key={`${index}`} />
+          )
+        })}
+      </main>
     </>
   );
 }

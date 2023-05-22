@@ -97,6 +97,13 @@ export interface ICourse {
     footer: string;
   }>;
 }
+
+export interface DatabaseCourse extends ICourse {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 export interface ICourseDocument extends ICourse, Document { }
 
 export interface ICourseModel extends Model<ICourseDocument> { }

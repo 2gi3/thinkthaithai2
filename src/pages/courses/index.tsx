@@ -1,7 +1,17 @@
+import { DatabaseCourse } from '@/types';
 import styles from './courses.module.scss'
 import Link from "next/link";
 
-export default function About() {
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:3000/api/courses", {
+    method: "GET",
+  });
+  const courses: DatabaseCourse[] = await res.json();
+
+  return { props: { courses }, revalidate: 60 };
+};
+
+export default function About({ courses }: { courses: DatabaseCourse[] }) {
   return (
     <div className={styles.container}>
       <header>
@@ -10,19 +20,21 @@ export default function About() {
         </h1>
       </header>
       <main>
-        <Link href='#'>
-          <div className={styles.course}>
-            <h3>
-              Learn the Thai alphabet
-            </h3>
-            <p className={styles.price}>Free</p>
-            <p>The best place to start, if your long term goal is to become fluent in Thai language.</p>
-            <div className={styles.footer}>
-              <p>Level: <span>Beginner</span></p>
-              <p>commitment: <span>15 minutes/day, 1 month</span></p>
+        {courses.map((course: DatabaseCourse) => (
+          <Link href={`http://localhost:3000/courses/${course._id}`} key={course._id}>
+            <div className={styles.course}>
+              <h3>
+                {course.title}
+              </h3>
+              <p className={styles.price}>{course.status}</p>
+              <p>{course.description}</p>
+              <div className={styles.footer}>
+                <p>Level: <span>{course.level}</span></p>
+                <p>commitment: <span>15 minutes/day, 1 month</span></p>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </main>
     </div>
   );
