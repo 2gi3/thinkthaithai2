@@ -23,9 +23,19 @@ const CourseSchema = new Schema<ICourseDocument, ICourseModel>(
             type: [String],
             default: [],
         },
-        introduction: {
+
+        introduction:
+        {
+            videoURL: String,
+            header: String,
+            body: String,
+            footer: String,
+        },
+
+        lessons: {
             type: [
                 {
+                    title: String,
                     videoURL: String,
                     header: String,
                     body: String,

@@ -8,8 +8,16 @@ const CreateCourseForm = () => {
     const [status, setStatus] = useState('');
     const [level, setLevel] = useState('');
     const [prerequisites, setPrerequisites] = useState<string[]>([]);
-    const [introduction, setIntroduction] = useState<
+    const [introduction, setIntroduction] = useState({
+        videoURL: '',
+        header: '',
+        body: '',
+        footer: '',
+    })
+
+    const [lessons, setLessons] = useState<
         Array<{
+            title: string;
             videoURL: string;
             header: string;
             body: string;
@@ -27,6 +35,7 @@ const CreateCourseForm = () => {
             level,
             prerequisites,
             introduction,
+            lessons,
         };
 
         try {
@@ -49,21 +58,22 @@ const CreateCourseForm = () => {
         }
     };
 
-    const handleIntroductionChange = (index: number, field: string, value: string) => {
-        setIntroduction(prevIntroduction => {
-            const updatedIntroduction = [...prevIntroduction];
-            updatedIntroduction[index] = {
-                ...updatedIntroduction[index],
+    const handleLessonsChange = (index: number, field: string, value: string) => {
+        setLessons(prevLessons => {
+            const updatedLessons = [...prevLessons];
+            updatedLessons[index] = {
+                ...updatedLessons[index],
                 [field]: value,
             };
-            return updatedIntroduction;
+            return updatedLessons;
         });
     };
 
-    const handleAddIntroduction = () => {
-        setIntroduction(prevIntroduction => [
-            ...prevIntroduction,
+    const handleAddLesson = () => {
+        setLessons(prevLessons => [
+            ...prevLessons,
             {
+                title: '',
                 videoURL: '',
                 header: '',
                 body: '',
@@ -72,11 +82,11 @@ const CreateCourseForm = () => {
         ]);
     };
 
-    const handleRemoveIntroduction = (index: number) => {
-        setIntroduction(prevIntroduction => {
-            const updatedIntroduction = [...prevIntroduction];
-            updatedIntroduction.splice(index, 1);
-            return updatedIntroduction;
+    const handleRemoveLesson = (index: number) => {
+        setLessons(prevLessons => {
+            const updatedLessons = [...prevLessons];
+            updatedLessons.splice(index, 1);
+            return updatedLessons;
         });
     };
 
@@ -126,15 +136,82 @@ const CreateCourseForm = () => {
                 onChange={(e) => setPrerequisites(e.target.value.split(','))}
             />
 
+
+
             <label htmlFor="introduction">Introduction</label>
-            {introduction.map((intro, index) => (
+            <label htmlFor="videoURL">Video URL</label>
+            <input
+                type="text"
+                id="videoURL"
+                value={introduction.videoURL}
+                onChange={(e) =>
+                    setIntroduction((prevState) => ({
+                        ...prevState,
+                        videoURL: e.target.value,
+                    }))
+                }
+            />
+
+            <label htmlFor="header">Header</label>
+            <input
+                type="text"
+                id="header"
+                value={introduction.header}
+                onChange={(e) =>
+                    setIntroduction((prevState) => ({
+                        ...prevState,
+                        header: e.target.value,
+                    }))
+                }
+            />
+
+            <label htmlFor="body">Body</label>
+            <input
+                type="text"
+                id="body"
+                value={introduction.body}
+                onChange={(e) =>
+                    setIntroduction((prevState) => ({
+                        ...prevState,
+                        body: e.target.value,
+                    }))
+                }
+            />
+
+            <label htmlFor="footer">Footer</label>
+            <input
+                type="text"
+                id="footer"
+                value={introduction.footer}
+                onChange={(e) =>
+                    setIntroduction((prevState) => ({
+                        ...prevState,
+                        footer: e.target.value,
+                    }))
+                }
+            />
+
+
+
+
+
+            <label htmlFor="lesson">Lessons</label>
+            {lessons.map((intro, index) => (
                 <div key={index}>
+                    <label htmlFor={`title-${index}`}>Title</label>
+                    <input
+                        type="text"
+                        id={`title-${index}`}
+                        value={intro.title}
+                        onChange={(e) => handleLessonsChange(index, 'title', e.target.value)}
+                    />
+
                     <label htmlFor={`videoURL-${index}`}>Video URL</label>
                     <input
                         type="text"
                         id={`videoURL-${index}`}
                         value={intro.videoURL}
-                        onChange={(e) => handleIntroductionChange(index, 'videoURL', e.target.value)}
+                        onChange={(e) => handleLessonsChange(index, 'videoURL', e.target.value)}
                     />
 
                     <label htmlFor={`header-${index}`}>Header</label>
@@ -142,7 +219,7 @@ const CreateCourseForm = () => {
                         type="text"
                         id={`header-${index}`}
                         value={intro.header}
-                        onChange={(e) => handleIntroductionChange(index, 'header', e.target.value)}
+                        onChange={(e) => handleLessonsChange(index, 'header', e.target.value)}
                     />
 
                     <label htmlFor={`body-${index}`}>Body</label>
@@ -150,7 +227,7 @@ const CreateCourseForm = () => {
                         type="text"
                         id={`body-${index}`}
                         value={intro.body}
-                        onChange={(e) => handleIntroductionChange(index, 'body', e.target.value)}
+                        onChange={(e) => handleLessonsChange(index, 'body', e.target.value)}
                     />
 
                     <label htmlFor={`footer-${index}`}>Footer</label>
@@ -158,17 +235,17 @@ const CreateCourseForm = () => {
                         type="text"
                         id={`footer-${index}`}
                         value={intro.footer}
-                        onChange={(e) => handleIntroductionChange(index, 'footer', e.target.value)}
+                        onChange={(e) => handleLessonsChange(index, 'footer', e.target.value)}
                     />
 
-                    <button type="button" onClick={() => handleRemoveIntroduction(index)}>
-                        Remove Introduction
+                    <button type="button" onClick={() => handleRemoveLesson(index)}>
+                        Remove Lesson
                     </button>
                 </div>
             ))}
 
-            <button type="button" onClick={handleAddIntroduction}>
-                Add Introduction
+            <button type="button" onClick={handleAddLesson}>
+                Add Lesson
             </button>
 
             <button type="submit">Create Course</button>

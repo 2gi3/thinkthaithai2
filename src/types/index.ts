@@ -90,12 +90,22 @@ export interface ICourse {
   status: string;
   level: string;
   prerequisites: string[];
-  introduction: Array<{
+
+  introduction: {
+    videoURL: string;
+    header: string;
+    body: string;
+    footer: string;
+  };
+
+  lessons: Array<{
+    title: string;
     videoURL: string;
     header: string;
     body: string;
     footer: string;
   }>;
+
 }
 
 export interface DatabaseCourse extends ICourse {

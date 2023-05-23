@@ -1,7 +1,47 @@
 @use '@/styles' as *;
 
 .container {
+    video {
+        width: 100%;
+        max-width: 600px;
+        display: block;
+        margin: $baseXL auto;
+    }
+
+    header {
+        position: relative;
+        margin: $baseXL auto;
+        text-align: center;
+        max-width: 320px;
+
+        h1 {
+            margin: auto;
+        }
+
+        .status {
+            position: absolute;
+            top: -$base;
+            right: 0;
+            border-radius: 6px;
+            padding: 6px $baseS;
+
+            background-image: linear-gradient(9deg, $secondaryColor, $secondaryColorLight);
+            @include secondary_font;
+            font-weight: 700;
+        }
+    }
+
     main {
+
+        .introduction {
+            max-width: 320px;
+            margin: auto;
+
+            p {
+                margin: $baseS 0;
+            }
+        }
+
         .course {
             position: relative;
             max-width: 320px;
@@ -22,11 +62,6 @@
 
             .price {
                 position: absolute;
-                // top: 0px;
-                // right: 0px;
-                // border-radius: 0 12px;
-                // padding: 13px 13px 6px 12px;
-
                 top: 6px;
                 right: 6px;
                 border-radius: 6px;
@@ -42,6 +77,34 @@
                 transform: translate(-1px, 1px);
                 background-image: none
             }
+        }
+    }
+
+    footer {
+        max-width: 320px;
+        margin: $baseXL auto;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+            @include secondary-button;
+            position: absolute;
+            left: 0;
+            display: flex
+        }
+
+        button {
+            @include primary-button;
+        }
+    }
+}
+
+@media (min-width: 599px) {
+    .container {
+        video {
+            border-radius: $baseS;
         }
     }
 }

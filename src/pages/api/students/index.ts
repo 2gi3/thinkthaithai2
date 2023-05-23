@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {getSession} from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 import { handleOptions } from '@/functions/back-end';
 import { handleGet, handlePost } from '@/functions/back-end/students';
+// @ts-ignore
+import clientPromise from 'mongoDB/clientPromise';
 
 const jwt = require('jsonwebtoken')
 
@@ -11,14 +13,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({req})
+  // const session = await getSession({ req })
 
-  if(!session) return res.send('You are not authenticated')
-  
+  // if (!session) return res.send('You are not authenticated')
+
   switch (req.method) {
     case 'OPTIONS':
-   handleOptions(res)
-    break;
+      handleOptions(res)
+      break;
 
     case 'POST':
       handlePost(req, res)
@@ -28,12 +30,38 @@ export default async function handler(
       // Get one student by email: /api/students?searchBy=email&value=<EMAIL>
       // Get one student by id: /api/students?searchBy=id&value=<ID>
       // Get all students: /api/students
-     handleGet(req,res)      
+      handleGet(req, res)
       break;
 
-    // case 'PUT':
-    //   // Handle PUT request
-    //   break;
+    case 'PATCH':
+
+      const { studentEmail, courseId } = req.body
+      // @ts-ignore
+      const client = await clientPromise;
+      const db = client.db();
+      await db.collection("users").updateOne(
+        { email: req.body.studentEmail },
+        { $push: { startedCourses: courseId } }
+      );
+
+      // await db.collection("users").updateOne(
+      //   { email: studentEmail },
+      //   {
+      //     $set: {
+      //       startedCourses: {
+      //         $cond: {
+      //           if: { $exists: "$startedCourses" },
+      //           then: { $push: "$startedCourses" },
+      //           else: [courseId]
+      //         }
+      //       }
+      //     }
+      //   }
+      // );
+
+
+      res.status(200).json({ message: "course added to student" });
+      break;
 
     // case 'DELETE':
     //   // Handle DELETE request

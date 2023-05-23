@@ -23,12 +23,12 @@ export default async function handler(
             break;
 
         case 'POST':
-            const { title, description, status, level, prerequisites, introduction } = req.body;
+            const { title, description, status, level, prerequisites, introduction, lessons } = req.body;
 
 
             try {
                 await dbConnect();
-                const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction });
+                const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction, lessons });
                 await newCourse.save();
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json({ message: 'Feedback created successfully!' });
