@@ -35,14 +35,29 @@ export default async function handler(
 
     case 'PATCH':
 
-      const { studentEmail, courseId } = req.body
+      const { studentEmail, courseId, lessonTitle } = req.body
       // @ts-ignore
       const client = await clientPromise;
       const db = client.db();
-      await db.collection("users").updateOne(
-        { email: req.body.studentEmail },
-        { $push: { startedCourses: courseId } }
-      );
+
+      //     const student = await db.collection("users").findOne({ email: studentEmail });
+      // if (!student) {
+      //   res.status(404).json({ message: "Student not found" });
+      //   break;
+      // }
+      if (lessonTitle) {
+        await db.collection("users").updateOne(
+          { email: studentEmail },
+          { $push: { [`startedCourses.${courseId}`]: lessonTitle } }
+        );
+      } else {
+        await db.collection("users").updateOne(
+          { email: studentEmail },
+          { $push: { [`startedCourses.${courseId}`]: [] } }
+          // { $push: { startedCourses: courseId } }
+        );
+      }
+
 
       // await db.collection("users").updateOne(
       //   { email: studentEmail },

@@ -55,9 +55,26 @@ export interface databaseStudent {
   image?: string;
   name?: string;
   paidLessons?: number;
-  startedCourses?: string[];
+  // startedCourses?: string[];
+  startedCourses?: { [key: string]: string[] };
   _id: string;
 }
+
+// startedCourses?: { [key: string]: string[] };
+
+// const student: databaseStudent = {
+//   email: "example@example.com",
+//   emailVerified: true,
+//   image: "profile.jpg",
+//   name: "John Doe",
+//   paidLessons: 5,
+//   startedCourses: {
+//     'wret435': ['sfg', 'sfg', 'sgf'],
+//     'wretdf435': ['ssdffg', 'sfsfg', 'sgf'],
+//     'w1t435': ['123', '4', 'sgf'],
+//   },
+//   _id: "1234567890",
+// };
 
 export type FetcherArgs = [RequestInfo, RequestInit?];
 

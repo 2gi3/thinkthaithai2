@@ -4,11 +4,40 @@
     display: flex;
     justify-content: center;
 
-    .progress {
+    .progress,
+    .toLearn {
+        all: unset;
+        position: relative;
+        box-sizing: border-box;
         margin: 1px;
         width: 6px;
         height: $base;
-        background-color: red;
+        background-color: $primaryColor;
+
+        span {
+            position: absolute;
+            bottom: -$base;
+            z-index: 1;
+            width: max-content;
+            background-image: linear-gradient(9deg, #ebebeb, #ffffff);
+            display: none;
+
+
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            span {
+                display: block;
+            }
+        }
+    }
+
+    .toLearn {
+        background-color: white;
+        border: 1px solid $secondaryColor;
+
     }
 }
 

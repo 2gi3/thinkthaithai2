@@ -13,6 +13,8 @@ export default function About({ course }: { course: DatabaseCourse }) {
     const { data } = useSession();
     const [studentData, setStudentData] = useState<databaseStudent | null>(null);
     const [startCourseCompleted, setStartCourseCompleted] = useState(false);
+    const [currentLesson, setCurrentLesson] = useState(0)
+    // const [completedLessons, setCompletedLessons] = useState<string []>()
 
     const handleLoadStudentData = () => {
         const savedDataString = localStorage.getItem('databaseStudent');
@@ -20,20 +22,57 @@ export default function About({ course }: { course: DatabaseCourse }) {
         setStudentData(parsedData);
     };
 
+
+
     const handleStartCourseCompleted = (completed: boolean) => {
         setStartCourseCompleted(completed);
     };
 
+    const completeLesson = async (title: string) => {
+
+        try {
+
+            await fetch("/api/students", {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    courseId: course._id,
+                    lessonTitle: title,
+                    studentEmail: data?.user?.email,
+                }),
+            }).then(res => res.json()).then(json => console.log(json))
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            const response: databaseStudent = await fetch(`/api/students?searchBy=email&value=${data?.user?.email}`).then((res) => res.json());
+            localStorage.setItem('databaseStudent', JSON.stringify(response));
+            setCurrentLesson(prev => prev + 1)
+        }
+    }
+
+
+
+    const completedLessons = studentData?.startedCourses?.[course._id]
+    const lesson = course.lessons[currentLesson]
+    const incompleteLessonIndex = course.lessons.findIndex(
+        (lesson) => !completedLessons?.includes(lesson.title)
+    );
+
     useEffect(() => {
         handleLoadStudentData()
-        console.log(startCourseCompleted)
-    }, [startCourseCompleted])
+        setCurrentLesson(incompleteLessonIndex !== -1 ? incompleteLessonIndex : 0)
+    }, [startCourseCompleted, incompleteLessonIndex, currentLesson])
 
-    const lesson = course.lessons[2]
+    // console.log(studentData?.startedCourses?.[course._id])
+
+    const startedCourses = studentData?.startedCourses
+    console.log(startedCourses)
 
 
-
-    if (startCourseCompleted) {
+    if (startCourseCompleted || startedCourses?.hasOwnProperty(course._id)) {
         return (
             <div className={styles.container}>
                 <header>
@@ -41,9 +80,11 @@ export default function About({ course }: { course: DatabaseCourse }) {
                     {/* <p>Progress {course.lessons.length}</p> */}
                     <div className={styles.progressContainer}>
                         {course.lessons.map((lesson, i: number) => (
-                            <div key={i} className={styles.progress}>
-
-                            </div>
+                            <button key={i}
+                                onClick={() => { setCurrentLesson(i) }}
+                                className={completedLessons?.includes(lesson.title) ? styles.progress : styles.toLearn}>
+                                <span>{lesson.title}</span>
+                            </button>
                         ))}
 
                     </div>
@@ -53,7 +94,9 @@ export default function About({ course }: { course: DatabaseCourse }) {
                 </main>
                 <footer>
                     <button className={styles.previous}><FaArrowLeft /></button>
-                    <button>Lesson completed &nbsp; <FaArrowRight /></button>
+                    <button onClick={() => {
+                        completeLesson(lesson.title)
+                    }}>Lesson completed &nbsp; <FaArrowRight /></button>
                 </footer>
 
                 {/* {course.lessons.map((lesson, i: number) => (
