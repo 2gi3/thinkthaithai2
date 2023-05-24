@@ -27,6 +27,7 @@ const NavBar = () => {
   }, [pathname]);
 
   const handleLogOut = async () => {
+    localStorage.removeItem('databaseStudent');
     const data = await signOut({ redirect: true, callbackUrl: "/" });
   };
 
@@ -44,16 +45,16 @@ const NavBar = () => {
       <div className={toggleIsOpen ? styles.navigation : styles.hide}>
         <ul className={styles.links}>
           <li>
-            <Link href="/aboutme" id={ pathname=== "/aboutme"? styles.selected : ''}>{t("about me")}</Link>
+            <Link href="/aboutme" id={pathname === "/aboutme" ? styles.selected : ''}>{t("about me")}</Link>
           </li>
           <li>
-            <Link href="/price" id={ pathname=== "/price"? styles.selected : ''}>{t("price")}</Link>
+            <Link href="/price" id={pathname === "/price" ? styles.selected : ''}>{t("price")}</Link>
           </li>
           <li>
-            <Link href="/feedbacks" id={ pathname=== "/feedbacks"? styles.selected : ''}>{t("feedbacks")}</Link>
+            <Link href="/feedbacks" id={pathname === "/feedbacks" ? styles.selected : ''}>{t("feedbacks")}</Link>
           </li>
           <li>
-            <Link href="/courses" id={ pathname=== "/courses"? styles.selected : ''}>{t("free courses")}</Link>
+            <Link href="/courses" id={pathname === "/courses" ? styles.selected : ''}>{t("free courses")}</Link>
           </li>
         </ul>
         <ul className={styles.buttons}>
@@ -66,17 +67,17 @@ const NavBar = () => {
         </ul>
         {status === "authenticated" && session ? (<>
           <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
-          <Link href="/account" className={styles.account} id={ pathname=== "/account"? styles.selected : ''}>
-              {session?.user?.image  ?
-               <img width={36} height={36} src={session.user.image} alt="profile picture" />
-          : <p>Profile</p>} </Link>
-          </>
+          <Link href="/account" className={styles.account} id={pathname === "/account" ? styles.selected : ''}>
+            {session?.user?.image ?
+              <img width={36} height={36} src={session.user.image} alt="profile picture" />
+              : <p>Profile</p>} </Link>
+        </>
         ) : (
-          <Link href="/access" id={ pathname=== "/access"? styles.selected : ''} className={styles.access}>
+          <Link href="/access" id={pathname === "/access" ? styles.selected : ''} className={styles.access}>
             {t("log in")}
           </Link>
-        )}   
-        </div>
+        )}
+      </div>
       <CurrencyList />
     </nav>
   );

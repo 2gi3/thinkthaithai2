@@ -55,6 +55,7 @@ export interface databaseStudent {
   image?: string;
   name?: string;
   paidLessons?: number;
+  startedCourses?: string[];
   _id: string;
 }
 
@@ -117,3 +118,7 @@ export interface DatabaseCourse extends ICourse {
 export interface ICourseDocument extends ICourse, Document { }
 
 export interface ICourseModel extends Model<ICourseDocument> { }
+
+export interface LessonProps {
+  lesson: ICourse["lessons"][number];
+}

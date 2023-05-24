@@ -5,6 +5,7 @@ import { dbConnect } from '../../../../mongoDB';
 import { ObjectId } from 'mongodb';
 
 import CourseModel from 'mongoDB/models/course';
+import { databaseStudent } from '@/types';
 
 
 export default async function handler(
@@ -14,6 +15,7 @@ export default async function handler(
 
     // const session = await getSession({req})
     // if(!session) return res.send('You are not authenticated')
+
 
     switch (req.method) {
 

@@ -1,5 +1,29 @@
 @use '@/styles' as *;
 
+.progressContainer {
+    display: flex;
+    justify-content: center;
+
+    .progress {
+        margin: 1px;
+        width: 6px;
+        height: $base;
+        background-color: red;
+    }
+}
+
+.lesson {
+    h3 {
+        text-align: center;
+        margin: $base;
+    }
+
+    p {
+        margin: $baseS auto;
+        max-width: 280px;
+    }
+}
+
 .container {
     video {
         width: 100%;
@@ -85,18 +109,28 @@
         margin: $baseXL auto;
         position: relative;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
 
+        button {
+            @include primary-button;
+            display: flex;
+            justify-content: space-between;
+            margin: auto;
+        }
+
         a {
+            background-image: none;
             @include secondary-button;
             position: absolute;
             left: 0;
             display: flex
         }
 
-        button {
-            @include primary-button;
+        .previous {
+            background-image: none;
+            @include secondary-button;
+            display: flex;
         }
     }
 }

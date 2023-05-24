@@ -1,75 +1,80 @@
-import { DatabaseCourse } from '@/types';
+import { DatabaseCourse, databaseStudent } from '@/types';
 import { useSession } from 'next-auth/react'
 import styles from './courses.module.scss'
 import Link from "next/link";
 import { GetStaticPropsContext } from 'next';
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useEffect, useState } from 'react';
+import CourseIntroduction from '@/components/courses/CourseIntroduction';
+import Lesson from '@/components/courses/Lesson';
 
 
 export default function About({ course }: { course: DatabaseCourse }) {
     const { data } = useSession();
-    console.log(data)
+    const [studentData, setStudentData] = useState<databaseStudent | null>(null);
+    const [startCourseCompleted, setStartCourseCompleted] = useState(false);
+
+    const handleLoadStudentData = () => {
+        const savedDataString = localStorage.getItem('databaseStudent');
+        const parsedData: databaseStudent = savedDataString ? JSON.parse(savedDataString) : null;
+        setStudentData(parsedData);
+    };
+
+    const handleStartCourseCompleted = (completed: boolean) => {
+        setStartCourseCompleted(completed);
+    };
+
+    useEffect(() => {
+        handleLoadStudentData()
+        console.log(startCourseCompleted)
+    }, [startCourseCompleted])
+
+    const lesson = course.lessons[2]
 
 
-    const startCourse = async () => {
 
-        try {
+    if (startCourseCompleted) {
+        return (
+            <div className={styles.container}>
+                <header>
+                    <h1>{course.title}</h1>
+                    {/* <p>Progress {course.lessons.length}</p> */}
+                    <div className={styles.progressContainer}>
+                        {course.lessons.map((lesson, i: number) => (
+                            <div key={i} className={styles.progress}>
 
-            fetch("/api/students", {
-                method: "PATCH",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    courseId: course._id,
-                    studentEmail: data?.user?.email,
-                }),
-            }).then(res => res.json()).then(json => console.log(json))
+                            </div>
+                        ))}
 
-        } catch (error) {
-            console.log(error);
-        }
+                    </div>
+                </header>
+                <main>
+                    <Lesson lesson={lesson} />
+                </main>
+                <footer>
+                    <button className={styles.previous}><FaArrowLeft /></button>
+                    <button>Lesson completed &nbsp; <FaArrowRight /></button>
+                </footer>
+
+                {/* {course.lessons.map((lesson, i: number) => (
+                    <div key={i} className={styles.container}> */}
+                {/* <Lesson lesson={lesson} /> */}
+                {/* </div>
+                ))} */}
+            </div>
+
+        )
+    } else {
+        return (
+            <CourseIntroduction
+                course={course}
+                setStartCourseCompleted={handleStartCourseCompleted}
+            />
+
+        )
     }
 
-    return (<div className={styles.container}>
-        <video controls>
-            <source src="https://drive.google.com/uc?export=download&id=1x2gRolOz9kjuuEP2dYgy8-Fu7Kv90XEx" type="video/mp4" />
-        </video>
-        <header>
-            <h1>{course.title}</h1>
-            <p className={styles.status}>{course.status}</p>
-        </header>
-        <main>
-            <div className={styles.introduction}>
-                <p>{course.introduction.header}</p>
-                <p>{course.introduction.body}</p>
-                <p>{course.introduction.footer}</p>
-            </div>
-            {/* <div>
-                <h2>Lessons {course.lessons.length}</h2>
 
-
-                {course.lessons.map((lesson, i: number) => (
-                    <div key={i}>
-                        <h3>{lesson.header}</h3>
-                        <p>{lesson.body}</p>
-                        <p>{lesson.footer}</p>
-                    </div>
-                ))}
-            </div> */}
-        </main>
-        <footer>
-            <Link href='#'>
-                <FaArrowLeft />
-            </Link>
-
-            <button onClick={() => {
-                startCourse()
-            }}>
-                Start Course
-            </button>
-        </footer>
-    </div>)
 }
 
 
