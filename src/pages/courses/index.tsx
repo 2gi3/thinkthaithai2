@@ -1,17 +1,16 @@
 import { DatabaseCourse } from '@/types';
 import styles from './courses.module.scss'
 import Link from "next/link";
-
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/courses", {
-    method: "GET",
-  });
-  const courses: DatabaseCourse[] = await res.json();
-
-  return { props: { courses }, revalidate: 60 };
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 export default function About({ courses }: { courses: DatabaseCourse[] }) {
+
+  const dispatch = useDispatch();
+  const studentData = useSelector(
+    (state: RootState) => state.student
+  );
+  console.log(studentData.startedCourses)
   return (
     <div className={styles.container}>
       <header>
@@ -26,7 +25,16 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
               <h3>
                 {course.title}
               </h3>
-              <p className={styles.price}>{course.status}</p>
+              {studentData.startedCourses?.hasOwnProperty(course._id)
+                ? <p className={styles.started}>{
+                  studentData.startedCourses?.[course._id].length
+                } / {
+                    course.lessons.length
+                  } </p>
+                : <p className={styles.price}>{course.status}</p>
+
+              }
+
               <p>{course.description}</p>
               <div className={styles.footer}>
                 <p>Level: <span>{course.level}</span></p>
@@ -39,3 +47,14 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
     </div>
   );
 }
+
+
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:3000/api/courses", {
+    method: "GET",
+  });
+  const courses: DatabaseCourse[] = await res.json();
+
+  return { props: { courses }, revalidate: 60 };
+};

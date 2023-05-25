@@ -4,8 +4,13 @@ import { useSession, signOut } from "next-auth/react";
 import useSWR from 'swr';
 import Image from "next/image";
 import Calendly from "@/components/calendar";
+import { useEffect } from "react";
+import { databaseStudent } from "@/types";
+import { useDispatch } from "react-redux";
+import { updateStudent } from "@/redux/slices/studentSlice";
 
 const Account = () => {
+  const dispatch = useDispatch();
 
   const { data: session, status } = useSession({ required: true });
 
@@ -13,7 +18,9 @@ const Account = () => {
     `/api/students?searchBy=email&value=${session?.user?.email}`,
     fetcherStudent
   );
-
+  useEffect(() => {
+    data ? dispatch(updateStudent(data)) : null
+  }, [data, dispatch])
 
 
   const handleLogOut = async () => {

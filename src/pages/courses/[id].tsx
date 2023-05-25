@@ -7,22 +7,37 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import CourseIntroduction from '@/components/courses/CourseIntroduction';
 import Lesson from '@/components/courses/Lesson';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { updateStudent } from '@/redux/slices/studentSlice';
 
 
 export default function About({ course }: { course: DatabaseCourse }) {
+
+
+    const dispatch = useDispatch();
+    const studentDataRedux = useSelector(
+        (state: RootState) => state.student
+    );
+    // const handleCurrencyChange = (newCurrency: string) => {
+    //   dispatch(updateStudent(newCurrency));
+
+    // };
+
+
+
     const { data } = useSession();
-    const [studentData, setStudentData] = useState<databaseStudent | null>(null);
+    // const [studentData, setStudentData] = useState<databaseStudent | null>(null);
     const [startCourseCompleted, setStartCourseCompleted] = useState(false);
     const [currentLesson, setCurrentLesson] = useState(0)
     // const [completedLessons, setCompletedLessons] = useState<string []>()
 
-    const handleLoadStudentData = () => {
-        const savedDataString = localStorage.getItem('databaseStudent');
-        const parsedData: databaseStudent = savedDataString ? JSON.parse(savedDataString) : null;
-        setStudentData(parsedData);
-    };
-
-
+    // const handleLoadStudentData = () => {
+    //     const savedDataString = localStorage.getItem('databaseStudent');
+    //     const parsedData: databaseStudent = savedDataString ? JSON.parse(savedDataString) : null;
+    //     setStudentData(parsedData);
+    //     dispatch(updateStudent(parsedData));
+    // };
 
     const handleStartCourseCompleted = (completed: boolean) => {
         setStartCourseCompleted(completed);
@@ -42,7 +57,8 @@ export default function About({ course }: { course: DatabaseCourse }) {
                     lessonTitle: title,
                     studentEmail: data?.user?.email,
                 }),
-            }).then(res => res.json()).then(json => console.log(json))
+            }).then(res => res.json())
+            // .then(json => console.log(json))
 
         } catch (error) {
             console.log(error);
@@ -55,21 +71,38 @@ export default function About({ course }: { course: DatabaseCourse }) {
 
 
 
-    const completedLessons = studentData?.startedCourses?.[course._id]
+    const completedLessons = studentDataRedux?.startedCourses?.[course._id]
+    console.log(completedLessons)
     const lesson = course.lessons[currentLesson]
     const incompleteLessonIndex = course.lessons.findIndex(
         (lesson) => !completedLessons?.includes(lesson.title)
     );
 
     useEffect(() => {
+        // const handleLoadStudentData = () => {
+        //     const savedDataString = localStorage.getItem('databaseStudent');
+        //     const parsedData: databaseStudent = savedDataString ? JSON.parse(savedDataString) : null;
+        //     setStudentData(parsedData);
+        //     dispatch(updateStudent(parsedData));
+        //     console.log(studentDataRedux)
+        // };
+        const handleLoadStudentData = () => {
+            const savedDataString = localStorage.getItem('databaseStudent');
+            const parsedData: databaseStudent = savedDataString ? JSON.parse(savedDataString) : null;
+            // setStudentData(parsedData);
+            dispatch(updateStudent(parsedData));
+        };
+
         handleLoadStudentData()
+        // setCurrentLesson(incompleteLessonIndex !== -1 ? incompleteLessonIndex : 0)
+    }, [startCourseCompleted, currentLesson, dispatch])
+
+    useEffect(() => {
         setCurrentLesson(incompleteLessonIndex !== -1 ? incompleteLessonIndex : 0)
-    }, [startCourseCompleted, incompleteLessonIndex, currentLesson])
 
-    // console.log(studentData?.startedCourses?.[course._id])
+    }, [incompleteLessonIndex])
 
-    const startedCourses = studentData?.startedCourses
-    console.log(startedCourses)
+    const startedCourses = studentDataRedux?.startedCourses
 
 
     if (startCourseCompleted || startedCourses?.hasOwnProperty(course._id)) {
@@ -93,7 +126,8 @@ export default function About({ course }: { course: DatabaseCourse }) {
                     <Lesson lesson={lesson} />
                 </main>
                 <footer>
-                    <button className={styles.previous}><FaArrowLeft /></button>
+                    <button className={styles.previous}
+                        onClick={() => { setCurrentLesson(x => x - 1) }}><FaArrowLeft /></button>
                     <button onClick={() => {
                         completeLesson(lesson.title)
                     }}>Lesson completed &nbsp; <FaArrowRight /></button>
