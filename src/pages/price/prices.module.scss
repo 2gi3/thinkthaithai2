@@ -1,6 +1,16 @@
 @use "@/styles" as *;
 
 .container {
+  header {
+    margin: $base;
+
+    p {
+      margin: 3px auto;
+      max-width: 240px;
+
+    }
+  }
+
   button {
     margin: $base;
     padding: $baseS $base;

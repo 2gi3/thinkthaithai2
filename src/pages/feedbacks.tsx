@@ -16,8 +16,8 @@ export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) 
   console.log(feedbacks)
   return (
     <>
-      <header>
-        <h1>What&nbsp;My&nbsp;Students&nbsp;Say</h1>
+      <header className={styles.header}>
+        <h1>What My&nbsp;Students&nbsp;Say</h1>
       </header>
       <main className={styles.main}>
         {feedbacks.map((feedback: DatabaseFeedback, index: number) => {

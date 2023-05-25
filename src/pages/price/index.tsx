@@ -54,7 +54,9 @@ export default function Prices() {
       <header>
         <h1>Invest in Yourself</h1>
         <p>Regular lessons are 50 minutes</p>
-        <p> Personalised homeworks and study material are always included</p>
+        <p> Personalised homeworks</p>
+        <p>and study material</p>
+        <p>are always included</p>
       </header>
       <main>
         <button onClick={() => console.log("hello world")}>

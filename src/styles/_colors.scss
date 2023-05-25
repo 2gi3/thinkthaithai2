@@ -7,12 +7,10 @@ $secondaryColorLight: #ffdfba;
 $backgroundColor: linear-gradient(3deg, #eeeeee, #ffffff);
 $shadow: -1px 1px 1px rgba(80, 80, 80, 0.2);
 
-@mixin gradient-text(
-  $color1: $primaryColor,
+@mixin gradient-text($color1: $primaryColor,
   $color2: $primaryColorLight,
-  $lightAngle: 3deg
-) {
-  width: max-content;
+  $lightAngle: 3deg) {
+  // width: max-content;
   background-image: linear-gradient($lightAngle, $color1, $color2);
   background-clip: text;
   color: transparent;
