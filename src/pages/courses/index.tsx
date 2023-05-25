@@ -10,7 +10,8 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
   const studentData = useSelector(
     (state: RootState) => state.student
   );
-  console.log(studentData.startedCourses)
+
+
   return (
     <div className={styles.container}>
       <header>
@@ -25,20 +26,26 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
               <h3>
                 {course.title}
               </h3>
-              {studentData.startedCourses?.hasOwnProperty(course._id)
-                ? <p className={styles.started}>{
-                  studentData.startedCourses?.[course._id].length
-                } / {
-                    course.lessons.length
-                  } </p>
-                : <p className={styles.price}>{course.status}</p>
+              {studentData.startedCourses?.hasOwnProperty(course._id) ?
+                studentData.startedCourses?.[course._id].length === course.lessons.length ?
+                  (
+                    <p className={styles.completed}>
+                      <span>Completed</span>
+                    </p>
+                  ) :
+                  (
+                    <p className={styles.started}>
+                      <span>Progress</span> {Math.ceil((studentData.startedCourses?.[course._id].length / course.lessons.length) * 100)}%
+                    </p>
+                  ) : (
+                  <p className={styles.price}>{course.status}</p>
+                )}
 
-              }
 
               <p>{course.description}</p>
               <div className={styles.footer}>
                 <p>Level: <span>{course.level}</span></p>
-                <p>commitment: <span>15 minutes/day, 1 month</span></p>
+                {/* <p>commitment: <span>15 minutes/day, 1 month</span></p> */}
               </div>
             </div>
           </Link>
