@@ -48,7 +48,7 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
             </div>
         </main>
         <footer>
-            <Link href='#'>
+            <Link href='http://localhost:3000/courses'>
                 <FaArrowLeft />
             </Link>
 

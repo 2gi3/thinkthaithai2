@@ -1,34 +1,3 @@
-// const courseId = course._id;
-// const hasStartedCourse = studentData.startedCourses?.hasOwnProperty(courseId);
-// const startedCourseLength = studentData.startedCourses?.[courseId].length;
-
-// let progressElement;
-// if (hasStartedCourse) {
-//   if (startedCourseLength === lessonCount) {
-//     progressElement = (
-//       <p className={styles.completed}>
-//         <span>Completed</span>
-//       </p>
-//     );
-//   } else {
-//     const progressPercentage = Math.ceil((startedCourseLength / lessonCount) * 100);
-//     progressElement = (
-//       <p className={styles.started}>
-//         <span>Progress</span> {progressPercentage}%
-//       </p>
-//     );
-//   }
-// } else {
-//   progressElement = <p className={styles.price}>{course.status}</p>;
-// }
-
-// // Render the progress element in the JSX code
-// {progressElement}
-
-
-
-
-
 import { DatabaseCourse } from '@/types';
 import styles from './courses.module.scss'
 import Link from "next/link";
@@ -42,6 +11,36 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
     (state: RootState) => state.student
   );
 
+  const renderProgress = (course: DatabaseCourse) => {
+
+    const courseId = course._id;
+    const hasStartedCourse = studentData.startedCourses?.hasOwnProperty(courseId);
+    const startedCourseLength = studentData.startedCourses?.[courseId]?.length;
+    const lessonCount = course.lessons.length
+
+    let progressElement;
+    if (hasStartedCourse) {
+      if (startedCourseLength && startedCourseLength >= lessonCount) {
+        progressElement = (
+          <p className={styles.completed}>
+            <span>Completed</span>
+          </p>
+        );
+      } else {
+        const progressPercentage = Math.ceil((startedCourseLength! / lessonCount) * 100);
+        progressElement = (
+          <p className={styles.started}>
+            <span>Progress</span> {progressPercentage}%
+          </p>
+        );
+      }
+    } else {
+      progressElement = <p className={styles.price}>{course.status.charAt(0).toUpperCase() + course.status.slice(1).toLowerCase()}</p>;
+    }
+
+    return progressElement
+
+  }
 
   return (
     <div className={styles.container}>
@@ -57,22 +56,7 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
               <h3>
                 {course.title}
               </h3>
-              {studentData.startedCourses?.hasOwnProperty(course._id) ?
-                studentData.startedCourses?.[course._id].length === course.lessons.length ?
-                  (
-                    <p className={styles.completed}>
-                      <span>Completed</span>
-                    </p>
-                  ) :
-                  (
-                    <p className={styles.started}>
-                      <span>Progress: </span> {Math.ceil((studentData.startedCourses?.[course._id].length / course.lessons.length) * 100)}%
-                    </p>
-                  ) : (
-                  <p className={styles.price}>{course.status}</p>
-                )}
-
-
+              {renderProgress(course)}
               <p>{course.description}</p>
               <div className={styles.footer}>
                 <p>Level: <span>{course.level}</span></p>

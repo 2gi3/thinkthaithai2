@@ -53,7 +53,7 @@ export default async function handler(
       } else {
         await db.collection("users").updateOne(
           { email: studentEmail },
-          { $push: { [`startedCourses.${courseId}`]: [] } }
+          { $set: { [`startedCourses.${courseId}`]: [] } }
           // { $push: { startedCourses: courseId } }
         );
       }
