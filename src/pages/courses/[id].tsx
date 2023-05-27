@@ -75,9 +75,10 @@ export default function About({ course }: { course: DatabaseCourse }) {
 
 
 
-
     const lesson = course.lessons[currentLesson]
     console.log(currentLesson)
+    console.log(course.lessons.length
+    )
     const incompleteLessonIndex = course.lessons.findIndex(
         (lesson) => !completedLessons?.includes(lesson.title)
     );
@@ -110,6 +111,10 @@ export default function About({ course }: { course: DatabaseCourse }) {
 
 
     if (startCourseCompleted || startedCourses?.hasOwnProperty(course._id)) {
+
+        // Memo to create CourseCompleted page
+        // if ( completedLessons.length => course.lessons.length ) return <CourseCompleted />
+
         return (
             <div className={styles.container}>
                 <header>
@@ -129,7 +134,10 @@ export default function About({ course }: { course: DatabaseCourse }) {
                     </div>
                 </header>
                 <main>
-                    <Lesson lesson={lesson} />
+                    {currentLesson >= course.lessons.length ?
+                        <h2>Course completed</h2>
+                        : <Lesson lesson={lesson} />
+                    }
                 </main>
                 <footer>
                     <button className={styles.previous}
@@ -140,9 +148,23 @@ export default function About({ course }: { course: DatabaseCourse }) {
                         }}>
                         <FaArrowLeft />
                     </button>
-                    <button onClick={() => {
+
+                    {
+                        currentLesson === course.lessons.length ?
+                            <button onClick={() => {
+                                router.push('/courses')
+                            }}>Start a new course</button>
+                            : <button onClick={() => {
+                                completeLesson(lesson.title)
+                            }}>
+                                Lesson completed &nbsp; <FaArrowRight />
+                            </button>
+
+                    }
+
+                    {/* <button onClick={() => {
                         completeLesson(lesson.title)
-                    }}>Lesson completed &nbsp; <FaArrowRight /></button>
+                    }}>Lesson completed &nbsp; <FaArrowRight /></button> */}
                 </footer>
 
                 {/* {course.lessons.map((lesson, i: number) => (
