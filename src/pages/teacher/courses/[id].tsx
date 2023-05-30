@@ -1,6 +1,6 @@
 import { DatabaseCourse, databaseStudent } from '@/types';
 import { useSession } from 'next-auth/react'
-import styles from './courses.module.scss'
+import styles from '@/pages/courses/courses.module.scss'
 import Link from "next/link";
 import { GetStaticPropsContext } from 'next';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
