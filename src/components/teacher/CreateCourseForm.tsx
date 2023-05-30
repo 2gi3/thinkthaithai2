@@ -39,7 +39,7 @@ const CreateCourseForm = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/api/courses', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

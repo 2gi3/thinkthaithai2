@@ -25,7 +25,7 @@ On 'npm start', the environment variables will reference the .env.production fil
 
 What follows is a list of all the necessary environment variables:
 
-    NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=http://localhost:3000/api/TEST_API/MOCK_currencyExchange
+    NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=
 
     OAUTH_REFRESH_TOKEN=
 
@@ -37,7 +37,7 @@ What follows is a list of all the necessary environment variables:
 
     GOOGLE_CLIENT_SECRET=
 
-    NEXTAUTH_URL=http://localhost:3000
+    NEXTAUTH_URL=http:
 
     FACEBOOK_CLIENT_ID=
 

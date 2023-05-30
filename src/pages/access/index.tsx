@@ -11,7 +11,7 @@ export default function About() {
   const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   const { push } = useRouter();
-  // SIGN IN ROUTE http://localhost:3000/api/auth/signin
+  // SIGN IN ROUTE ${process.env.NEXT_PUBLIC_BASIC_URL}/api/auth/signin
 
   const handleLogOut = async () => {
     const data = await signOut({ redirect: true, callbackUrl: "/" });
@@ -33,7 +33,7 @@ export default function About() {
   };
 
   if (status === "loading") {
-    return <Spinner diameter={88}/>;
+    return <Spinner diameter={88} />;
   } else {
     return (
       <div className={styles.access}>

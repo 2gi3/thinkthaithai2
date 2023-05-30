@@ -51,7 +51,7 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
       </header>
       <main>
         {courses.map((course: DatabaseCourse) => (
-          <Link href={`http://localhost:3000/courses/${course._id}`} key={course._id}>
+          <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/courses/${course._id}`} key={course._id}>
             <div className={styles.course}>
               <h3>
                 {course.title}
@@ -73,7 +73,7 @@ export default function About({ courses }: { courses: DatabaseCourse[] }) {
 
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/courses", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
     method: "GET",
   });
   const courses: DatabaseCourse[] = await res.json();

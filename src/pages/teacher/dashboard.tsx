@@ -15,7 +15,7 @@ const Dashboard = () => {
       <Link href='/teacher/students'>Students&nbsp;<FaArrowRight /></Link>
       <Link href='/teacher/feedbacks'>Feedbacks&nbsp;<FaArrowRight /></Link>
       <Link href='#'>Lessons&nbsp;<FaArrowRight /></Link>
-      <Link href='http://localhost:3000/teacher/courses'>Courses&nbsp;<FaArrowRight /></Link>
+      <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/teacher/courses`}>Courses&nbsp;<FaArrowRight /></Link>
     </div>
   );
 };

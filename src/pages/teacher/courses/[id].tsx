@@ -191,7 +191,7 @@ export default function About({ course }: { course: DatabaseCourse }) {
 
 export async function getStaticPaths() {
 
-    const res = await fetch("http://localhost:3000/api/courses", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
         method: "GET",
     });
     const courses: DatabaseCourse[] = await res.json();
@@ -211,7 +211,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
     const id = context.params!.id
-    const res = await fetch(`http://localhost:3000/api/courses?searchBy=id&value=${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses?searchBy=id&value=${id}`, {
         method: "GET",
     });
     const course: DatabaseCourse = await res.json();

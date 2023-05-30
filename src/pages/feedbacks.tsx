@@ -4,7 +4,7 @@ import styles from '@/styles/feedbacks.module.scss'
 import Image from "next/image";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/feedbacks", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {
     method: "GET",
   });
   const feedbacks: DatabaseFeedback[] = await res.json();
