@@ -3,6 +3,7 @@ import Price from "@/components/Currency/Price";
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSession } from "next-auth/react";
+import Calendar from "@/components/calendar";
 
 export default function Prices() {
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
@@ -59,9 +60,10 @@ export default function Prices() {
         <p>are always included</p>
       </header>
       <main>
-        <button onClick={() => console.log("hello world")}>
+        {/* <button onClick={() => console.log("hello world")}>
           Trial lesson <Price USD={5} />
-        </button>
+        </button> */}
+        <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
         <button onClick={() => setProduct("5 lessons")}>
           5 lessons <Price USD={products["5 lessons"]} />
         </button>

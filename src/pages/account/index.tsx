@@ -3,8 +3,8 @@ import styles from "./account.module.scss";
 import { useSession, signOut } from "next-auth/react";
 import useSWR from 'swr';
 import Image from "next/image";
-import Calendly from "@/components/calendar";
-import { useEffect } from "react";
+import Calendar from "@/components/calendar";
+import { useEffect, useState } from "react";
 import { databaseStudent } from "@/types";
 import { useDispatch } from "react-redux";
 import { updateStudent } from "@/redux/slices/studentSlice";
@@ -13,6 +13,8 @@ const Account = () => {
   const dispatch = useDispatch();
 
   const { data: session, status } = useSession({ required: true });
+  const [showCalendar, setShowCalendar] = useState(true); // State variable to toggle the calendar
+
 
   const { data, error } = useSWR(
     `/api/students?searchBy=email&value=${session?.user?.email}`,
@@ -45,7 +47,11 @@ const Account = () => {
         <div>
           <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
         </div>
-        <Calendly />
+        {/* <div>
+          <button onClick={() => setShowCalendar(!showCalendar)}>Toggle Calendar</button>
+        </div> */}
+        {showCalendar && <Calendar label='Book a lesson' eventURL='https://calendly.com/thinkthaithai/50min?hide_event_type_details=1' />}
+
       </div>
     );
   } else {
