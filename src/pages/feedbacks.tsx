@@ -3,31 +3,31 @@ import { DatabaseFeedback } from "@/types";
 import styles from '@/styles/feedbacks.module.scss'
 import Image from "next/image";
 
-// export const getStaticProps = async () => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {
-//     method: "GET",
-//   });
-//   const feedbacks: DatabaseFeedback[] = await res.json();
+export const getStaticProps = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {
+    method: "GET",
+  });
+  const feedbacks: DatabaseFeedback[] = await res.json();
 
-//   return { props: { feedbacks }, revalidate: 60 };
-// };
+  return { props: { feedbacks }, revalidate: 60 };
+};
 
 export default function About(
-  // { feedbacks }: { feedbacks: DatabaseFeedback[] }
+  { feedbacks }: { feedbacks: DatabaseFeedback[] }
 ) {
-  // console.log(feedbacks)
+  console.log(feedbacks)
   return (
     <>
       <header className={styles.header}>
         <h1>What My&nbsp;Students&nbsp;Say</h1>
       </header>
-      {/* <main className={styles.main}>
+      <main className={styles.main}>
         {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
           return (
             <Feedback feedback={feedback} key={`${index}`} />
           )
         })}
-      </main> */}
+      </main>
     </>
   );
 }
