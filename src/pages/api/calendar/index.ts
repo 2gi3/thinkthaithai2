@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   console.log(req.body)
   dbConnect()
-  await Booking.create(req)
+  await Booking.create(req.body)
 
 
 
