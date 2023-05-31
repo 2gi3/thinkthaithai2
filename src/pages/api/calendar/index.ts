@@ -1,6 +1,5 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
-import mongoose, { Schema } from "mongoose";
 import { dbConnect } from '../../../../mongoDB';
 import { getSession } from 'next-auth/react'
 import { handleOptions } from '@/functions/back-end';
@@ -39,11 +38,11 @@ export default async function handler(
       break;
 
     case 'POST':
-      const { email } = req.body;
+      const { payload } = req.body;
 
       try {
         await dbConnect();
-        const newBooking = new BookingModel({ email });
+        const newBooking = new BookingModel({ email: payload.email });
         await newBooking.save();
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ message: 'Feedback created successfully!' });
