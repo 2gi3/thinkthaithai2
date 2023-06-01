@@ -53,8 +53,11 @@ export default async function handler(
           return res.status(404).json({ message: 'User not found' });
         }
 
-        student.paidlessons -= 1;
-        await db.collection('users').updateOne({ email }, { $set: { paidlessons: student.paidlessons } });
+        const paidLessons = student.paidLessons
+        const totalLessons = paidLessons - 1
+
+        //  student.paidlessons -= 1;
+        await db.collection('users').updateOne({ email: email }, { $set: { paidlessons: totalLessons } });
 
         // await dbConnect();
         // const newBooking = new BookingModel({ email: payload.email });
