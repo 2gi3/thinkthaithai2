@@ -40,30 +40,30 @@ export default async function handler(
       break;
 
     case 'POST':
-      const { email } = req.body.payload;
+      const { email, name, cancel_url, reschedule_url } = req.body.payload;
       // @ts-ignore
       const client = await clientPromise;
 
 
       try {
-        const db = client.db();
-        const student = await db.collection('users').findOne({ email: email });
+        // const db = client.db();
+        // const student = await db.collection('users').findOne({ email: email });
 
-        if (!student) {
-          return res.status(404).json({ message: 'User not found' });
-        }
+        // if (!student) {
+        //   return res.status(404).json({ message: 'User not found' });
+        // }
 
-        const paidLessons = student.paidLessons
-        const totalLessons = paidLessons - 1
+        // const paidLessons = student.paidLessons
+        // const totalLessons = paidLessons - 1
 
-        //  student.paidlessons -= 1;
-        await db.collection('users').updateOne({ email: email }, { $set: { paidlessons: totalLessons } });
+        // //  student.paidlessons -= 1;
+        // await db.collection('users').updateOne({ email: email }, { $set: { paidlessons: totalLessons } });
 
-        // await dbConnect();
-        // const newBooking = new BookingModel({ email: payload.email });
-        // await newBooking.save();
-        // res.setHeader('Content-Type', 'application/json');
-        // res.status(200).json({ message: 'Feedback created successfully!' });
+        await dbConnect();
+        const newBooking = new BookingModel({ email, name, cancel_url, reschedule_url });
+        await newBooking.save();
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({ message: 'Booking created successfully!' });
         // @ts-ignore
 
       } catch (error) {
