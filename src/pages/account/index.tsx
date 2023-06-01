@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 import { databaseStudent } from "@/types";
 import { useDispatch } from "react-redux";
 import { updateStudent } from "@/redux/slices/studentSlice";
+import Link from "next/link";
 
 const Account = () => {
   const dispatch = useDispatch();
 
   const { data: session, status } = useSession({ required: true });
-  const [showCalendar, setShowCalendar] = useState(true); // State variable to toggle the calendar
+  // const [showCalendar, setShowCalendar] = useState(true);
 
 
   const { data, error } = useSWR(
@@ -47,10 +48,10 @@ const Account = () => {
         <div>
           <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
         </div>
-        {/* <div>
-          <button onClick={() => setShowCalendar(!showCalendar)}>Toggle Calendar</button>
-        </div> */}
-        {showCalendar && <Calendar label='Book a lesson' eventURL='https://calendly.com/thinkthaithai/50min?hide_event_type_details=1' />}
+        {data?.paidLessons && data?.paidLessons > 0 ?
+          <Calendar label='Book a lesson' eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}`} />
+          : <Link href='/price'></Link>
+        }
 
       </div>
     );

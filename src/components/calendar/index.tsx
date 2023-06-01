@@ -1,3 +1,6 @@
+// How to pre-fill calendly forms:
+//  https://help.calendly.com/hc/en-us/articles/226766767-Pre-populate-invitee-information-on-the-scheduling-page
+
 import { useState, useEffect } from "react";
 import Price from "../Currency/Price";
 
