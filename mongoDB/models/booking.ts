@@ -20,6 +20,10 @@ const BookingSchema = new Schema<any>(
         reschedule_url: {
             type: String,
             required: true
+        },
+        event: {
+            type: String,
+            required: true
         }
 
 
