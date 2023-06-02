@@ -5,7 +5,9 @@ import { LocaleToLanguage } from "@/types";
 import { useState } from "react";
 
 const LanguageSelector = () => {
-  const { locale, locales, push } = useRouter();
+  const router = useRouter();
+  const { pathname } = router;
+  const { locale, locales, push, } = useRouter();
   const [selectorIsOpen, setSelectorIsOpen] = useState(false);
 
   const localeToLanguage: LocaleToLanguage = {
@@ -16,9 +18,15 @@ const LanguageSelector = () => {
   };
 
   const handleClick = (l: string) => {
-    push("/", undefined, { locale: l });
+    push(pathname, undefined, { locale: l });
     setSelectorIsOpen(!selectorIsOpen);
   };
+
+  // const handleClick = (l: string) => {
+  //   const updatedLocale = l === locale ? "" : l; // Set the new locale if it's different, otherwise remove the current locale
+  //   push({ query: { ...query, locale: updatedLocale } }, undefined, { shallow: true });
+  //   setSelectorIsOpen(!selectorIsOpen);
+  // };
 
   return (
     <>

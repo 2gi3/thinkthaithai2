@@ -1,22 +1,24 @@
-## CI/CD deploy: https://thinkthaithai-draft.netlify.app
-
-## FIGMA: https://www.figma.com/file/84tR9gfjrZJOAo8QUK1bQ8/ThinkThaiThai2.0?node-id=0-1&t=y6RD5RE6sgjC7YsD-0
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Run this project locally
+### CI/CD deploy: https://thinkthaithai-draft.netlify.app
 
-1: npm install
-2: create the .env.local (see the environment section of this document)
-3: npm run dev
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### FIGMA: https://www.figma.com/file/84tR9gfjrZJOAo8QUK1bQ8/ThinkThaiThai2.0?node-id=0-1&t=y6RD5RE6sgjC7YsD-0
 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Features documentation
 
-## 3rd parties documentation:
+- ## Payments
 
-- Calendly 
+The paypal order is created in the server, see the following Chart to understand the logic.
+
+Payment flow:
+- [PDF](https://github.com/2gi3/thinkthaithai2/blob/main/documentation/Payment_flow.pdf)
+
+- [lucidChart link](https://lucid.app/lucidchart/4b5a8ddb-e13c-45a9-b0a5-b99c8daa633d/edit?viewport_loc=-616%2C671%2C2585%2C964%2C0_0&invitationId=inv_fae12b37-73ff-4859-a6cf-e65c5e02d586)
+
+- ## Bookings:
+
+ 
   - create web-hooks subscription
     - example: [Useful example](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
 
@@ -55,8 +57,20 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
       ```
       
 
+
+
+# Run this project locally
+
+1. npm install
+2. create the .env.local (see the environment section below)
+3. npm run dev
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
 ## Environment
-##### All .env files are ignored by Git.
+All .env files are ignored by Git.
 
 On 'npm run dev', the environment variables will reference the .env.local file.
 
@@ -97,13 +111,4 @@ What follows is a list of all the necessary environment variables:
    - EMAIL_SERVER_HOST=smtp.sendgrid.net
    - EMAIL_SERVER_PORT=587
    - EMAIL_FROM= Your email, 
-
-## Payments
-
-The paypal order is created in the server, see the PDF in the documentation directory to find a diagram of the logic.
-
-[Payment flow](https://lucid.app/lucidchart/4b5a8ddb-e13c-45a9-b0a5-b99c8daa633d/edit?viewport_loc=-616%2C671%2C2585%2C964%2C0_0&invitationId=inv_fae12b37-73ff-4859-a6cf-e65c5e02d586)
-
-
-
 

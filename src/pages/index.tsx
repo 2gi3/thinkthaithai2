@@ -65,7 +65,7 @@ export default function Home() {
             sizes="100vw"
           />
           <source srcSet="/heroNoBG.webp 1280w" sizes="1280px" />
-          <img loading="eager" src="/heroNoBG.webp" />
+          <img loading="eager" src="/heroNoBG.webp" alt="Teacher" />
         </picture>
       </header>
       <main className={styles.main}>
@@ -173,7 +173,6 @@ export async function getStaticProps({ locale }: any) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "homepage"])),
-      // Will be passed to the page component as props
     },
   };
 }

@@ -1,11 +1,12 @@
 {
     "about me": "自己紹介",
-    "price" : "価格",
-    "feedbacks" : "フィードバック" ,
-    "free courses" : "無料コース" ,
+    "price": "価格",
+    "feedbacks": "フィードバック",
+    "free courses": "無料コース",
     "log in": "ログイン",
     "Website by": "制作:",
-"Giuseppe Ippolito": "ジュゼッペ・イッポリト",
-"Web-Developer": "Webデベロッパー",
-"London": "ロンドン"
+    "Giuseppe Ippolito": "ジュゼッペ・イッポリト",
+    "Web-Developer": "Webデベロッパー",
+    "London": "ロンドン",
+    "feedbacks header": "生徒たちは何を言っているか"
 }
