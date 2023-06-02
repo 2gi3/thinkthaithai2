@@ -52,7 +52,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
       $response = Invoke-RestMethod -Method Post -Uri 'https://api.calendly.com/webhook_subscriptions' -Headers $headers -Body $jsonData
    
       $response
-```
+      ```
       
 
 ## Environment
@@ -64,39 +64,39 @@ On 'npm start', the environment variables will reference the .env.production fil
 
 What follows is a list of all the necessary environment variables:
 
-    NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=
+   - NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=
 
-    OAUTH_REFRESH_TOKEN=
+   - OAUTH_REFRESH_TOKEN=
 
-    MONGODB_URI=
+   - MONGODB_URI=
 
-    CLOUDINARY_URL=
+   - CLOUDINARY_URL=
 
-    GOOGLE_CLIENT_ID=
+   - GOOGLE_CLIENT_ID=
 
-    GOOGLE_CLIENT_SECRET=
+   - GOOGLE_CLIENT_SECRET=
 
-    NEXTAUTH_URL=http:
+   - NEXTAUTH_URL=http:
 
-    FACEBOOK_CLIENT_ID=
+   - FACEBOOK_CLIENT_ID=
 
-    FACEBOOK_CLIENT_SECRET=
+   - FACEBOOK_CLIENT_SECRET=
 
-    JWT_secret=
+   - JWT_secret=
 
-    NEXT_PUBLIC_PAYPAL_CLIENT_ID=
+   - NEXT_PUBLIC_PAYPAL_CLIENT_ID=
 
-    NEXT_PUBLIC_CLIENT_SECRET=
+   - NEXT_PUBLIC_CLIENT_SECRET=
 
-    PAYPAL_CLIENT_ID=
+   - PAYPAL_CLIENT_ID=
 
-    PAYPAL_CLIENT_SECRET=
+   - PAYPAL_CLIENT_SECRET=
     
-    EMAIL_SERVER_USER=apikey
-    EMAIL_SERVER_PASSWORD=
-    EMAIL_SERVER_HOST=smtp.sendgrid.net
-    EMAIL_SERVER_PORT=587
-    EMAIL_FROM= Your email, 
+   - EMAIL_SERVER_USER=apikey
+   - EMAIL_SERVER_PASSWORD=
+   - EMAIL_SERVER_HOST=smtp.sendgrid.net
+   - EMAIL_SERVER_PORT=587
+   - EMAIL_FROM= Your email, 
 
 ## Payments
 
