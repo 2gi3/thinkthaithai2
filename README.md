@@ -14,11 +14,50 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Dependencies documentation
+## 3rd parties documentation:
 
-Google calendar API: [youtube tutorial](https://www.youtube.com/watch?v=zrLf4KMs71E&t=1338s)
+- Calendly 
+  - create web-hooks subscription
+    - example: [Useful example](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
+
+    - Calendly [create webhook documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
+
+    - Instructions: 
+      - Log in Calendly and a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
+      - Make a post request as follows:
+      ```
+       $headers = @{
+       "authorization" = "Bearer TOKEN"
+       }
+
+      Invoke-RestMethod -Method GET -Uri "https://api.calendly.com/users/me" -Headers $headers
+
+      ```
+      - Use the informations received in the response to make a POST request as follows: 
+      ```
+       $headers = @{
+            'Authorization' = 'Bearer TOKEN'
+           'Content-Type'  = 'application/json'
+        }
+
+      $data = @{
+       'url'         = 'API endpoint that receives the POST request'
+       'events'      = @('invitee.created', 'invitee.canceled')
+       'organization'= 'https://api.calendly.com/organizations/XXXXXXX'
+       'user'        = 'https://api.calendly.com/users/XXXXXXX'
+       'scope'       = 'user'
+  
+      $jsonData = $data | ConvertTo-Json
+   
+      $response = Invoke-RestMethod -Method Post -Uri 'https://api.calendly.com/webhook_subscriptions' -Headers $headers -Body $jsonData
+   
+      $response
+```
+      
 
 ## Environment
+##### All .env files are ignored by Git.
+
 On 'npm run dev', the environment variables will reference the .env.local file.
 
 On 'npm start', the environment variables will reference the .env.production file.
