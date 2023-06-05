@@ -7,6 +7,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Features documentation
 
+- ## Authorization and authentication
+
+Oauth 2.0 flow [video](https://www.youtube.com/watch?v=hHRFjbGTEOk)
+
 - ## Payments
 
 The paypal order is created in the server, see the following Chart to understand the logic.
