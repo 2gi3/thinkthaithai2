@@ -9,12 +9,12 @@ import { databaseStudent } from "@/types";
 import { useDispatch } from "react-redux";
 import { updateStudent } from "@/redux/slices/studentSlice";
 import Link from "next/link";
+import Spinner from "@/components/Spinner";
 
 const Account = () => {
   const dispatch = useDispatch();
 
   const { data: session, status } = useSession({ required: true });
-  // const [showCalendar, setShowCalendar] = useState(true);
 
 
   const { data, error } = useSWR(
@@ -32,7 +32,7 @@ const Account = () => {
   };
 
   if (status === "loading") {
-    return <p>Checking Authentication...</p>;
+    return <Spinner diameter={88} />
   } else if (status === "authenticated" && session && session.user) {
     return (
       <div className={styles.container}>

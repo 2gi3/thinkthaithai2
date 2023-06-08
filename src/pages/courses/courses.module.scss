@@ -176,12 +176,24 @@
         justify-content: space-between;
         align-items: center;
 
-        button {
-            @include primary-button;
-            display: flex;
-            justify-content: space-between;
-            margin: auto;
+        .warning {
+            position: absolute;
+            padding: $baseL $base $base;
+            border-radius: $baseS;
+            top: -140px;
+            background-color: #ffffff;
+
+            button {
+                background-image: none;
+                @include secondary-button;
+                position: absolute;
+                right: 0;
+                top: 0;
+                display: flex
+            }
         }
+
+
 
         a {
             background-image: none;
@@ -191,10 +203,23 @@
             display: flex
         }
 
+        button,
+        .buttonLink {
+            @include primary-button;
+            display: flex;
+            justify-content: space-between;
+            margin: auto;
+            position: relative;
+        }
+
         .previous {
             background-image: none;
             @include secondary-button;
             display: flex;
+        }
+
+        .popup {
+            background-color: rebeccapurple;
         }
     }
 }

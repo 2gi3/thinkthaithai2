@@ -27,3 +27,5 @@ export const fetcherStudent = async (...args: FetcherArgs) => {
   // console.log(response)
   return response
 };
+
+

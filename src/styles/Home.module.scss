@@ -1,25 +1,31 @@
 @use "./index.scss" as *; // .main {
+
 // }
 .header {
   display: flex;
   justify-content: center;
   margin: $baseXL 0;
+
   .title {
+
     // width: max-content;
     // margin: $baseL;
     .underText {
       margin-top: $base;
       display: flex;
       width: max-content;
+
       p {
         margin-right: 6px;
         @include tertiary-font;
+
         span {
           font-weight: 700;
         }
       }
     }
   }
+
   picture {
     img {
       height: 344px;
@@ -29,6 +35,7 @@
     }
   }
 }
+
 .main {
   position: relative;
 
@@ -39,19 +46,23 @@
     margin: auto;
     max-width: 999px;
     padding: 48px 0;
+
     // gap: $baseL;
-    & > div {
+    &>div {
       max-width: 260px;
       margin: $baseL;
+
       h2 {
         margin: $baseS;
       }
+
       p {
         margin: $baseS;
         line-height: $pLineHeight;
       }
     }
   }
+
   .teacher {
     position: relative;
     display: flex;
@@ -59,6 +70,7 @@
     justify-content: center;
     align-items: center;
     margin: 24px;
+
     .homepageContacts {
       position: absolute;
       z-index: 2;
@@ -69,30 +81,37 @@
       padding: 0 36px;
       border-radius: 12px;
       height: 140px;
+
       button {
         position: absolute;
         top: $base;
         right: $baseL;
       }
     }
+
     .video {
       h2 {
         margin-bottom: $base;
         text-align: center;
       }
+
       margin: $baseXL;
       width: max-content;
+
       iframe {
         width: 300px;
         border-radius: $base;
         border: 1px solid black;
       }
     }
+
     .introduction {
       max-width: 300px;
+
       p {
         line-height: $pLineHeight;
       }
+
       .contactsToggle,
       a {
         color: blue;
@@ -100,6 +119,7 @@
       }
     }
   }
+
   .price {
     margin: $baseXL;
     display: flex;
@@ -107,19 +127,23 @@
     align-items: center;
     padding: $baseL 0;
     gap: 12px;
-    & > div:first-of-type {
+
+    &>div:first-of-type {
       display: flex;
       justify-content: center;
       gap: 6px;
       margin-bottom: $base;
+
       p {
         min-width: max-content;
       }
     }
+
     h2 {
       @include gradient-text($lightAngle: 1deg);
       margin-bottom: 0;
     }
+
     a {
       @include primary-button($lightAngle: 1deg);
       box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.4);
@@ -133,13 +157,27 @@
   .header {
     .title {
       margin: $baseL;
+
+      ul {
+        margin: $baseXL auto;
+        width: max-content;
+        text-align: center;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
+
     picture {
       display: none;
     }
   }
+
   .main {
-    .courses > div {
+    .courses>div {
       max-width: 300px;
       margin: 12px;
     }
@@ -153,7 +191,7 @@
   }
 }
 
-/* Enable hover only on non-touch devices */
+/* Enable hove;r only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
@@ -185,6 +223,7 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }

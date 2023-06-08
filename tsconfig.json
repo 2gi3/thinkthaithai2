@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
-    "types": ["cypress", "@testing-library/cypress"],
+    "types": [
+      "cypress",
+      "@testing-library/cypress"
+    ],
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,12 +24,23 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "mongoDB/models/student.ts", "mongoDB/clientPromise.js"],
-  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "mongoDB/models/student.ts",
+    "mongoDB/clientPromise.js",
+    "src/pages/api/auth/[...nextauth].js"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "types": [
     "aria-query"
-]
+  ]
 }

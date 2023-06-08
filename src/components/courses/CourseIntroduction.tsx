@@ -3,11 +3,15 @@ import { useSession } from 'next-auth/react'
 import styles from '@/pages/courses/courses.module.scss'
 import Link from "next/link";
 import { GetStaticPropsContext } from 'next';
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaTimes } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 
 const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: DatabaseCourse, setStartCourseCompleted: any }) => {
-    const { data } = useSession();
+
+    const [showPopup, setShowPopup] = useState(false);
+
+
+    const { data, status } = useSession();
 
     const startCourse = async () => {
 
@@ -51,12 +55,30 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
             <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/courses`}>
                 <FaArrowLeft />
             </Link>
+            {showPopup ?
+                <>
+                    <div className={styles.warning}>
+                        <button onClick={() => setShowPopup(false)}><FaTimes /></button>
+                        <p>Log In to start a course, your account will be created automatically, it only takes a few seconds and it is free!</p>
+                    </div>
+                    <Link className={styles.buttonLink} href="/access">Log In</Link>
+                </>
+                : <button onClick={() => {
+                    if (status === "authenticated" && data && data.user) {
+                        startCourse()
+                    } else {
+                        setShowPopup(true);
+                    }
+                }}>
+                    Start Course
+                </button>
+            }
 
-            <button onClick={() => {
-                startCourse()
-            }}>
-                Start Course
-            </button>
+            {/* {showPopup && (
+                <div className={styles.popup}>
+                    <button onClick={() => setShowPopup(false)}>Close</button>
+                </div>
+            )} */}
         </footer>
     </div>
 

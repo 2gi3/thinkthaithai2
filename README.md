@@ -7,11 +7,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Features documentation
 
-- ## Authorization and authentication
+ ## Authentication and Authorization-
 
-Oauth 2.0 flow [video](https://www.youtube.com/watch?v=hHRFjbGTEOk)
+  Create a project on the respective platforms and get credentials:
+  - [Google](https://console.developers.google.com/apis/credentials)
+  - [Facebook]()
+  - [Email]()
 
-- ## Payments
+ ## Payments
 
 The paypal order is created in the server, see the following Chart to understand the logic.
 
@@ -20,7 +23,7 @@ Payment flow:
 
 - [lucidChart link](https://lucid.app/lucidchart/4b5a8ddb-e13c-45a9-b0a5-b99c8daa633d/edit?viewport_loc=-616%2C671%2C2585%2C964%2C0_0&invitationId=inv_fae12b37-73ff-4859-a6cf-e65c5e02d586)
 
-- ## Bookings:
+ ## Bookings:
 
  
   - create web-hooks subscription
@@ -81,6 +84,8 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 What follows is a list of all the necessary environment variables:
+
+   - ADMIN_EMAILS=example@hotmail.com,example@gmail.com
 
    - NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=
 

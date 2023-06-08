@@ -2,12 +2,13 @@ import NextAuth from "next-auth/next";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../../mongoDB/clientPromise";
 
+
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import EmailProvider from "next-auth/providers/email";
 // import { dbConnect } from "../../../../mongoDB";
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -33,12 +34,11 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signOut: "/",
-    // signIn: "/access",
-    // newUser: "/account",
+    signOut: "/"
   },
   adapter: MongoDBAdapter(clientPromise),
-  // secret: process.env.JWT_SECRET,
   secret: process.env.NEXTAUTH_SECRET,
-  debug: true
-});
+  // debug: true
+}
+
+export default NextAuth(authOptions);

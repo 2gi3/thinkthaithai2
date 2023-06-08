@@ -68,9 +68,8 @@ export default function About(
 
 
     const lesson = course.lessons[currentLesson]
-    console.log(currentLesson)
-    console.log(course.lessons.length
-    )
+    // console.log(currentLesson)
+    // console.log(course.lessons.length    )
     const incompleteLessonIndex = course.lessons.findIndex(
         (lesson) => !completedLessons?.includes(lesson.title)
     );
