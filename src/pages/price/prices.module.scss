@@ -11,9 +11,61 @@
     }
   }
 
-  button {
-    margin: $base;
-    padding: $baseS $base;
-    border: 1px solid $fontColor;
+  main {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    max-width: 700px;
+
+    .trial {
+      margin-top: $base;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin: 3px auto;
+        max-width: 240px;
+        text-align: start;
+      }
+
+
+    }
+
+    button {
+      margin: $base;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: $baseS $base;
+      border: 1px solid $fontColor;
+      border-radius: $baseS;
+    }
+
+    .mostPopular {
+
+      h3 {
+        margin: $base ;
+        margin-bottom: 0;
+      }
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: $base;
+      border: 1px solid $primaryColor;
+      padding-bottom: $base;
+
+      button {
+        @include primary-button;
+      }
+    }
   }
 }

@@ -1,20 +1,30 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react'
-import { handleOptions } from '@/functions/back-end';
+// import { getSession } from 'next-auth/react'
+import { authOptions } from '../auth/[...nextauth]';
+import { getServerSession } from "next-auth/next"
+import { handleOptions, isAdmin } from '@/functions/back-end';
 import { dbConnect } from '../../../../mongoDB';
 import { ObjectId } from 'mongodb';
 
 import CourseModel from 'mongoDB/models/course';
 import { databaseStudent } from '@/types';
 
+const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
 
-    // const session = await getSession({req})
-    // if(!session) return res.send('You are not authenticated')
+    const session = await getServerSession(req, res, authOptions)
+
+    // if (
+    //     session &&
+    //     session.user?.email &&
+    //     adminEmails.length > 0 &&
+    //     adminEmails.includes(session.user?.email)) {
+
+    //     }
 
 
     switch (req.method) {
@@ -25,22 +35,38 @@ export default async function handler(
             break;
 
         case 'POST':
+
             const { title, description, status, level, prerequisites, introduction, lessons } = req.body;
 
+            if (
+                // session &&
+                // session.user?.email &&
+                // adminEmails.length > 0 &&
+                // adminEmails.includes(session.user?.email)
+                await isAdmin(req, res)
+            ) {
 
-            try {
-                await dbConnect();
-                const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction, lessons });
-                await newCourse.save();
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).json({ message: 'Feedback created successfully!' });
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ message: 'Error creating feedback TEST' });
-            } finally {
-                res.end();
+
+                try {
+                    await dbConnect();
+                    const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction, lessons });
+                    await newCourse.save();
+                    res.setHeader('Content-Type', 'application/json');
+                    res.status(200).json({ message: 'Feedback created successfully!' });
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({ error, message: 'Error creating feedback TEST' });
+                } finally {
+                    res.end();
+                }
+                break;
+            } else {
+                res.status(401).json({
+                    "error": "Unauthorized",
+                    "message": "Access denied. Please provide valid credentials."
+                }
+                );
             }
-            break;
 
         // Get one course by title: /api/courses?searchBy=title&value=<TITLE>
         // Get one course by id: /api/courses?searchBy=id&value=<ID>
@@ -81,18 +107,6 @@ export default async function handler(
                 res.status(500).json({ message: 'Error retrieving courses' });
             }
             break;
-
-        // case 'DELETE':
-        // try {
-        //     await dbConnect();
-        //     const { _id } = req.body;
-        //     await FeedbackModel.findByIdAndDelete(_id);
-        //     res.status(200).json({ message: 'Feedback deleted successfully!' });
-        // } catch (error) {
-        //     console.error(error);
-        //     res.status(500).json({ message: 'Error deleting feedback' });
-        // }
-        // break;
     }
 
 }

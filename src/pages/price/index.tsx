@@ -63,13 +63,20 @@ export default function Prices() {
         {/* <button onClick={() => console.log("hello world")}>
           Trial lesson <Price USD={5} />
         </button> */}
-        <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+        <div className={styles.trial}>
+          <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+        </div>
         <button onClick={() => setProduct("5 lessons")}>
           5 lessons <Price USD={products["5 lessons"]} />
         </button>
-        <button onClick={() => setProduct("10 lessons")}>
-          10 lessons <Price USD={products["10 lessons"]} />
-        </button>
+        <div className={styles.mostPopular}>
+          <h3>Most Popular</h3>
+          <button onClick={() => setProduct("10 lessons")}>
+            10 lessons
+          </button>
+          <Price USD={products["10 lessons"]} />
+        </div>
+
         <button onClick={() => setProduct("20 Lessons")}>
           20 lessons <Price USD={products["20 Lessons"]} />
         </button>

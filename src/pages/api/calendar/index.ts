@@ -8,20 +8,6 @@ import BookingModel from 'mongoDB/models/booking';
 import clientPromise from 'mongoDB/clientPromise';
 
 
-// const Booking = mongoose.model('Booking', new mongoose.Schema({}))
-
-
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   console.log(req.body)
-//   dbConnect()
-//   await Booking.create(req.body)
-
-
-// }
-
 
 
 
@@ -30,8 +16,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // const session = await getSession({req})
-  // if(!session) return res.send('You are not authenticated')
 
   switch (req.method) {
 
@@ -45,15 +29,6 @@ export default async function handler(
       try {
 
 
-        // if (!student) {
-        //   return res.status(404).json({ message: 'User not found' });
-        // }
-
-        // const paidLessons = student.paidLessons
-        // const totalLessons = paidLessons - 1
-
-        // //  student.paidlessons -= 1;
-        // await db.collection('users').updateOne({ email: email }, { $set: { paidLessons: totalLessons } });
 
         await dbConnect();
         const newBooking = new BookingModel({ email, name, event, cancel_url, reschedule_url });
