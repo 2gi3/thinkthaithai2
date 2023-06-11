@@ -1,36 +1,52 @@
 @use '@/styles' as *;
 
-.feedbackCard{
+.feedbackCard {
     position: relative;
     margin: $base;
     display: flex;
-    border: 1px solid black;
+    // border: 1px solid black;
     padding: $baseS;
     width: 280px;
     border-radius: $baseS;
-    & > div:nth-child(1){
-        margin-right: $baseS;
-        img{
-            border-radius: 50%;            
-        background-color: red;
-        }
-    }
-    & > div:nth-child(2){
-        &>:nth-child(2){
-            margin: $baseS 0;
-        height: 88px;
-        overflow: hidden;
-        }
-    }
-    button{
-        @include secondary-button;
-        position: absolute;
-        bottom: $base;
-        right: $baseS;
-        background-color: #ffffff;
-    }
-    .footer{
+    overflow: hidden;
+
+    .credientials {
+        margin: 6px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
         @include tertiary-font;
     }
-    
+
+    &>div:nth-child(1) {
+        margin-right: $baseS;
+
+        img {
+            border-radius: 50%;
+            background-color: red;
+        }
+    }
+
+    &>div:nth-child(2) {
+        &>:nth-child(2) {
+            margin: $baseS 0;
+            // height: 88px;
+            overflow: hidden;
+        }
+    }
+
+    button {
+        @include secondary-button;
+        position: absolute;
+        z-index: 3;
+        border: none;
+        bottom: -5px;
+        right: 0;
+        // bottom: $base;
+        // right: $baseS;
+        background-color: #ffffff;
+    }
+
+
 }

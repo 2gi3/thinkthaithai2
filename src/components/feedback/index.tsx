@@ -13,7 +13,7 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
       setIsOverflow(paragraphElement.scrollHeight > paragraphElement.clientHeight);
     }
   }, [feedback._id]);
-  {console.log(height)}
+  { console.log(height) }
 
   return (
     <div key={feedback._id} className={styles.feedbackCard}>
@@ -23,22 +23,26 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
         </div>
       )}
       <div>
-        <h4>{feedback.title}</h4>
-        <p id={`feedback-body-${feedback._id}`}
-        style={{height: height}}
-        >
-          {feedback.body}
-        </p>
-        {isOverflow && <button className="secondaryButton" onClick={()=>{
-            height === 'max-content'? setHeight('88px'): setHeight('max-content')
-            
-        }}>expand</button>}
-        <div className={styles.footer}>
+
+        <div className={styles.credientials}>
           <p>
             {feedback.name}, <span>{feedback.job}</span>
           </p>
           <p>{feedback.location}</p>
         </div>
+        <h4>{feedback.title}</h4>
+        <p id={`feedback-body-${feedback._id}`}
+          style={{ height: height }}
+        >
+          {feedback.body}
+        </p>
+        {isOverflow && <button className="secondaryButton" onClick={() => {
+          height === 'max-content' ? setHeight('88px') : setHeight('max-content')
+
+        }}>... more</button>}
+
+
+
       </div>
     </div>
   );
