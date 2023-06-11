@@ -54,8 +54,8 @@ export default function Prices() {
     <div className={styles.container}>
       <header>
         <h1>Invest in Yourself</h1>
-        <p>Regular lessons are 50 minutes</p>
-        <p> Personalised homeworks</p>
+        <p>50 minutes regular lessons</p>
+        <p>Personalised homeworks</p>
         <p>and study material</p>
         <p>are always included</p>
       </header>
