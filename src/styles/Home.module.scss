@@ -217,7 +217,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0;
+    // margin-bottom: 0;
+    margin: $baseXL auto 0 auto;
 
     h1 {
       width: 100%;
@@ -266,6 +267,7 @@
       flex-direction: column;
       margin-top: $baseL;
       gap: 0;
+      padding-bottom: 0;
 
       &>div {
         max-width: 300px;
@@ -298,6 +300,14 @@
       }
 
 
+    }
+
+    .teacher {
+      margin-top: 0;
+
+      .video {
+        margin-top: 0;
+      }
     }
 
 
