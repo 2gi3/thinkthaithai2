@@ -16,6 +16,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
  ## Payments
 
+ sandbox account email: test@thinkthaithai.com
+ anndbox account password: testabctest
+
 The paypal order is created in the server, see the following Chart to understand the logic.
 
 Payment flow:
@@ -121,3 +124,9 @@ What follows is a list of all the necessary environment variables:
    - EMAIL_SERVER_PORT=587
    - EMAIL_FROM= Your email, 
 
+
+# Feedbacks
+
+## Katy Nguyen: 
+- (figma)[https://www.figma.com/file/4ioUGDhUqDLYur9PcvCFjQ/ThinkThaiThai's-feedback?type=design&node-id=1-2&t=utyGoHAh2Iswhlm5-0]
+- (PDFs)[#]

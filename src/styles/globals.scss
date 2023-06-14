@@ -64,6 +64,11 @@ a {
   text-decoration: none;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

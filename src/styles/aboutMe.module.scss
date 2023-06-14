@@ -1,35 +1,42 @@
 @use './index.scss' as *;
 
-.container{
+.container {
     max-width: 1000px;
     margin: auto;
-    header{
+
+    header {
         margin: $baseXL auto;
         display: flex;
         flex-wrap: wrap-reverse;
         justify-content: space-around;
         align-items: center;
-        div{
+
+        div {
+
             // max-width: 320px;
-            &:first-child{
+            &:first-child {
                 height: 320px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                p{
+
+                p {
                     max-width: 300px;
                 }
-                h1{
+
+                h1 {
                     width: 100%;
                     text-align: center;
                 }
             }
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 width: 100%;
                 max-width: 600px;
                 margin: auto;
-                img{
+
+                img {
                     width: 100%;
                     max-width: 600px;
                     object-position: bottom;
@@ -38,35 +45,46 @@
             }
         }
     }
-    main{
-       margin-top: -$baseL;
+
+    main {
+        margin-top: -$baseL;
         display: flex;
         flex-wrap: wrap-reverse;
         justify-content: space-around;
         align-items: center;
-        p{max-width: 300px;
-        margin-bottom: $baseS;}
-        div{
-            &:first-child{
-               display: none;
+
+        p {
+            max-width: 300px;
+            margin-bottom: $baseS;
+        }
+
+        div {
+            &:first-child {
+                display: none;
             }
         }
     }
-    .CTA{
+
+    .CTA {
         margin: $baseXL auto;
         width: max-content;
-        P{margin: $baseS 0}
-        a{
+
+        P {
+            margin: $baseS 0
+        }
+
+        a {
             @include secondary-button;
         }
     }
 }
+
 @media (min-width: 599px) {
-    .container{
-        header{
-            div{
-                &:nth-child(2){
-                    img{
+    .container {
+        header {
+            div {
+                &:nth-child(2) {
+                    img {
                         border-radius: $baseS;
                     }
                 }
@@ -77,40 +95,46 @@
 }
 
 @media (min-width: 799px) {
-    .container{
-        header{
-            div{
+    .container {
+        header {
+            div {
+
                 // max-width: 320px;
-                &:first-child{
+                &:first-child {
                     height: 320px;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
                 }
-                &:nth-child(2){
+
+                &:nth-child(2) {
                     max-width: 320px;
                     margin: unset;
-                    img{
+
+                    img {
                         border-radius: $baseS;
                     }
                 }
             }
 
         }
-        main{
+
+        main {
             margin: $baseXL auto;
             padding: $base 0;
-            div{
-                &:first-child{
-                   display: block;
-                   img{
-                    border-radius: $baseS;
-                   }
+
+            div {
+                &:first-child {
+                    display: block;
+
+                    img {
+                        border-radius: $baseS;
+                    }
                 }
             }
         }
-       
+
     }
 
 

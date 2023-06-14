@@ -4,12 +4,16 @@ import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSession } from "next-auth/react";
 import Calendar from "@/components/calendar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export default function Prices() {
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
   const student = data?.user;
   console.log(student);
+  const paidLessons = useSelector((state: RootState) => state.student.paidLessons);
+
 
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const [orderId, setOrderId] = useState<string>();
@@ -63,9 +67,14 @@ export default function Prices() {
         {/* <button onClick={() => console.log("hello world")}>
           Trial lesson <Price USD={5} />
         </button> */}
-        <div className={styles.trial}>
-          <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
-        </div>
+        {paidLessons === undefined && (
+          <div className={styles.trial}>
+            <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+          </div>
+        )}
+
+
+
         <button onClick={() => setProduct("5 lessons")}>
           5 lessons <Price USD={products["5 lessons"]} />
         </button>

@@ -6,6 +6,7 @@ import { RootState } from "@/redux/store";
 import Price from "@/components/Currency/Price";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import Image from 'next/image'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,15 +40,17 @@ export default function Home() {
         <link rel="icon" href="/logo.webp" />
       </Head>
       <header className={styles.header}>
+        {/* <h1>{t("title")}</h1> */}
         <div className={styles.title}>
           <h1>{t("title")}</h1>
-          <ul>
+          {/* <ul>
             {t("Learn Thai Language With")}
             <li>{t("Customised Lessons")}</li>
             <li>{t("Study material")}</li>
             <li>{t("& Homeworks")}</li>
-          </ul>
-          <div>
+          </ul> */}
+          <p>{t("Learn Thai Language With")} {t("Customised Lessons")}, {t("Study material")} {t("& Homeworks")}</p>
+          <div className={styles.CTA}>
             <button>{t("Start Now")}</button>
             <div className={styles.underText}>
               <p>
@@ -70,6 +73,7 @@ export default function Home() {
       </header>
       <main className={styles.main}>
         <div className={styles.courses}>
+
           <div>
             <h2>{t("Speaking & Listening")}</h2>
             <p>
@@ -78,6 +82,17 @@ export default function Home() {
               )}
             </p>
           </div>
+          <Image src="/images/speaking.webp"
+            width={320}
+            height={320}
+            alt="A tourist asking for directions"
+          />
+
+          <Image src="/images/texting.webp"
+            width={320}
+            height={320}
+            alt="A tourist asking for directions"
+          />
           <div>
             <h2>{t("Reading & Writing")}</h2>
             <p>
@@ -86,6 +101,7 @@ export default function Home() {
               )}
             </p>
           </div>
+
           <div>
             <h2>
               <span>{t("Gain the ")}</span>
@@ -97,6 +113,12 @@ export default function Home() {
               )}
             </p>
           </div>
+          <Image className={styles.beach} src="/images/beach.webp"
+            width={320}
+            height={320}
+            alt="A tourist asking for directions"
+          />
+
         </div>
         <div className={styles.teacher}>
           <div className={styles.video}>

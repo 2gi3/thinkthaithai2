@@ -1,4 +1,5 @@
 @use "./colors" as *;
+
 $primaryFontSize: 22px;
 $primaryFontWeight: 700;
 $secondaryFontSize: 16px;
@@ -14,10 +15,8 @@ $pLineHeight: 20px;
   text-shadow: $shadow;
 }
 
-@mixin secondary-font(
-  $size: $secondaryFontSize,
-  $weight: $secondaryFontWeight
-) {
+@mixin secondary-font($size: $secondaryFontSize,
+  $weight: $secondaryFontWeight) {
   font-size: $size;
   font-weight: $weight;
   color: $fontColor;

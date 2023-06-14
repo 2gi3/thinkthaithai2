@@ -8,7 +8,7 @@ const initialState: databaseStudent = {
     emailVerified: null,
     image: '',
     name: '',
-    paidLessons: 0,
+    paidLessons: undefined,
     startedCourses: {},
     _id: '',
 };

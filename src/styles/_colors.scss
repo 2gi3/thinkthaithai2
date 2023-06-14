@@ -1,6 +1,6 @@
 @use "./measures" as *;
 
-$primaryColor: #8f79ff;
+$primaryColor: #6e51ff;
 $primaryColorLight: #eae6ff;
 $secondaryColor: #ff8900;
 $secondaryColorLight: #ffdfba;
@@ -9,7 +9,7 @@ $shadow: -1px 1px 1px rgba(80, 80, 80, 0.2);
 
 @mixin gradient-text($color1: $primaryColor,
   $color2: $primaryColorLight,
-  $lightAngle: 3deg) {
+  $lightAngle: 2deg) {
   // width: max-content;
   background-image: linear-gradient($lightAngle, $color1, $color2);
   background-clip: text;
