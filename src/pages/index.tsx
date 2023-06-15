@@ -120,9 +120,11 @@ export default function Home() {
           />
 
         </div>
+        <h2 className={styles.teacherHeader}>{t("My name is Natt")}</h2>
+
         <div className={styles.teacher}>
           <div className={styles.video}>
-            <h2>{t("My name is Natt")}</h2>
+            {/* <h2>{t("My name is Natt")}</h2> */}
             <iframe
               src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
               width="274"

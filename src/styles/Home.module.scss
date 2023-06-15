@@ -122,13 +122,27 @@
     }
   }
 
+  .teacherHeader {
+    text-align: center;
+
+    @include primary-font(34px);
+    @include gradient-text();
+    margin-top: $baseXXL;
+    margin-bottom: $base;
+  }
+
   .teacher {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    // align-items: center;
+    // margin: 24px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin: 24px;
+
 
     .homepageContacts {
       position: absolute;
@@ -154,7 +168,8 @@
         text-align: center;
       }
 
-      margin: $baseXL;
+      // margin: $baseXL;
+      margin: auto;
       width: max-content;
 
       iframe {
@@ -166,6 +181,9 @@
 
     .introduction {
       max-width: 300px;
+      height: max-content;
+      margin: auto;
+
 
       p {
         line-height: $pLineHeight;
@@ -180,7 +198,7 @@
   }
 
   .price {
-    margin: $baseXL;
+    margin: $baseXXL $baseXL;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +217,9 @@
     }
 
     h2 {
+      @include primary-font(34px);
       @include gradient-text($lightAngle: 1deg);
+
       margin-bottom: 0;
     }
 
@@ -302,11 +322,49 @@
 
     }
 
-    .teacher {
+    .teacherHeader {
+      font-size: 28px;
       margin-top: 0;
+    }
+
+    .teacher {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      // margin-top: 0;
+
 
       .video {
         margin-top: 0;
+        margin-bottom: $baseL;
+
+        width: 100%;
+        max-width: 440px;
+
+
+
+
+        iframe {
+          height: 200px;
+          width: 100%;
+          max-width: 440px;
+          border-radius: 0;
+          margin: auto;
+
+        }
+      }
+
+      // .introduction {
+      //   padding: 0 $base;
+      // }
+    }
+
+    .price {
+      h2 {
+        font-size: 28px;
+        text-align: center;
       }
     }
 
@@ -378,6 +436,15 @@
         height: 220px;
       }
     }
+
+    .teacher {
+      .video {
+        iframe {
+          width: 220px;
+          height: 220px;
+        }
+      }
+    }
   }
 }
 
@@ -387,6 +454,14 @@
     .courses {
       img {
         border-radius: $base;
+      }
+    }
+
+    .teacher {
+      .video {
+        iframe {
+          border-radius: $base;
+        }
       }
     }
   }
