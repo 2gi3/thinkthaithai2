@@ -10,11 +10,13 @@ import Image from 'next/image'
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+
+export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
   const { t } = useTranslation("homepage");
   const [showContacts, setShowContacts] = useState(false);
   const { locale } = useRouter();
   const currency = useSelector((state: RootState) => state.currency.value);
+
 
   return (
     <>
@@ -167,6 +169,14 @@ export default function Home() {
             )}
           </div>
         </div>
+        <div className={styles.feedbacks}>
+          {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
+            return (
+              index < 3 && <Feedback feedback={feedback} key={`${index}`} />
+            )
+          })}
+          <Link href='/feedbacks'> <p>See what my students say about me <FaArrowRight /></p></Link>
+        </div>
         <div className={styles.price}>
           <h2>{t("Start Learning Now!")}</h2>
           <div>
@@ -192,11 +202,28 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import Contacts from "@/components/Contacts/Contacts";
 import { useState } from "react";
+import { DatabaseFeedback } from "@/types";
+import Feedback from "@/components/feedback";
+import { FaArrowRight } from "react-icons/fa";
 
-export async function getStaticProps({ locale }: any) {
+// export async function getStaticProps({ locale }: any) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ["common", "homepage"])),
+//     },
+//   };
+// }
+
+export const getStaticProps = async ({ locale }: any) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {
+    method: "GET",
+  });
+  const feedbacks: DatabaseFeedback[] = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "homepage"])),
+      feedbacks: feedbacks,
     },
+    revalidate: 60,
   };
-}
+};
