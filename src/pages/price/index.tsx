@@ -7,7 +7,12 @@ import Calendar from "@/components/calendar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+
 export default function Prices() {
+  const { t } = useTranslation("price");
+
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
   const student = data?.user;
@@ -57,11 +62,11 @@ export default function Prices() {
   return (
     <div className={styles.container}>
       <header>
-        <h1>Invest in Yourself</h1>
-        <p>50 minutes regular lessons</p>
-        <p>Personalised homeworks</p>
-        <p>and study material</p>
-        <p>are always included</p>
+        <h1>{t('Invest in Yourself')}</h1>
+        <p>{t('50 minutes regular lessons')}</p>
+        <p>{t('Personalised homeworks')}</p>
+        <p>{t('and study material')}</p>
+        <p>{t('are always included')}</p>
       </header>
       <main>
         {/* <button onClick={() => console.log("hello world")}>
@@ -69,25 +74,25 @@ export default function Prices() {
         </button> */}
         {paidLessons === undefined && (
           <div className={styles.trial}>
-            <Calendar label="Trial Lesson" eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+            <Calendar label={('Trial Lesson')} eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
           </div>
         )}
 
 
 
         <button onClick={() => setProduct("5 lessons")}>
-          5 lessons <Price USD={products["5 lessons"]} />
+          5 {t('lessons')} <Price USD={products["5 lessons"]} />
         </button>
         <div className={styles.mostPopular}>
-          <h3>Most Popular</h3>
+          <h3>{t('Most Popular')}</h3>
           <button onClick={() => setProduct("10 lessons")}>
-            10 lessons
+            10 {t('lessons')}
           </button>
           <Price USD={products["10 lessons"]} />
         </div>
 
         <button onClick={() => setProduct("20 Lessons")}>
-          20 lessons <Price USD={products["20 Lessons"]} />
+          20 {t('lessons')} <Price USD={products["20 Lessons"]} />
         </button>
         <PayPalScriptProvider options={initialOptions}>
           {product && (
@@ -115,11 +120,19 @@ export default function Prices() {
         </PayPalScriptProvider>
         {orderId && (
           <div>
-            <h2>Thank you for your purchase!</h2>
-            <p>Your order ID is: {orderId}</p>
+            <h2>{t('Thank you for your purchase!')}</h2>
+            <p>{t('Your order ID is')}: {orderId}</p>
           </div>
         )}
       </main>
     </div>
   );
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "price"])),
+    },
+  };
 }

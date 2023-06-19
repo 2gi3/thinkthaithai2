@@ -68,6 +68,16 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+@media (max-width: 599px) {
+  header {
+    h1 {
+      @include gradient-text($color2: #6d50ff);
+      ;
+      font-size: 28px;
+    }
+  }
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {

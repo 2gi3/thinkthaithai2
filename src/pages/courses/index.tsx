@@ -3,11 +3,14 @@ import styles from './courses.module.scss'
 import Link from "next/link";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from "next-i18next";
+
 
 export default function About(
     { courses }: { courses: DatabaseCourse[] }
 ) {
-
+    const { t } = useTranslation("courses");
     const dispatch = useDispatch();
     const studentData = useSelector(
         (state: RootState) => state.student
@@ -25,14 +28,14 @@ export default function About(
             if (startedCourseLength && startedCourseLength >= lessonCount) {
                 progressElement = (
                     <p className={styles.completed}>
-                        <span>Completed</span>
+                        <span>{t('Completed')}</span>
                     </p>
                 );
             } else {
                 const progressPercentage = Math.ceil((startedCourseLength! / lessonCount) * 100);
                 progressElement = (
                     <p className={styles.started}>
-                        <span>Progress</span> {progressPercentage}%
+                        <span>{t('Progress')}</span> {progressPercentage}%
                     </p>
                 );
             }
@@ -48,7 +51,8 @@ export default function About(
         <div className={styles.container}>
             <header>
                 <h1>
-                    The&nbsp;best&nbsp;time to&nbsp;start&nbsp;learning is&nbsp;Now!
+                    {/* The&nbsp;best&nbsp;time to&nbsp;start&nbsp;learning is&nbsp;Now! */}
+                    {t('the best time to start learning is Now!')}
                 </h1>
             </header>
             <main>
@@ -61,7 +65,7 @@ export default function About(
                             {renderProgress(course)}
                             <p>{course.description}</p>
                             <div className={styles.footer}>
-                                <p>Level: <span>{course.level}</span></p>
+                                <p>{t('Level')}: <span>{course.level}</span></p>
                             </div>
                         </div>
                     </Link>
@@ -72,12 +76,27 @@ export default function About(
 }
 
 
+// export const getStaticProps = async () => {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
+//         method: "GET",
+//     });
+//     const courses: DatabaseCourse[] = await res.json();
 
-export const getStaticProps = async () => {
+//     return { props: { courses }, revalidate: 60 };
+// };
+
+
+export const getStaticProps = async ({ locale }: any) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
         method: "GET",
     });
     const courses: DatabaseCourse[] = await res.json();
 
-    return { props: { courses }, revalidate: 60 };
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common", "courses"])),
+            courses: courses,
+        },
+        revalidate: 60,
+    };
 };

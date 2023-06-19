@@ -354,6 +354,7 @@
     }
 
     .teacherHeader {
+      @include gradient-text($color2: #6d50ff);
       font-size: 28px;
       margin-top: 0;
     }
@@ -402,9 +403,9 @@
 
     .price {
       h2 {
+        @include gradient-text($color2: #6d50ff);
         font-size: 28px;
         text-align: center;
-        width: max-content;
       }
 
       .underText {
