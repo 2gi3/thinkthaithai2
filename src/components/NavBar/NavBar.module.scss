@@ -8,27 +8,34 @@
   align-items: center;
   position: relative;
   @include secondary-font;
-  #selected{
+
+  #selected {
     text-decoration: underline;
     text-underline-offset: 3px;
     color: black;
   }
-  .account{
-    padding-left:24px;
-    img{
-    border-radius: 50%;
+
+  .account {
+    padding-left: 24px;
+
+    img {
+      border-radius: 50%;
     }
   }
+
   #hide {
     display: unset;
   }
+
   .toggle {
     display: none;
   }
+
   .brand {
     padding: $base $baseL;
     @include primary-font;
   }
+
   .navigation,
   .hide {
     display: flex;
@@ -36,10 +43,12 @@
     align-items: center;
     justify-content: right;
     margin-right: $baseL;
+
     button {
       display: inline;
     }
   }
+
   .links,
   .buttons {
     position: relative;
@@ -48,13 +57,16 @@
     gap: $base;
     padding: $base;
     list-style-type: none;
+
     li {
       min-width: max-content;
+
       a {
         text-decoration: none;
       }
     }
   }
+
   .links::after {
     content: "";
     position: absolute;
@@ -70,9 +82,11 @@
   .container {
     display: flex;
     flex-direction: column-reverse;
+
     .brand {
       padding-top: 0;
     }
+
     .navigation,
     .hide {
       margin-right: 0;
@@ -80,24 +94,39 @@
   }
 }
 
+@media (min-width: 600px) and (max-width: 698px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .brand {
+      padding-top: $base;
+    }
+  }
+
+}
+
 @media (max-width: 699px) {
   .container {
     align-items: start;
+
     .hide {
       display: none;
     }
-    
+
     .toggle {
       display: block;
       position: absolute;
       top: 18px;
       right: 30px;
       padding: 5px 10px;
+
       svg {
         height: 28px;
         width: 28px;
       }
     }
+
     .navigation {
       flex-direction: column;
       position: absolute;
@@ -110,20 +139,24 @@
       top: 65px;
       right: $baseL;
       margin-right: 0;
-      .account{
+
+      .account {
         padding-top: 18px;
         padding-right: 0;
       }
     }
-    .navigation > a {
+
+    .navigation>a {
       padding: 5px 11px;
     }
+
     .links,
     .buttons {
       flex-direction: column;
       align-items: flex-end;
       padding: $baseS;
     }
+
     .links::after {
       top: unset;
       right: 0;
