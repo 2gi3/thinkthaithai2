@@ -7,9 +7,11 @@
   gap: $base;
   margin: $baseXL auto;
   padding-bottom: $base;
-  width: 220px;
+  width: 234px;
+
   p {
     position: relative;
+
     &::before,
     &::after {
       content: " ";
@@ -20,10 +22,12 @@
       width: 90px;
       background-color: #999999;
     }
+
     &::after {
       right: -100px;
     }
   }
+
   button {
     width: 100%;
     border: 1px solid $fontColor;
@@ -34,16 +38,19 @@
     justify-content: space-between;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #999999;
+
     &:last-child {
       margin-top: -12px;
     }
   }
+
   form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: $base;
+
     input {
       width: 100%;
       padding: $baseS;
@@ -51,9 +58,11 @@
       border: 1px solid $fontColor;
       box-shadow: inset -1px 1px 2px #999999;
     }
+
     label {
       width: 100%;
     }
+
     button {
       justify-content: center;
     }

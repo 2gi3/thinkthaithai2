@@ -133,12 +133,8 @@
 
   .teacher {
     position: relative;
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: center;
-    // align-items: center;
-    // margin: 24px;
-
+    max-width: 999px;
+    margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -198,7 +194,8 @@
   }
 
   .feedbacks {
-    margin-top: $baseXXL;
+    max-width: 999px;
+    margin: $baseXXL auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     // gap: $baseS 0;
