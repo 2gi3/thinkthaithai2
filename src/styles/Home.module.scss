@@ -211,7 +211,7 @@
     a {
       @include secondary-button();
       margin: auto;
-      // width: 280px;
+      width: 280px;
       // height: 206px;
       padding: $base $baseL;
       display: flex;

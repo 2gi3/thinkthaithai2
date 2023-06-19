@@ -1,17 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from '@/styles/aboutMe.module.scss'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function About() {
+  const { t } = useTranslation("aboutme");
+  const { locale } = useRouter();
+
+
   return (
     <div className={styles.container}>
       <header>
         <div>
-          <h2>I&apos;m&nbsp;Natt</h2>
-          <p>Here to guide you</p>
-          <h1>Every Step of The Way!</h1>
-          <p>I have always been passionate about teaching and sharing knowledge with others.
-            That&apos;s why I pursued a career in education and have been teaching Thai language since 2017
+          <h2>{t("I'm Natt")}</h2>
+          <p>{t("Here to guide you")}</p>
+          <h1>{t("Every Step of The Way!")}</h1>
+          <p>{t("I have always been passionate...")}
           </p>
         </div>
         <div>
@@ -23,17 +29,24 @@ export default function About() {
           <Image src='/aboutMe2.webp' alt="Teacher Natt" width={320} height={320} />
         </div>
         <div>
-          <p>I have experience working with students of all levels and ages, and I use a variety of teaching methods to make sure that each student gets the individual attention they need.</p>
-          <p>My goal is to help You learn to speak Thai with confidence and understand our beautiful culture on a deeper level.</p>
-          <p>In my free time, I enjoy watching movies, learning new languages, surfing the internet, and travelling.
-            Currently, I&apos;m learning Japanese, so I understand the challenges of learning a second language from both a teacher&apos;s and a student&apos;s point of view.</p>
-          <p>Thank you for taking the time to learn more about me and my teaching style. I look forward to helping you achieve your language goals!</p>
+          <p>{t("I have experience working with students...")}</p>
+          <p>{t("My goal is to help...")}</p>
+          <p>{t("In my free time...")}</p>
+          <p>{t("Thank you for taking the time...")}</p>
         </div>
       </main>
       <div className={styles.CTA}>
-        <p>Don&apos;t take my word for it!</p>
-        <Link href='/feedbacks'> See what my students say about me</Link>
+        <p>{t("Don't take my word for it!")}</p>
+        <Link href='/feedbacks'> {t("See what my students say about me")}</Link>
       </div>
     </div>
   );
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "aboutme"])),
+    },
+  };
 }

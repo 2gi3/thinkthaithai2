@@ -23,7 +23,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setToggleIsOpen(false);
-    console.log(pathname)
+    // console.log(pathname)
   }, [pathname]);
 
   const handleLogOut = async () => {
@@ -45,16 +45,16 @@ const NavBar = () => {
       <div className={toggleIsOpen ? styles.navigation : styles.hide}>
         <ul className={styles.links}>
           <li>
-            <Link href="/aboutme" id={pathname === "/aboutme" ? styles.selected : ''}>{t("about me")}</Link>
+            <Link href="/aboutme" id={pathname === "/aboutme" ? styles.selected : ''}>{t("About Me")}</Link>
           </li>
           <li>
-            <Link href="/price" id={pathname === "/price" ? styles.selected : ''}>{t("price")}</Link>
+            <Link href="/price" id={pathname === "/price" ? styles.selected : ''}>{t("Price")}</Link>
           </li>
           <li>
-            <Link href="/feedbacks" id={pathname === "/feedbacks" ? styles.selected : ''}>{t("feedbacks")}</Link>
+            <Link href="/feedbacks" id={pathname === "/feedbacks" ? styles.selected : ''}>{t("Feedbacks")}</Link>
           </li>
           <li>
-            <Link href="/courses" id={pathname === "/courses" ? styles.selected : ''}>{t("free courses")}</Link>
+            <Link href="/courses" id={pathname === "/courses" ? styles.selected : ''}>{t("Free Courses")}</Link>
           </li>
         </ul>
         <ul className={styles.buttons}>
@@ -74,7 +74,7 @@ const NavBar = () => {
         </>
         ) : (
           <Link href="/access" id={pathname === "/access" ? styles.selected : ''} className={styles.access}>
-            {t("log in")}
+            {t("Log In")}
           </Link>
         )}
       </div>

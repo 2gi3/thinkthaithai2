@@ -13,7 +13,7 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
       setIsOverflow(paragraphElement.scrollHeight > paragraphElement.clientHeight);
     }
   }, [feedback._id]);
-  { console.log(height) }
+  // { console.log(height) }
 
   return (
     <div key={feedback._id} className={styles.feedbackCard}>
