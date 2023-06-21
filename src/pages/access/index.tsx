@@ -33,7 +33,7 @@ export default function About() {
       return false;
     }
 
-    signIn("email", { email });
+    signIn("email", { email, redirect: true, callbackUrl: "/account" });
   };
 
   if (status === "loading") {

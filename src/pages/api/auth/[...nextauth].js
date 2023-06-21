@@ -21,16 +21,8 @@ export const authOptions = {
       callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
     EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
-      },
+      server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
-      callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
   ],
   pages: {
@@ -42,3 +34,5 @@ export const authOptions = {
 }
 
 export default NextAuth(authOptions);
+
+

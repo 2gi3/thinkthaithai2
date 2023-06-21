@@ -12,7 +12,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   Create a project on the respective platforms and get credentials:
   - [Google](https://console.developers.google.com/apis/credentials)
   - [Facebook]()
-  - [Email]()
+  - [Email](https://next-auth.js.org/providers/email)
+    - If double factor authentication is active to log in your email, then an app-specific password mustbe created in the email settings and that is the password to be used in in .env/EMAIL_SERVER
+    - For gmail, the username is the part in your email addres before the '@' symbol
 
  ## Payments
 
@@ -118,11 +120,8 @@ What follows is a list of all the necessary environment variables:
 
    - PAYPAL_CLIENT_SECRET=
     
-   - EMAIL_SERVER_USER=apikey
-   - EMAIL_SERVER_PASSWORD=
-   - EMAIL_SERVER_HOST=smtp.sendgrid.net
-   - EMAIL_SERVER_PORT=587
-   - EMAIL_FROM= Your email, 
+   - EMAIL_SERVER=smtp://USERNAME:PASSWORD@smtp.gmail.com:587
+   - EMAIL_FROM=EXAMPLE@gmail.com
 
 
 # Feedbacks
