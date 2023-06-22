@@ -50,7 +50,7 @@ const Account = () => {
         </div>
         {data?.paidLessons && data?.paidLessons > 0 ?
           <Calendar label='Book a lesson' eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}`} />
-          : <Link href='/price'></Link>
+          : <Link href='/price'>Buy some lessons</Link>
         }
 
       </div>

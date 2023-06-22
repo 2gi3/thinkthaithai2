@@ -25,6 +25,7 @@ export default async function handler(
 
     case 'POST':
       const { email, name, event, cancel_url, reschedule_url } = req.body.payload;
+      console.log(req.body.payload)
 
       try {
 
