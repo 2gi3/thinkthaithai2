@@ -80,6 +80,7 @@ export default function Prices() {
 
 
 
+
         <button onClick={() => setProduct("5 lessons")}>
           5 {t('lessons')} <Price USD={products["5 lessons"]} />
         </button>

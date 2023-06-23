@@ -11,20 +11,17 @@ interface Products {
 }
 
 const products: Products = {
-  // '5 lessons': 109,
-  // '10 lessons': 209,
-  // '20 Lessons': 380
-  '5 lessons': 0.5,
-  '10 lessons': 1,
-  '20 Lessons': 2
+  '5 lessons': 109,
+  '10 lessons': 209,
+  '20 Lessons': 380
 }
 const client_id = process.env.PAYPAL_CLIENT_ID!
 const client_secret = process.env.PAYPAL_CLIENT_SECRET!
-const Environment =
-  process.env.NODE_ENV === 'production'
-    ? paypal.core.LiveEnvironment
-    : paypal.core.SandboxEnvironment
-console.log(process.env.NODE_ENV)
+const Environment = paypal.core.SandboxEnvironment
+// process.env.NODE_ENV === 'production'
+//   ? paypal.core.LiveEnvironment
+//   : paypal.core.SandboxEnvironment
+
 const paypalClient = new paypal.core.PayPalHttpClient(new Environment(
   client_id,
   client_secret
