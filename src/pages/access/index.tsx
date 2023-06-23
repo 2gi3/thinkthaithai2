@@ -55,9 +55,13 @@ export default function About() {
         <button onClick={() => handleLogIn("google")}>
           <BsGoogle /> {t('Log in with Google')}
         </button>
-        <button onClick={() => handleLogIn("facebook")}>
+
+
+        {/* <button onClick={() => handleLogIn("facebook")}>
           <BsFacebook /> {t('Log in with Facebook')}
-        </button>
+        </button> */}
+
+
       </div>
     );
   }

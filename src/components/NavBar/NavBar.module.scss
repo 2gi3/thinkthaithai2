@@ -32,7 +32,7 @@
   }
 
   .brand {
-    padding: $base $baseL;
+    padding: $base;
     @include primary-font;
   }
 
@@ -118,7 +118,7 @@
       display: block;
       position: absolute;
       top: 18px;
-      right: 30px;
+      right: 6px;
       padding: 5px 10px;
 
       svg {

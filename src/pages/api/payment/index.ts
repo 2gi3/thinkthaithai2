@@ -24,7 +24,7 @@ const Environment =
   process.env.NODE_ENV === 'production'
     ? paypal.core.LiveEnvironment
     : paypal.core.SandboxEnvironment
-console.log(Environment)
+console.log(process.env.NODE_ENV)
 const paypalClient = new paypal.core.PayPalHttpClient(new Environment(
   client_id,
   client_secret

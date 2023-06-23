@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "next-i18next";
 import { CurrencyList } from "../Currency/CurrencyList";
+import Image from "next/image";
 
 const NavBar = () => {
   const { t } = useTranslation("common");
@@ -69,7 +70,7 @@ const NavBar = () => {
           <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
           <Link href="/account" className={styles.account} id={pathname === "/account" ? styles.selected : ''}>
             {session?.user?.image ?
-              <img width={36} height={36} src={session.user.image} alt="profile picture" />
+              <Image width={36} height={36} src={session.user.image} alt="profile picture" />
               : <p>Profile</p>} </Link>
         </>
         ) : (

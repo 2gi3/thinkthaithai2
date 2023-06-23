@@ -4,6 +4,10 @@
     max-width: 1000px;
     margin: auto;
 
+    div {
+        padding: 0 24px;
+    }
+
     header {
         margin: $baseXL auto;
         display: flex;
@@ -35,6 +39,8 @@
                 width: 100%;
                 max-width: 600px;
                 margin: auto;
+                padding: 0;
+
 
                 img {
                     width: 100%;
@@ -81,6 +87,11 @@
 
 @media (min-width: 599px) {
     .container {
+        div {
+            background-color: none;
+            padding: 0;
+        }
+
         header {
             div {
                 &:nth-child(2) {

@@ -16,7 +16,7 @@ export default function Prices() {
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
   const student = data?.user;
-  console.log(student);
+  // console.log(student);
   const paidLessons = useSelector((state: RootState) => state.student.paidLessons);
 
 
