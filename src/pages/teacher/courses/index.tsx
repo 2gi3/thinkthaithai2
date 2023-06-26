@@ -2,18 +2,37 @@ import { DatabaseCourse } from '@/types';
 import styles from '../../courses/courses.module.scss'
 import Link from "next/link";
 
+
 export const getStaticProps = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
         method: "GET",
     });
     const courses: DatabaseCourse[] = await res.json();
+    console.log(courses)
 
     return { props: { courses }, revalidate: 60 };
 };
 
+
+// export const getStaticProps = async ({ locale }: any) => {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
+//         method: "GET",
+//     });
+//     const courses: DatabaseCourse[] = await res.json();
+
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ["common", "courses"])),
+//             courses: courses,
+//         },
+//         revalidate: 60,
+//     };
+// };
+
 export default function TeacherCourses(
     { courses }: { courses: DatabaseCourse[] }
 ) {
+    console.log(courses)
     return (
         <div className={styles.container}>
             <header>
@@ -27,7 +46,7 @@ export default function TeacherCourses(
                         Create new course
                     </Link>
                 </div>
-                {courses.map((course: DatabaseCourse) => (
+                {/* {courses.map((course: DatabaseCourse) => (
                     <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/teacher/courses/${course._id}`} key={course._id}>
                         <div className={styles.course}>
                             <h3>
@@ -41,7 +60,7 @@ export default function TeacherCourses(
                             </div>
                         </div>
                     </Link>
-                ))}
+                ))} */}
             </main>
         </div>
     );

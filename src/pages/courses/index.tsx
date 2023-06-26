@@ -76,6 +76,7 @@ export default function About(
 }
 
 
+
 export const getStaticProps = async ({ locale }: any) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
         method: "GET",

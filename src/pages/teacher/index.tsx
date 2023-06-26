@@ -8,7 +8,6 @@ import { authOptions } from '../api/auth/[...nextauth]'
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const session = await getServerSession(context.req, context.res, authOptions)
     const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
-
     if (
         session &&
         session.user?.email &&
@@ -24,6 +23,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
             },
         };
 
+    } else {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+
     }
 
 
@@ -33,12 +40,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     //     },
     // };
 
-    return {
-        redirect: {
-            destination: '/',
-            permanent: false,
-        },
-    }
+
 
 }
 

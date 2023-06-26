@@ -9,6 +9,7 @@ import { RootState } from "@/redux/store";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { FaTimes } from "react-icons/fa";
 
 export default function Prices() {
   const { t } = useTranslation("price");
@@ -23,8 +24,9 @@ export default function Prices() {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const [orderId, setOrderId] = useState<string>();
   const [product, setProduct] = useState<string | null>(null);
+  const [orderCompleted, setOrderCompleted] = useState<boolean>(false)
 
-  const products = {
+  const products: { [key: string]: number } = {
     "5 lessons": 109,
     "10 lessons": 209,
     "20 Lessons": 380,
@@ -53,6 +55,7 @@ export default function Prices() {
         }),
       });
       console.log("onApprove details:" + JSON.stringify(details));
+      if (details.status === 'COMPLETED') { setOrderCompleted(true); setProduct(null) }
       // alert("Transaction completed by " + details.payer.name.given_name + "!");
     } catch (error) {
       console.log(error);
@@ -95,32 +98,38 @@ export default function Prices() {
         <button onClick={() => setProduct("20 Lessons")}>
           20 {t('lessons')} <Price USD={products["20 Lessons"]} />
         </button>
-        <PayPalScriptProvider options={initialOptions}>
-          {product && (
-            <div key={product}>
-              <PayPalButtons
-                createOrder={async () => {
-                  // The order is created in the server for safety reasons
-                  const response = await fetch("/api/payment", {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      product,
-                    }),
-                  });
-                  const { id: orderId } = await response.json();
-                  setOrderId(orderId);
-                  return orderId;
-                }}
-                onApprove={onApprove}
-              />
-            </div>
-          )}
-        </PayPalScriptProvider>
-        {orderId && (
-          <div>
+        {product && <div className={styles.paymentOptions}>
+          <button onClick={() => setProduct(null)}><FaTimes /></button>
+          <Price USD={products[product]} />
+          {/* <p>{products[product]} USD</p> */}
+          <PayPalScriptProvider options={initialOptions}>
+            {product && (
+              <div key={product}>
+                <PayPalButtons
+                  createOrder={async () => {
+                    // The order is created in the server for safety reasons
+                    const response = await fetch("/api/payment", {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        product,
+                      }),
+                    });
+                    const { id: orderId } = await response.json();
+                    setOrderId(orderId);
+                    return orderId;
+                  }}
+                  onApprove={onApprove}
+                />
+              </div>
+            )}
+          </PayPalScriptProvider>
+        </div>}
+        {orderCompleted && (
+          <div className={styles.purchaseId}>
+            <button onClick={() => setOrderCompleted(false)}><FaTimes /></button>
             <h2>{t('Thank you for your purchase!')}</h2>
             <p>{t('Your order ID is')}: {orderId}</p>
           </div>

@@ -25,7 +25,7 @@ const NavBar = () => {
   useEffect(() => {
     setToggleIsOpen(false);
     // console.log(pathname)
-  }, [pathname]);
+  }, [pathname, currency]);
 
   const handleLogOut = async () => {
     localStorage.removeItem('databaseStudent');

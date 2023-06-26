@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { IFeedback} from "@/types";
+import { IFeedback } from "@/types";
 import ImgDropAndCrop from "@/components/imgDrop&Crop/ImgDropAndCrop";
 import Dropzone from "react-dropzone";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/src/ReactCrop.scss";
 import { Crop, PixelCrop } from "react-image-crop/dist/types";
+import Image from "next/image";
+import styles from '../teacher.module.scss'
 
 // "image/*": [".png", ".gif", ".jpeg", ".jpg"],
 const CreateFeedbackForm = () => {
@@ -21,10 +23,10 @@ const CreateFeedbackForm = () => {
   const [preCropImg, setPreCropImg] = useState("");
   const [formData, setFormData] = useState<IFeedback>({
     name: "",
-    job:'',
-    location:'',
-    title:'',
-    body:'',
+    job: '',
+    location: '',
+    title: '',
+    body: '',
     imageFile: preview,
   });
   const router = useRouter();
@@ -57,7 +59,7 @@ const CreateFeedbackForm = () => {
     }));
   };
 
-//   const imageMaxSize = 10024;
+  //   const imageMaxSize = 10024;
   const handleOnDrop = (files: any, rejectedFiles?: any) => {
     if (files.length === 0 || !(files[0] instanceof Blob)) {
       console.error("Invalid file");
@@ -130,7 +132,7 @@ const CreateFeedbackForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.feedbackForm} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -182,11 +184,11 @@ const CreateFeedbackForm = () => {
           />
         </div>
 
-        <div>
+        <div className={styles.feedbackFormImage}>
           {/* <label htmlFor="image">Image:</label> */}
           {preview ? (
             <>
-              <img
+              <Image
                 src={preview}
                 alt="Preview of uploeade image"
                 style={{ maxWidth: "200px" }}
@@ -201,10 +203,11 @@ const CreateFeedbackForm = () => {
                 onChange={(newCrop) => setCrop(newCrop)}
                 onDragEnd={(e: any) => handleDragEnd(e)}
               >
-                <img
+                <Image
                   src={preCropImg}
                   draggable={false}
                   onDragStart={(e) => e.preventDefault()}
+                  alt='preview'
                 />
               </ReactCrop>
 
@@ -215,7 +218,7 @@ const CreateFeedbackForm = () => {
           ) : (
             <Dropzone
               accept={{ Image: [".png", ".jpg", ".jpeg", ".gif"] }}
-            //   maxSize={imageMaxSize}
+              //   maxSize={imageMaxSize}
               multiple={false}
               onDrop={(acceptedFiles) => handleOnDrop(acceptedFiles)}
             >
@@ -224,7 +227,7 @@ const CreateFeedbackForm = () => {
                   <div {...getRootProps()} style={{ height: "200px" }}>
                     <input {...getInputProps()} />
                     <p>
-                      Drag and drop some files here, or click to select files
+                      Drag and drop, or click to select an image
                     </p>
                   </div>
                 </section>
@@ -242,7 +245,7 @@ const CreateFeedbackForm = () => {
             onChange={handleImageChange}
           /> */}
         </div>
-        <button type="submit">Create feedback</button>
+        <button className={styles.feedbackFormButton} type="submit">Create feedback</button>
       </form>
       {/* <ImgDropAndCrop /> */}
     </>

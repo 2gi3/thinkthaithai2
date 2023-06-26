@@ -69,6 +69,42 @@
         @include primary-button;
       }
     }
+
+    .paymentOptions,
+    .purchaseId {
+      position: fixed;
+      padding: $baseL;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border-radius: $base;
+      z-index: 2;
+
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      h2 {
+        margin-top: $baseL;
+      }
+
+      P {
+        margin: $baseS 0;
+      }
+    }
+
+    // .purchaseId {
+    //   width: 100%;
+    //   margin: auto;
+    //   text-align: center;
+    //   padding: 24px;
+    //   box-sizing: border-box;
+    // }
   }
 }
 
@@ -89,6 +125,8 @@
 
       }
     }
+
+
   }
 
 }
