@@ -3,7 +3,28 @@
 .formContainer {
     display: flex;
     flex-direction: column;
-    gap: $base;
+    margin: $baseXL ;
+
+    h2 {
+        margin-bottom: $baseXL;
+    }
+
+    label {
+        margin-bottom: $baseS;
+    }
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        margin: $base;
+        padding: $base;
+        border: 1px solid $primaryColor;
+        border-radius: $base;
+    }
+
+    input {
+        margin-bottom: $baseXL;
+    }
 
     button {
         @include secondary-button

@@ -8,7 +8,6 @@ export const getStaticProps = async () => {
         method: "GET",
     });
     const courses: DatabaseCourse[] = await res.json();
-    console.log(courses)
 
     return { props: { courses }, revalidate: 60 };
 };
@@ -41,12 +40,12 @@ export default function TeacherCourses(
                 </h1>
             </header>
             <main>
-                <div>
+                <div className={styles.crreateNewCourseButton}>
                     <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/teacher/courses/create`}>
                         Create new course
                     </Link>
                 </div>
-                {/* {courses.map((course: DatabaseCourse) => (
+                {courses.map((course: DatabaseCourse) => (
                     <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/teacher/courses/${course._id}`} key={course._id}>
                         <div className={styles.course}>
                             <h3>
@@ -60,7 +59,7 @@ export default function TeacherCourses(
                             </div>
                         </div>
                     </Link>
-                ))} */}
+                ))}
             </main>
         </div>
     );

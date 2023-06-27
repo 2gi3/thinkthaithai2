@@ -6,7 +6,7 @@ import Dropzone from "react-dropzone";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/src/ReactCrop.scss";
 import { Crop, PixelCrop } from "react-image-crop/dist/types";
-import Image from "next/image";
+// import { Image as NextImage }  from "next/image";
 import styles from '../teacher.module.scss'
 
 // "image/*": [".png", ".gif", ".jpeg", ".jpg"],
@@ -188,7 +188,7 @@ const CreateFeedbackForm = () => {
           {/* <label htmlFor="image">Image:</label> */}
           {preview ? (
             <>
-              <Image
+              <img
                 src={preview}
                 alt="Preview of uploeade image"
                 style={{ maxWidth: "200px" }}
@@ -203,7 +203,7 @@ const CreateFeedbackForm = () => {
                 onChange={(newCrop) => setCrop(newCrop)}
                 onDragEnd={(e: any) => handleDragEnd(e)}
               >
-                <Image
+                <img
                   src={preCropImg}
                   draggable={false}
                   onDragStart={(e) => e.preventDefault()}

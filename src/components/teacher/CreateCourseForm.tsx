@@ -92,104 +92,108 @@ const CreateCourseForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.formContainer}>
-            <label htmlFor="title">Title</label>
-            <input
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-            />
+            <div className={styles.section}>
+                <h2>Course Informations:</h2>
+                <label htmlFor="title">Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
 
-            <label htmlFor="description">Description</label>
-            <input
-                type="text"
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-            />
+                <label htmlFor="description">Description</label>
+                <input
+                    type="text"
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
 
-            <label htmlFor="status">Status</label>
-            <input
-                type="text"
-                id="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                required
-            />
+                <label htmlFor="status">Status</label>
+                <input
+                    type="text"
+                    id="status"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    required
+                />
 
-            <label htmlFor="level">Level</label>
-            <input
-                type="text"
-                id="level"
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
-                required
-            />
+                <label htmlFor="level">Level</label>
+                <input
+                    type="text"
+                    id="level"
+                    value={level}
+                    onChange={(e) => setLevel(e.target.value)}
+                    required
+                />
 
-            <label htmlFor="prerequisites">Prerequisites</label>
-            <input
-                type="text"
-                id="prerequisites"
-                value={prerequisites.join(',')}
-                onChange={(e) => setPrerequisites(e.target.value.split(','))}
-            />
+                <label htmlFor="prerequisites">Prerequisites</label>
+                <input
+                    type="text"
+                    id="prerequisites"
+                    value={prerequisites.join(',')}
+                    onChange={(e) => setPrerequisites(e.target.value.split(','))}
+                />
 
+            </div>
+            <div className={styles.section}>
+                <h2>Introduction Page:</h2>
+                {/* <label htmlFor="introduction">Introduction</label> */}
+                <label htmlFor="videoURL">Video URL</label>
+                <input
+                    type="text"
+                    id="videoURL"
+                    value={introduction.videoURL}
+                    onChange={(e) =>
+                        setIntroduction((prevState) => ({
+                            ...prevState,
+                            videoURL: e.target.value,
+                        }))
+                    }
+                />
 
+                <label htmlFor="header">Header</label>
+                <input
+                    type="text"
+                    id="header"
+                    value={introduction.header}
+                    onChange={(e) =>
+                        setIntroduction((prevState) => ({
+                            ...prevState,
+                            header: e.target.value,
+                        }))
+                    }
+                />
 
-            <label htmlFor="introduction">Introduction</label>
-            <label htmlFor="videoURL">Video URL</label>
-            <input
-                type="text"
-                id="videoURL"
-                value={introduction.videoURL}
-                onChange={(e) =>
-                    setIntroduction((prevState) => ({
-                        ...prevState,
-                        videoURL: e.target.value,
-                    }))
-                }
-            />
+                <label htmlFor="body">Body</label>
+                <input
+                    type="text"
+                    id="body"
+                    value={introduction.body}
+                    onChange={(e) =>
+                        setIntroduction((prevState) => ({
+                            ...prevState,
+                            body: e.target.value,
+                        }))
+                    }
+                />
 
-            <label htmlFor="header">Header</label>
-            <input
-                type="text"
-                id="header"
-                value={introduction.header}
-                onChange={(e) =>
-                    setIntroduction((prevState) => ({
-                        ...prevState,
-                        header: e.target.value,
-                    }))
-                }
-            />
-
-            <label htmlFor="body">Body</label>
-            <input
-                type="text"
-                id="body"
-                value={introduction.body}
-                onChange={(e) =>
-                    setIntroduction((prevState) => ({
-                        ...prevState,
-                        body: e.target.value,
-                    }))
-                }
-            />
-
-            <label htmlFor="footer">Footer</label>
-            <input
-                type="text"
-                id="footer"
-                value={introduction.footer}
-                onChange={(e) =>
-                    setIntroduction((prevState) => ({
-                        ...prevState,
-                        footer: e.target.value,
-                    }))
-                }
-            />
+                <label htmlFor="footer">Footer</label>
+                <input
+                    type="text"
+                    id="footer"
+                    value={introduction.footer}
+                    onChange={(e) =>
+                        setIntroduction((prevState) => ({
+                            ...prevState,
+                            footer: e.target.value,
+                        }))
+                    }
+                />
+            </div>
 
 
 
@@ -197,7 +201,7 @@ const CreateCourseForm = () => {
 
             <label htmlFor="lesson">Lessons</label>
             {lessons.map((intro, index) => (
-                <div key={index}>
+                <div className={styles.section} key={index}>
                     <label htmlFor={`title-${index}`}>Title</label>
                     <input
                         type="text"
