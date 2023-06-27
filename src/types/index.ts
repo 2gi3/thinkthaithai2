@@ -139,3 +139,9 @@ export interface ICourseModel extends Model<ICourseDocument> { }
 export interface LessonProps {
   lesson: ICourse["lessons"][number];
 }
+
+export interface AlertProps {
+  heading: string;
+  message: string;
+  onClose: () => void;
+}

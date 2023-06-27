@@ -1,8 +1,12 @@
 import styles from './teacher.module.scss'
 import { ICourse } from '@/types';
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
+import Alert from '../Alert/Alert';
 
 const CreateCourseForm = () => {
+    const router = useRouter()
     const [expandLesson, setExpandLesson] = useState(false)
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -15,6 +19,7 @@ const CreateCourseForm = () => {
         body: '',
         footer: '',
     })
+    const [courseCreated, setCourseCreated] = useState(false)
 
     const [lessons, setLessons] = useState<
         Array<{
@@ -50,7 +55,7 @@ const CreateCourseForm = () => {
 
             if (response.ok) {
                 console.log('Course created successfully!');
-                // Perform any desired actions after successful course creation
+                setCourseCreated(true)
             } else {
                 console.error('Error creating course');
             }
@@ -243,7 +248,7 @@ const CreateCourseForm = () => {
                         onChange={(e) => handleLessonsChange(index, 'footer', e.target.value)}
                     />
 
-                    <button type="button" onClick={() => handleRemoveLesson(index)}>
+                    <button className={styles.removeLesson} type="button" onClick={() => handleRemoveLesson(index)}>
                         Remove Lesson
                     </button>
                 </div>
@@ -254,6 +259,16 @@ const CreateCourseForm = () => {
             </button>
 
             <button className={styles.createCourseButton} type="submit">Create Course</button>
+            {courseCreated && (
+                <Alert
+                    heading="Your new course was created successfully!"
+                    message="Please wait 3 minutes and then refresh your browser to see the new course in the 'free courses page'"
+                    onClose={() => {
+                        setCourseCreated(false);
+                        router.push('/courses');
+                    }}
+                />
+            )}
         </form>
     );
 };

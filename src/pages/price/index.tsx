@@ -10,9 +10,13 @@ import { RootState } from "@/redux/store";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { FaTimes } from "react-icons/fa";
+import { useRouter } from "next/router";
+import Alert from "@/components/Alert/Alert";
 
 export default function Prices() {
   const { t } = useTranslation("price");
+  const router = useRouter();
+
 
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
@@ -128,11 +132,20 @@ export default function Prices() {
           </PayPalScriptProvider>
         </div>}
         {orderCompleted && (
-          <div className={styles.purchaseId}>
-            <button onClick={() => setOrderCompleted(false)}><FaTimes /></button>
-            <h2>{t('Thank you for your purchase!')}</h2>
-            <p>{t('Your order ID is')}: {orderId}</p>
-          </div>
+          // <div className={styles.purchaseId}>
+          //   <button onClick={() => { setOrderCompleted(false); router.push('/account') }}><FaTimes /></button>
+          //   <h2>{t('Thank you for your purchase!')}</h2>
+          //   <p>{t('Your order ID is')}: {orderId}</p>
+          // </div>
+          <Alert
+            heading="Thank you for your purchase!"
+            message={`${t('Your order ID is')}: ${orderId}`}
+            onClose={() => {
+              setOrderCompleted(false);
+              router.push('/account');
+            }}
+          />
+
         )}
       </main>
     </div>
