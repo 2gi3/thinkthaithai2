@@ -31,6 +31,8 @@ export default async function handler(
           {
             folder: "thinkthaithaiDEV/feedbacks",
             public_id: "Test file",
+            // public_id: `${name}-${job}-${location}`,
+
             tag: 'student_profile',
             transformation: [{ width: "150", crop: "scale" }, { fetch_format: "webp" }, { quality: "auto" }]
           }

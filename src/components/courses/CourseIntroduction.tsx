@@ -38,7 +38,7 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
     }
     return (<div className={styles.container}>
         <video controls>
-            <source src="https://drive.google.com/uc?export=download&id=1x2gRolOz9kjuuEP2dYgy8-Fu7Kv90XEx" type="video/mp4" />
+            <source src={course.introduction.videoURL} type="video/mp4" />
         </video>
         <header>
             <h1>{course.title}</h1>

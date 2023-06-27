@@ -3,6 +3,7 @@ import { ICourse } from '@/types';
 import { FormEvent, useState } from 'react';
 
 const CreateCourseForm = () => {
+    const [expandLesson, setExpandLesson] = useState(false)
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState('');
@@ -252,7 +253,7 @@ const CreateCourseForm = () => {
                 Add Lesson
             </button>
 
-            <button type="submit">Create Course</button>
+            <button className={styles.createCourseButton} type="submit">Create Course</button>
         </form>
     );
 };
