@@ -18,7 +18,7 @@ const CreateFeedbackForm = () => {
     width: 50,
     height: 50,
   });
-
+  const [preCropImgWidth, setPreCropImgWidth] = useState<number>(0);
   const [preview, setPreview] = useState<string>("");
   const [preCropImg, setPreCropImg] = useState("");
   const [formData, setFormData] = useState<IFeedback>({
@@ -30,6 +30,7 @@ const CreateFeedbackForm = () => {
     imageFile: preview,
   });
   const router = useRouter();
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +44,7 @@ const CreateFeedbackForm = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       //   router.push("/");
     } catch (error) {
       console.error(error);
@@ -118,6 +119,8 @@ const CreateFeedbackForm = () => {
   //   reader.readAsDataURL(file);
   // };
 
+
+
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -129,6 +132,19 @@ const CreateFeedbackForm = () => {
     console.log("crop:", crop);
     console.log("percentageCrop:", percentageCrop);
   };
+
+  useEffect(() => {
+    if (preCropImg) {
+      const image = new Image();
+      image.src = preCropImg;
+      image.onload = () => {
+        setPreCropImgWidth(image.width);
+      };
+      console.log(preCropImgWidth)
+    }
+
+  }, [preCropImg, preCropImgWidth]);
+
 
   return (
     <>
@@ -190,7 +206,7 @@ const CreateFeedbackForm = () => {
             <>
               <img
                 src={preview}
-                alt="Preview of uploeade image"
+                alt="Preview of uploaded image"
                 style={{ maxWidth: "200px" }}
               />
 
@@ -204,10 +220,13 @@ const CreateFeedbackForm = () => {
                 onDragEnd={(e: any) => handleDragEnd(e)}
               >
                 <img
+                  id={styles.originalImage}
                   src={preCropImg}
                   draggable={false}
                   onDragStart={(e) => e.preventDefault()}
                   alt='preview'
+                  width={preCropImgWidth}
+
                 />
               </ReactCrop>
 
@@ -217,7 +236,7 @@ const CreateFeedbackForm = () => {
             </>
           ) : (
             <Dropzone
-              accept={{ Image: [".png", ".jpg", ".jpeg", ".gif"] }}
+              accept={{ Image: [".png", ".jpg", ".jpeg", ".gif", 'webp', 'svg'] }}
               //   maxSize={imageMaxSize}
               multiple={false}
               onDrop={(acceptedFiles) => handleOnDrop(acceptedFiles)}

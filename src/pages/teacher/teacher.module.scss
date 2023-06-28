@@ -1,5 +1,7 @@
 @use '@/styles' as *;
 
+
+
 .feedbackForm {
     padding: $base;
 
@@ -16,10 +18,14 @@
 
     .feedbackFormImage {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         border: 1px solid $primaryColor;
-        padding: 0 $base;
+        border-radius: $base;
+        padding: $base;
         margin: $baseL auto;
+        gap: $base;
+
 
         p {
             margin: $base auto;
@@ -27,6 +33,21 @@
 
         &:hover {
             cursor: pointer;
+        }
+
+        #originalImage {
+            // This is necessary to override the rules in
+            //node_modules\react-image-crop\src\ReactCrop.scss ReactCrop.scss that causes a bug
+            max-width: unset;
+
+
+        }
+
+
+
+        button {
+            @include secondary-button;
+            width: max-content;
         }
     }
 

@@ -1,5 +1,5 @@
 Exchange rate API https://api.coinbase.com/v2/exchange-rates?currency=THB
 
 27/06 - SAdd textArea to createNewCourse component
-      - Fix create feedback image cropper
+      - Fix create feedback image cropper (preview is precise with img size of width:240px )
       - Add sandbox email and password to deployed testing version of the website for users to copy and paste

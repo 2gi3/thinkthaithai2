@@ -75,6 +75,17 @@ Payment flow:
 
 
 
+ ## Drag, Drop and Crop 
+   There was a bug that caused the cropped image to not be precisely identical to the area inside the selected circle in the original image,
+
+   This happened when the intrinsic width of the image was different than the rendered width.
+
+   To solve the problem i have made the width attribute in the html dynamic, always having the same value as the intrinsic width of the image.
+
+   And to render the image in that same size i had to give the original image a ```max-width: unset```
+   in order to over-write the ```max-width:100%``` in node_modules/react-image-crop/src/ReactCrop.scss (line 50),
+
+  
 # Run this project locally
 
 1. npm install
