@@ -3,6 +3,7 @@ import styles from '@/pages/courses/courses.module.scss'
 
 
 const Lesson = ({ lesson }: LessonProps) => {
+    console.log(lesson.videoURL)
     return (
         <div className={styles.lesson}>
             <video controls>
