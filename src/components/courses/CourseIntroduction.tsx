@@ -41,7 +41,7 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
 
     return (<div className={styles.container}>
         <iframe
-            src={course.introduction.videoURL}
+            src={course.introduction.videoURL} allow="autoplay"
         >
         </iframe>
         <header>
