@@ -36,10 +36,14 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
             setStartCourseCompleted(true)
         }
     }
+
+    { console.log('url is:' + course.introduction.videoURL) }
+
     return (<div className={styles.container}>
-        <video controls>
-            <source src={course.introduction.videoURL} type="video/mp4" />
-        </video>
+        <iframe
+            src={course.introduction.videoURL}
+        >
+        </iframe>
         <header>
             <h1>{course.title}</h1>
             <p className={styles.status}>{course.status}</p>

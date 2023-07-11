@@ -75,7 +75,9 @@
 }
 
 .container {
-    video {
+
+    video,
+    iframe {
         width: 100%;
         max-width: 600px;
         display: block;
@@ -248,7 +250,9 @@
     }
 
     .container {
-        video {
+
+        video,
+        iframe {
             border-radius: $baseS;
         }
 
