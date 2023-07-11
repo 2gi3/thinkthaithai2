@@ -5,10 +5,9 @@ import styles from '@/pages/courses/courses.module.scss'
 const Lesson = ({ lesson }: LessonProps) => {
     return (
         <div className={styles.lesson}>
-            <iframe src={lesson.videoURL} allow="autoplay">
-
-
-            </iframe>
+            <video controls>
+                <source src={lesson.videoURL} type="video/mp4" />
+            </video>
 
             <h3>{lesson.title}</h3>
             <p>{lesson.header}</p>
