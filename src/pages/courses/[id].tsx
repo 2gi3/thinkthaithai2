@@ -67,7 +67,8 @@ export default function About(
 
 
 
-    const lesson = course.lessons[currentLesson]
+    // const lesson = course.lessons[currentLesson]
+    const [lesson, setLesson] = useState(course.lessons[currentLesson])
     // console.log(currentLesson)
     // console.log(course.lessons.length    )
     const incompleteLessonIndex = course.lessons.findIndex(
@@ -83,12 +84,14 @@ export default function About(
         };
 
         handleLoadStudentData()
-    }, [startCourseCompleted, currentLesson, dispatch])
+        setLesson(course.lessons[currentLesson])
+    }, [startCourseCompleted, course.lessons, currentLesson, dispatch])
 
     useEffect(() => {
         setCurrentLesson(incompleteLessonIndex !== -1 ? incompleteLessonIndex : 0)
 
-    }, [incompleteLessonIndex])
+    }, [incompleteLessonIndex, currentLesson])
+
 
     const startedCourses = studentDataRedux?.startedCourses
 
