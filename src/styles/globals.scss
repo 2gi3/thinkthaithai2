@@ -43,7 +43,8 @@ header {
     }
   }
 
-  button {
+  button,
+  a {
     @include primary-button();
   }
 }

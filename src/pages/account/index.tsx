@@ -12,6 +12,8 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+//https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}
+
 const Account = (
   { courses }: { courses: DatabaseCourse[] }
 ) => {
@@ -69,7 +71,11 @@ const Account = (
 
         {data?.paidLessons && <div><p>Remaining lessons: <span>{data.paidLessons}</span></p></div>}
         {data?.paidLessons && data?.paidLessons > 0 ?
-          <Calendar label='Book a lesson' eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}`} />
+          <Calendar
+            email={session.user.email!}
+            name={session.user.name!}
+            label='Book a lesson'
+            eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} />
           : <Link href='/price'>Buy some lessons</Link>
         }
 

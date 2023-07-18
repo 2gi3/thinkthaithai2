@@ -1,7 +1,7 @@
 // How to pre-fill calendly forms:
 //  https://help.calendly.com/hc/en-us/articles/226766767-Pre-populate-invitee-information-on-the-scheduling-page
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Price from "../Currency/Price";
 
 
@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-function Calendar({ label, eventURL }: { label: string, eventURL: string }) {
+function Calendar({ label, eventURL, email, name }: { label: string, eventURL: string, email: string, name: string }) {
 
   // Trial lesson: https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1
   //  Regular lesson: https://calendly.com/thinkthaithai/50min?hide_event_type_details=1
@@ -21,6 +21,7 @@ function Calendar({ label, eventURL }: { label: string, eventURL: string }) {
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
+
 
     return () => {
       document.body.removeChild(script);
@@ -34,7 +35,13 @@ function Calendar({ label, eventURL }: { label: string, eventURL: string }) {
   // };
   const handleScheduleClick = () => {
     if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: eventURL });
+      window.Calendly.initPopupWidget({
+        url: eventURL,
+        prefill: {
+          email: email,
+          name: name
+        },
+      });
     }
   };
 
@@ -69,3 +76,5 @@ function Calendar({ label, eventURL }: { label: string, eventURL: string }) {
 }
 
 export default Calendar;
+
+

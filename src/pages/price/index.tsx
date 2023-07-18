@@ -12,6 +12,7 @@ import { useTranslation } from "next-i18next";
 import { FaTimes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Alert from "@/components/Alert/Alert";
+import Contacts from "@/components/Contacts/Contacts";
 
 export default function Prices() {
   const { t } = useTranslation("price");
@@ -81,7 +82,8 @@ export default function Prices() {
         </button> */}
         {paidLessons === undefined && (
           <div className={styles.trial}>
-            <Calendar label={('Trial Lesson')} eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+            <Calendar email={student?.email || ''}
+              name={student?.name || ''} label={('Trial Lesson')} eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
           </div>
         )}
 
@@ -105,8 +107,10 @@ export default function Prices() {
         {product && <div className={styles.paymentOptions}>
           <button onClick={() => setProduct(null)}><FaTimes /></button>
           <Price USD={products[product]} />
+          <h4>Please contact me to buy some lessons</h4>
+          <Contacts />
           {/* <p>{products[product]} USD</p> */}
-          <PayPalScriptProvider options={initialOptions}>
+          {/* <PayPalScriptProvider options={initialOptions}>
             {product && (
               <div key={product}>
                 <PayPalButtons
@@ -129,9 +133,9 @@ export default function Prices() {
                 />
               </div>
             )}
-          </PayPalScriptProvider>
+          </PayPalScriptProvider> */}
         </div>}
-        {orderCompleted && (
+        {/* {orderCompleted && (
           // <div className={styles.purchaseId}>
           //   <button onClick={() => { setOrderCompleted(false); router.push('/account') }}><FaTimes /></button>
           //   <h2>{t('Thank you for your purchase!')}</h2>
@@ -146,7 +150,7 @@ export default function Prices() {
             }}
           />
 
-        )}
+        )} */}
       </main>
     </div>
   );

@@ -53,7 +53,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
           </ul> */}
           <p>{t("Learn Thai Language With")} {t("Customised Lessons")}, {t("Study material")} {t("& Homeworks")}</p>
           <div className={styles.CTA}>
-            <button>{t("Start Now")}</button>
+            <Link href="/price">{t("Start Now")}</Link>
             <div className={styles.underText}>
               <p>
                 {t("The trial lesson is")}&nbsp;
