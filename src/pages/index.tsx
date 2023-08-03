@@ -44,7 +44,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
       <header className={styles.header}>
         {/* <h1>{t("title")}</h1> */}
         <div className={styles.title}>
-          <h1>{t("title")}</h1>
+          <h1>{t("Reach Your Goals!")}</h1>
           {/* <ul>
             {t("Learn Thai Language With")}
             <li>{t("Customised Lessons")}</li>
