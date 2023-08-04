@@ -30,7 +30,7 @@ export default async function handler(
         await cloudinary.uploader.upload(req.body.imageFile,
           {
             folder: "thinkthaithaiDEV/feedbacks",
-            public_id: `${name}-${job}-${location}`,
+            public_id: `${name}-${job}-${location}.replace(/\s+/g, '_')`,
 
             tag: 'student_profile',
             transformation: [{ width: "150", crop: "scale" }, { fetch_format: "webp" }, { quality: "auto" }]

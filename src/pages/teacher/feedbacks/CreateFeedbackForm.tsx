@@ -8,9 +8,11 @@ import "react-image-crop/src/ReactCrop.scss";
 import { Crop, PixelCrop } from "react-image-crop/dist/types";
 // import { Image as NextImage }  from "next/image";
 import styles from '../teacher.module.scss'
+import Alert from "@/components/Alert/Alert";
 
 // "image/*": [".png", ".gif", ".jpeg", ".jpg"],
 const CreateFeedbackForm = () => {
+  const [feedbackCreated, setFeedbackCreated] = useState(false)
   const [crop, setCrop] = useState<Crop>({
     unit: "px", // Can be 'px' or '%'
     x: 25,
@@ -44,6 +46,7 @@ const CreateFeedbackForm = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
+      setFeedbackCreated(true)
       // console.log(data);
       //   router.push("/");
     } catch (error) {
@@ -265,6 +268,16 @@ const CreateFeedbackForm = () => {
           /> */}
         </div>
         <button className={styles.feedbackFormButton} type="submit">Create feedback</button>
+        {feedbackCreated && (
+          <Alert
+            heading="Your new feedback was created successfully!"
+            message="Please wait 3 minutes and then refresh your browser to see the new feedback in the 'feedbacks page'"
+            onClose={() => {
+              setFeedbackCreated(false);
+              router.reload();
+            }}
+          />
+        )}
       </form>
       {/* <ImgDropAndCrop /> */}
     </>
