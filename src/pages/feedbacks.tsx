@@ -35,7 +35,7 @@ export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) 
   return (
     <>
       <header className={styles.header}>
-        <h1>{t('feedbacks header')}</h1>
+        <h1>{t('What My Students Say')}</h1>
       </header>
       <main className={styles.main}>
         {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
