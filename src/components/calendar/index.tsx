@@ -67,7 +67,7 @@ function Calendar({ label, eventURL, email, name }: { label: string, eventURL: s
       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
       <button onClick={handleScheduleClick}>{label}{
         label === 'Trial Lesson' && <><Price USD={5} />
-          <p>25 minutes</p>
+          <p>50 minutes</p>
           <p>No commitment</p></>
       }</button>
     </div>
