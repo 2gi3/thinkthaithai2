@@ -18,15 +18,6 @@ export default async function handler(
 
     const session = await getServerSession(req, res, authOptions)
 
-    // if (
-    //     session &&
-    //     session.user?.email &&
-    //     adminEmails.length > 0 &&
-    //     adminEmails.includes(session.user?.email)) {
-
-    //     }
-
-
     switch (req.method) {
 
 
@@ -35,29 +26,17 @@ export default async function handler(
             break;
 
         case 'POST':
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).end();
-
             const { title, description, status, level, prerequisites, introduction, lessons } = req.body;
 
             if (
-                // session &&
-                // session.user?.email &&
-                // adminEmails.length > 0 &&
-                // adminEmails.includes(session.user?.email)
                 await isAdmin(req, res)
             ) {
-
-
                 try {
                     await dbConnect();
                     const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction, lessons });
                     await newCourse.save();
                     res.setHeader('Content-Type', 'application/json');
-                    res.status(200).json({ message: 'Feedback created successfully!' });
+                    res.status(200).json({ message: 'Course created successfully!' });
                 } catch (error) {
                     console.error(error);
                     res.status(500).json({ error, message: 'Error creating feedback TEST' });
