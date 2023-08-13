@@ -35,6 +35,11 @@ export default async function handler(
             break;
 
         case 'POST':
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).end();
 
             const { title, description, status, level, prerequisites, introduction, lessons } = req.body;
 
