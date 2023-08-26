@@ -1,6 +1,11 @@
+Originally this progect used to use Paypal to take payments, but it has now been updated to use stripe
+
+
+
 import styles from "./prices.module.scss";
 import Price from "@/components/Currency/Price";
 import { useState } from "react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSession } from "next-auth/react";
 import Calendar from "@/components/calendar";
 import { useSelector } from "react-redux";
@@ -41,34 +46,30 @@ export default function Prices() {
     currency: "USD",
   };
 
-  const makePayment = async (product: string) => {
+  const onApprove = async (data: any, actions: any) => {
+    // When the order is created in the server with the status of CREATED and the order ID is returned by the createOrder prop in the PaypalButtons,
+    // this function takes the order id and approves the order automatically, then sends the order details to the server to update the database
     try {
-      const response = await fetch("/api/payment", {
-        method: "POST",
+      const details = await actions.order.capture();
+      setOrderId(details.id);
+      fetch("/api/payment", {
+        method: "PATCH",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          product,
+          orderId: details.id,
           studentEmail: student?.email,
           studentName: student?.name,
         }),
       });
-
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || "Payment failed");
-      }
-
-      const { url } = await response.json();
-      // console.log(`The response from the API is: ${url}`)
-      router.push(url);
+      console.log("onApprove details:" + JSON.stringify(details));
+      if (details.status === 'COMPLETED') { setOrderCompleted(true); setProduct(null) }
+      // alert("Transaction completed by " + details.payer.name.given_name + "!");
     } catch (error) {
-      console.error("Payment error:", error);
-    } finally {
+      console.log(error);
     }
   };
-
 
   return (
     <div className={styles.container}>
@@ -93,32 +94,60 @@ export default function Prices() {
 
 
 
-        <button onClick={() => makePayment("5 lessons")}>
+        <button onClick={() => setProduct("5 lessons")}>
           5 {t('lessons')} <Price USD={products["5 lessons"]} />
         </button>
         <div className={styles.mostPopular}>
           <h3>{t('Most Popular')}</h3>
-          <button onClick={() => makePayment("10 lessons")}>
+          <button onClick={() => setProduct("10 lessons")}>
             10 {t('lessons')}
           </button>
           <Price USD={products["10 lessons"]} />
         </div>
 
-        <button onClick={() => makePayment("20 Lessons")}>
+        <button onClick={() => setProduct("20 Lessons")}>
           20 {t('lessons')} <Price USD={products["20 Lessons"]} />
         </button>
-        {/* {product && <div className={styles.paymentOptions}>
+        {product && <div className={styles.paymentOptions}>
           <button onClick={() => setProduct(null)}><FaTimes /></button>
           <Price USD={products[product]} />
           <h4>Please contact me to buy some lessons</h4>
           <Contacts />
-
-        </div>} */}
-        {/* {product && (
-
+          {/* <p>{products[product]} USD</p> */}
+          {/* <PayPalScriptProvider options={initialOptions}>
+            {product && (
+              <div key={product}>
+                <PayPalButtons
+                  createOrder={async () => {
+                    // The order is created in the server for safety reasons
+                    const response = await fetch("/api/payment", {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        product,
+                      }),
+                    });
+                    const { id: orderId } = await response.json();
+                    setOrderId(orderId);
+                    return orderId;
+                  }}
+                  onApprove={onApprove}
+                />
+              </div>
+            )}
+          </PayPalScriptProvider> */}
+        </div>}
+        {/* {orderCompleted && (
+          // <div className={styles.purchaseId}>
+          //   <button onClick={() => { setOrderCompleted(false); router.push('/account') }}><FaTimes /></button>
+          //   <h2>{t('Thank you for your purchase!')}</h2>
+          //   <p>{t('Your order ID is')}: {orderId}</p>
+          // </div>
           <Alert
             heading="Thank you for your purchase!"
-            message={`${t('Your order ID is')}: ${product}`}
+            message={`${t('Your order ID is')}: ${orderId}`}
             onClose={() => {
               setOrderCompleted(false);
               router.push('/account');
