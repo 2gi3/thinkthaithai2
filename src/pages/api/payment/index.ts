@@ -12,7 +12,7 @@ interface Products {
 }
 
 const products: Products = {
-  '5 lessons': 1,
+  '5 lessons': 109,
   '10 lessons': 209,
   '20 Lessons': 380
 }
@@ -85,7 +85,7 @@ export default async function handler(
 
       if (student) {
         const amountPaid = Number(successfulPayment.amountPaid)
-        const addedLessons = amountPaid === 1.00 ? 5 :
+        const addedLessons = amountPaid === 109.00 ? 5 :
           amountPaid === 209.00 ? 10 :
             amountPaid === 380.00 ? 20 : 0;
         const paidLessons = student.paidLessons || 0;
