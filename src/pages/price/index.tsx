@@ -61,7 +61,7 @@ export default function Prices() {
       }
 
       const { url } = await response.json();
-      // console.log(`The response from the API is: ${url}`)
+      console.log(`The response from the API is: ${url}`)
       router.push(url);
     } catch (error) {
       console.error("Payment error:", error);
