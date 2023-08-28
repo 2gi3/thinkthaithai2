@@ -34,7 +34,7 @@ export default async function handler(
           break;
         }
       }
-      console.log(studentId)
+      // console.log(studentId)
 
       try {
 
@@ -50,6 +50,7 @@ export default async function handler(
         const client = await clientPromise;
         const db = client.db();
         const student = await db.collection("users").findOne({ _id: studentId });
+        console.log(student)
         if (student) {
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
