@@ -24,6 +24,10 @@ const BookingSchema = new Schema<any>(
         event: {
             type: String,
             required: true
+        },
+        studentId: {
+            type: String,
+            required: true
         }
 
 
