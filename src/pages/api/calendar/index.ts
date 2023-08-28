@@ -6,6 +6,7 @@ import { handleOptions } from '@/functions/back-end';
 import BookingModel from 'mongoDB/models/booking';
 // @ts-ignore
 import clientPromise from 'mongoDB/clientPromise';
+import { ObjectId } from 'mongodb';
 
 
 
@@ -35,6 +36,7 @@ export default async function handler(
         }
       }
       // console.log(studentId)
+      const studentIdAsObjectId = new ObjectId(studentId);
 
       try {
 
@@ -49,12 +51,12 @@ export default async function handler(
         // @ts-ignore
         const client = await clientPromise;
         const db = client.db();
-        const student = await db.collection("users").findOne({ _id: studentId });
+        const student = await db.collection("users").findOne({ _id: studentIdAsObjectId });
         console.log(student)
         if (student) {
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
-          await db.collection("users").updateOne({ _id: studentId }, { $set: { paidLessons: totalLessons } });
+          await db.collection("users").updateOne({ _id: studentIdAsObjectId }, { $set: { paidLessons: totalLessons } });
 
         } else {
           res.status(404).json({ message: "User not found." });
