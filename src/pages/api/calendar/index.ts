@@ -53,7 +53,7 @@ export default async function handler(
         if (student) {
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
-          await db.collection("users").updateOne({ email: email }, { $set: { paidLessons: totalLessons } });
+          await db.collection("users").updateOne({ _id: studentId }, { $set: { paidLessons: totalLessons } });
 
         } else {
           res.status(404).json({ message: "User not found." });
