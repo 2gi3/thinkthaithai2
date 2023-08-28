@@ -43,6 +43,7 @@ const Account = (
     return <Spinner diameter={88} />
   } else if (status === "authenticated" && session && session.user) {
     const filteredCourses = courses.filter((course) => startedCourses?.hasOwnProperty(course._id));
+    console.log(filteredCourses)
     const courseDetails = filteredCourses.map((course) => {
       const sessionsLength = course.lessons.length;
       return {
@@ -59,29 +60,44 @@ const Account = (
 
         {/* <div><p>Next lesson: 11/12/2023 - 9 am</p></div>
         <div><p>Your flashcards</p></div> */}
-        <div><p>Your courses</p>
+        <div>
+          {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
+            <Link className="primaryButton" href='/courses'>Start a free course</Link>
+          </div>
+            : <p>Your courses:</p>}
           {courseDetails.map((course) => {
             const courseProgress = startedCourses?.[course.id]?.length ?? 0;
+            const progressPercentage = Math.ceil((courseProgress / course.sessionsLength!) * 100);
+
             return (
-              <li key={course.title}>
-                {course.title} (Progress: {Math.ceil((courseProgress / course.sessionsLength!) * 100)}%)
-              </li>
+              <div key={course.title} className={styles.startedCourses}>
+                <p className={styles.title}>{course.title}</p>
+                <div className={styles.progressBar}>
+                  <div
+                    className={styles.progress}
+                    style={{ width: `${progressPercentage}%` }}
+                  >
+                    <p className={styles.progressFigure}> {progressPercentage}%</p>
+                  </div>
+                </div>
+              </div>
             );
           })}</div>
 
         {data?.paidLessons && <div><p>Remaining lessons: <span>{data.paidLessons}</span></p></div>}
         {data?.paidLessons && data?.paidLessons > 0 ?
-          <Calendar
+          <div className='primaryButton'><Calendar
+            className={styles.button}
             email={session.user.email!}
             name={session.user.name!}
             label='Book a lesson'
-            eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} />
-          : <Link href='/price'>Buy some lessons</Link>
+            eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} /></div>
+          : <Link className="secondaryButton" href='/price'>Buy some lessons</Link>
         }
 
-        <div>
-          <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
-        </div>
+        {/* <div>
+          <button className="secondaryButton" onClick={() => handleLogOut()}>Log&nbsp;out</button>
+        </div> */}
 
       </div>
     );

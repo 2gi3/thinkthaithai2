@@ -1,20 +1,19 @@
 @use "../fonts" as *;
 @use "../colors" as *;
 @use "../measures" as *; // @mixin primary-button() {
+
 //   background-color: transparent;
 //   padding: 8px 16px;
 //   border: 1px solid $fontColor;
 //   border-radius: 10px;
 // }
-@mixin primary-button(
-  $color1: $secondaryColor,
+@mixin primary-button($color1: $secondaryColor,
   $color2: $secondaryColorLight,
-  $lightAngle: 15deg
-) {
+  $lightAngle: 15deg) {
   width: max-content;
   background-image: linear-gradient($lightAngle, $color1, $color2);
   padding: 13px 26px;
-  border-radius: $base;
+  border-radius: $baseS;
   font-weight: 700;
   box-shadow: $shadow;
   text-shadow: $shadow;
@@ -22,8 +21,8 @@
 
 @mixin secondary-button() {
   background-color: transparent;
-  padding: 8px 16px;
+  padding: 13px 26px;
   border: 1px solid $fontColor;
-  border-radius: 10px;
+  border-radius: $baseS;
   text-shadow: $shadow;
 }

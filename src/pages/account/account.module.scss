@@ -1,19 +1,70 @@
 @use "@/styles" as *;
 
-.container{
-   margin: $baseL;
-   header{
-    display: flex;
-    justify-content: space-between;
-   h2{
-    margin: $base 0;
-    max-width: max-content;
-    background-color: red;
-   }
-  
-}
-div{
-    margin: $base 0;
-}
-   
+.container {
+    margin: $baseL;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+            margin: $base 0;
+            max-width: max-content;
+        }
+
+    }
+
+    div {
+        margin: $base 0;
+    }
+
+    .startedCourses {
+        .title {
+            margin-bottom: -18px;
+        }
+
+        .progressBar {
+            position: relative;
+            width: 200px;
+            height: $base;
+            // display: flex;
+            // align-items: center;
+            background-color: $primaryColorLight;
+            border-radius: 5px;
+
+        }
+
+        .progress {
+            height: 100%;
+            background-color: $primaryColor;
+            border-radius: 5px;
+            width: 0;
+            transition: width 0.3s ease;
+
+        }
+
+        .progressFigure {
+            position: absolute;
+            left: 3px;
+            z-index: 2;
+            top: 5px;
+            bottom: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            color: black;
+            background: #eae6ffc4;
+            padding: 0px 2px;
+            width: min-content;
+            display: flex;
+            border-radius: 3px;
+            align-items: center;
+
+
+        }
+
+
+    }
+
+
+
 }

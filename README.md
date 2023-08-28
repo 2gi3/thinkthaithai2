@@ -29,14 +29,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
     - Calendly [create webhook documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
 
     - Instructions: 
-      - Log in Calendly and a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
+      - Log in Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
       - Make a post request as follows:
       ```
        $headers = @{
-       "authorization" = "Bearer TOKEN"
-       }
+      "authorization" = "Bearer TOKEN"
+      }
 
-      Invoke-RestMethod -Method GET -Uri "https://api.calendly.com/users/me" -Headers $headers
+      $response = Invoke-RestMethod -Uri "https://api.calendly.com/      users/me" -Headers $headers
+
+      $response | Format-List
+
 
       ```
       - Use the informations received in the response to make a POST request as follows: 
@@ -49,7 +52,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
       $data = @{
        'url'         = 'API endpoint that receives the POST request'
        'events'      = @('invitee.created', 'invitee.canceled')
-       'organization'= 'https://api.calendly.com/organizations/XXXXXXX'
        'user'        = 'https://api.calendly.com/users/XXXXXXX'
        'scope'       = 'user'
   

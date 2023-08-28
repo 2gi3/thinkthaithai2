@@ -32,7 +32,7 @@ header {
   }
 
   h2 {
-    @include gradient-text($secondaryColor, $secondaryColorLight)
+    @include gradient-text($fontColor, $fontColor)
   }
 
   ul {
@@ -67,6 +67,14 @@ a {
 
 body {
   font-family: 'Inter', sans-serif;
+}
+
+.primaryButton {
+  @include primary-button();
+}
+
+.secondaryButton {
+  @include secondary-button()
 }
 
 @media (max-width: 599px) {
