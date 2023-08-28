@@ -24,15 +24,23 @@ export default async function handler(
       break;
 
     case 'POST':
-      const { email, name, event, cancel_url, reschedule_url } = req.body.payload;
+      const { email, name, event, cancel_url, reschedule_url, questions_and_answers } = req.body.payload;
       console.log(req.body.payload)
+      let studentId = null;
+
+      for (const item of questions_and_answers) {
+        if (item.question === 'user id') {
+          studentId = item.answer;
+          break;
+        }
+      }
 
       try {
 
 
 
         await dbConnect();
-        const newBooking = new BookingModel({ email, name, event, cancel_url, reschedule_url });
+        const newBooking = new BookingModel({ email, name, event, cancel_url, reschedule_url, studentId });
         await newBooking.save();
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ message: 'Booking created successfully!' });
@@ -40,7 +48,7 @@ export default async function handler(
         // @ts-ignore
         const client = await clientPromise;
         const db = client.db();
-        const student = await db.collection("users").findOne({ email: email });
+        const student = await db.collection("users").findOne({ _id: studentId });
         if (student) {
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
