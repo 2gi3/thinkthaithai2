@@ -90,6 +90,7 @@ const Account = (
             className={styles.button}
             email={session.user.email!}
             name={session.user.name!}
+            studentId={data._id}
             label='Book a lesson'
             eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1&a2=${data._id}`} /></div>
           : <Link className="secondaryButton" href='/price'>Buy some lessons</Link>

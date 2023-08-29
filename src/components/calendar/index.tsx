@@ -11,10 +11,9 @@ declare global {
   }
 }
 
-function Calendar({ label, eventURL, email, name, className }: { label: string, eventURL: string, email: string, name: string, className?: string }) {
+function Calendar({ label, eventURL, email, name, className, studentId }: { label: string, eventURL: string, email: string, name: string, className?: string, studentId: string }) {
 
-  // Trial lesson: https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1
-  //  Regular lesson: https://calendly.com/thinkthaithai/50min?hide_event_type_details=1
+
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -28,11 +27,7 @@ function Calendar({ label, eventURL, email, name, className }: { label: string, 
     };
   }, []);
 
-  // const handleScheduleClick = () => {
-  //   if (window.Calendly) {
-  //     window.Calendly.initPopupWidget({ url: 'https://calendly.com/thinkthaithai/trial-lesson' });
-  //   }
-  // };
+
   const handleScheduleClick = () => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
@@ -41,27 +36,14 @@ function Calendar({ label, eventURL, email, name, className }: { label: string, 
           email: email,
           name: name
         },
+        utm: {
+          utmSource: studentId,
+        }
       });
     }
   };
 
 
-  // if (eventURL === 'https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1') {
-  //   return (
-  //     <div>
-  //       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-  //       <button onClick={handleScheduleClick}>Trial Lesson <Price USD={5} /></button>
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <div
-  //       className="calendly-inline-widget"
-  //       data-url={eventURL}
-  //       style={{ minWidth: "320px", height: "630px" }}
-  //     ></div>
-  //   )
-  // }
   return (
     <div style={{ margin: 0 }}>
       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
