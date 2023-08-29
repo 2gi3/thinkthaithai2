@@ -20,6 +20,15 @@ export interface Currency {
   country: string;
 }
 
+export type CalendarProps = {
+  label: string;
+  eventURL: string;
+  email: string;
+  name: string;
+  className?: string;
+  studentId?: string;
+};
+
 
 export interface IStudent {
   name?: string;

@@ -3,6 +3,7 @@
 
 import { useEffect } from "react";
 import Price from "../Currency/Price";
+import { CalendarProps } from "@/types";
 
 
 declare global {
@@ -11,7 +12,7 @@ declare global {
   }
 }
 
-function Calendar({ label, eventURL, email, name, className, studentId }: { label: string, eventURL: string, email: string, name: string, className?: string, studentId?: string }) {
+function Calendar({ label, eventURL, email, name, className, studentId }: CalendarProps) {
 
 
 
