@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-function Calendar({ label, eventURL, email, name, className, studentId }: { label: string, eventURL: string, email: string, name: string, className?: string, studentId: string }) {
+function Calendar({ label, eventURL, email, name, className, studentId }: { label: string, eventURL: string, email: string, name: string, className?: string, studentId?: string }) {
 
 
 
