@@ -25,17 +25,12 @@ export default async function handler(
       break;
 
     case 'POST':
-      const { email, name, event, cancel_url, reschedule_url, questions_and_answers } = req.body.payload;
+      const { email, name, event, cancel_url, reschedule_url, tracking } = req.body.payload;
       console.log(req.body.payload)
-      let studentId = null;
+      let studentId = tracking.utm_source;
 
-      for (const item of questions_and_answers) {
-        if (item.question === 'user id') {
-          studentId = item.answer;
-          break;
-        }
-      }
-      // console.log(studentId)
+
+      console.log('Student Id:' + studentId)
       const studentIdAsObjectId = new ObjectId(studentId);
 
       try {
