@@ -92,7 +92,7 @@ const Account = (
             name={session.user.name!}
             studentId={data._id || 'noId'}
             label='Book a lesson'
-            eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1&a2=${data._id}`} /></div>
+            eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} /></div>
           : <Link className="secondaryButton" href='/price'>Buy some lessons</Link>
         }
 

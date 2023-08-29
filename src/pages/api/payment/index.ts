@@ -16,7 +16,6 @@ const products: Products = {
   '10 lessons': 209,
   '20 Lessons': 380
 }
-const stripeApiKey = process.env.STRIPE_API_KEY!
 
 
 export default async function handler(
