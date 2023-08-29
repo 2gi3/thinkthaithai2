@@ -26,7 +26,7 @@ export default async function handler(
 
     case 'POST':
       const { email, name, event, cancel_url, reschedule_url, questions_and_answers } = req.body.payload;
-      // console.log(req.body.payload)
+      console.log(req.body.payload)
       let studentId = null;
 
       for (const item of questions_and_answers) {
@@ -52,7 +52,7 @@ export default async function handler(
         const client = await clientPromise;
         const db = client.db();
         const student = await db.collection("users").findOne({ _id: studentIdAsObjectId });
-        console.log(student)
+        // console.log(student)
         if (student) {
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
