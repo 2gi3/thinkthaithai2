@@ -74,9 +74,10 @@
     .CTA {
         margin: $baseXL auto;
         width: max-content;
+        font-size: 14px;
 
         P {
-            margin: $baseS 0
+            margin: $base 0
         }
 
         a {
@@ -100,6 +101,10 @@
                     }
                 }
             }
+        }
+
+        .CTA {
+            font-size: 16px;
         }
     }
 

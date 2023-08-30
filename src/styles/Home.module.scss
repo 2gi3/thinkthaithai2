@@ -18,16 +18,18 @@
     width: max-content;
     font-size: 48px;
     text-align: left;
-    // margin-bottom: $baseL;
+    margin-bottom: $baseS;
   }
 
   .title {
     // background-color: yellow;
     margin-left: $baseS;
+    height: min-content;
+    align-self: center;
 
     p {
       max-width: 320px;
-      margin-bottom: $baseM;
+      margin-bottom: $baseL;
 
       font-size: 18px;
       // text-align: center;
@@ -41,7 +43,7 @@
       button,
       a {
         // margin: auto;
-        margin-bottom: $baseS;
+        margin-bottom: -3px;
       }
     }
 
@@ -278,7 +280,6 @@
       margin: $base;
 
       p {
-        margin-bottom: $base;
         font-size: 16px;
       }
 
