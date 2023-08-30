@@ -16,34 +16,46 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
   // { console.log(height) }
 
   return (
-    <div key={feedback._id} className={styles.feedbackCard}>
-      {feedback.imageURL && (
+    <div key={feedback._id} style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className={styles.feedbackCard}>
+        {feedback.imageURL && (
+          <div>
+            <Image src={feedback.imageURL} height={48} width={48} alt={feedback.name} />
+          </div>
+        )}
         <div>
-          <Image src={feedback.imageURL} height={48} width={48} alt={feedback.name} />
-        </div>
-      )}
-      <div>
 
-        <div className={styles.credientials}>
-          <p>
-            {feedback.name}, <span>{feedback.job}</span>
+          <div className={styles.credientials}>
+            <p>
+              {feedback.name}, <span>{feedback.job}</span>
+            </p>
+            <p>{feedback.location}</p>
+          </div>
+          <h4>{feedback.title}</h4>
+          <p id={`feedback-body-${feedback._id}`}
+            style={{ height: height }}
+          >
+            {feedback.body}
           </p>
-          <p>{feedback.location}</p>
-        </div>
-        <h4>{feedback.title}</h4>
-        <p id={`feedback-body-${feedback._id}`}
-          style={{ height: height }}
-        >
-          {feedback.body}
-        </p>
-        {isOverflow && <button className="secondaryButton" onClick={() => {
+          {/* {isOverflow && <button className="secondaryButton" onClick={() => {
           height === 'max-content' ? setHeight('88px') : setHeight('max-content')
 
-        }}>... more</button>}
+        }}>... more</button>} */}
 
 
 
+        </div>
       </div>
+      {isOverflow && <button className="secondaryButton" style={{
+        width: 'maxContent',
+        marginLeft: 'auto',
+        marginTop: '-24px',
+        padding: '6px 12px',
+        border: 'none'
+      }} onClick={() => {
+        height === 'max-content' ? setHeight('88px') : setHeight('max-content')
+
+      }}>{height === 'max-content' ? 'show less' : '...more'} </button>}
     </div>
   );
 };

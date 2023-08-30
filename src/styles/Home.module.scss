@@ -198,7 +198,7 @@
 
   .feedbacks {
     max-width: 999px;
-    margin: $baseXXL auto;
+    margin: $baseXXL auto 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     // gap: $baseS 0;
@@ -228,7 +228,7 @@
   }
 
   .price {
-    margin: $baseXXL $baseXL;
+    margin: 0 $baseXL $baseXXL $baseXL ;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,7 +239,7 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-bottom: $base;
+      margin-bottom: 42px;
 
       p {
         min-width: max-content;
@@ -250,7 +250,7 @@
       @include primary-font(34px);
       @include gradient-text($lightAngle: 1deg);
 
-      margin-bottom: 0;
+      margin-bottom: -2px;
     }
 
     a {
@@ -396,6 +396,7 @@
     .price {
       h2 {
         @include gradient-text($color2: #6d50ff);
+        margin-bottom: -2px;
         font-size: 28px;
         text-align: center;
       }
