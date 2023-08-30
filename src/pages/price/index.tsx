@@ -79,34 +79,46 @@ export default function Prices() {
         <p>{t('and study material')}</p>
         <p>{t('are always included')}</p>
       </header>
+
       <main>
-        {/* <button onClick={() => console.log("hello world")}>
-          Trial lesson <Price USD={5} />
-        </button> */}
         {paidLessons === undefined && (
-          <div className={styles.trial}>
-            <Calendar email={student?.email || ''}
-              name={student?.name || ''} label={('Trial Lesson')} eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1' />
+          <div className={styles.trialContainer}>
+            <div className={styles.mostPopular}>
+              <h3>No Commitment</h3>
+              <Calendar
+                className="primaryButton"
+                email={student?.email || ''}
+                name={student?.name || ''} label={('Trial Lesson')}
+                eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1'
+              />
+              <Price USD={5} />
+            </div>
           </div>
         )}
 
+        <div className={styles.mostPopular}>
+          <h3> Try</h3>
 
-
-
-        <button onClick={() => makePayment("5 lessons")}>
-          5 {t('lessons')} <Price USD={products["5 lessons"]} />
-        </button>
+          <button onClick={() => makePayment("5 lessons")}>
+            5 {t('lessons')}
+          </button>
+          <Price USD={products["5 lessons"]} />
+        </div>
         <div className={styles.mostPopular}>
           <h3>{t('Most Popular')}</h3>
-          <button onClick={() => makePayment("10 lessons")}>
+          <button className={paidLessons === undefined ? 'secondaryButton' : "primaryButton"} onClick={() => makePayment("10 lessons")}>
             10 {t('lessons')}
           </button>
           <Price USD={products["10 lessons"]} />
         </div>
+        <div className={styles.mostPopular}>
+          <h3> Commit </h3>
 
-        <button onClick={() => makePayment("20 Lessons")}>
-          20 {t('lessons')} <Price USD={products["20 Lessons"]} />
-        </button>
+          <button onClick={() => makePayment("20 Lessons")}>
+            20 {t('lessons')}
+          </button>
+          <Price USD={products["20 Lessons"]} />
+        </div>
         {/* {product && <div className={styles.paymentOptions}>
           <button onClick={() => setProduct(null)}><FaTimes /></button>
           <Price USD={products[product]} />

@@ -48,11 +48,7 @@ function Calendar({ label, eventURL, email, name, className, studentId }: Calend
   return (
     <div style={{ margin: 0 }}>
       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      <button className={className} onClick={handleScheduleClick}>{label}{
-        label === 'Trial Lesson' && <><Price USD={5} />
-          <p>50 minutes</p>
-          <p>No commitment</p></>
-      }</button>
+      <button className={className} onClick={handleScheduleClick}>{label}</button>
     </div>
   );
 

@@ -21,6 +21,14 @@
 
     max-width: 700px;
 
+    .trialContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
     .trial {
       margin-top: $base;
       margin-bottom: $baseL;
@@ -50,6 +58,7 @@
     }
 
     .mostPopular {
+      margin: $base;
 
       h3 {
         margin: $base ;
@@ -65,9 +74,9 @@
       border: 1px solid $primaryColor;
       padding-bottom: $base;
 
-      button {
-        @include primary-button;
-      }
+      // button {
+      //   @include primary-button;
+      // }
     }
 
     .paymentOptions {
@@ -96,22 +105,12 @@
         margin: $baseS 0;
       }
     }
-
-    // .purchaseId {
-    //   width: 100%;
-    //   margin: auto;
-    //   text-align: center;
-    //   padding: 24px;
-    //   box-sizing: border-box;
-    // }
   }
 }
 
 @media (max-width: 499px) {
   .container {
     main {
-      flex-direction: column-reverse;
-
 
       .trial {
         order: 2;
