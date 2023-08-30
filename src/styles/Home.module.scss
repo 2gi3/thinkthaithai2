@@ -298,12 +298,6 @@
         }
       }
 
-      // div {
-      //   display: flex;
-      //   flex-direction: column;
-      //   align-items: center;
-
-      // }
     }
 
     picture {
@@ -333,8 +327,8 @@
         object-position: top;
         height: 200px;
         width: 100%;
-        max-width: 440px;
-        border-radius: 0;
+        max-width: 300px;
+        border-radius: $base;
         margin: auto;
 
 
@@ -372,7 +366,7 @@
         margin-bottom: $baseL;
 
         width: 100%;
-        max-width: 440px;
+        max-width: 300px;
 
 
 
@@ -380,16 +374,14 @@
         iframe {
           height: 200px;
           width: 100%;
-          max-width: 440px;
-          border-radius: 0;
+          max-width: 300px;
+          border-radius: $base;
           margin: auto;
 
         }
       }
 
-      // .introduction {
-      //   padding: 0 $base;
-      // }
+
     }
 
     .feedbacks {
