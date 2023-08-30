@@ -39,6 +39,7 @@
     button {
         @include secondary-button;
         position: absolute;
+        padding: 6px 12px;
         z-index: 3;
         border: none;
         bottom: -5px;
