@@ -98,7 +98,7 @@ export default function About(
         return (
             <div className={styles.container}>
                 <header>
-                    <h1>{course.title}</h1>
+                    <h1 style={{ width: 'unset' }}>{course.title}</h1>
                     <div className={styles.progressContainer}>
                         {course.lessons.map((lesson, i: number) => (
                             <button key={i}
