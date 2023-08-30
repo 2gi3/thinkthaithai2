@@ -1,8 +1,5 @@
-import { updateStudent } from "@/redux/slices/studentSlice";
-import { FetcherArgs, databaseStudent } from "@/types";
+import { fallbackData } from "@/data/fallbackExchangeRates";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-
 
 
 export const useExchangeRate = (newRate: string, amount = 5) => {
@@ -15,14 +12,20 @@ export const useExchangeRate = (newRate: string, amount = 5) => {
       try {
         const raw = await fetch(`${URL}/api/forex`);
         const { data } = await raw.json();
-
-        console.log('b4')
-        console.log(data)
-        console.log('af')
         const newCurrencyValue = data.rates[newRate] * amount;
         setExchangeRate(Number(newCurrencyValue.toFixed(2)));
       } catch (error) {
         console.error(error);
+        try {
+          const raw = await fetch('https://api.exchangerate.host/latest?base=USD');
+          const { rates } = await raw.json();
+          const newCurrencyValue = rates[newRate] * amount;
+          setExchangeRate(Number(newCurrencyValue.toFixed(2)));
+        } catch (error) {
+          console.error('Currencies updated to 30/08/2023');
+          const rate = Number(fallbackData.data.rates[newRate]) * amount;
+          setExchangeRate(Number(rate.toFixed(2)));
+        }
       }
     };
     fetchExchangeRate();
@@ -30,4 +33,5 @@ export const useExchangeRate = (newRate: string, amount = 5) => {
 
   return exchangeRate;
 };
+
 

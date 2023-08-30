@@ -1,4 +1,4 @@
-import {Currency} from '@/types'
+import { Currency } from '@/types'
 
 export const currencies: Currency[] = [
   { currency: "AUD", country: "Australia" },
