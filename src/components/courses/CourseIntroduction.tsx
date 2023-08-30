@@ -41,7 +41,7 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
             <source src={course.introduction.videoURL} type="video/mp4" />
         </video>
         <header>
-            <h1>{course.title}</h1>
+            <h1 style={{ width: 'unset' }}>{course.title}</h1>
             <p className={styles.status}>{course.status}</p>
         </header>
         <main>
