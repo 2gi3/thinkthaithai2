@@ -159,23 +159,6 @@ export default function Prices() {
             <Price USD={products["20 Lessons"]} />
           </div>
 
-          <div className={styles.safetyInfo}>
-            {!displaySafetyInfo && <button className="secondaryButton"
-              onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)}
-            >
-              Learn about Payment Safety
-            </button>}
-            {displaySafetyInfo && (
-              <div className={styles.safetyInfoBody}>
-                <button onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)} className={styles.toggle}> <FaTimes /></button>
-                <h3>When you click &apos;Buy&apos;</h3>
-                <p>You&apos;ll be taken to a secure website with this link: <span>https://checkout.stripe.com/your-order-ID</span></p>
-                <p>On this website, a company called &apos;Stripe&apos; helps you make the payment, and then they send the money to us.</p>
-                <a href='https://stripe.com' target='_blank' className={styles.stripeLink}>Learn more about Stripe</a>
-              </div>
-            )}
-
-          </div>
           {warningOn && (
 
             <Alert
@@ -189,6 +172,22 @@ export default function Prices() {
 
           )}
         </main>
+        <div className={styles.safetyInfo}>
+          {!displaySafetyInfo && <button className="secondaryButton"
+            onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)}
+          >
+            Learn about Payment Safety
+          </button>}
+          {displaySafetyInfo && (
+            <div className={styles.safetyInfoBody}>
+              <button onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)} className={styles.toggle}> <FaTimes /></button>
+              <h3>When you click &apos;Buy&apos;</h3>
+              <p>You&apos;ll be taken to a secure website with this link: <span>https://checkout.stripe.com/your-order-ID</span></p>
+              <p>On this website, a company called &apos;Stripe&apos; helps you make the payment, and then they send the money to us.</p>
+              <a href='https://stripe.com' target='_blank' className={styles.stripeLink}>Learn more about Stripe</a>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
