@@ -15,11 +15,11 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
     }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
-    }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_CLIENT_ID,
+    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    //   callbackUrl: `${process.env.NEXTAUTH_URL}/account`,
+    // }),
     EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,

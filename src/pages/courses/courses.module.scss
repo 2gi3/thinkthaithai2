@@ -75,6 +75,8 @@
 }
 
 .container {
+    margin-top: $baseXL;
+    padding-bottom: $baseXL;
 
     video,
     iframe {
@@ -92,7 +94,7 @@
 
         h1 {
             margin: $base;
-            padding-top: $base;
+            // padding-top: $base;
         }
 
         .status {

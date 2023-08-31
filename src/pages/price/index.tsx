@@ -21,7 +21,6 @@ export default function Prices() {
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
   const student = data?.user;
-  // console.log(student);
   const paidLessons = useSelector((state: RootState) => state.student.paidLessons);
 
 
@@ -29,6 +28,7 @@ export default function Prices() {
   const [orderId, setOrderId] = useState<string>();
   const [product, setProduct] = useState<string | null>(null);
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false)
+  const [warningOn, setWarningOn] = useState<boolean>(false)
 
   const products: { [key: string]: number } = {
     "5 lessons": 109,
@@ -42,30 +42,35 @@ export default function Prices() {
   };
 
   const makePayment = async (product: string) => {
-    try {
-      const response = await fetch("/api/payment", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          product,
-          studentEmail: student?.email,
-          studentName: student?.name,
-        }),
-      });
+    if (!student) {
+      setWarningOn(true)
 
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || "Payment failed");
+    } else {
+      try {
+        const response = await fetch("/api/payment", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            product,
+            studentEmail: student?.email,
+            studentName: student?.name,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.message || "Payment failed");
+        }
+
+        const { url } = await response.json();
+        console.log(`The response from the API is: ${url}`)
+        router.push(url);
+      } catch (error) {
+        console.error("Payment error:", error);
+      } finally {
       }
-
-      const { url } = await response.json();
-      console.log(`The response from the API is: ${url}`)
-      router.push(url);
-    } catch (error) {
-      console.error("Payment error:", error);
-    } finally {
     }
   };
 
@@ -99,7 +104,10 @@ export default function Prices() {
         <div className={styles.mostPopular}>
           <h3> Try</h3>
 
-          <button className='secondaryButton' onClick={() => makePayment("5 lessons")}>
+          <button
+            style={{ border: 'none' }}
+            className='secondaryButton'
+            onClick={() => makePayment("5 lessons")}>
             5 {t('lessons')}
           </button>
           <Price USD={products["5 lessons"]} />
@@ -119,6 +127,7 @@ export default function Prices() {
           <h3> Commit </h3>
 
           <button
+            style={{ border: 'none' }}
             className='secondaryButton'
             onClick={() => makePayment("20 Lessons")}>
             20 {t('lessons')}
@@ -132,18 +141,18 @@ export default function Prices() {
           <Contacts />
 
         </div>} */}
-        {/* {product && (
+        {warningOn && (
 
           <Alert
-            heading="Thank you for your purchase!"
-            message={`${t('Your order ID is')}: ${product}`}
+            heading="Please Log In first"
+            message={`It takes a few seconds and it's free`}
             onClose={() => {
-              setOrderCompleted(false);
-              router.push('/account');
+              setWarningOn(false);
+              router.push('/access');
             }}
           />
 
-        )} */}
+        )}
       </main>
     </div>
   );

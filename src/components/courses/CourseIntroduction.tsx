@@ -2,9 +2,8 @@ import { DatabaseCourse, databaseStudent } from '@/types';
 import { useSession } from 'next-auth/react'
 import styles from '@/pages/courses/courses.module.scss'
 import Link from "next/link";
-import { GetStaticPropsContext } from 'next';
 import { FaArrowLeft, FaTimes } from "react-icons/fa";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: DatabaseCourse, setStartCourseCompleted: any }) => {
 

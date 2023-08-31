@@ -3,6 +3,7 @@ import { DatabaseFeedback } from "@/types";
 import styles from '@/styles/feedbacks.module.scss'
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
 
 
 
@@ -43,6 +44,9 @@ export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) 
             <Feedback feedback={feedback} key={`${index}`} />
           )
         })}
+        <div className={styles.CTA}>
+          <Link href="/courses">Start a FREE course now</Link>
+        </div>
       </main>
     </>
   );
