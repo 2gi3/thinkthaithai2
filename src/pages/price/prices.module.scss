@@ -14,6 +14,23 @@
     }
 
     .toggle {
+
+      background-color: transparent;
+      text-shadow: $shadow;
+      transition: transform 250ms;
+
+      svg {
+        height: 28px;
+        width: 28px;
+      }
+
+      &:hover {
+        transform: translate(1px, -1px);
+      }
+
+
+
+      display: block;
       margin: 0;
       margin-left: auto;
     }
