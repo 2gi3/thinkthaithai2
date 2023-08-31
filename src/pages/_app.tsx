@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { appWithTranslation } from "next-i18next";
 // import i18n from "../../next-i18next.config";
 import { SessionProvider } from "next-auth/react";
+import { Analytics } from '@vercel/analytics/react';
 import type { Session } from "next-auth";
 
 function App({
@@ -17,6 +18,7 @@ function App({
       <Provider store={store}>
         <Layout>
           <Component {...pageProps} />
+          <Analytics />
         </Layout>
       </Provider>
     </SessionProvider>
