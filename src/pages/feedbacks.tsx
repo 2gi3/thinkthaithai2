@@ -4,6 +4,7 @@ import styles from '@/styles/feedbacks.module.scss'
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import Head from "next/head";
 
 
 
@@ -35,6 +36,27 @@ export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) 
 
   return (
     <>
+      <Head>
+        <title>ThinkThaiThai</title>
+        <meta name="description" content="Thai language student's opinion of Teacher Nat's classes" />
+        {/* <meta property="og:image" content="/1.png" /> */}
+        <meta property="og:url" content="https://www.thikthaithai.com/feedbacks" />
+        <meta property="og:type" content="website" />
+
+        <meta property="og:title" content="Don't take my word for it!" />
+
+        <meta
+          property="og:description"
+          content="Guiding you through every step of your learning journey"
+        />
+
+        <meta
+          property="og:image"
+          content={"https://thinkthaithai.com/1.png"}
+        />
+
+        <link rel="icon" href="/logo.webp" />
+      </Head>
       <header className={styles.header}>
         <h1>{t('What My Students Say')}</h1>
       </header>

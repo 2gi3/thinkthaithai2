@@ -12,6 +12,7 @@ import { FaTimes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Alert from "@/components/Alert/Alert";
 import Contacts from "@/components/Contacts/Contacts";
+import Head from "next/head";
 
 export default function Prices() {
   const { t } = useTranslation("price");
@@ -29,6 +30,7 @@ export default function Prices() {
   const [product, setProduct] = useState<string | null>(null);
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false)
   const [warningOn, setWarningOn] = useState<boolean>(false)
+  const [displaySafetyInfo, setDisplaySafetyInfo] = useState<boolean>(false)
 
   const products: { [key: string]: number } = {
     "5 lessons": 109,
@@ -76,85 +78,119 @@ export default function Prices() {
 
 
   return (
-    <div className={styles.container}>
-      <header>
-        <h1>{t('Invest in Yourself')}</h1>
-        <p>{t('50 minutes regular lessons')}</p>
-        <p>{t('Personalised homeworks')}</p>
-        <p>{t('and study material')}</p>
-        <p>{t('are always included')}</p>
-      </header>
+    <>
+      <Head>
+        <title>ThinkThaiThai</title>
+        <meta name="description" content="With free courses and tailored study material, you get so much more than just a simple private lesson" />
+        {/* <meta property="og:image" content="/1.png" /> */}
+        <meta property="og:url" content="https://www.thikthaithai.com/price" />
+        <meta property="og:type" content="website" />
 
-      <main>
-        {paidLessons === undefined && (
-          <div className={styles.trialContainer}>
-            <div className={styles.mostPopular}>
-              <h3>No Commitment</h3>
-              <Calendar
-                className="primaryButton"
-                email={student?.email || ''}
-                name={student?.name || ''} label={('Trial Lesson')}
-                eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1'
-              />
-              <Price USD={5} />
+        <meta property="og:title" content="The best value for your money!" />
+
+        <meta
+          property="og:description"
+          content="Guiding you through every step of your learning journey"
+        />
+
+        <meta
+          property="og:image"
+          content={"https://thinkthaithai.com/1.png"}
+        />
+
+        <link rel="icon" href="/logo.webp" />
+      </Head>
+      <div className={styles.container}>
+        <header>
+          <h1>{t('Invest in Yourself')}</h1>
+          <p>{t('50 minutes regular lessons')}</p>
+          <p>{t('Personalised homeworks')}</p>
+          <p>{t('and study material')}</p>
+          <p>{t('are always included')}</p>
+        </header>
+
+        <main>
+          {paidLessons === undefined && (
+            <div className={styles.trialContainer}>
+              <div className={styles.mostPopular}>
+                <h3>No Commitment</h3>
+                <Calendar
+                  className="primaryButton"
+                  email={student?.email || ''}
+                  name={student?.name || ''} label={('Trial Lesson')}
+                  eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1'
+                />
+                <Price USD={5} />
+              </div>
             </div>
+          )}
+
+          <div className={styles.mostPopular}>
+            <h3> Try</h3>
+
+            <button
+              style={{ border: 'none' }}
+              className='secondaryButton'
+              onClick={() => makePayment("5 lessons")}>
+              5 {t('lessons')}
+            </button>
+            <Price USD={products["5 lessons"]} />
           </div>
-        )}
+          <div className={styles.mostPopular}>
+            <h3>{t('Most Popular')}</h3>
+            <button
+              style={{ border: 'none' }}
+              className={paidLessons === undefined ? 'secondaryButton' : "primaryButton"}
+              onClick={() => makePayment("10 lessons")}
+            >
+              10 {t('lessons')}
+            </button>
+            <Price USD={products["10 lessons"]} />
+          </div>
+          <div className={styles.mostPopular}>
+            <h3> Commit </h3>
 
-        <div className={styles.mostPopular}>
-          <h3> Try</h3>
+            <button
+              style={{ border: 'none' }}
+              className='secondaryButton'
+              onClick={() => makePayment("20 Lessons")}>
+              20 {t('lessons')}
+            </button>
+            <Price USD={products["20 Lessons"]} />
+          </div>
 
-          <button
-            style={{ border: 'none' }}
-            className='secondaryButton'
-            onClick={() => makePayment("5 lessons")}>
-            5 {t('lessons')}
-          </button>
-          <Price USD={products["5 lessons"]} />
-        </div>
-        <div className={styles.mostPopular}>
-          <h3>{t('Most Popular')}</h3>
-          <button
-            style={{ border: 'none' }}
-            className={paidLessons === undefined ? 'secondaryButton' : "primaryButton"}
-            onClick={() => makePayment("10 lessons")}
-          >
-            10 {t('lessons')}
-          </button>
-          <Price USD={products["10 lessons"]} />
-        </div>
-        <div className={styles.mostPopular}>
-          <h3> Commit </h3>
+          <div className={styles.safetyInfo}>
+            {!displaySafetyInfo && <button className="secondaryButton"
+              onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)}
+            >
+              Learn about Payment Safety
+            </button>}
+            {displaySafetyInfo && (
+              <div className={styles.safetyInfoBody}>
+                <button onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)} className={styles.toggle}> <FaTimes /></button>
+                <h3>When you click &apos;Buy&apos;</h3>
+                <p>You&apos;ll be taken to a secure website with this link: <span>https://checkout.stripe.com/your-order-ID</span></p>
+                <p>On this website, a company called &apos;Stripe&apos; helps you make the payment, and then they send the money to us.</p>
+                <a href='https://stripe.com' target='_blank' className={styles.stripeLink}>Learn more about Stripe</a>
+              </div>
+            )}
 
-          <button
-            style={{ border: 'none' }}
-            className='secondaryButton'
-            onClick={() => makePayment("20 Lessons")}>
-            20 {t('lessons')}
-          </button>
-          <Price USD={products["20 Lessons"]} />
-        </div>
-        {/* {product && <div className={styles.paymentOptions}>
-          <button onClick={() => setProduct(null)}><FaTimes /></button>
-          <Price USD={products[product]} />
-          <h4>Please contact me to buy some lessons</h4>
-          <Contacts />
+          </div>
+          {warningOn && (
 
-        </div>} */}
-        {warningOn && (
+            <Alert
+              heading="Please Log In first"
+              message={`It takes a few seconds and it's free`}
+              onClose={() => {
+                setWarningOn(false);
+                router.push('/access');
+              }}
+            />
 
-          <Alert
-            heading="Please Log In first"
-            message={`It takes a few seconds and it's free`}
-            onClose={() => {
-              setWarningOn(false);
-              router.push('/access');
-            }}
-          />
-
-        )}
-      </main>
-    </div>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
 

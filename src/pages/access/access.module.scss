@@ -11,6 +11,8 @@
 
   p {
     position: relative;
+    margin-bottom: $baseS;
+
 
     &::before,
     &::after {

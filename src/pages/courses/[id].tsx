@@ -11,6 +11,7 @@ import Lesson from '@/components/courses/Lesson';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { updateStudent } from '@/redux/slices/studentSlice';
+import Head from 'next/head';
 
 
 export default function About(
@@ -96,52 +97,75 @@ export default function About(
     if (startCourseCompleted || startedCourses?.hasOwnProperty(course._id)) {
 
         return (
-            <div className={styles.container}>
-                <header>
-                    <h1 style={{ width: 'unset' }}>{course.title}</h1>
-                    <div className={styles.progressContainer}>
-                        {course.lessons.map((lesson, i: number) => (
-                            <button key={i}
-                                onClick={() => { setCurrentLesson(i) }}
-                                className={completedLessons?.includes(lesson.title) ? styles.progress : styles.toLearn}>
-                                <span>{lesson.title}</span>
-                                {currentLesson === i + 1 ? <div className={styles.current} ></div> : null}
-                            </button>
+            <>
+                <Head>
+                    <title>ThinkThaiThai</title>
+                    <meta name="description" content="With free courses and tailored study material, you get so much more than just a simple private lesson" />
+                    {/* <meta property="og:image" content="/1.png" /> */}
+                    <meta property="og:url" content="https://www.thikthaithai.com/courses" />
+                    <meta property="og:type" content="website" />
 
-                        ))}
+                    <meta property="og:title" content="The best value for your money!" />
 
-                    </div>
-                </header>
-                <main>
-                    {currentLesson >= course.lessons.length ?
-                        <h2>Course completed</h2>
-                        : <Lesson lesson={lesson} />
-                    }
-                </main>
-                <footer>
-                    <button className={styles.previous}
-                        onClick={() => {
-                            if (currentLesson === 0) {
-                                router.push('/courses')
-                            } else { setCurrentLesson(x => x - 1) }
-                        }}>
-                        <FaArrowLeft />
-                    </button>
+                    <meta
+                        property="og:description"
+                        content="Guiding you through every step of your learning journey"
+                    />
 
-                    {
-                        currentLesson === course.lessons.length ?
-                            <button onClick={() => {
-                                router.push('/courses')
-                            }}>Start a new course</button>
-                            : <button onClick={() => {
-                                completeLesson(lesson.title)
+                    <meta
+                        property="og:image"
+                        content={"https://thinkthaithai.com/1.png"}
+                    />
+
+                    <link rel="icon" href="/logo.webp" />
+                </Head>
+                <div className={styles.container}>
+                    <header>
+                        <h1 style={{ width: 'unset' }}>{course.title}</h1>
+                        <div className={styles.progressContainer}>
+                            {course.lessons.map((lesson, i: number) => (
+                                <button key={i}
+                                    onClick={() => { setCurrentLesson(i) }}
+                                    className={completedLessons?.includes(lesson.title) ? styles.progress : styles.toLearn}>
+                                    <span>{lesson.title}</span>
+                                    {currentLesson === i + 1 ? <div className={styles.current} ></div> : null}
+                                </button>
+
+                            ))}
+
+                        </div>
+                    </header>
+                    <main>
+                        {currentLesson >= course.lessons.length ?
+                            <h2>Course completed</h2>
+                            : <Lesson lesson={lesson} />
+                        }
+                    </main>
+                    <footer>
+                        <button className={styles.previous}
+                            onClick={() => {
+                                if (currentLesson === 0) {
+                                    router.push('/courses')
+                                } else { setCurrentLesson(x => x - 1) }
                             }}>
-                                Lesson completed &nbsp; <FaArrowRight />
-                            </button>
+                            <FaArrowLeft />
+                        </button>
 
-                    }
-                </footer>
-            </div>
+                        {
+                            currentLesson === course.lessons.length ?
+                                <button onClick={() => {
+                                    router.push('/courses')
+                                }}>Start a new course</button>
+                                : <button onClick={() => {
+                                    completeLesson(lesson.title)
+                                }}>
+                                    Lesson completed &nbsp; <FaArrowRight />
+                                </button>
+
+                        }
+                    </footer>
+                </div>
+            </>
 
         )
     } else {

@@ -22,7 +22,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
     <>
       <Head>
         <title>ThinkThaiThai</title>
-        <meta name="description" content="Learn thai test" />
+        <meta name="description" content="Learn Thai language with free courses and one-on-one lessons" />
         {/* <meta property="og:image" content="/1.png" /> */}
         <meta property="og:url" content="https://www.thikthaithai.com/" />
         <meta property="og:type" content="website" />
@@ -31,12 +31,12 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
 
         <meta
           property="og:description"
-          content="Teaching and guiding you through every step of your learning journey"
+          content="Guiding you through every step of your learning journey"
         />
 
         <meta
           property="og:image"
-          content={"https://thinkthaithai-draft.netlify.app/1.png"}
+          content={"https://thinkthaithai.com/1.png"}
         />
 
         <link rel="icon" href="/logo.webp" />

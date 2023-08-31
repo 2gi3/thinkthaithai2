@@ -1,6 +1,50 @@
 @use "@/styles" as *;
 
 .container {
+  .safetyInfo {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    h3 {
+      margin-bottom: $baseS;
+    }
+
+    .toggle {
+      margin: 0;
+      margin-left: auto;
+    }
+
+    p {
+      margin-bottom: $baseS;
+    }
+
+    span {
+      font-style: italic;
+    }
+
+    .safetyInfoBody {
+      position: absolute;
+      z-index: 5;
+      padding: $base;
+      max-width: 440px;
+      background-color: #ffffff;
+      border-radius: $base;
+
+
+      .stripeLink {
+        @include secondary-button;
+        display: block;
+        max-width: min-content;
+        margin-top: $base;
+      }
+
+    }
+  }
+
   header {
     margin: $base;
     margin-top: $baseXL;
