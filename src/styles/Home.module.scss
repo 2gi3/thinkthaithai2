@@ -228,7 +228,7 @@
   }
 
   .price {
-    margin: 0 $baseXL $baseXXL $baseXL ;
+    margin: $base $baseXL $baseXXL $baseXL ;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -394,6 +394,8 @@
     }
 
     .price {
+      margin-top: 72px;
+
       h2 {
         @include gradient-text($color2: #6d50ff);
         margin-bottom: -2px;
