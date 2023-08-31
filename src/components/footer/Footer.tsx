@@ -10,7 +10,7 @@ const Footer = () => {
       <div className={styles.contactsContainer}>
         <Contacts />
       </div>
-      <div className={styles.credits}>
+      <a href='https://github.com/2gi3' target="blank" className={styles.credits}>
         <div className={styles.image}>
           <Image
             alt="Giuseppe Ippolito"
@@ -25,7 +25,7 @@ const Footer = () => {
           <p>{t("Web-Developer")}</p>
           <p>{t("London")}</p>
         </div>
-      </div>
+      </a>
       <p className={styles.copyRights}>
         Giuseppe Ippolito © 2023 All rights reserved
       </p>

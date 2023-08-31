@@ -67,7 +67,7 @@ const NavBar = () => {
           </li>
         </ul>
         {status === "authenticated" && session ? (<>
-          <button onClick={() => handleLogOut()}>Log&nbsp;out</button>
+          <button className={styles.logOutButton} onClick={() => handleLogOut()}>Log&nbsp;out</button>
           <Link href="/account" className={styles.account} id={pathname === "/account" ? styles.selected : ''}>
             {session?.user?.image ?
               <Image width={36} height={36} src={session.user.image} alt="profile picture" />

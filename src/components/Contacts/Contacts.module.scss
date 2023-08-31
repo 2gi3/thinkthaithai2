@@ -5,9 +5,11 @@
     opacity: 0.3;
     transform: translateY(75vh);
   }
+
   30% {
     opacity: 1;
   }
+
   80% {
     transform: translateY(-40px);
   }
@@ -33,14 +35,27 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
+
       li:nth-child(1) {
         animation: contactsLoader 600ms ease-in forwards;
       }
+
       li:nth-child(2) {
         animation: contactsLoader 650ms ease-in forwards;
       }
+
       li:nth-child(3) {
         animation: contactsLoader 700ms ease-in forwards;
+      }
+
+      li {
+        filter: drop-shadow(-1px 2px 2px rgba(80, 80, 80, 0.3));
+        transition: transform 250ms, filter 250ms;
+
+        &:hover {
+          transform: translate(1px, -1px);
+          filter: drop-shadow(0px 1px 1px rgba(80, 80, 80, 0.2));
+        }
       }
     }
   }

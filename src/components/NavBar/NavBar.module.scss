@@ -9,6 +9,15 @@
   position: relative;
   @include secondary-font;
 
+  .logOutButton {
+    transition: transform 250ms;
+
+    &:hover {
+      transform: translate(1px, -1px);
+      // box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.2);
+    }
+  }
+
   #selected {
     text-decoration: underline;
     text-underline-offset: 3px;
@@ -17,6 +26,12 @@
 
   .account {
     padding-left: 24px;
+    transition: transform 250ms;
+
+    &:hover {
+      transform: translate(1px, -1px);
+      // box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.2);
+    }
 
     img {
       border-radius: 50%;
@@ -34,6 +49,12 @@
   .brand {
     padding: $base;
     @include primary-font;
+    transition: transform 250ms;
+
+    &:hover {
+      transform: translate(1px, -1px);
+      // box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.2);
+    }
   }
 
   .navigation,
@@ -60,6 +81,12 @@
 
     li {
       min-width: max-content;
+      transition: transform 250ms;
+
+      &:hover {
+        transform: translate(1px, -1px);
+        // box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.2);
+      }
 
       a {
         text-decoration: none;
@@ -120,6 +147,12 @@
       top: 18px;
       right: 6px;
       padding: 5px 10px;
+      transition: transform 250ms;
+
+      &:hover {
+        transform: translate(1px, -1px);
+        // box-shadow: 0px 1px 1px rgba(80, 80, 80, 0.2);
+      }
 
       svg {
         height: 28px;

@@ -99,14 +99,18 @@ export default function Prices() {
         <div className={styles.mostPopular}>
           <h3> Try</h3>
 
-          <button onClick={() => makePayment("5 lessons")}>
+          <button className='secondaryButton' onClick={() => makePayment("5 lessons")}>
             5 {t('lessons')}
           </button>
           <Price USD={products["5 lessons"]} />
         </div>
         <div className={styles.mostPopular}>
           <h3>{t('Most Popular')}</h3>
-          <button className={paidLessons === undefined ? 'secondaryButton' : "primaryButton"} onClick={() => makePayment("10 lessons")}>
+          <button
+            style={{ border: 'none' }}
+            className={paidLessons === undefined ? 'secondaryButton' : "primaryButton"}
+            onClick={() => makePayment("10 lessons")}
+          >
             10 {t('lessons')}
           </button>
           <Price USD={products["10 lessons"]} />
@@ -114,7 +118,9 @@ export default function Prices() {
         <div className={styles.mostPopular}>
           <h3> Commit </h3>
 
-          <button onClick={() => makePayment("20 Lessons")}>
+          <button
+            className='secondaryButton'
+            onClick={() => makePayment("20 Lessons")}>
             20 {t('lessons')}
           </button>
           <Price USD={products["20 Lessons"]} />
