@@ -7,7 +7,7 @@ describe("Home page renders and works correctly", () => {
 
   it("should display all elements in the header", () => {
     // cy.findByRole("link", { name: "About Me" }).should("be.visible");
-    cy.get("h1").contains("Achieve your goals!");
+    cy.get("h1").contains("Reach Your Goals!");
   });
 });
 // it("should display the correct average ticket value", () => {

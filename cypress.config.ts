@@ -3,7 +3,8 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   e2e: {
     // defaultCommandTimeout: 4000,
-    baseUrl: process.env.NEXT_PUBLIC_BASIC_URL,
+    // baseUrl: process.env.NEXT_PUBLIC_BASIC_URL,
+    baseUrl: 'http://localhost:3000',
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     video: false,
     setupNodeEvents(on, config) {

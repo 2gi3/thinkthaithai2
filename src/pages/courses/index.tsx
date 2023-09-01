@@ -75,7 +75,7 @@ export default function About(
                 <header>
                     <h1>
                         {/* The&nbsp;best&nbsp;time to&nbsp;start&nbsp;learning is&nbsp;Now! */}
-                        {t('the best time to start learning is Now!')}
+                        {t('The Best Time to Start Learning is Now!')}
                     </h1>
                 </header>
                 <main>
