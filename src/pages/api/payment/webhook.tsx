@@ -18,7 +18,7 @@ import clientPromise from "../../../../mongoDB/clientPromise";
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret = process.env.STRIPE_WEBHOOK_SIGNING_SECRET;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SIGNING_SECRET!;
 
 export const config = {
     api: {
