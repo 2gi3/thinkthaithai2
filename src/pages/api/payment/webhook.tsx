@@ -1,8 +1,21 @@
-// pages/api/webhook.ts
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import stripe from '../../../utils/stripe'; // Import your Stripe secret key from a separate file
 import { Readable } from 'stream';
+import { CheckoutSession } from '@/types';
+// @ts-ignore
+import clientPromise from "../../../../mongoDB/clientPromise";
+
+
+
+
+
+
+
+
+
+
+
+
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = 'whsec_f88529e843d235ebe2fbb713b71663aece02b6392866e8d3b8a31688ce3fb725';
@@ -35,7 +48,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const sig = req.headers['stripe-signature'] as string;
     const body = await rawBodyBuffer(req);
-
     let event;
 
     try {
@@ -49,18 +61,53 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'checkout.session.async_payment_failed':
             const checkoutSessionAsyncPaymentFailed = event.data.object;
             // Then define and call a function to handle the event checkout.session.async_payment_failed
+            console.log({ checkoutSessionAsyncPaymentFailed: checkoutSessionAsyncPaymentFailed })
+
+
             break;
         case 'checkout.session.async_payment_succeeded':
             const checkoutSessionAsyncPaymentSucceeded = event.data.object;
             // Then define and call a function to handle the event checkout.session.async_payment_succeeded
+            console.log({ checkoutSessionAsyncPaymentSucceeded: checkoutSessionAsyncPaymentSucceeded })
+
             break;
         case 'checkout.session.completed':
-            const checkoutSessionCompleted = event.data.object;
+            const checkoutSessionCompleted = event.data.object as CheckoutSession;
             // Then define and call a function to handle the event checkout.session.completed
+            const successfulPayment = {
+                paymentId: checkoutSessionCompleted.id,
+                paymentStatus: checkoutSessionCompleted.payment_status,
+                studentName: checkoutSessionCompleted.customer_details.name,
+                studentEmail: checkoutSessionCompleted.customer_details.email,
+                amountPaid: checkoutSessionCompleted.amount_total / 100, // Assuming the amount is in cents
+                currency: checkoutSessionCompleted.currency,
+                dateOfPurchase: new Date(checkoutSessionCompleted.created * 1000), // Convert timestamp to date
+            };
+
+            //@ts-ignore
+            const client = await clientPromise;
+            const db = client.db();
+            const student = await db.collection("users").findOne({ email: successfulPayment.studentEmail });
+
+            console.log({ student: student })
+
+            const amountPaid = Number(successfulPayment.amountPaid)
+            const addedLessons = amountPaid === 1 ? 5 :
+                amountPaid === 209.00 ? 10 :
+                    amountPaid === 380.00 ? 20 : 0;
+            const paidLessons = student.paidLessons || 0;
+            const totalLessons = paidLessons + addedLessons
+            await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
+
+            console.log({ successfulPayment: successfulPayment })
+
             break;
         case 'checkout.session.expired':
             const checkoutSessionExpired = event.data.object;
             // Then define and call a function to handle the event checkout.session.expired
+            console.log({ checkoutSessionExpired: checkoutSessionExpired })
+
+
             break;
         // ... handle other event types
         default:

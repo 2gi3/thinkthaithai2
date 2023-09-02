@@ -154,3 +154,15 @@ export interface AlertProps {
   message: string;
   onClose: () => void;
 }
+
+export interface CheckoutSession {
+  id: string;
+  payment_status: string
+  customer_details: {
+    name: string;
+    email: string;
+  };
+  amount_total: number;
+  currency: string;
+  created: number;
+}

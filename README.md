@@ -17,6 +17,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
     - For gmail, the username is the part in your email addres before the '@' symbol
 
  ## Payments
+ ### Simulate webhook in local environment: 
+ -  stripe listen --forward-to localhost:3000/api/payment/webhook
 
 
 

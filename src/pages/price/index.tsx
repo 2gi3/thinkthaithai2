@@ -44,37 +44,37 @@ export default function Prices() {
   };
 
   const makePayment = async (product: string) => {
-    alert('Card payments are momentarely unavailable, please contact the teacher for more informations and alternative payment methods')
-    // if (!student) {
-    //   setWarningOn(true)
+    // alert('Card payments are momentarely unavailable, please contact the teacher for more informations and alternative payment methods')
+    if (!student) {
+      setWarningOn(true)
 
-    // } else {
-    //   try {
-    //     const response = await fetch("/api/payment", {
-    //       method: "POST",
-    //       headers: {
-    //         "content-type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         product,
-    //         studentEmail: student?.email,
-    //         studentName: student?.name,
-    //       }),
-    //     });
+    } else {
+      try {
+        const response = await fetch("/api/payment", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            product,
+            studentEmail: student?.email,
+            studentName: student?.name,
+          }),
+        });
 
-    //     if (!response.ok) {
-    //       const errorResponse = await response.json();
-    //       throw new Error(errorResponse.message || "Payment failed");
-    //     }
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.message || "Payment failed");
+        }
 
-    //     const { url } = await response.json();
-    //     console.log(`The response from the API is: ${url}`)
-    //     router.push(url);
-    //   } catch (error) {
-    //     console.error("Payment error:", error);
-    //   } finally {
-    //   }
-    // }
+        const { url } = await response.json();
+        console.log(`The response from the API is: ${url}`)
+        router.push(url);
+      } catch (error) {
+        console.error("Payment error:", error);
+      } finally {
+      }
+    }
   };
 
 
