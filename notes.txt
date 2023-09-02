@@ -1,5 +1,7 @@
 stripe local environment testing example
 
+//account id from cli: acct_1NeIZIExCY4f7lBt
+
 // server.js
 //
 // Use this sample code to handle webhook events in your integration.
@@ -51,3 +53,89 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
 });
 
 app.listen(4242, () => console.log('Running on port 4242'));
+
+
+
+
+
+
+
+
+
+// pages/api/webhook.ts
+
+import { NextApiRequest, NextApiResponse } from 'next';
+import stripe from '../../../utils/stripe'; // Import your Stripe secret key from a separate file
+import { Readable } from 'stream';
+
+// Set your Stripe webhook secret for production
+const productionEndpointSecret = 'your-production-secret-key';
+
+// This is your Stripe CLI webhook secret for testing your endpoint locally.
+const developmentEndpointSecret = 'whsec_f88529e843d235ebe2fbb713b71663aece02b6392866e8d3b8a31688ce3fb725';
+
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
+
+const rawBodyBuffer = (req: NextApiRequest) => {
+    return new Promise<Buffer>((resolve, reject) => {
+        let buffer: Buffer[] = [];
+        req.on('data', (chunk) => {
+            buffer.push(chunk);
+        });
+        req.on('end', () => {
+            resolve(Buffer.concat(buffer));
+        });
+        req.on('error', (error) => {
+            reject(error);
+        });
+    });
+};
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'POST') {
+        return res.status(405).end();
+    }
+
+    const sig = req.headers['stripe-signature'] as string;
+    const body = await rawBodyBuffer(req);
+
+    let event;
+
+    try {
+        // Use the appropriate endpoint secret based on the environment
+        const endpointSecret = process.env.NODE_ENV === 'production' ? productionEndpointSecret : developmentEndpointSecret;
+        event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+    } catch (err: any) {
+        return res.status(400).json({ error: `Webhook Error: ${err.message}` });
+    }
+
+    // Handle the event
+    switch (event.type) {
+        case 'checkout.session.async_payment_failed':
+            const checkoutSessionAsyncPaymentFailed = event.data.object;
+            // Then define and call a function to handle the event checkout.session.async_payment_failed
+            break;
+        case 'checkout.session.async_payment_succeeded':
+            const checkoutSessionAsyncPaymentSucceeded = event.data.object;
+            // Then define and call a function to handle the event checkout.session.async_payment_succeeded
+            break;
+        case 'checkout.session.completed':
+            const checkoutSessionCompleted = event.data.object;
+            // Then define and call a function to handle the event checkout.session.completed
+            break;
+        case 'checkout.session.expired':
+            const checkoutSessionExpired = event.data.object;
+            // Then define and call a function to handle the event checkout.session.expired
+            break;
+        // ... handle other event types
+        default:
+            console.log(`Unhandled event type ${event.type}`);
+    }
+
+    // Return a 200 response to acknowledge receipt of the event
+    res.status(200).json({ received: true });
+};

@@ -18,7 +18,7 @@ import clientPromise from "../../../../mongoDB/clientPromise";
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret = 'whsec_f88529e843d235ebe2fbb713b71663aece02b6392866e8d3b8a31688ce3fb725';
+const endpointSecret = process.env.STRIPE_WEBHOOK_SIGNING_SECRET;
 
 export const config = {
     api: {
@@ -56,7 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ error: `Webhook Error: ${err.message}` });
     }
 
-    // Handle the event
     switch (event.type) {
         case 'checkout.session.async_payment_failed':
             const checkoutSessionAsyncPaymentFailed = event.data.object;
