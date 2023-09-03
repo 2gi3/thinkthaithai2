@@ -96,7 +96,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const student = await db.collection("users").findOne({ _id: successfulPayment.studentId });
 
             const amountPaid = Number(successfulPayment.amountPaid)
-            const addedLessons = amountPaid === 1 ? 5 :
+            const addedLessons = amountPaid === 109 ? 5 :
                 amountPaid === 209.00 ? 10 :
                     amountPaid === 380.00 ? 20 : 0;
             const paidLessons = student.paidLessons || 0;
