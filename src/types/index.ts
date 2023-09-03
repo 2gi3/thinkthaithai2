@@ -162,6 +162,8 @@ export interface CheckoutSession {
     name: string;
     email: string;
   };
+  client_reference_id: string;
+  customer_email: string;
   amount_total: number;
   currency: string;
   created: number;

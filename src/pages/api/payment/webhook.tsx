@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import stripe from '../../../utils/stripe'; // Import your Stripe secret key from a separate file
+import stripe from '../../../utils/stripe';
 import { Readable } from 'stream';
 import { CheckoutSession } from '@/types';
 // @ts-ignore
 import clientPromise from "../../../../mongoDB/clientPromise";
+import { ObjectId } from 'mongodb';
+
 
 
 
@@ -72,12 +74,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case 'checkout.session.completed':
             const checkoutSessionCompleted = event.data.object as CheckoutSession;
-            // Then define and call a function to handle the event checkout.session.completed
+            console.log({ checkoutSessionCompleted: checkoutSessionCompleted })
+            const studentIdAsObjectId = new ObjectId(checkoutSessionCompleted.client_reference_id);
+
+
             const successfulPayment = {
                 paymentId: checkoutSessionCompleted.id,
                 paymentStatus: checkoutSessionCompleted.payment_status,
-                studentName: checkoutSessionCompleted.customer_details.name,
-                studentEmail: checkoutSessionCompleted.customer_details.email,
+                payeeName: checkoutSessionCompleted.customer_details.name,
+                payeeEmail: checkoutSessionCompleted.customer_details.email,
+                studentEmail: checkoutSessionCompleted.customer_email,
+                studentId: studentIdAsObjectId,
                 amountPaid: checkoutSessionCompleted.amount_total / 100, // Assuming the amount is in cents
                 currency: checkoutSessionCompleted.currency,
                 dateOfPurchase: new Date(checkoutSessionCompleted.created * 1000), // Convert timestamp to date
@@ -86,7 +93,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             //@ts-ignore
             const client = await clientPromise;
             const db = client.db();
-            const student = await db.collection("users").findOne({ email: successfulPayment.studentEmail });
+            // const student = await db.collection("users").findOne({ email: successfulPayment.studentEmail });
+            const student = await db.collection("users").findOne({ _id: successfulPayment.studentId });
+
 
             console.log({ student: student })
 
@@ -96,7 +105,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     amountPaid === 380.00 ? 20 : 0;
             const paidLessons = student.paidLessons || 0;
             const totalLessons = paidLessons + addedLessons
-            await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
+            // await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
+            await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { paidLessons: totalLessons } });
 
             console.log({ successfulPayment: successfulPayment })
 

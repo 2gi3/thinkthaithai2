@@ -65,8 +65,8 @@ export default async function handler(
         }],
         success_url: `${process.env.NEXT_PUBLIC_BASIC_URL}/account`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASIC_URL}/cancelled-payment`,
-        customer_email: req.body.email,
-        client_reference_id: req.body.name,
+        customer_email: req.body.studentEmail,
+        client_reference_id: req.body.studentID,
       })
 
       res.status(200).json({ url: payment.url })

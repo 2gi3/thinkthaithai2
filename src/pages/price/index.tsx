@@ -21,8 +21,10 @@ export default function Prices() {
 
   // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
-  const student = data?.user;
-  const paidLessons = useSelector((state: RootState) => state.student.paidLessons);
+  const student = useSelector(
+    (state: RootState) => state.student
+  );
+  const paidLessons = student.paidLessons
 
 
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
@@ -58,7 +60,7 @@ export default function Prices() {
           body: JSON.stringify({
             product,
             studentEmail: student?.email,
-            studentName: student?.name,
+            studentID: student._id
           }),
         });
 
