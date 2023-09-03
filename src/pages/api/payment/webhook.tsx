@@ -74,7 +74,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case 'checkout.session.completed':
             const checkoutSessionCompleted = event.data.object as CheckoutSession;
-            console.log({ checkoutSessionCompleted: checkoutSessionCompleted })
             const studentIdAsObjectId = new ObjectId(checkoutSessionCompleted.client_reference_id);
 
 
@@ -93,11 +92,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             //@ts-ignore
             const client = await clientPromise;
             const db = client.db();
-            // const student = await db.collection("users").findOne({ email: successfulPayment.studentEmail });
+            db.collection('payments').insertOne(successfulPayment);
             const student = await db.collection("users").findOne({ _id: successfulPayment.studentId });
-
-
-            console.log({ student: student })
 
             const amountPaid = Number(successfulPayment.amountPaid)
             const addedLessons = amountPaid === 1 ? 5 :
@@ -105,7 +101,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     amountPaid === 380.00 ? 20 : 0;
             const paidLessons = student.paidLessons || 0;
             const totalLessons = paidLessons + addedLessons
-            // await db.collection("users").updateOne({ _id: student._id }, { $set: { paidLessons: totalLessons } });
             await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { paidLessons: totalLessons } });
 
             console.log({ successfulPayment: successfulPayment })
