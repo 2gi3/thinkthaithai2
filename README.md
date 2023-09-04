@@ -5,7 +5,61 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### FIGMA: https://www.figma.com/file/84tR9gfjrZJOAo8QUK1bQ8/ThinkThaiThai2.0?node-id=0-1&t=y6RD5RE6sgjC7YsD-0
 
 
-# Features documentation
+# Features and where to find them
+
+## Publicly accessible features:
+
+### Navigaation bar
+- Multy-Language.
+
+- Live Multy-Currency exchange values.
+
+### Price (page)
+
+- Show trial lesson option only to new students, no need to log in, the fee for this lesson is paid on [Calendly](https://www.calendly.com). Every other purchase in the website is managed with [Stripe](https://stripe.com) and requires the student to be logged in.
+
+
+- Update the number of available lessons after the student completes a successful purchase.
+
+- The 'Most Popular' button changes style following the presence ( or lack there ) of the trial lesson button.
+
+### Free Courses (page)
+
+-  Display how much progress has the student achieved so far in any course.
+
+-  Display which courses the student has already started.
+
+-  #### Free Courses / course 
+
+    -  Ask the student to log in to start a course.
+
+    -  Display an array of bars, each representing a lesson, and each showing the lesson title when being hovered on, this is to help the students visualise their progress and help them navigate to any specific lesson in the course.
+
+    - 'Lesson Completed' button becomes 'Start a new course' when the course is completed.
+
+
+### Profile (page)
+
+-  A list of all the courses that the student has started, which includes a progress bar to show the percentage of completed lessons.
+
+- 'Remaining lessons', this element shows how many private lessons the student has left.
+
+- 'Buy some lessons', this button appears when remaining lessons are 0.
+
+- 'Book a lesson', this button will open a [Calendly](https://www.calendly.com) iframe and allow the student to book a lesson.
+
+-  When a lesson is booked, the number of 'Remaining lessons' will decrease by one.
+
+- 'Paypent history', This button will appear after a student makes their first purchase ( not including the trial lesson ), and will show a list of all the payments the student has ever made on the website.
+
+### Log In
+
+- Log in with google without password.
+
+- Log in by email, with confirmation link, no password.
+
+- Student's account is created automatically the first time they log in.
+
 
  ## Authentication and Authorization-
 
@@ -17,7 +71,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
     - For gmail, the username is the part in your email addres before the '@' symbol
 
  ## Payments
- ### Simulate webhook in local environment: 
+ ### Simulate stripe webhook in local environment: 
+ -  stripe login
  -  stripe listen --forward-to localhost:3000/api/payment/webhook
 
 

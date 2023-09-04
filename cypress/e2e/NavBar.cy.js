@@ -8,9 +8,10 @@ describe("Navigation", () => {
   });
 
   it("should navigate to all available pages", () => {
-    // cy.findByRole("link", { name: "About Me" }).first().click();
-    // cy.url().should("include", "/aboutme");
-    // cy.get("h1").contains("I'm Natt");
+    // Using get to select only the first element
+    cy.get('a[href*="aboutme"]').first().click();
+    cy.url().should("include", "/aboutme");
+    cy.get("h1").contains("Every Step of The Way!");
     cy.findByRole("link", { name: "Prices" }).click();
     cy.url().should("include", "/price");
     cy.get("h1").contains("Invest in Yourself");
@@ -58,21 +59,46 @@ describe("Currency", () => {
     cy.visit("/");
   });
 
-  it("Should display or hide a list of currencies according to the toggle button", () => {
+  it("Should display or hide a list of currencies according to the toggle button and display the correct value for the selected currency", () => {
+
+    cy.intercept('GET', 'https://api.exchangerate.host/latest?base=USD', {
+      statusCode: 200,
+      body: {
+        rates: {
+          EUR: "0.9201956662563647",
+          GBP: 0.7919550957455295,
+          HKD: "7.8455566666666667",
+          JPY: "146.237",
+          KRW: "1321.2903993117096324",
+          NZD: "1.6815523333333333",
+          THB: "35.0862488866721536",
+          TWD: "31.8690003007284841",
+          USD: 1.0,
+          INR: "82.6519893333333333",
+          RUB: "95.4157823333333333",
+          BRL: "4.8527333315015794",
+          MXN: "16.7952719961277675"
+        },
+      },
+    }).as('exchangeRateRequest');
+
+
     cy.findByRole("button", { name: "Toggle available currencies" }).contains("USD");
 
-    // cy.findByTestId("currency_code").contains("USD");
-    cy.findAllByTestId("currency_rate").should($element => {
-      // Use a custom assertion to retry until the element has the expected value
-      expect($element).to.have.text("5");
+
+    cy.findAllByTestId("currency_rate").each(($element) => {
+      // Retry until each element has the expected value
+      cy.wrap($element).should('have.text', '5');
     });
-    // // cy.findByText('Toggle available currencies').should('not.exist')
-    // cy.get(".Currency_currencyToggle__AZ3vm")
-    //   .contains("USD")
-    //   .should("not.contain", "GBP")
-    //   .click();
-    // cy.findByRole("button", { name: /GBP/i }).click();
-    // cy.findByTestId("currency_code").contains("GBP");
-    // cy.findByTestId("currency_rate").should("have.text", "4.44");
+    cy.findByText('Toggle available currencies').should('not.exist')
+    cy.get(".Currency_currencyToggle__AZ3vm")
+      .contains("USD")
+      .should("not.contain", "GBP")
+      .click();
+    cy.findByRole("button", { name: /GBP/i }).click();
+    cy.findAllByTestId("currency_code").each(($element) => {
+      // Retry until each element has the expected value
+      cy.wrap($element).should('have.text', 'GBP3.96');
+    });
   });
 });
