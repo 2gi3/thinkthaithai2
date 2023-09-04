@@ -12,6 +12,8 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
+import PaymentsHistory from "@/components/PaymentsHistory/PaymentsHistory";
+import { FaTimes } from "react-icons/fa";
 
 //https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}
 
@@ -20,15 +22,13 @@ const Account = (
 ) => {
 
   const dispatch = useDispatch();
-
   const { data: session, status } = useSession({ required: true });
-
-
   const { data, error } = useSWR(
     `/api/students?searchBy=email&value=${session?.user?.email}`,
     fetcherStudent
   );
   const startedCourses = data?.startedCourses
+  const [showHistory, setShowHistory] = useState(false)
 
   useEffect(() => {
     data ? dispatch(updateStudent(data)) : null
@@ -44,7 +44,6 @@ const Account = (
     return <Spinner diameter={88} />
   } else if (status === "authenticated" && session && session.user) {
     const filteredCourses = courses.filter((course) => startedCourses?.hasOwnProperty(course._id));
-    console.log(filteredCourses)
     const courseDetails = filteredCourses.map((course) => {
       const sessionsLength = course.lessons.length;
       return {
@@ -85,7 +84,7 @@ const Account = (
         <div><p>Your flashcards</p></div> */}
           <div>
             {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
-              <Link className="primaryButton" href='/courses'>Start a free course</Link>
+              <Link className={data?.paidLessons && data?.paidLessons > 0 ? "secondaryButton" : "primaryButton"} href='/courses'>Start a free course</Link>
             </div>
               : <p>Your courses:</p>}
             {courseDetails.map((course) => {
@@ -118,10 +117,14 @@ const Account = (
               eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} /></div>
             : <Link className="secondaryButton" href='/price'>Buy some lessons</Link>
           }
+          {data?.paidLessons && <div>
+            <button
+              className="secondaryButton"
+              onClick={() => setShowHistory(!showHistory)}>
+              {showHistory ? <FaTimes /> : 'paypents history'}
+            </button>
+            {showHistory && <PaymentsHistory />}</div>}
 
-          {/* <div>
-          <button className="secondaryButton" onClick={() => handleLogOut()}>Log&nbsp;out</button>
-        </div> */}
 
         </div>
       </>

@@ -168,3 +168,16 @@ export interface CheckoutSession {
   currency: string;
   created: number;
 }
+
+export interface Payment {
+  amountPaid: number;
+  currency: string;
+  dateOfPurchase: string;
+  payeeEmail: string;
+  payeeName: string;
+  paymentId: string;
+  paymentStatus: string;
+  studentEmail: string;
+  studentId: string;
+  _id: string;
+}

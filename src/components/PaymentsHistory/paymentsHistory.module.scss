@@ -1,0 +1,152 @@
+@use "@/styles" as *;
+
+@keyframes expansion {
+    0% {
+        transform: translateY(-60%);
+    }
+
+    100% {
+        transform: translateY(0);
+
+
+    }
+}
+
+@keyframes reverseExpantion {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-60%);
+        display: none;
+    }
+}
+
+.container {
+    width: max-content;
+
+    .paymentContainer {
+        background: white;
+        outline: 1px solid black;
+        border-radius: $baseS;
+        padding: $baseS $base;
+
+
+
+        .payment {
+            position: relative;
+            z-index: 1;
+            margin: $baseS 0;
+            display: grid;
+            grid-template-columns: 0.4fr 1fr 0.2fr;
+            gap: $baseS;
+            align-items: center;
+            width: 200px;
+
+            h3 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .name {
+                display: none;
+            }
+
+            .buttonOpened,
+            .buttonClosed {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: transform 100ms ease-out;
+
+
+
+                svg {
+                    height: $base;
+                    width: $base;
+                }
+            }
+
+            .buttonClosed {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+
+    .detailsClosed {
+        display: none;
+        // display: flex;
+        // flex-direction: column;
+        // gap: $baseS;
+
+        // animation: 150ms ease-out reverseExpantion forwards;
+
+        p {
+            font-size: 14Px;
+        }
+    }
+
+    .detailsOpened {
+        position: relative;
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+        gap: $base;
+        overflow: hidden;
+        margin: 0;
+        margin-bottom: $baseL;
+        // animation: 150ms ease-out expansion forwards;
+
+        p {
+            font-size: 12Px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+
+            span {
+                font-size: 14Px;
+            }
+        }
+
+    }
+
+}
+
+@media (min-width: 499px) {
+    .container {
+        .paymentContainer {
+            .payment {
+                grid-template-columns: 0.5fr 1fr 1fr 0.3fr;
+                width: 380px;
+
+                h3 {
+                    font-size: 18px;
+                }
+
+                p {
+                    font-size: 16px;
+                }
+
+                .name {
+                    display: inline;
+                }
+            }
+
+            .detailsOpened {
+                p {
+                    font-size: 14px;
+
+                    span {
+                        font-size: 16px;
+
+                    }
+                }
+            }
+        }
+    }
+}

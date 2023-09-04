@@ -1,9 +1,12 @@
-import { handleOptions } from "@/functions/back-end";
+import { handleOptions, isAdmin } from "@/functions/back-end";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from 'next-auth/react'
 // @ts-ignore
 import clientPromise from "../../../../mongoDB/clientPromise";
 import Stripe from "stripe";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
+import { ObjectId } from 'mongodb';
+
 
 
 
@@ -22,7 +25,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // const session = await getSession({ req })
+  const session = await getServerSession(req, res, authOptions)
 
   if (req.method === 'OPTIONS') {
     handleOptions(res)
@@ -76,6 +79,63 @@ export default async function handler(
     } catch (e: any) {
       res.status(500).json({ error: e.message })
     }
+  } else if (req.method === "GET") {
+    // Get one payments by email: /api/payment?searchBy=email&value=<EMAIL>
+    // Get one payments by id: /api/payment?searchBy=id&value=<ID>
+    // Get all payments: /api/payment
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Content-Type', 'application/json');
+
+    if (!session) {
+      return res.status(401).json({
+        "error": "Unauthorized",
+        "message": "Access denied. Please provide valid credentials."
+      }
+      );
+    } else {
+      try {
+        const { searchBy, value } = req.query;
+        console.log(searchBy)
+        console.log(value)
+        let payments
+        //@ts-ignore
+        const client = await clientPromise;
+        const db = client.db();
+
+        if (searchBy && value) {
+
+          if (searchBy === 'email') {
+            payments = await db.collection('payments').find({ "studentEmail": value }).toArray();
+          } else if (searchBy === 'id') {
+            const studentIdAsObjectId = new ObjectId(value as string)
+            payments = await db.collection('payments').find({ "studentId": studentIdAsObjectId }).toArray();
+          } else {
+            res.status(401).json({ message: 'Invalid searchBy parameter or authorization' });
+
+          }
+
+        } else if (await isAdmin(req, res)) {
+          payments = await db.collection('payments').find().toArray();
+        } else {
+          payments = null
+        }
+        if (payments) {
+          res.status(200).json({ payments });
+        }
+        else {
+          res.status(401).json({ message: 'Invalid  authorization' });
+
+        }
+
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving paypents' });
+      }
+    }
+
+
   }
 
 
