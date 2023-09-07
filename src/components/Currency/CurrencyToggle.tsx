@@ -1,5 +1,5 @@
-import { toggleCurrencySelector } from "@/redux/slices/currencySlice";
 import { useDispatch } from "react-redux";
+import { toggleCurrencySelector } from "@/redux/slices/currencySlice";
 import styles from "./Currency.module.scss";
 
 const CurrencyToggle = ({ label }: { label: string }) => {

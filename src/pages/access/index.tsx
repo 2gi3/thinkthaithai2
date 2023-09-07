@@ -1,13 +1,12 @@
-import StudentAccess from "@/components/Access/StudentAccess";
-import styles from "./access.module.scss";
-import { useRouter } from "next/router";
+import { useState, FormEvent } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { BsGoogle, BsFacebook } from "react-icons/bs";
-import { FormEvent, useState } from "react";
-import Spinner from "@/components/Spinner";
+import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
+import Spinner from "@/components/Spinner";
+import { BsGoogle, BsFacebook } from "react-icons/bs";
+import styles from "./access.module.scss";
 
 export default function About() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable SSL certificate checks --USE ONLY ON DEVELOPMENT ENVIRONMENT--
@@ -45,25 +44,15 @@ export default function About() {
         <Head>
           <title>ThinkThaiThai</title>
           <meta name="description" content="Log in safely with google or your email" />
-          {/* <meta property="og:image" content="/1.png" /> */}
           <meta property="og:url" content="https://www.thikthaithai.com/access" />
           <meta property="og:type" content="website" />
-
           <meta property="og:title" content="The best value for your money!" />
-
-          <meta
-            property="og:description"
-            content="Guiding you through every step of your learning journey"
-          />
-
-          <meta
-            property="og:image"
-            content={"https://thinkthaithai.com/1.png"}
-          />
-
+          <meta property="og:description" content="Guiding you through every step of your learning journey" />
+          <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
           <link rel="icon" href="/logo.webp" />
         </Head>
-        <div className={styles.access}>
+
+        <main className={styles.access}>
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* <label>Email </label> */}
             <input
@@ -85,7 +74,7 @@ export default function About() {
         </button> */}
 
 
-        </div>
+        </main>
       </>
     );
   }

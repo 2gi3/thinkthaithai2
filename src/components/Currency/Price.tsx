@@ -1,8 +1,8 @@
-import styles from "./Currency.module.scss";
-import { useExchangeRate } from "@/functions/hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import Spinner from "../Spinner";
+import { useExchangeRate } from "@/functions/hooks";
+import styles from "./Currency.module.scss";
 
 const Price = ({ USD }: { USD: number }) => {
   const currency = useSelector((state: RootState) => state.currency.value);

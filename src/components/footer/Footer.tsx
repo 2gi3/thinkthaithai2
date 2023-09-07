@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Contacts from "../Contacts/Contacts";
-import styles from "./Footer.module.scss";
 import { useTranslation } from "next-i18next";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   const { t } = useTranslation("common");

@@ -8,10 +8,7 @@ import { useState } from 'react';
 const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: DatabaseCourse, setStartCourseCompleted: any }) => {
 
     const [showPopup, setShowPopup] = useState(false);
-
-
     const { data, status } = useSession();
-
     const startCourse = async () => {
 
         try {
@@ -28,11 +25,15 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
             }).then(res => res.json()).then(json => console.log(json))
 
         } catch (error) {
+
             console.log(error);
+
         } finally {
+
             const response: databaseStudent = await fetch(`/api/students?searchBy=email&value=${data?.user?.email}`).then((res) => res.json());
             localStorage.setItem('databaseStudent', JSON.stringify(response));
             setStartCourseCompleted(true)
+
         }
     }
     return (<div className={styles.container}>
@@ -64,20 +65,18 @@ const CourseIntroduction = ({ course, setStartCourseCompleted }: { course: Datab
                 </>
                 : <button onClick={() => {
                     if (status === "authenticated" && data && data.user) {
+
                         startCourse()
+
                     } else {
+
                         setShowPopup(true);
+
                     }
                 }}>
                     Start Course
                 </button>
             }
-
-            {/* {showPopup && (
-                <div className={styles.popup}>
-                    <button onClick={() => setShowPopup(false)}>Close</button>
-                </div>
-            )} */}
         </footer>
     </div>
 

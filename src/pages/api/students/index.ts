@@ -1,13 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { authOptions } from '../auth/[...nextauth]';
 import { getServerSession } from "next-auth/next";
+import { authOptions } from '../auth/[...nextauth]';
 import { handleOptions } from '@/functions/back-end';
 import { handleGet, handlePost } from '@/functions/back-end/students';
-// @ts-ignore
 import clientPromise from 'mongoDB/clientPromise';
-
-const jwt = require('jsonwebtoken')
-
 
 
 export default async function handler(
@@ -43,15 +39,9 @@ export default async function handler(
       case 'PATCH':
 
         const { studentEmail, courseId, lessonTitle } = req.body
-        // @ts-ignore
         const client = await clientPromise;
         const db = client.db();
 
-        //     const student = await db.collection("users").findOne({ email: studentEmail });
-        // if (!student) {
-        //   res.status(404).json({ message: "Student not found" });
-        //   break;
-        // }
         if (lessonTitle) {
           await db.collection("users").updateOne(
             { email: studentEmail },
@@ -61,32 +51,14 @@ export default async function handler(
           await db.collection("users").updateOne(
             { email: studentEmail },
             { $set: { [`startedCourses.${courseId}`]: [] } }
-            // { $push: { startedCourses: courseId } }
           );
         }
-
-
-        // await db.collection("users").updateOne(
-        //   { email: studentEmail },
-        //   {
-        //     $set: {
-        //       startedCourses: {
-        //         $cond: {
-        //           if: { $exists: "$startedCourses" },
-        //           then: { $push: "$startedCourses" },
-        //           else: [courseId]
-        //         }
-        //       }
-        //     }
-        //   }
-        // );
 
 
         res.status(200).json({ message: "course added to student" });
         break;
 
       // case 'DELETE':
-      //   // Handle DELETE request
       //   break;
 
       default:

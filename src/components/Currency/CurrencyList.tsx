@@ -1,12 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
 import {
   changeCurrency,
   toggleCurrencySelector,
 } from "@/redux/slices/currencySlice";
 import { RootState } from "@/redux/store";
-import { useDispatch, useSelector } from "react-redux";
 import CurrencyToggle from "./CurrencyToggle";
 import { currencies } from "@/data/currencies";
 import styles from "./Currency.module.scss";
+
 
 export const CurrencyList = () => {
   const dispatch = useDispatch();

@@ -10,10 +10,12 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
   useEffect(() => {
     const paragraphElement = document.getElementById(`feedback-body-${feedback._id}`);
     if (paragraphElement) {
+
       setIsOverflow(paragraphElement.scrollHeight > paragraphElement.clientHeight);
+
     }
+
   }, [feedback._id]);
-  // { console.log(height) }
 
   return (
     <div key={feedback._id} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -24,7 +26,6 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
           </div>
         )}
         <div>
-
           <div className={styles.credientials}>
             <p>
               {feedback.name}, <span>{feedback.job}</span>
@@ -37,13 +38,6 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
           >
             {feedback.body}
           </p>
-          {/* {isOverflow && <button className="secondaryButton" onClick={() => {
-          height === 'max-content' ? setHeight('88px') : setHeight('max-content')
-
-        }}>... more</button>} */}
-
-
-
         </div>
       </div>
       {isOverflow && <button className="secondaryButton" style={{
@@ -54,7 +48,6 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
         border: 'none'
       }} onClick={() => {
         height === 'max-content' ? setHeight('88px') : setHeight('max-content')
-
       }}>{height === 'max-content' ? 'show less' : '...more'} </button>}
     </div>
   );

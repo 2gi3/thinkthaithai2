@@ -1,13 +1,11 @@
-import styles from './teacher.module.scss'
-import { ICourse } from '@/types';
+import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { ICourse } from '@/types';
 import Alert from '../Alert/Alert';
+import styles from './teacher.module.scss';
 
 const CreateCourseForm = () => {
     const router = useRouter()
-    const [expandLesson, setExpandLesson] = useState(false)
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState('');
@@ -54,13 +52,19 @@ const CreateCourseForm = () => {
             });
 
             if (response.ok) {
+
                 console.log('Course created successfully!');
                 setCourseCreated(true)
+
             } else {
+
                 console.error('Error creating course');
+
             }
         } catch (error) {
+
             console.error(error);
+
         }
     };
 

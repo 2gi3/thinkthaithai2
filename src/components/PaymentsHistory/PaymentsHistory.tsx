@@ -1,10 +1,10 @@
-import { Payment } from '@/types'
-import styles from './paymentsHistory.module.scss'
-import { useState, useEffect } from 'react'
-import { FaAngleRight, FaAngleDown } from "react-icons/fa";
-import moment from 'moment';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import moment from 'moment';
+import { FaAngleRight, FaAngleDown } from "react-icons/fa";
+import { Payment } from '@/types';
+import styles from './paymentsHistory.module.scss';
 
 const PaymentsHistory = () => {
     const [history, setHistory] = useState<Payment[]>()
@@ -14,7 +14,9 @@ const PaymentsHistory = () => {
     );
 
     useEffect(() => {
+
         const getHistory = async () => {
+
             try {
                 const res = await fetch(`api/payment?searchBy=id&value=${studentData._id}`).then((res) => res.json());
                 console.log(res.payments);
@@ -24,9 +26,11 @@ const PaymentsHistory = () => {
             } catch (error) {
                 console.error(error);
             }
+
         };
 
         getHistory();
+
     }, [studentData])
 
     const toggleExpanded = (index: number) => {
@@ -36,10 +40,12 @@ const PaymentsHistory = () => {
     }
 
     if (history?.length === 0) {
+
         return (
             <div>
                 <p>It seems like you have never made a purchase, if that is not correct please contact the teacher.</p>
             </div>)
+
     }
 
     return (

@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import styles from './alert.module.scss'
 import { AlertProps } from '@/types';
-
-
+import styles from './alert.module.scss';
 
 const Alert: FC<AlertProps> = ({
     heading,

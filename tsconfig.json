@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     "mongoDB/models/student.ts",
-    "mongoDB/clientPromise.js",
+    "mongoDB/clientPromise.ts",
     "src/pages/api/auth/[...nextauth].js"
   ],
   "exclude": [

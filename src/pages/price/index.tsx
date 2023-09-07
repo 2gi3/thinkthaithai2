@@ -1,25 +1,23 @@
-import styles from "./prices.module.scss";
-import Price from "@/components/Currency/Price";
+import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import Calendar from "@/components/calendar";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-
+import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import { FaTimes } from "react-icons/fa";
-import { useRouter } from "next/router";
+import styles from "./prices.module.scss";
+import Price from "@/components/Currency/Price";
+import Calendar from "@/components/calendar";
 import Alert from "@/components/Alert/Alert";
-import Contacts from "@/components/Contacts/Contacts";
+import { FaTimes } from "react-icons/fa";
 import Head from "next/head";
+
 
 export default function Prices() {
   const { t } = useTranslation("price");
   const router = useRouter();
 
 
-  // const [{ isPending }] = usePayPalScriptReducer();can be used if the script provider wraps the _app
   const { data } = useSession();
   const student = useSelector(
     (state: RootState) => state.student
@@ -28,9 +26,6 @@ export default function Prices() {
 
 
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
-  const [orderId, setOrderId] = useState<string>();
-  const [product, setProduct] = useState<string | null>(null);
-  const [orderCompleted, setOrderCompleted] = useState<boolean>(false)
   const [warningOn, setWarningOn] = useState<boolean>(false)
   const [displaySafetyInfo, setDisplaySafetyInfo] = useState<boolean>(false)
 
@@ -40,10 +35,6 @@ export default function Prices() {
     "20 Lessons": 380,
   };
 
-  const initialOptions = {
-    "client-id": clientId!,
-    currency: "USD",
-  };
 
   const makePayment = async (product: string) => {
     // alert('Card payments are momentarely unavailable, please contact the teacher for more informations and alternative payment methods')
@@ -85,24 +76,14 @@ export default function Prices() {
       <Head>
         <title>ThinkThaiThai</title>
         <meta name="description" content="With free courses and tailored study material, you get so much more than just a simple private lesson" />
-        {/* <meta property="og:image" content="/1.png" /> */}
         <meta property="og:url" content="https://www.thikthaithai.com/price" />
         <meta property="og:type" content="website" />
-
         <meta property="og:title" content="The best value for your money!" />
-
-        <meta
-          property="og:description"
-          content="Guiding you through every step of your learning journey"
-        />
-
-        <meta
-          property="og:image"
-          content={"https://thinkthaithai.com/1.png"}
-        />
-
+        <meta property="og:description" content="Guiding you through every step of your learning journey" />
+        <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
         <link rel="icon" href="/logo.webp" />
       </Head>
+
       <div className={styles.container}>
         <header>
           <h1>{t('Invest in Yourself')}</h1>
@@ -175,6 +156,7 @@ export default function Prices() {
 
           )}
         </main>
+
         <div className={styles.safetyInfo}>
           {!displaySafetyInfo && <button className="secondaryButton"
             onClick={() => setDisplaySafetyInfo(!displaySafetyInfo)}

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { IStudent } from "@/types";
-import ImgDropAndCrop from "../imgDrop&Crop/ImgDropAndCrop";
 import Dropzone from "react-dropzone";
 import ReactCrop from "react-image-crop";
-import "react-image-crop/src/ReactCrop.scss";
 import { Crop, PixelCrop } from "react-image-crop/dist/types";
+import { IStudent } from "@/types";
+import "react-image-crop/src/ReactCrop.scss";
+
 
 // "image/*": [".png", ".gif", ".jpeg", ".jpg"],
 const CreateStudentForm = () => {
@@ -26,7 +26,6 @@ const CreateStudentForm = () => {
     fundedLessons: 0,
     imageFile: preview,
   });
-  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

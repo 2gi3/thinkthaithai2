@@ -1,4 +1,3 @@
-import styles from "./ImgDropAndCrop.module.scss";
 import Dropzone from "react-dropzone";
 
 const ImgDropAndCrop = () => {

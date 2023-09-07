@@ -1,19 +1,20 @@
-import { fetcherStudent } from "@/functions";
-import styles from "./account.module.scss";
+import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
-import useSWR from 'swr';
-import Image from "next/image";
-import Calendar from "@/components/calendar";
-import { useEffect, useState } from "react";
-import { DatabaseCourse, databaseStudent } from "@/types";
 import { useDispatch } from "react-redux";
-import { updateStudent } from "@/redux/slices/studentSlice";
+import useSWR from 'swr';
 import Link from "next/link";
-import Spinner from "@/components/Spinner";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import PaymentsHistory from "@/components/PaymentsHistory/PaymentsHistory";
+import Spinner from "@/components/Spinner";
 import { FaTimes } from "react-icons/fa";
+import { fetcherStudent } from "@/functions";
+import { DatabaseCourse, databaseStudent } from "@/types";
+import { updateStudent } from "@/redux/slices/studentSlice";
+import PaymentsHistory from "@/components/PaymentsHistory/PaymentsHistory";
+import Calendar from "@/components/calendar";
+import styles from "./account.module.scss";
+
+
+
 
 //https://calendly.com/thinkthaithai/50min?hide_event_type_details=1?name=${session.user.name}&email=${session.user.email}
 
@@ -57,31 +58,19 @@ const Account = (
         <Head>
           <title>ThinkThaiThai</title>
           <meta name="description" content="Keep track of your progress, and book a lesson if you need any help!" />
-          {/* <meta property="og:image" content="/1.png" /> */}
           <meta property="og:url" content="https://www.thikthaithai.com/account" />
           <meta property="og:type" content="website" />
-
           <meta property="og:title" content="Reach your goals!" />
-
-          <meta
-            property="og:description"
-            content="Guiding you through every step of your learning journey"
-          />
-
-          <meta
-            property="og:image"
-            content={"https://thinkthaithai.com/1.png"}
-          />
-
+          <meta property="og:description" content="Guiding you through every step of your learning journey" />
+          <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
           <link rel="icon" href="/logo.webp" />
         </Head>
+
         <div className={styles.container}>
           <header>
             <h2>{session.user.name}</h2>
           </header>
 
-          {/* <div><p>Next lesson: 11/12/2023 - 9 am</p></div>
-        <div><p>Your flashcards</p></div> */}
           <div>
             {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
               <Link className={data?.paidLessons && data?.paidLessons > 0 ? "secondaryButton" : "primaryButton"} href='/courses'>Start a free course</Link>

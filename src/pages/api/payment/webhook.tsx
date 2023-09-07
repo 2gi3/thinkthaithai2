@@ -1,21 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import stripe from '../../../utils/stripe';
-import { Readable } from 'stream';
-import { CheckoutSession } from '@/types';
-// @ts-ignore
-import clientPromise from "../../../../mongoDB/clientPromise";
 import { ObjectId } from 'mongodb';
-
-
-
-
-
-
-
-
-
-
-
+import stripe from '../../../utils/stripe';
+import { CheckoutSession } from '@/types';
+import clientPromise from "../../../../mongoDB/clientPromise";
 
 
 
@@ -61,22 +48,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     switch (event.type) {
         case 'checkout.session.async_payment_failed':
             const checkoutSessionAsyncPaymentFailed = event.data.object;
-            // Then define and call a function to handle the event checkout.session.async_payment_failed
             console.log({ checkoutSessionAsyncPaymentFailed: checkoutSessionAsyncPaymentFailed })
-
-
             break;
+
         case 'checkout.session.async_payment_succeeded':
             const checkoutSessionAsyncPaymentSucceeded = event.data.object;
-            // Then define and call a function to handle the event checkout.session.async_payment_succeeded
             console.log({ checkoutSessionAsyncPaymentSucceeded: checkoutSessionAsyncPaymentSucceeded })
-
             break;
+
         case 'checkout.session.completed':
             const checkoutSessionCompleted = event.data.object as CheckoutSession;
             const studentIdAsObjectId = new ObjectId(checkoutSessionCompleted.client_reference_id);
-
-
             const successfulPayment = {
                 paymentId: checkoutSessionCompleted.id,
                 paymentStatus: checkoutSessionCompleted.payment_status,
@@ -84,22 +66,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 payeeEmail: checkoutSessionCompleted.customer_details.email,
                 studentEmail: checkoutSessionCompleted.customer_email,
                 studentId: studentIdAsObjectId,
-                amountPaid: checkoutSessionCompleted.amount_total / 100, // Assuming the amount is in cents
+                amountPaid: checkoutSessionCompleted.amount_total / 100,
                 currency: checkoutSessionCompleted.currency,
-                dateOfPurchase: new Date(checkoutSessionCompleted.created * 1000), // Convert timestamp to date
+                dateOfPurchase: new Date(checkoutSessionCompleted.created * 1000),
             };
 
-            //@ts-ignore
             const client = await clientPromise;
             const db = client.db();
             db.collection('payments').insertOne(successfulPayment);
             const student = await db.collection("users").findOne({ _id: successfulPayment.studentId });
-
             const amountPaid = Number(successfulPayment.amountPaid)
             const addedLessons = amountPaid === 109 ? 5 :
                 amountPaid === 209.00 ? 10 :
                     amountPaid === 380.00 ? 20 : 0;
-            const paidLessons = student.paidLessons || 0;
+            const paidLessons = student?.paidLessons || 0;
             const totalLessons = paidLessons + addedLessons
             await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { paidLessons: totalLessons } });
 
@@ -108,16 +88,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case 'checkout.session.expired':
             const checkoutSessionExpired = event.data.object;
-            // Then define and call a function to handle the event checkout.session.expired
             console.log({ checkoutSessionExpired: checkoutSessionExpired })
 
 
             break;
-        // ... handle other event types
         default:
             console.log(`Unhandled event type ${event.type}`);
     }
 
-    // Return a 200 response to acknowledge receipt of the event
     res.status(200).json({ received: true });
 };

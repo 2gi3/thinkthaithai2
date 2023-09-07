@@ -1,11 +1,10 @@
 import { handleOptions, isAdmin } from "@/functions/back-end";
 import { NextApiRequest, NextApiResponse } from "next";
-// @ts-ignore
-import clientPromise from "../../../../mongoDB/clientPromise";
-import Stripe from "stripe";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import { ObjectId } from 'mongodb';
+import clientPromise from "../../../../mongoDB/clientPromise";
+import Stripe from "stripe";
 
 
 
@@ -30,9 +29,6 @@ export default async function handler(
   if (req.method === 'OPTIONS') {
     handleOptions(res)
   } else if (req.method === "POST") {
-    //This receives the product from the client, uses the product name to create a paypal order with the status of created, 
-    // and sends the order ID to the client for confirmation ( the client will automatically confirm and then do a patch request to this endpoint)
-
 
     const priceInCents = products[req.body.product] * 100;
 
@@ -97,10 +93,7 @@ export default async function handler(
     } else {
       try {
         const { searchBy, value } = req.query;
-        console.log(searchBy)
-        console.log(value)
         let payments
-        //@ts-ignore
         const client = await clientPromise;
         const db = client.db();
 

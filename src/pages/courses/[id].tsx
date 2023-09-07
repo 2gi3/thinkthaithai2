@@ -101,24 +101,14 @@ export default function About(
                 <Head>
                     <title>ThinkThaiThai</title>
                     <meta name="description" content="With free courses and tailored study material, you get so much more than just a simple private lesson" />
-                    {/* <meta property="og:image" content="/1.png" /> */}
                     <meta property="og:url" content="https://www.thikthaithai.com/courses" />
                     <meta property="og:type" content="website" />
-
                     <meta property="og:title" content="The best value for your money!" />
-
-                    <meta
-                        property="og:description"
-                        content="Guiding you through every step of your learning journey"
-                    />
-
-                    <meta
-                        property="og:image"
-                        content={"https://thinkthaithai.com/1.png"}
-                    />
-
+                    <meta property="og:description" content="Guiding you through every step of your learning journey" />
+                    <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
                     <link rel="icon" href="/logo.webp" />
                 </Head>
+
                 <div className={styles.container}>
                     <header>
                         <h1 style={{ width: 'unset' }}>{course.title}</h1>
@@ -135,12 +125,14 @@ export default function About(
 
                         </div>
                     </header>
+
                     <main>
                         {currentLesson >= course.lessons.length ?
                             <h2>Course completed</h2>
                             : <Lesson lesson={lesson} />
                         }
                     </main>
+
                     <footer>
                         <button className={styles.previous}
                             onClick={() => {

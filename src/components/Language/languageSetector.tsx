@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
-import styles from "./Language.module.scss";
 import Image from "next/image";
 import { LocaleToLanguage } from "@/types";
-import { useState } from "react";
+import styles from "./Language.module.scss";
 
 const LanguageSelector = () => {
   const router = useRouter();
@@ -21,12 +21,6 @@ const LanguageSelector = () => {
     push(pathname, undefined, { locale: l });
     setSelectorIsOpen(!selectorIsOpen);
   };
-
-  // const handleClick = (l: string) => {
-  //   const updatedLocale = l === locale ? "" : l; // Set the new locale if it's different, otherwise remove the current locale
-  //   push({ query: { ...query, locale: updatedLocale } }, undefined, { shallow: true });
-  //   setSelectorIsOpen(!selectorIsOpen);
-  // };
 
   return (
     <>

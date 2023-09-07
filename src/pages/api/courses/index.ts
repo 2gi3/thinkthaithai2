@@ -1,25 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-// import { getSession } from 'next-auth/react'
-import { authOptions } from '../auth/[...nextauth]';
-import { getServerSession } from "next-auth/next"
+import { ObjectId } from 'mongodb';
 import { handleOptions, isAdmin } from '@/functions/back-end';
 import { dbConnect } from '../../../../mongoDB';
-import { ObjectId } from 'mongodb';
-
 import CourseModel from 'mongoDB/models/course';
-import { databaseStudent } from '@/types';
-
-const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-
-    const session = await getServerSession(req, res, authOptions)
-
     switch (req.method) {
-
 
         case 'OPTIONS':
             handleOptions(res)
@@ -27,10 +16,10 @@ export default async function handler(
 
         case 'POST':
             const { title, description, status, level, prerequisites, introduction, lessons } = req.body;
-
             if (
                 await isAdmin(req, res)
             ) {
+
                 try {
                     await dbConnect();
                     const newCourse = new CourseModel({ title, description, status, level, prerequisites, introduction, lessons });
@@ -44,12 +33,15 @@ export default async function handler(
                     res.end();
                 }
                 break;
+
             } else {
+
                 res.status(401).json({
                     "error": "Unauthorized",
                     "message": "Access denied. Please provide valid credentials."
                 }
                 );
+
             }
 
         // Get one course by title: /api/courses?searchBy=title&value=<TITLE>
@@ -67,11 +59,9 @@ export default async function handler(
             res.setHeader('Content-Type', 'application/json');
 
             try {
-
                 await dbConnect();
-
-
                 if (searchBy && value) {
+
                     if (searchBy === 'title') {
                         courses = await CourseModel.findOne({ title: searchValue });
                     } else if (searchBy === 'id') {
@@ -80,15 +70,20 @@ export default async function handler(
                     } else {
                         res.status(400).json({ message: 'Invalid searchBy parameter' });
                     }
+
                 } else {
+
                     courses = await CourseModel.find({})
-                    // .toArray();
+
                 }
+
                 res.status(200).json(courses);
 
             } catch (error) {
+
                 console.error(error);
                 res.status(500).json({ message: 'Error retrieving courses' });
+
             }
             break;
     }

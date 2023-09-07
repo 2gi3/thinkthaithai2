@@ -2,9 +2,7 @@
 //  https://help.calendly.com/hc/en-us/articles/226766767-Pre-populate-invitee-information-on-the-scheduling-page
 
 import { useEffect } from "react";
-import Price from "../Currency/Price";
 import { CalendarProps } from "@/types";
-
 
 declare global {
   interface Window {
@@ -14,22 +12,21 @@ declare global {
 
 function Calendar({ label, eventURL, email, name, className, studentId }: CalendarProps) {
 
-
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
 
-
     return () => {
       document.body.removeChild(script);
     };
+
   }, []);
 
 
   const handleScheduleClick = () => {
+
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
         url: eventURL,

@@ -5,14 +5,10 @@ import FeedbackModel from 'mongoDB/models/feedback';
 
 const cloudinary = require('cloudinary').v2;
 
-
-
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-
   switch (req.method) {
 
     case 'OPTIONS':
@@ -36,7 +32,6 @@ export default async function handler(
             transformation: [{ width: "150", crop: "scale" }, { fetch_format: "webp" }, { quality: "auto" }]
           }
         ).then((data: any) => {
-          // console.log(data);
           imageURL = data.secure_url;
         }).catch((err: any) => {
           console.log(err);
@@ -81,6 +76,7 @@ export default async function handler(
 
     case 'DELETE':
       if (await isAdmin(req, res)) {
+
         try {
           await dbConnect();
           const { _id } = req.body;
@@ -90,12 +86,15 @@ export default async function handler(
           console.error(error);
           res.status(500).json({ message: 'Error deleting feedback' });
         }
+
       } else {
+
         res.status(401).json({
           "error": "Unauthorized",
           "message": "Access denied. Please provide valid credentials."
         }
         );
+
       }
 
       break;

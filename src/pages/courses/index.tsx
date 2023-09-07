@@ -1,18 +1,18 @@
-import { DatabaseCourse } from '@/types';
-import styles from './courses.module.scss'
-import Link from "next/link";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from "next-i18next";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/redux/store';
+import Link from "next/link";
 import Head from 'next/head';
+import { DatabaseCourse } from '@/types';
+import styles from './courses.module.scss';
+
 
 
 export default function About(
     { courses }: { courses: DatabaseCourse[] }
 ) {
     const { t } = useTranslation("courses");
-    const dispatch = useDispatch();
     const studentData = useSelector(
         (state: RootState) => state.student
     );
@@ -53,24 +53,14 @@ export default function About(
             <Head>
                 <title>ThinkThaiThai</title>
                 <meta name="description" content="Before spanding any money start getting familiar with thai language through these free courses, and contact the teacher if you have any question" />
-                {/* <meta property="og:image" content="/1.png" /> */}
                 <meta property="og:url" content="https://www.thikthaithai.com/courses" />
                 <meta property="og:type" content="website" />
-
                 <meta property="og:title" content="The best time to start learning is now!" />
-
-                <meta
-                    property="og:description"
-                    content="Start learning Thai by following these free courses, and contact the teacher if you have any questions"
-                />
-
-                <meta
-                    property="og:image"
-                    content={"https://thinkthaithai.com/1.png"}
-                />
-
+                <meta property="og:description" content="Start learning Thai by following these free courses, and contact the teacher if you have any questions" />
+                <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
                 <link rel="icon" href="/logo.webp" />
             </Head>
+
             <div className={styles.container}>
                 <header>
                     <h1>
@@ -78,6 +68,7 @@ export default function About(
                         {t('The Best Time to Start Learning is Now!')}
                     </h1>
                 </header>
+
                 <main>
                     {courses.map((course: DatabaseCourse) => (
                         <Link href={`${process.env.NEXT_PUBLIC_BASIC_URL}/courses/${course._id}`} key={course._id}>
@@ -94,6 +85,7 @@ export default function About(
                         </Link>
                     ))}
                 </main>
+
             </div>
         </>
     );

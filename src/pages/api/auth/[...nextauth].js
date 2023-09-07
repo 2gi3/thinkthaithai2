@@ -1,12 +1,9 @@
 import NextAuth from "next-auth/next";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../../mongoDB/clientPromise";
-
-
 import GoogleProvider from "next-auth/providers/google";
-// import FacebookProvider from "next-auth/providers/facebook";
 import EmailProvider from "next-auth/providers/email";
-// import { dbConnect } from "../../../../mongoDB";
+// import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
   providers: [

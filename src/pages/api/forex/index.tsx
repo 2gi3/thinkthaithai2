@@ -5,7 +5,6 @@ import { authOptions } from '../auth/[...nextauth]';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const session = await getServerSession(req, res, authOptions)
-
         const isUserAuthorized = session?.user
 
         if (isUserAuthorized) {

@@ -1,18 +1,16 @@
-import styles from "./NavBar.module.scss";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { FaBars, FaTimes } from "react-icons/fa";
+import styles from "./NavBar.module.scss";
 import CurrencyToggle from "../Currency/CurrencyToggle";
 import LanguageSelector from "../Language/languageSetector";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { useEffect, useState } from "react";
-
-import { useTranslation } from "next-i18next";
 import { CurrencyList } from "../Currency/CurrencyList";
-import Image from "next/image";
+import { RootState } from "@/redux/store";
 
 const NavBar = () => {
   const { t } = useTranslation("common");
@@ -23,8 +21,9 @@ const NavBar = () => {
   const { pathname } = router;
 
   useEffect(() => {
+
     setToggleIsOpen(false);
-    // console.log(pathname)
+
   }, [pathname, currency]);
 
   const handleLogOut = async () => {

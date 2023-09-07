@@ -1,14 +1,18 @@
-import Head from "next/head";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import Price from "@/components/Currency/Price";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from 'next/image';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import Image from 'next/image'
+import { FaArrowRight } from "react-icons/fa";
+import Head from "next/head";
+import styles from "@/styles/Home.module.scss";
+import Price from "@/components/Currency/Price";
+import Contacts from "@/components/Contacts/Contacts";
+import Feedback from "@/components/feedback";
+import { DatabaseFeedback } from "@/types";
 
-// const inter = Inter({ subsets: ["latin"] });
+
+
 
 
 export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
@@ -21,24 +25,14 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
       <Head>
         <title>ThinkThaiThai</title>
         <meta name="description" content="Learn Thai language with free courses and one-on-one lessons" />
-        {/* <meta property="og:image" content="/1.png" /> */}
         <meta property="og:url" content="https://www.thikthaithai.com/" />
         <meta property="og:type" content="website" />
-
         <meta property="og:title" content="Achieve Your Thai Language Goals!" />
-
-        <meta
-          property="og:description"
-          content="Guiding you through every step of your learning journey"
-        />
-
-        <meta
-          property="og:image"
-          content={"https://thinkthaithai.com/1.png"}
-        />
-
+        <meta property="og:description" content="Guiding you through every step of your learning journey" />
+        <meta property="og:image" content={"https://thinkthaithai.com/1.png"} />
         <link rel="icon" href="/logo.webp" />
       </Head>
+
       <header className={styles.header}>
         <div className={styles.title}>
           <h1>{t("Reach Your Goals!")}</h1>
@@ -64,8 +58,9 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
           <img loading="eager" src="/heroNoBG.webp" alt="Teacher" />
         </picture>
       </header>
+
       <main className={styles.main}>
-        <div className={styles.courses}>
+        <section className={styles.courses}>
 
           <div>
             <h2>{t("Speaking & Listening")}</h2>
@@ -112,10 +107,10 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
             alt="A tourist asking for directions"
           />
 
-        </div>
+        </section>
         <h2 className={styles.teacherHeader}>{t("My name is Natt")}</h2>
 
-        <div className={styles.teacher}>
+        <section className={styles.teacher}>
           <div className={styles.video}>
             <iframe
               src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
@@ -158,16 +153,16 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
               <></>
             )}
           </div>
-        </div>
-        <div className={styles.feedbacks}>
+        </section>
+        <section className={styles.feedbacks}>
           {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
             return (
               index < 3 && <Feedback feedback={feedback} key={`${index}`} />
             )
           })}
           <Link href='/feedbacks'> <p>See what my students say about me <FaArrowRight /></p></Link>
-        </div>
-        <div className={styles.price}>
+        </section>
+        <section className={styles.price}>
           <h2>{t("Start Learning Now!")}</h2>
           <div>
             <p>
@@ -182,19 +177,13 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
               {t("Learning materials, homeworks and exercices always included")}
             </p>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );
 }
 
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Link from "next/link";
-import Contacts from "@/components/Contacts/Contacts";
-import { useState } from "react";
-import { DatabaseFeedback } from "@/types";
-import Feedback from "@/components/feedback";
-import { FaArrowRight } from "react-icons/fa";
+
 
 export const getStaticProps = async ({ locale }: any) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {
