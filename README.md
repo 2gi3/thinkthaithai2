@@ -144,47 +144,23 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Environment
-All .env files are ignored by Git.
+- .env.local = .env.example
+
+- .cypress.env.json = {
+   "GOOGLE_USER": ,
+    "GOOGLE_PW": ",
+    "COOKIE_NAME": "next-auth.session-token",
+    "SITE_NAME": "http://localhost:3000"
+}
 
 On 'npm run dev', the environment variables will reference the .env.local file.
 
 On 'npm start', the environment variables will reference the .env.production file.
 
-What follows is a list of all the necessary environment variables:
-
-   - ADMIN_EMAILS=example@hotmail.com,example@gmail.com
-
-   - NEXT_PUBLIC_CURRENCY_EXCHANGE_URL=
-
-   - OAUTH_REFRESH_TOKEN=
-
-   - MONGODB_URI=
-
-   - CLOUDINARY_URL=
-
-   - GOOGLE_CLIENT_ID=
-
-   - GOOGLE_CLIENT_SECRET=
-
-   - NEXTAUTH_URL=http:
-
-   - FACEBOOK_CLIENT_ID=
-
-   - FACEBOOK_CLIENT_SECRET=
-
-   - JWT_secret=
-
-   - NEXT_PUBLIC_PAYPAL_CLIENT_ID=
-
-   - NEXT_PUBLIC_CLIENT_SECRET=
-
-   - PAYPAL_CLIENT_ID=
-
-   - PAYPAL_CLIENT_SECRET=
-    
-   - EMAIL_SERVER=smtp://USERNAME:PASSWORD@smtp.gmail.com:587
-   - EMAIL_FROM=EXAMPLE@gmail.com
-
+# Testing
+### Log in with Cypress
+- [next-auth documentation](https://next-auth.js.org/tutorials/testing-with-cypress).
+- [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication)
 
 # Feedbacks
 

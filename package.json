@@ -49,6 +49,7 @@
     "@types/paypal-rest-sdk": "^1.7.6",
     "@types/testing-library__cypress": "^5.0.9",
     "cypress": "^12.10.0",
+    "cypress-social-logins": "^1.14.1",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-cypress": "^2.13.2",
