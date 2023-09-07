@@ -8,14 +8,12 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Image from 'next/image'
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 
 export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
   const { t } = useTranslation("homepage");
   const [showContacts, setShowContacts] = useState(false);
-  const { locale } = useRouter();
-  const currency = useSelector((state: RootState) => state.currency.value);
 
 
   return (
@@ -42,15 +40,8 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
         <link rel="icon" href="/logo.webp" />
       </Head>
       <header className={styles.header}>
-        {/* <h1>{t("title")}</h1> */}
         <div className={styles.title}>
           <h1>{t("Reach Your Goals!")}</h1>
-          {/* <ul>
-            {t("Learn Thai Language With")}
-            <li>{t("Customised Lessons")}</li>
-            <li>{t("Study material")}</li>
-            <li>{t("& Homeworks")}</li>
-          </ul> */}
           <p>{t("Learn Thai Language With")} {t("Customised Lessons")}, {t("Study material")} {t("& Homeworks")}</p>
           <div className={styles.CTA}>
             <Link href="/price">{t("Start Now")}</Link>
@@ -126,7 +117,6 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
 
         <div className={styles.teacher}>
           <div className={styles.video}>
-            {/* <h2>{t("My name is Natt")}</h2> */}
             <iframe
               src="https://drive.google.com/file/d/18T5UaTOLQulNkiT2GNw-hCTa8HxAeise/preview"
               width="274"
@@ -205,14 +195,6 @@ import { useState } from "react";
 import { DatabaseFeedback } from "@/types";
 import Feedback from "@/components/feedback";
 import { FaArrowRight } from "react-icons/fa";
-
-// export async function getStaticProps({ locale }: any) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["common", "homepage"])),
-//     },
-//   };
-// }
 
 export const getStaticProps = async ({ locale }: any) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/feedbacks`, {

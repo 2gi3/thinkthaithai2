@@ -10,6 +10,11 @@
 
 .currencyToggle {
   @include secondary-font;
+  transition: transform 250ms;
+
+  &:hover {
+    transform: translate(1px, -1px);
+  }
 }
 
 .currencyList {
@@ -22,16 +27,19 @@
   width: 280px;
   padding-bottom: 10px;
   border-radius: 15px;
+
   .title {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 10px 0;
+
     button {
       @include secondary-button;
     }
   }
+
   ul {
     list-style-type: none;
     display: flex;
@@ -40,15 +48,23 @@
     column-gap: 10px;
     width: 100%;
     padding: 10px;
+
     li {
       font-size: 12px;
       width: 120px;
+
       button {
         width: -webkit-fill-available;
         padding: 14px 0;
         border-bottom: 1px solid #dddddd;
         display: flex;
         justify-content: left;
+        transition: transform 250ms;
+
+        &:hover {
+          transform: translate(1px, -1px);
+        }
+
         span {
           width: 36px;
           @include tertiary-font;
@@ -59,14 +75,17 @@
 }
 
 @media (min-width: 500px) {
+
   // .container {
   .currencyList {
     width: 420px;
     top: 60px;
     border-radius: 20px;
+
     .title {
       padding: 20px 20px 0;
     }
+
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -74,18 +93,22 @@
       column-gap: 40px;
       width: 100%;
       padding: 20px;
+
       li {
         @include secondary-font;
         width: 150px;
+
         button {
           span {
             @include secondary-font;
             width: 42px;
           }
+
           padding: 20px 0;
         }
       }
     }
   }
 }
+
 // }

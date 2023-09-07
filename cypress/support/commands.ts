@@ -25,8 +25,6 @@ Cypress.Commands.add('loginByGoogleApi', () => {
                     googleId: body.sub,
                     email: body.email,
                     name: `${body.given_name} ${body.family_name}`,
-                    // givenName: body.given_name,
-                    // familyName: body.family_name,
                     image: body.picture,
                 },
             }

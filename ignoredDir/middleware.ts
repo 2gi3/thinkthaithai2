@@ -1,8 +1,9 @@
+// this .ts file shoud be at the root of the project
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // This function can be marked `async` if using `await` inside
-export function middleware(req: NextRequest, res :NextResponse) {
+export function middleware(req: NextRequest, res: NextResponse) {
     const response = NextResponse.next(
         {
             request: {
@@ -16,14 +17,14 @@ export function middleware(req: NextRequest, res :NextResponse) {
     response.cookies.set('is auth', 'true', {
         httpOnly: true
     })
-      const cookie = req.cookies.get('auth')?.valueOf()
-      const allCookies = req.cookies
+    const cookie = req.cookies.get('auth')?.valueOf()
+    const allCookies = req.cookies
 
     // console.log(allCookies)
-//   return NextResponse.redirect(new URL('/about-2', request.url))
-return response
+    //   return NextResponse.redirect(new URL('/about-2', request.url))
+    return response
 }
 
 export const config = {
     matcher: '/'
-  }
+}

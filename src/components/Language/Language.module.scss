@@ -2,24 +2,38 @@
 
 .LanguageButton {
   position: relative;
+  transition: transform 250ms;
+
+  &:hover {
+    transform: translate(1px, -1px);
+  }
+
   img {
     border-radius: 20px;
     margin-bottom: -4px;
     box-shadow: $shadow;
   }
 }
+
 .languageList {
   position: absolute;
   z-index: 2;
   top: 60px;
   background-color: white;
+
   ul {
     display: flex;
     flex-direction: column;
     list-style-type: none;
+
     li {
       border-bottom: 1px solid #dddddd;
       padding: 10px;
+      transition: transform 250ms;
+
+      &:hover {
+        transform: translate(1px, -1px);
+      }
     }
   }
 }
