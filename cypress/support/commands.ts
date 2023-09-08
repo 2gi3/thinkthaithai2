@@ -12,7 +12,6 @@ Cypress.Commands.add('loginByGoogleApi', () => {
         },
     }).then(({ body }) => {
         const { access_token, id_token } = body
-
         cy.request({
             method: 'GET',
             url: 'https://www.googleapis.com/oauth2/v3/userinfo',
@@ -29,7 +28,7 @@ Cypress.Commands.add('loginByGoogleApi', () => {
                 },
             }
 
-            window.localStorage.setItem('databaseStudent', JSON.stringify(userItem))
+            // window.localStorage.setItem('databaseStudent', JSON.stringify(userItem))
             cy.visit('/')
         })
     })
