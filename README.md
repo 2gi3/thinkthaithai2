@@ -158,9 +158,11 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 # Testing
-### Log in with Cypress
-- [next-auth documentation](https://next-auth.js.org/tutorials/testing-with-cypress).
-- [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication)
+### Custom commands
+ -  ```cy.loginByGoogleApi()```
+ This command is based on the [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication), it will log in and redirect the user to '/account'.
+
+ -  ```cy.logOut``` This command will log you out and redirect you to the homepage.
 
 # Feedbacks
 

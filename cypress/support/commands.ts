@@ -1,5 +1,16 @@
+import '@testing-library/cypress/add-commands'
+import { mockDatabaseStudent } from 'cypress/mock_data/mockDatabaseStudent';
+import { mockSession } from 'cypress/mock_data/mockSession';
+
 // @ts-ignore
 Cypress.Commands.add('loginByGoogleApi', () => {
+
+
+
+    cy.intercept('GET', '/api/auth/session', mockSession).as('getSessionRequest');
+
+    cy.intercept('GET', 'http://localhost:3000/api/students?searchBy=email&value=gippolito@hotmail.co.uk', mockDatabaseStudent).as('getSessionRequest');
+
     cy.log('Logging in to Google')
     cy.request({
         method: 'POST',
@@ -29,9 +40,26 @@ Cypress.Commands.add('loginByGoogleApi', () => {
             }
 
             // window.localStorage.setItem('databaseStudent', JSON.stringify(userItem))
-            cy.visit('/')
+            cy.visit('/account')
+            cy.wait(3000)
+            cy.log('Logged in')
+
         })
     })
+})
+
+// @ts-ignore
+Cypress.Commands.add('logOut', () => {
+    cy.get('.NavBar_logOutButton__XSmpu').click({ force: true })
+
+    cy.intercept('GET', '/api/auth/session', {
+
+    }).as('getSessionRequest');
+    cy.window().then((win) => {
+        win.localStorage.clear();
+    });
+    cy.log('Logged out')
+
 })
 
 /// <reference types="cypress" />
@@ -72,4 +100,3 @@ Cypress.Commands.add('loginByGoogleApi', () => {
 //   }
 // }
 
-import '@testing-library/cypress/add-commands'

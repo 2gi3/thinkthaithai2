@@ -11,9 +11,9 @@ export default defineConfig({
     video: false,
     chromeWebSecurity: false,
     setupNodeEvents(on, config) {
-      on("task", {
-        GoogleSocialLogin: GoogleSocialLogin,
-      })
+      // on("task", {
+      //   GoogleSocialLogin: GoogleSocialLogin,
+      // })
     },
   },
   component: {
