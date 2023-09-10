@@ -37,11 +37,6 @@ describe('Private lessons packages', () => {
 
 
   it('displays all packages with buttons and with the right prices', () => {
-    // cy.intercept('POST', '/api/payment', {
-    //   url: 'https://checkout.stripe.com/c/pay/cs_test_a1rZOS8f6zDHVq4LXaFKTnIAASpTPVULxZuyp9t6cDYCE0B5hVlYmQGlRT#fidkdWxOYHwnPyd1blpxYHZxWjA0S2BMX0xAfUZcMWMyaUdxdXw0fzFybXU0bmpfMWxJQURqMkxESm9JbmZfPDR8S19wMUw8amFCd11HUFVycG01R3Zjb1VNd2d2TnxSYHduQUJqQXdXfGZoNTU0S2NsPUR3QycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'
-    // }).as('createCheckout');
-
-
 
     cy.get('@10Lessons').contains(/10 lessons/i);
     cy.get('@10Lessons').contains(/USD209/i);
@@ -66,20 +61,55 @@ describe('Private lessons packages', () => {
 
   })
 
-  it.only('Payments are completed successfully', () => {
-    cy.loginByGoogleApi().then(() => {
+})
 
+describe('Payments', () => {
+  beforeEach(() => {
+    cy.visit("/price")
+  })
+
+  it('Redirects students to their account after a successful payment', () => {
+    cy.loginByGoogleApi().then(() => {
       cy.visit('/price')
       cy.wait(2000)
       cy.get('.primaryButton').click()
+    })
+    cy.on('uncaught:exception', (e) => {
+      return false
+    })
+    cy.origin('https://checkout.stripe.com', () => {
+
+      cy.get('#cardNumber').type('4242424242424242')
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
+      cy.get('#cardExpiry').type('1028')
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
+      cy.get('#cardCvc').type('123')
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
+      cy.get('#billingName').type('John Doe')
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
+      cy.get('#billingPostalCode').type('NW2 4TX')
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
+      cy.get('.SubmitButton-IconContainer').click()
+      cy.on('uncaught:exception', (e) => {
+        return false
+      })
 
     })
+    // cy.get('h2', { timeout: 30000 }).should("have.value", /giuseppe I/i)
+    cy.url({ timeout: 30000 }).should("include", "/account")
+
 
 
   })
 
-
-
-
 })
-

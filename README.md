@@ -176,7 +176,11 @@ On 'npm start', the environment variables will reference the .env.production fil
 
  ### prices.cy.js
 
- - The trial lesson is not rendered after a student buys the first lesson.
+ - Payments
+
+ - The trial lesson 
+
+ -  Private lessons packages
  
 
 

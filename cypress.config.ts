@@ -22,4 +22,5 @@ export default defineConfig({
       bundler: 'webpack',
     },
   },
+  experimentalModifyObstructiveThirdPartyCode: true
 })
