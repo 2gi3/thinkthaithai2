@@ -158,11 +158,27 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 # Testing
-### Custom commands
+
+## Custom commands
+
  -  ```cy.loginByGoogleApi()```
  This command is based on the [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication), it will log in and redirect the user to '/account'.
 
  -  ```cy.logOut``` This command will log you out and redirect you to the homepage.
+
+ ## Tested features by file
+
+ ### navBar.cy.js
+
+ -  Navigation links.
+ -  Multi language button and page translation.
+ -  Currency exchange button and conversion rates.
+
+ ### prices.cy.js
+
+ - The trial lesson is not rendered after a student buys the first lesson.
+ 
+
 
 # Feedbacks
 

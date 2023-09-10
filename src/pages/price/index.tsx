@@ -35,10 +35,9 @@ export default function Prices() {
     "20 Lessons": 380,
   };
 
-
   const makePayment = async (product: string) => {
     // alert('Card payments are momentarely unavailable, please contact the teacher for more informations and alternative payment methods')
-    if (!student) {
+    if (!data) {
       setWarningOn(true)
 
     } else {
@@ -110,7 +109,7 @@ export default function Prices() {
           )}
 
           <div className={styles.mostPopular}>
-            <h3> Try</h3>
+            <h3>Try</h3>
 
             <button
               style={{ border: 'none' }}
@@ -132,7 +131,7 @@ export default function Prices() {
             <Price USD={products["10 lessons"]} />
           </div>
           <div className={styles.mostPopular}>
-            <h3> Commit </h3>
+            <h3>Commit</h3>
 
             <button
               style={{ border: 'none' }}

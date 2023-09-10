@@ -35,7 +35,9 @@
     "**/*.tsx",
     "mongoDB/models/student.ts",
     "mongoDB/clientPromise.ts",
-    "src/pages/api/auth/[...nextauth].js"
+    "src/pages/api/auth/[...nextauth].js",
+    "cypress/e2e/navBar.cy.js",
+    "cypress/e2e/prices.cy.js"
   ],
   "exclude": [
     "node_modules"

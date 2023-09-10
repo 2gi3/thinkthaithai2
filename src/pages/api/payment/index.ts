@@ -43,7 +43,7 @@ export default async function handler(
         apiVersion: "2023-08-16",
         // appInfo: { // For sample support and debugging, not required for production:
         //   name: "stripe-samples/accept-a-payment",
-        //   url: `${process.env.NEXT_PUBLIC_BASIC_URL}/payment`,
+        //   url: `${process.env.NEXT_PUBLIC_BASIC_URL}/api/payment`,
         //   version: "0.0.2",
         // },
         typescript: true,
