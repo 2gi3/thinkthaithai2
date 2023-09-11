@@ -8,7 +8,7 @@ describe("Navigation", () => {
   });
 
   it("should navigate to all available pages", () => {
-    // Using get to select only the first element
+
     cy.get('a[href*="aboutme"]').first().click();
     cy.url().should("include", "/aboutme");
     cy.get("h1").contains("Every Step of The Way!");
@@ -24,6 +24,7 @@ describe("Navigation", () => {
     cy.findByRole("link", { name: "Log In" }).click();
     cy.url().should("include", "/access");
     cy.get("input[type='email']").should('be.visible').should('have.attr', 'placeholder', 'Email');
+
   });
 });
 
@@ -87,7 +88,6 @@ describe("Currency", () => {
 
 
     cy.findAllByTestId("currency_rate").each(($element) => {
-      // Retry until each element has the expected value
       cy.wrap($element).should('have.text', '5');
     });
     cy.findByText('Toggle available currencies').should('not.exist')
@@ -97,7 +97,6 @@ describe("Currency", () => {
       .click();
     cy.findByRole("button", { name: /GBP/i }).click();
     cy.findAllByTestId("currency_code").each(($element) => {
-      // Retry until each element has the expected value
       cy.wrap($element).should('have.text', 'GBP3.96');
     });
   });
