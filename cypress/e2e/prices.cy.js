@@ -93,6 +93,7 @@ describe("Trial lesson", () => {
 describe('Private lessons packages', () => {
   beforeEach(() => {
     cy.visit("/price");
+    cy.wait(2000)
     cy.get('main > :nth-child(2)').as('fiveLessonsPackage');
     cy.get('main > :nth-child(3)').as('tenLessonsPackage');
     cy.get('main > :nth-child(4)').as('twentyLessonsPackage');
