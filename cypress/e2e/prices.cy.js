@@ -112,6 +112,7 @@ describe('Private lessons packages', () => {
       cy.get('@tenLessonsPackage').contains('10 lessons').click();
       cy.get("h2").contains("Please Log In first");
       cy.get('.alert_alertButton__mHffR').click();
+      cy.wait(2000)
       cy.url().should("include", "/access");
     });
   });
