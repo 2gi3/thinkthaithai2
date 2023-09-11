@@ -22,7 +22,7 @@ jobs:
         run: npm run build # Add this step to build the Next.js app
 
       - name: Start server
-        run: npm start
+        run: npm run dev
 
       - name: Wait for server to be ready
         run: |

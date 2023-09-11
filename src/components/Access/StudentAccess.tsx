@@ -189,6 +189,7 @@ const CreateStudentForm = () => {
                 onDragEnd={(e: any) => handleDragEnd(e)}
               >
                 <img
+                  alt='image before cropping'
                   src={preCropImg}
                   draggable={false}
                   onDragStart={(e) => e.preventDefault()}
