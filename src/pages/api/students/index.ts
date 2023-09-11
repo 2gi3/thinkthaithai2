@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from '../auth/[...nextauth]';
-import { handleOptions } from '@/functions/back-end';
+import { handleOptions, isAdmin } from '@/functions/back-end';
 import { handleGet, handlePost } from '@/functions/back-end/students';
 import clientPromise from 'mongoDB/clientPromise';
 
@@ -11,13 +11,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions)
+  console.log(process.env.NODE_ENV)
 
-  if (!session) {
+  // Authorization in development mode is used to test the Stripe webhook
+  if (process.env.NODE_ENV !== 'development' && !session) {
+
     return res.status(401).json({
       "error": "Unauthorized",
-      "message": "Access denied. Please provide valid credentials."
-    }
-    );
+      "message": "Access denied. Please provide valid credentials. abc"
+    });
+
   } else {
 
     switch (req.method) {

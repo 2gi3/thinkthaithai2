@@ -63,17 +63,43 @@ describe('Private lessons packages', () => {
 
 })
 
-describe('Payments', () => {
+describe('Successful payment', () => {
+  let paidLessonsBefore
+  let paidLessonsAfter
+
+
+  before(() => {
+    paidLessonsBefore = cy.request({
+      method: 'GET',
+      url: '/api/students?searchBy=email&value=gippolito@hotmail.co.uk',
+    }).then((res) => {
+      paidLessonsBefore = res.body.paidLessons
+    })
+  })
+  after(() => {
+    paidLessonsAfter = cy.request({
+      method: 'GET',
+      url: '/api/students?searchBy=email&value=gippolito@hotmail.co.uk',
+    }).then((res) => {
+      paidLessonsAfter = res.body.paidLessons;
+      expect(paidLessonsBefore).to.eq(paidLessonsAfter - 10);
+      console.log({ 'paidLessonsAfter': paidLessonsAfter })
+    })
+
+  })
   beforeEach(() => {
     cy.visit("/price")
   })
 
-  it('Redirects students to their account after a successful payment', () => {
-    cy.loginByGoogleApi().then(() => {
+  it('Updates "paidLessons" in the database and redirects the student to /account', () => {
+
+    cy.loginByGoogleApi().then(async () => {
       cy.visit('/price')
       cy.wait(2000)
       cy.get('.primaryButton').click()
     })
+    console.log({ 'paidLessonsBefore': paidLessonsBefore })
+
     cy.on('uncaught:exception', (e) => {
       return false
     })
@@ -105,10 +131,8 @@ describe('Payments', () => {
       })
 
     })
-    // cy.get('h2', { timeout: 30000 }).should("have.value", /giuseppe I/i)
+
     cy.url({ timeout: 30000 }).should("include", "/account")
-
-
 
   })
 

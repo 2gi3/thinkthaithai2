@@ -72,6 +72,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
  ## Payments
  ### Simulate stripe webhook in local environment: 
+#### CLI commsnds
+ -  CD C:\Users\gippo\Downloads\stripe_1.17.2_windows_x86_64
  -  stripe login
  -  stripe listen --forward-to localhost:3000/api/payment/webhook
 
@@ -158,6 +160,12 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 # Testing
+-  The project must be running on localhost:3000
+-  The following commands must run in the Stripe CLI
+    
+   - ( on my computer)  C:\Users\gippo\Downloads\stripe_1.17.2_windows_x86_64 
+   -  stripe login
+   -  stripe listen --forward-to localhost:3000/api/payment/webhook
 
 ## Custom commands
 
@@ -171,12 +179,14 @@ On 'npm start', the environment variables will reference the .env.production fil
  ### navBar.cy.js
 
  -  Navigation links.
+
  -  Multi language button and page translation.
+
  -  Currency exchange button and conversion rates.
 
  ### prices.cy.js
 
- - Payments
+ - Payments ( includes stripe iframe and webhook)
 
  - The trial lesson 
 

@@ -5,8 +5,6 @@ import { mockSession } from 'cypress/mock_data/mockSession';
 // @ts-ignore
 Cypress.Commands.add('loginByGoogleApi', () => {
 
-
-
     cy.intercept('GET', '/api/auth/session', mockSession).as('getSessionRequest');
 
     cy.intercept('GET', 'http://localhost:3000/api/students?searchBy=email&value=gippolito@hotmail.co.uk', mockDatabaseStudent).as('getSessionRequest');
@@ -28,7 +26,6 @@ Cypress.Commands.add('loginByGoogleApi', () => {
             url: 'https://www.googleapis.com/oauth2/v3/userinfo',
             headers: { Authorization: `Bearer ${access_token}` },
         }).then(({ body }) => {
-            cy.log(body)
             const userItem = {
                 token: id_token,
                 user: {
