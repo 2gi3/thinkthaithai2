@@ -3,7 +3,7 @@ const { GoogleSocialLogin } = require("cypress-social-logins").plugins
 
 
 export default defineConfig({
-  projectId: '5Zb8Kp2sRqF3Y',
+  projectId: 'gsku38',
   e2e: {
     // defaultCommandTimeout: 4000,
     // baseUrl: process.env.NEXT_PUBLIC_BASIC_URL,
