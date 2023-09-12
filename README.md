@@ -1,8 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-### CI/CD deploy: https://thinkthaithai-draft.netlify.app
+### CI/CD 
+deploys: 
 
-### FIGMA: https://www.figma.com/file/84tR9gfjrZJOAo8QUK1bQ8/ThinkThaiThai2.0?node-id=0-1&t=y6RD5RE6sgjC7YsD-0
+- ####  [Production](https://thinkthaithai.com)
+
+-  [Cypress E2E tests report](https://2gi3.github.io/thinkthaithai2/cypress/reports/html)
+
+-  FIGMA: https://www.figma.com/file/84tR9gfjrZJOAo8QUK1bQ8/ThinkThaiThai2.0?node-id=0-1&t=y6RD5RE6sgjC7YsD-0
 
 
 # Features and where to find them
@@ -160,7 +165,7 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 # Testing
-[Cypress cloud](https://cloud.cypress.io)
+[Deployed Tests report](https://2gi3.github.io/thinkthaithai2/cypress/reports/html)
 
 -  The project must be running on localhost:3000
 -  The following commands must run in the Stripe CLI
