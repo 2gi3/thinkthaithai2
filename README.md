@@ -160,6 +160,8 @@ On 'npm run dev', the environment variables will reference the .env.local file.
 On 'npm start', the environment variables will reference the .env.production file.
 
 # Testing
+[Cypress cloud](https://cloud.cypress.io)
+
 -  The project must be running on localhost:3000
 -  The following commands must run in the Stripe CLI
     
@@ -170,7 +172,7 @@ On 'npm start', the environment variables will reference the .env.production fil
 ## Custom commands
 
  -  ```cy.loginByGoogleApi()```
- This command is based on the [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication), it will log in and redirect the user to '/account'.
+ This command is based on the [Cypress documentation](https://docs.cypress.io/guides/end-to-end-testing/google-authentication), `cy.intercept('GET', '/api/auth/session', mockSession)` was added to fix a bug, it will log in and redirect the user to '/account'.
 
  -  ```cy.logOut``` This command will log you out and redirect you to the homepage.
 

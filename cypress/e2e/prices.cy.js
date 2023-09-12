@@ -1,15 +1,17 @@
+const getPaidLessons = () => {
+
+  return cy.request({
+    method: 'GET',
+    url: '/api/students?searchBy=email&value=gippolito@hotmail.co.uk',
+  }).then((res) => res.body.paidLessons);
+
+};
+
 describe('Successful payment', () => {
   let paidLessonsBefore
   let paidLessonsAfter
 
-  const getPaidLessons = () => {
 
-    return cy.request({
-      method: 'GET',
-      url: '/api/students?searchBy=email&value=gippolito@hotmail.co.uk',
-    }).then((res) => res.body.paidLessons);
-
-  };
 
   before(() => {
 
@@ -57,6 +59,65 @@ describe('Successful payment', () => {
     cy.url({ timeout: 30000 }).should("include", "/account")
 
   })
+
+})
+
+describe('Failed payment', () => {
+  let paidLessonsBefore
+  let paidLessonsAfter
+
+
+
+  before(() => {
+
+    paidLessonsBefore = getPaidLessons().then((countBefore) => {
+      paidLessonsBefore = countBefore
+    })
+
+  })
+
+  after(() => {
+
+    getPaidLessons().then((countAfter) => {
+      paidLessonsAfter = countAfter;
+      expect(paidLessonsBefore).to.eq(paidLessonsAfter);
+      console.log({ 'paidLessonsAfter': paidLessonsAfter })
+    })
+
+  })
+
+  it('Does NOT update "paidLessons" in the database and redirects the student to /cancelled-payment', () => {
+
+    cy.loginByGoogleApi().then(async () => {
+      cy.visit('/price')
+      cy.wait(2000)
+      cy.get('.primaryButton').click()
+    })
+
+    console.log({ 'paidLessonsBefore': paidLessonsBefore })
+
+    Cypress.on('uncaught:exception', () => false);
+
+    cy.origin('https://checkout.stripe.com', () => {
+
+      Cypress.on('uncaught:exception', () => false);
+
+      cy.get('#cardNumber').type('4000 0000 0000 0002')
+      cy.get('#cardExpiry').type('1028')
+      cy.get('#cardCvc').type('123')
+      cy.get('#billingName').type('John Doe')
+      cy.get('#billingPostalCode').type('NW2 4TX')
+      cy.get('.SubmitButton-IconContainer').click()
+      cy.get("span").contains("Your credit card was declined. Try paying with a debit card instead.", { timeout: 30000 }).should('be.visible')
+      cy.get("h1").contains("thinkthaithai").should('be.visible').click()
+
+    })
+
+
+    cy.url({ timeout: 30000 }).should("include", "/cancelled-payment")
+
+  })
+
 
 })
 
