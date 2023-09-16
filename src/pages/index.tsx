@@ -24,6 +24,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
     <>
       <Head>
         <title>ThinkThaiThai</title>
+        <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
         <meta name="description" content="Learn Thai language with free courses and one-on-one lessons" />
         <meta property="og:url" content="https://www.thikthaithai.com/" />
         <meta property="og:type" content="website" />

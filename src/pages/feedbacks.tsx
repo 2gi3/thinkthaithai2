@@ -38,6 +38,7 @@ export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) 
     <>
       <Head>
         <title>ThinkThaiThai</title>
+        <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
         <meta name="description" content="Thai language student's opinion of Teacher Nat's classes" />
         <meta property="og:url" content="https://www.thikthaithai.com/feedbacks" />
         <meta property="og:type" content="website" />

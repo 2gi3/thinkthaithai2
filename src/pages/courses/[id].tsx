@@ -100,6 +100,7 @@ export default function About(
             <>
                 <Head>
                     <title>ThinkThaiThai</title>
+                    <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
                     <meta name="description" content="With free courses and tailored study material, you get so much more than just a simple private lesson" />
                     <meta property="og:url" content="https://www.thikthaithai.com/courses" />
                     <meta property="og:type" content="website" />

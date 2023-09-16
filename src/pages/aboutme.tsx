@@ -14,6 +14,7 @@ export default function About() {
     <>
       <Head>
         <title>ThinkThaiThai</title>
+        <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
         <meta name="description" content="Learn more about teacher Nat and her teaching style" />
         <meta property="og:url" content="https://www.thikthaithai.com/aboutme" />
         <meta property="og:type" content="website" />

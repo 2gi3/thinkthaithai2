@@ -57,6 +57,7 @@ const Account = (
       <>
         <Head>
           <title>ThinkThaiThai</title>
+          <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
           <meta name="description" content="Keep track of your progress, and book a lesson if you need any help!" />
           <meta property="og:url" content="https://www.thikthaithai.com/account" />
           <meta property="og:type" content="website" />
