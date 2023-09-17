@@ -12,6 +12,8 @@ import { updateStudent } from "@/redux/slices/studentSlice";
 import PaymentsHistory from "@/components/PaymentsHistory/PaymentsHistory";
 import Calendar from "@/components/calendar";
 import styles from "./account.module.scss";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 
 
@@ -21,7 +23,7 @@ import styles from "./account.module.scss";
 const Account = (
   { courses }: { courses: DatabaseCourse[] }
 ) => {
-
+  const { t } = useTranslation("common");
   const dispatch = useDispatch();
   const { data: session, status } = useSession({ required: true });
   const { data, error } = useSWR(
@@ -76,7 +78,7 @@ const Account = (
             {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
               <Link className={data?.paidLessons && data?.paidLessons > 0 ? "secondaryButton" : "primaryButton"} href='/courses'>Start a free course</Link>
             </div>
-              : <p>Your courses:</p>}
+              : <h3>{t('Your courses:')}</h3>}
             {courseDetails.map((course) => {
               const courseProgress = startedCourses?.[course.id]?.length ?? 0;
               const progressPercentage = Math.ceil((courseProgress / course.sessionsLength!) * 100);
@@ -96,22 +98,22 @@ const Account = (
               );
             })}</div>
 
-          {data?.paidLessons && <div><p>Remaining lessons: <span>{data.paidLessons}</span></p></div>}
+          {data?.paidLessons && <div className={styles.remainingLessons}><h3>{t('Remaining lessons:')} <span>{data.paidLessons}</span></h3></div>}
           {data?.paidLessons && data?.paidLessons > 0 ?
             <div className='primaryButton'><Calendar
               className={styles.button}
               email={session.user.email!}
               name={session.user.name!}
               studentId={data._id || 'noId'}
-              label='Book a lesson'
+              label={t("Book a lesson")}
               eventURL={`https://calendly.com/thinkthaithai/50min?hide_event_type_details=1`} /></div>
-            : <Link className="secondaryButton" href='/price'>Buy some lessons</Link>
+            : <Link className="secondaryButton" href='/price'>{t('Buy some lessons')}</Link>
           }
-          {data?.paidLessons && <div>
+          {data?.paidLessons && <div className={styles.remainingLessons}>
             <button
               className="secondaryButton"
               onClick={() => setShowHistory(!showHistory)}>
-              {showHistory ? <FaTimes /> : 'paypents history'}
+              {showHistory ? <FaTimes /> : t('Payments history')}
             </button>
             {showHistory && <PaymentsHistory />}</div>}
 
@@ -138,7 +140,7 @@ export const getStaticProps = async ({ locale }: any) => {
 
   return {
     props: {
-      // ...(await serverSideTranslations(locale, ["common", "courses"])),
+      ...(await serverSideTranslations(locale, ["common"])),
       courses: courses,
     },
     revalidate: 60,

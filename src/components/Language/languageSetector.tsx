@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { LocaleToLanguage } from "@/types";
@@ -6,9 +6,11 @@ import styles from "./Language.module.scss";
 
 const LanguageSelector = () => {
   const router = useRouter();
-  const { pathname } = router;
+  const { pathname, query } = router;
   const { locale, locales, push, } = useRouter();
   const [selectorIsOpen, setSelectorIsOpen] = useState(false);
+
+  const id = query.id;
 
   const localeToLanguage: LocaleToLanguage = {
     en: "English",
@@ -16,11 +18,20 @@ const LanguageSelector = () => {
     ja: "Japanese",
     it: "Italian",
   };
-
   const handleClick = (l: string) => {
-    push(pathname, undefined, { locale: l });
-    setSelectorIsOpen(!selectorIsOpen);
+
+    if (pathname === '/courses/[id]') {
+      router.replace(`/courses/${id}`, undefined, { locale: l });
+    } else {
+      push(pathname, undefined, { locale: l });
+      setSelectorIsOpen(!selectorIsOpen);
+    }
+
   };
+
+  useEffect(() => {
+    setSelectorIsOpen(false)
+  }, [pathname])
 
   return (
     <>

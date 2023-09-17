@@ -124,7 +124,7 @@ export default async function handler(
 
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error retrieving paypents' });
+        res.status(500).json({ message: 'Error retrieving payments' });
       }
     }
 

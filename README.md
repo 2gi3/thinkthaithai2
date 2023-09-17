@@ -54,7 +54,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 -  When a lesson is booked, the number of 'Remaining lessons' will decrease by one.
 
-- 'Paypent history', This button will appear after a student makes their first purchase ( not including the trial lesson ), and will show a list of all the payments the student has ever made on the website.
+- 'Payment history', This button will appear after a student makes their first purchase ( not including the trial lesson ), and will show a list of all the payments the student has ever made on the website.
 
 ### Log In
 

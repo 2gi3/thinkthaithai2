@@ -12,12 +12,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { updateStudent } from '@/redux/slices/studentSlice';
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 
 export default function About(
     { course }: { course: DatabaseCourse }
 ) {
 
+    const { t } = useTranslation("common");
 
     const dispatch = useDispatch();
     const studentDataRedux = useSelector(
@@ -152,7 +155,7 @@ export default function About(
                                 : <button onClick={() => {
                                     completeLesson(lesson.title)
                                 }}>
-                                    Lesson completed &nbsp; <FaArrowRight />
+                                    {t('Lesson completed')} &nbsp; <FaArrowRight />
                                 </button>
 
                         }
@@ -175,25 +178,58 @@ export default function About(
 }
 
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
+//         method: "GET",
+//     });
+//     const courses: DatabaseCourse[] = await res.json();
+
+
+
+
+//     const paths = courses.map((course) => ({
+//         params: { id: course._id },
+//     }));
+
+//     return {
+//         paths,
+//         fallback: false,
+//     };
+// }
+
+
+import { GetStaticPaths } from 'next';
+
+interface Course {
+    _id: string;
+    locale: string; // Assuming each course has a 'locale' property
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/courses`, {
         method: "GET",
     });
-    const courses: DatabaseCourse[] = await res.json();
+    const courses: Course[] = await res.json();
 
+    const locales = ["en", "zh", "ja", "it"]; // Define the supported locales
+    const paths: { params: { id: string }; locale: string }[] = [];
 
-
-
-    const paths = courses.map((course) => ({
-        params: { id: course._id },
-    }));
+    // Create paths for each course and each locale
+    courses.forEach((course) => {
+        locales.forEach((locale) => {
+            paths.push({
+                params: { id: course._id },
+                locale, // Set the locale for this path
+            });
+        });
+    });
 
     return {
         paths,
         fallback: false,
     };
-}
+};
 
 export async function getStaticProps(context: GetStaticPropsContext) {
     const id = context.params!.id
@@ -202,5 +238,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     });
     const course: DatabaseCourse = await res.json();
 
-    return { props: { course }, revalidate: 60 };
+    const locale = context.locale || 'en'
+
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            course
+        }, revalidate: 60
+    };
 };
