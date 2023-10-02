@@ -6,7 +6,7 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   const { t } = useTranslation("common");
   return (
-    <footer>
+    <footer className={styles.footer}>
       <div className={styles.contactsContainer}>
         <Contacts />
       </div>
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className={styles.image}>
           <Image
             alt="Giuseppe Ippolito"
-            src="/popOutProfile.webp"
+            src="/popOutProfileDark.webp"
             width={104}
             height={119}
           />

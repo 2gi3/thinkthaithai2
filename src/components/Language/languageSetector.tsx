@@ -24,8 +24,9 @@ const LanguageSelector = () => {
       router.replace(`/courses/${id}`, undefined, { locale: l });
     } else {
       push(pathname, undefined, { locale: l });
-      setSelectorIsOpen(!selectorIsOpen);
     }
+    setSelectorIsOpen(!selectorIsOpen);
+
 
   };
 

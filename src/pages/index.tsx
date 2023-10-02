@@ -118,6 +118,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
               width="274"
               height="205"
               loading="lazy"
+              title="Teacher introduction"
             ></iframe>
           </div>
           <div className={styles.introduction}>
