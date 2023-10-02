@@ -48,7 +48,7 @@ const NavBar = () => {
             <Link href="/aboutme" id={pathname === "/aboutme" ? styles.selected : ''}>{t("About Me")}</Link>
           </li>
           <li>
-            <Link href="/price" id={pathname === "/price" ? styles.selected : ''}>{t("Price")}</Link>
+            <Link href="/price" id={pathname === "/price" ? styles.selected : ''}>{t("Prices")}</Link>
           </li>
           <li>
             <Link href="/feedbacks" id={pathname === "/feedbacks" ? styles.selected : ''}>{t("Feedbacks")}</Link>

@@ -27,11 +27,16 @@
 
                 p {
                     max-width: 300px;
+                    margin-bottom: $baseS;
                 }
 
                 h1 {
                     width: 100%;
                     text-align: center;
+                }
+
+                h2 {
+                    margin-bottom: $baseS;
                 }
             }
 

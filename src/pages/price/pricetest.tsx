@@ -78,8 +78,8 @@ export default function PriceTest() {
       setOrderId(capturedPaymentData.id);
       alert(
         "Transaction completed by " +
-          capturedPaymentData.payer.name.given_name +
-          "!"
+        capturedPaymentData.payer.name.given_name +
+        "!"
       );
     } catch (error) {
       console.log(error);
