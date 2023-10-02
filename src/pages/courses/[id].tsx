@@ -244,6 +244,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         props: {
             ...(await serverSideTranslations(locale, ["common"])),
             course
-        }, revalidate: 60
+        },
+        //  revalidate: 60
     };
 };

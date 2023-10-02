@@ -28,7 +28,7 @@ export const getStaticProps = async ({ locale }: any) => {
       ...(await serverSideTranslations(locale, ["common"])),
       feedbacks: feedbacks,
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 };
 export default function About({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
