@@ -25,7 +25,7 @@ export const getStaticProps = async ({ locale }: any) => {
   const feedbacks: DatabaseFeedback[] = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "homepage"])),
+      ...(await serverSideTranslations(locale, ["common"])),
       feedbacks: feedbacks,
     },
     revalidate: 60,
