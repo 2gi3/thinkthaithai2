@@ -16,8 +16,8 @@ export default async function handler(
       break;
 
     case 'POST':
-      const { email, name, event, cancel_url, reschedule_url, tracking } = req.body.payload;
       console.log(req.body.payload)
+      const { email, name, event, cancel_url, reschedule_url, tracking } = req.body.payload;
       let studentId = tracking.utm_source;
       const studentIdAsObjectId = new ObjectId(studentId);
 

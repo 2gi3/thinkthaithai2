@@ -45,7 +45,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
                 {t("The trial lesson is")}&nbsp;
                 <span>{t("Only")}</span>
               </p>
-              <Price USD={5} />
+              {/* <Price USD={5} /> */}
             </div>
           </div>
         </div>

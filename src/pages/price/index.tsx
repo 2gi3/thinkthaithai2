@@ -104,7 +104,8 @@ export default function Prices() {
                   name={student?.name || ''} label={('Trial Lesson')}
                   eventURL='https://calendly.com/thinkthaithai/trial-lesson?hide_event_type_details=1'
                 />
-                <Price USD={5} />
+                <p>{t("Only")}</p>
+                {/* <Price USD={5} /> */}
               </div>
             </div>
           )}
