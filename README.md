@@ -208,3 +208,6 @@ On 'npm start', the environment variables will reference the .env.production fil
 - [figma](https://www.figma.com/file/Qwwly37PdqzOj2nIQSizOU/ThinkThaithai?type=design&node-id=0-1&mode=design&t=28ixwB28Q7UtsBTb-0)
 
 
+## Katy Nguyen: 
+- [figma](https://www.figma.com/file/4ioUGDhUqDLYur9PcvCFjQ/ThinkThaiThai's-feedback?type=design&node-id=1-2&t=utyGoHAh2Iswhlm5-0)
+
