@@ -15,7 +15,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Publicly accessible features:
 
-### Navigaation bar
+### Navigation bar
 - Multy-Language.
 
 - Live Multy-Currency exchange values.
