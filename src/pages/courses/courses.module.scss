@@ -90,7 +90,7 @@
         position: relative;
         margin: $baseXL auto;
         text-align: center;
-        max-width: 599px;
+        // max-width: 599px;
 
         h1 {
             margin: $base;
@@ -243,7 +243,7 @@
     }
 }
 
-@media (min-width: 599px) {
+@media (min-width: 699px) {
     .progressContainer {
         display: flex;
         justify-content: center;

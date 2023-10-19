@@ -14,7 +14,7 @@ const Footer = () => {
         <div className={styles.image}>
           <Image
             alt="Giuseppe Ippolito"
-            src="/popOutProfileDark.webp"
+            src="/popOutProfile2.webp"
             width={104}
             height={119}
           />

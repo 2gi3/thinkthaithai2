@@ -10,6 +10,7 @@ import Price from "@/components/Currency/Price";
 import Contacts from "@/components/Contacts/Contacts";
 import Feedback from "@/components/feedback";
 import { DatabaseFeedback } from "@/types";
+import FeedbackCard from "@/components/feedback/feedbackCard";
 
 
 
@@ -156,14 +157,19 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
             )}
           </div>
         </section>
+        {/* <div className={styles.feedbacksContainer}> */}
         <section className={styles.feedbacks}>
+          <h2 className={styles.teacherHeader}>{t("My students say")}</h2>
+
           {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
             return (
-              index < 3 && <Feedback feedback={feedback} key={`${index}`} />
+              index < 3 && <FeedbackCard feedback={feedback} key={`${index}`} />
             )
           })}
-          <Link href='/feedbacks'> <p>See what my students say about me <FaArrowRight /></p></Link>
+          <Link href='/feedbacks'> <p>{t("all feedbacks")} <FaArrowRight /></p></Link>
+
         </section>
+        {/* </div> */}
         <section className={styles.price}>
           <h2>{t("Start Learning Now!")}</h2>
           <div>

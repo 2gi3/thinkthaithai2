@@ -1,14 +1,19 @@
 @use '@/styles' as *;
 
+.feedback,
 .feedbackCard {
     position: relative;
-    margin: $base;
+    margin-top: $baseM;
+    margin-bottom: $baseM;
     display: flex;
+    background-color: #f6f6f6;
     // border: 1px solid black;
-    padding: $baseS;
-    width: 280px;
+    // padding: $baseS;
+    // width: 280px;
+    max-width: 620px;
     border-radius: $baseS;
-    overflow: hidden;
+    padding: $base;
+
 
     .credientials {
         margin: 6px 0;
@@ -25,6 +30,7 @@
         img {
             border-radius: 50%;
             background-color: red;
+
         }
     }
 
@@ -51,4 +57,54 @@
     }
 
 
+}
+
+.feedback {
+    &>div:nth-child(1) {
+        img {
+            position: absolute;
+            top: -$baseS;
+            left: -$baseS;
+        }
+    }
+}
+
+.feedbackCard {
+    padding: $base;
+    max-width: 300px;
+    z-index: 1;
+    height: max-content;
+    scroll-snap-align: start;
+    overflow: hidden;
+
+
+    .cardHeader {
+        display: flex;
+        // border-bottom: 1px solid #505050;
+        margin-bottom: $baseS;
+
+        &>div:nth-child(1) {
+            margin-right: $base;
+
+            img {
+                border-radius: 50%;
+                background-color: red;
+            }
+        }
+    }
+}
+
+@media (min-width: 499px) {
+    .feedback {
+        margin: $baseM auto;
+
+        &>div:nth-child(1) {
+
+            img {
+                position: static;
+            }
+        }
+    }
+
+    // .feedbackCard {}
 }

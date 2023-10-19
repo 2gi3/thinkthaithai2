@@ -87,10 +87,10 @@ export default function Prices() {
       <div className={styles.container}>
         <header>
           <h1>{t('Invest in Yourself')}</h1>
-          <p>{t('50 minutes regular lessons')}</p>
-          <p>{t('Personalised homeworks')}</p>
-          <p>{t('and study material')}</p>
-          <p>{t('are always included')}</p>
+          <p>{t('50 minutes regular lessons')} {t('Personalised homeworks')}</p>
+          {/* <p>{t('Personalised homeworks')}</p> */}
+          <p>{t('and study material')} {t('are always included')}</p>
+          {/* <p>{t('are always included')}</p> */}
         </header>
 
         <main>

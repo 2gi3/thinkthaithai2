@@ -24,7 +24,7 @@ const NavBar = () => {
 
     setToggleIsOpen(false);
 
-  }, [pathname, currency]);
+  }, [pathname, currency, router.locale]);
 
   const handleLogOut = async () => {
     localStorage.removeItem('databaseStudent');

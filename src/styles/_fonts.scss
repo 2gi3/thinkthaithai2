@@ -12,7 +12,7 @@ $pLineHeight: 20px;
   font-size: $size;
   font-weight: $weight;
   color: $fontColor;
-  text-shadow: $shadow;
+  // text-shadow: $shadow;
 }
 
 @mixin secondary-font($size: $secondaryFontSize,
@@ -20,7 +20,7 @@ $pLineHeight: 20px;
   font-size: $size;
   font-weight: $weight;
   color: $fontColor;
-  text-shadow: $shadow;
+  // text-shadow: $shadow;
 }
 
 @mixin tertiary-font($size: $tertiaryFontSize, $weight: $secondaryFontWeight) {

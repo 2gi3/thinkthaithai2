@@ -18,8 +18,8 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
   }, [feedback._id]);
 
   return (
-    <div key={feedback._id} style={{ display: 'flex', flexDirection: 'column' }}>
-      <div className={styles.feedbackCard}>
+    <div key={feedback._id} style={{ display: 'flex', flexDirection: 'column', paddingRight: 24, paddingLeft: 24 }}>
+      <div className={styles.feedback}>
         {feedback.imageURL && (
           <div>
             <Image src={feedback.imageURL} height={48} width={48} alt={feedback.name} />
@@ -28,19 +28,23 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
         <div>
           <div className={styles.credientials}>
             <p>
-              {feedback.name}, <span>{feedback.job}</span>
+              {feedback.name}
+              {/* , <span>{feedback.job}</span> */}
             </p>
+            <p>{feedback.job}</p>
             <p>{feedback.location}</p>
           </div>
           <h4>{feedback.title}</h4>
           <p id={`feedback-body-${feedback._id}`}
-            style={{ height: height }}
-          >
+          // style={{ height: height }}
+          > jadhfakjd fkjsa fkja fhdsa fkja djasd fkjsad kjd kfhsa fdasd fsadh fkajs fkjsahd fkjshd fkjad kffkjahds flkj fkhdsa fkjhds fjsahd flk flkajs fkjdsa fkjsa vflkjsa f
             {feedback.body}
+            123 jadhfakjd fkjsa fkja fhdsa fkja djasd fkjsad kjd kfhsa fdasd fsadh fkajs fkjsahd fkjshd fkjad kffkjahds flkj fkhdsa fkjhds fjsahd flk flkajs fkjdsa fkjsa vflkjsa f
+
           </p>
         </div>
       </div>
-      {isOverflow && <button className="secondaryButton" style={{
+      {/* {isOverflow && <button className="secondaryButton" style={{
         width: 'maxContent',
         marginLeft: 'auto',
         marginTop: '-24px',
@@ -48,7 +52,7 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
         border: 'none'
       }} onClick={() => {
         height === 'max-content' ? setHeight('88px') : setHeight('max-content')
-      }}>{height === 'max-content' ? 'show less' : '...more'} </button>}
+      }}>{height === 'max-content' ? 'show less' : '...more'} </button>} */}
     </div>
   );
 };
