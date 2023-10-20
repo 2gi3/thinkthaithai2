@@ -22,13 +22,14 @@ const Footer = () => {
         <div className={styles.info}>
           <p>{t("Website by")}</p>
           <h3>{t("Giuseppe Ippolito")}</h3>
-          <p>{t("Web-Developer")}</p>
-          <p>{t("London")}</p>
+          <p >
+            © 2023 All rights reserved
+          </p>
+          {/* <p>{t("Web-Developer")}</p>
+          <p>{t("London")}</p> */}
         </div>
       </a>
-      <p className={styles.copyRights}>
-        Giuseppe Ippolito © 2023 All rights reserved
-      </p>
+
     </footer>
   );
 };

@@ -1,13 +1,15 @@
 @use "@/styles" as *;
 
 .container {
+  margin-top: $baseXXL;
+
   .safetyInfo {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin: $baseM auto;
     height: $base;
 
     h3 {
@@ -79,10 +81,9 @@
     padding: $base 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-
-    max-width: 700px;
+    background-color: #f6f6f6;
 
     .trialContainer {
       width: 100%;

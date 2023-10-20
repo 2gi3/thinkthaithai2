@@ -1,7 +1,7 @@
 @use "@/styles" as *;
 
 .container {
-    margin: $base;
+    margin: $baseXL $base;
 
     header {
         display: flex;
@@ -75,5 +75,6 @@
 @media (min-width: 499px) {
     .container {
         margin: $baseXL;
+        margin-top: $baseXXL;
     }
 }

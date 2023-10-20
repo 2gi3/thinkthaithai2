@@ -1,13 +1,52 @@
 @use "@/styles" as *;
 
+@keyframes slideIn {
+  0% {
+    opacity: 0.1;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.hiddenBar {
+  animation: slideOut 450ms ease-in-out forwards;
+}
+
 .container {
+  animation: slideIn 450ms ease-in-out forwards;
+}
+
+.container,
+.hiddenBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  // position: relative;
   @include secondary-font;
+  background-color: #f6f6f6;
+
 
   .links {
     li {
@@ -116,7 +155,9 @@
 }
 
 @media (min-width: 600px) and (max-width: 999px) {
-  .container {
+
+  .container,
+  .hiddenBar {
     display: flex;
     flex-direction: column-reverse;
 
@@ -132,7 +173,9 @@
 }
 
 @media (min-width: 600px) and (max-width: 698px) {
-  .container {
+
+  .container,
+  .hiddenBar {
     display: flex;
     flex-direction: column-reverse;
 
@@ -144,7 +187,9 @@
 }
 
 @media (max-width: 699px) {
-  .container {
+
+  .container,
+  .hiddenBar {
     align-items: start;
 
     .hide {

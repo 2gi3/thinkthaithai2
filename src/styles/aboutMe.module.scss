@@ -9,7 +9,7 @@
     }
 
     header {
-        margin: $baseXL auto;
+        margin: $baseXXL auto;
         display: flex;
         flex-wrap: wrap-reverse;
         justify-content: space-around;
@@ -100,6 +100,8 @@
         }
 
         header {
+            margin-top: $baseXXXL;
+
             div {
                 &:nth-child(2) {
                     img {
@@ -145,6 +147,7 @@
         main {
             margin: $baseXL auto;
             padding: $base 0;
+            background-color: #f6f6f6;
 
             div {
                 &:first-child {

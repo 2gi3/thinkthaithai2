@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -15,14 +15,28 @@ import { RootState } from "@/redux/store";
 const NavBar = () => {
   const { t } = useTranslation("common");
   const [toggleIsOpen, setToggleIsOpen] = useState(false);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
   const { data: session, status } = useSession();
   const currency = useSelector((state: RootState) => state.currency.value);
   const router = useRouter();
   const { pathname } = router;
+  const lastScrollPosition = useRef(0);
 
   useEffect(() => {
 
     setToggleIsOpen(false);
+
+    const handleScroll = () => {
+      const currentPosition = window.scrollY;
+      setIsScrollingUp(currentPosition < (lastScrollPosition.current || 0));
+      lastScrollPosition.current = currentPosition;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
 
   }, [pathname, currency, router.locale]);
 
@@ -32,7 +46,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className={styles.container}>
+    <nav className={` ${isScrollingUp ? styles.container : styles.hiddenBar}`}>
       <button
         className={styles.toggle}
         onClick={() => setToggleIsOpen(!toggleIsOpen)}

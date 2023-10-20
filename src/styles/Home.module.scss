@@ -6,7 +6,7 @@
   // flex-wrap: wrap;
   // justify-content: center;
   // align-items: center;
-  margin: $baseXXL auto;
+  margin: $baseXXXL auto;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -89,6 +89,7 @@
     margin: auto;
     max-width: 999px;
     padding: $baseL $baseM;
+    background-color: #f6f6f6;
     gap: $baseM;
 
 
@@ -117,10 +118,10 @@
     }
 
     .imageContainer {
-      background-color: $primaryColorLight;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      // background-color: $primaryColorLight;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
       width: 100%;
       padding: 0 $baseS;
       border-radius: 24px 24px 0 0;
@@ -145,7 +146,7 @@
     text-align: center;
 
     @include primary-font(34px);
-    @include gradient-text();
+    // @include gradient-text();
     margin-top: $baseXXL;
     margin-bottom: $base;
   }
@@ -227,7 +228,8 @@
     // flex-wrap: wrap;
     justify-content: space-around;
     gap: $baseM;
-    padding: 0 $baseM;
+    padding: 0 $baseM $baseL;
+    background-color: #f6f6f6;
 
     h2,
     a {
@@ -240,7 +242,7 @@
     }
 
     a {
-      bottom: -$baseS;
+      bottom: $baseM;
     }
 
 
@@ -294,7 +296,7 @@
 
     h2 {
       @include primary-font(34px);
-      @include gradient-text($lightAngle: 1deg);
+      // @include gradient-text($lightAngle: 1deg);
 
       margin-bottom: -2px;
     }
@@ -314,7 +316,7 @@
     justify-content: center;
     align-items: center;
     // margin-bottom: 0;
-    margin: $baseXL auto 0 auto;
+    margin: $baseXXL auto 0 auto;
     padding-top: $base;
 
 
@@ -396,9 +398,10 @@
     }
 
     .teacherHeader {
-      @include gradient-text($color2: #6d50ff);
+      // @include gradient-text($color2: #6d50ff);
       font-size: 28px;
       margin-top: 0;
+      margin-bottom: $base;
     }
 
     .teacher {
@@ -454,7 +457,7 @@
       margin-top: 72px;
 
       h2 {
-        @include gradient-text($color2: #6d50ff);
+        // @include gradient-text($color2: #6d50ff);
         margin-bottom: -2px;
         font-size: 28px;
         text-align: center;
@@ -476,7 +479,7 @@
 
 @media (min-width: 599px) and (max-width: 899px) {
   .header {
-    margin: $baseXXL $baseL;
+    margin: $baseXXXL $baseL;
 
     .title {
       h1 {
