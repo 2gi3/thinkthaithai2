@@ -37,10 +37,8 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
           <h4>{feedback.title}</h4>
           <p id={`feedback-body-${feedback._id}`}
           // style={{ height: height }}
-          > jadhfakjd fkjsa fkja fhdsa fkja djasd fkjsad kjd kfhsa fdasd fsadh fkajs fkjsahd fkjshd fkjad kffkjahds flkj fkhdsa fkjhds fjsahd flk flkajs fkjdsa fkjsa vflkjsa f
+          >
             {feedback.body}
-            123 jadhfakjd fkjsa fkja fhdsa fkja djasd fkjsad kjd kfhsa fdasd fsadh fkajs fkjsahd fkjshd fkjad kffkjahds flkj fkhdsa fkjhds fjsahd flk flkajs fkjdsa fkjsa vflkjsa f
-
           </p>
         </div>
       </div>
