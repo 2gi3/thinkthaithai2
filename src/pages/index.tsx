@@ -63,52 +63,60 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
 
       <main className={styles.main}>
         <section className={styles.courses}>
-
-          <div>
-            <h2>{t("Speaking & Listening")}</h2>
-            <p>
-              {t(
-                "Simulate real life situations\nWatch Thai drama\nlearn your favourite songs\nand listen to podcasts"
-              )}
-            </p>
+          <div className={styles.course}>
+            <div className={styles.imageContainer}>
+              <Image src="/conversation.jpg"
+                width={320}
+                height={320}
+                alt="A tourist asking for directions"
+              />
+            </div>
+            <div className={styles.bodyContainer}>
+              <h2>{t("Speaking & Listening")}</h2>
+              <p>
+                {t(
+                  "Simulate real life situations\nWatch Thai drama\nlearn your favourite songs\nand listen to podcasts"
+                )}
+              </p>
+            </div>
           </div>
-          <Image src="/images/speaking.webp"
-            width={320}
-            height={320}
-            alt="A tourist asking for directions"
-          />
-
-          <Image src="/images/texting.webp"
-            width={320}
-            height={320}
-            alt="A tourist asking for directions"
-          />
-          <div>
-            <h2>{t("Reading & Writing")}</h2>
-            <p>
-              {t(
-                "Thai alphabet and grammar\nLearn & practice Thai tones\nUse primary school books\nQuick daily exercises "
-              )}
-            </p>
+          <div className={styles.course}>
+            <div className={styles.imageContainer}>
+              <Image src="/studying.jpg"
+                width={320}
+                height={320}
+                alt="A tourist asking for directions"
+              />
+            </div>
+            <div className={styles.bodyContainer}>
+              <h2>{t("Reading & Writing")}</h2>
+              <p>
+                {t(
+                  "Thai alphabet and grammar\nLearn & practice Thai tones\nUse primary school books\nQuick daily exercises "
+                )}
+              </p>
+            </div>
           </div>
-
-          <div>
-            <h2>
-              <span>{t("Gain the ")}</span>
-              {t("Confidence")}
-            </h2>
-            <p>
-              {t(
-                "to engage in daily conversations,\nexplore Thai social media, chats, news and literature"
-              )}
-            </p>
+          <div className={styles.course}>
+            <div className={styles.imageContainer}>
+              <Image className={styles.beach} src="/videocall.jpg"
+                width={320}
+                height={320}
+                alt="A tourist asking for directions"
+              />
+            </div>
+            <div className={styles.bodyContainer}>
+              <h2>
+                <span>{t("Gain the ")}</span>
+                {t("Confidence")}
+              </h2>
+              <p>
+                {t(
+                  "to engage in daily conversations,\nexplore Thai social media, chats, news and literature"
+                )}
+              </p>
+            </div>
           </div>
-          <Image className={styles.beach} src="/images/beach.webp"
-            width={320}
-            height={320}
-            alt="A tourist asking for directions"
-          />
-
         </section>
         <h2 className={styles.teacherHeader}>{t("My name is Natt")}</h2>
 

@@ -85,43 +85,59 @@
 
   .courses {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: auto;
     max-width: 999px;
-    padding: 48px 0;
-    gap: $baseXXL 0;
+    padding: $baseL $baseM;
+    gap: $baseM;
 
 
 
     // gap: $baseL;
-    &>div {
+    .course {
       max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: auto;
-
-      // &:nth-child(odd) {
-      // background-color: red;
-      // margin: $baseXL;
-      // margin-top: -230px;
-
-
-      // }
+      height: 100%;
+      border-radius: $base;
+      background-color: #f6f6f6;
 
 
       h2 {
-        margin: $baseS 0;
+        margin-bottom: $baseS;
+        font-size: 16px;
       }
 
       p {
-        margin: $baseS 0;
         line-height: $pLineHeight;
+        font-size: 15px;
       }
     }
 
-    img {
-      object-fit: contain;
-      border-radius: $base;
-      width: min-content;
-      margin: auto;
+    .imageContainer {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0 $baseS;
+      border-radius: 24px 24px 0 0;
+
+      img {
+        width: $baseXXL;
+        height: 90px;
+        object-fit: contain;
+        // border-radius: 50%;
+        margin: auto;
+      }
+    }
+
+    .bodyContainer {
+      padding: $base;
+      min-height: 140px;
+      border-radius: 0 0 24px 24px;
     }
   }
 
@@ -343,16 +359,16 @@
       display: flex;
       flex-direction: column;
       margin-top: $baseL;
-      gap: 0;
+      margin-bottom: $baseXXL;
+      gap: $baseM;
       padding-bottom: 0;
 
       &>div {
         max-width: 300px;
-        margin: $base auto 120px;
+        margin: auto;
+        // margin: $base auto 120px;
 
-        &:nth-child(5) {
-          order: 1;
-        }
+
       }
 
       img {
@@ -448,10 +464,6 @@
         max-width: 224px;
       }
     }
-
-
-
-
   }
 }
 
@@ -500,14 +512,37 @@
   }
 
   .main {
+    h2 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
     .courses {
-      &>div {
-        margin: $baseXL;
+      grid-template-columns: 1fr 1fr;
+
+      &>div:nth-child(3) {
+        grid-column: 1 / 3;
       }
 
-      img {
-        width: 220px;
-        height: 220px;
+      &>div {
+        max-width: 180px;
+
+        // h2 {
+        //   font-size: 16px;
+        // }
+
+        // p {
+        //   font-size: 15px;
+        // }
+
+
+        img {
+          width: 180px;
+          height: 180px;
+        }
       }
     }
 
