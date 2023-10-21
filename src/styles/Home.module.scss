@@ -92,7 +92,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     margin: auto;
     max-width: 999px;
-    padding: $baseL $baseM 0 $baseM;
+    padding: $baseXXL $baseM $baseXL $baseM;
     gap: $baseM;
 
 
@@ -233,7 +233,7 @@
     // flex-wrap: wrap;
     justify-content: space-around;
     gap: $baseM;
-    padding: 0 $baseM $baseL;
+    padding: $baseXXL $baseM $baseXXL;
     background-color: $darkBackground;
 
     h2,
@@ -244,11 +244,11 @@
     }
 
     h2 {
-      top: $base;
+      top: $baseXXL;
     }
 
     a {
-      bottom: $baseM;
+      bottom: $baseXXL;
     }
 
 
@@ -369,7 +369,7 @@
       margin-top: $baseL;
       margin-bottom: $baseXXL;
       gap: $baseM;
-      padding: $baseL 0 0 0;
+      padding: $baseXXL 0 $baseXL 0;
 
       &>div {
         max-width: 300px;

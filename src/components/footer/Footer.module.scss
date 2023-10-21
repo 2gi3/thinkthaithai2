@@ -6,7 +6,8 @@
 
 
   .contactsContainer {
-    padding-top: 1px;
+    padding-top: $baseXL;
+    padding-bottom: $baseXL;
     border-bottom: 1px solid $fontColor;
     background-color: $darkBackground;
   }
