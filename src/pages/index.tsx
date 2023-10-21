@@ -66,7 +66,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
           <section className={styles.courses}>
             <div className={styles.course}>
               <div className={styles.imageContainer}>
-                <Image src="/conversation.png"
+                <Image src="/conversationColor.png"
                   width={320}
                   height={320}
                   alt="A tourist asking for directions"
@@ -83,7 +83,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
             </div>
             <div className={styles.course}>
               <div className={styles.imageContainer}>
-                <Image src="/studying.png"
+                <Image src="/studyingColor.png"
                   width={320}
                   height={320}
                   alt="A tourist asking for directions"
@@ -100,7 +100,7 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
             </div>
             <div className={styles.course}>
               <div className={styles.imageContainer}>
-                <Image className={styles.beach} src="/videocall.png"
+                <Image className={styles.beach} src="/videocallColor.png"
                   width={320}
                   height={320}
                   alt="A tourist asking for directions"
