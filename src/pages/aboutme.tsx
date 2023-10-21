@@ -13,7 +13,7 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>ThinkThaiThai</title>
+        <title>Online Thai language teacher</title>
         <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
         <meta name="description" content="Learn more about teacher Nat and her teaching style" />
         <meta property="og:url" content="https://www.thikthaithai.com/aboutme" />
