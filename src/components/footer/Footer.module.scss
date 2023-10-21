@@ -2,13 +2,13 @@
 
 .footer {
   padding-bottom: $baseS;
-  background-color: #f6f6f6;
+  background-color: $darkBackground;
 
 
   .contactsContainer {
     padding-top: 1px;
     border-bottom: 1px solid $fontColor;
-    background-color: #f6f6f6;
+    background-color: $darkBackground;
   }
 
   .credits {
@@ -16,7 +16,7 @@
     justify-content: center;
     margin: $baseM;
     width: max-content;
-    background-color: #f6f6f6;
+    background-color: $darkBackground;
     border-radius: $baseS;
     // box-shadow: -1px 1px 1px $secondaryColorLight;
 

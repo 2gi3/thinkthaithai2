@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: $baseM auto;
+    margin: $baseXL auto;
     height: $base;
 
     h3 {
@@ -66,8 +66,7 @@
   }
 
   header {
-    margin: $base;
-    margin-top: $baseXL;
+    margin: $baseXL $base;
 
     p {
       margin: 3px auto;
@@ -83,7 +82,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: #f6f6f6;
+    background-color: $darkBackground ;
 
     .trialContainer {
       width: 100%;

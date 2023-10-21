@@ -1,5 +1,7 @@
 @use "@/styles" as *;
 
+@media (min-width: 600px) and (max-width: 698px) {}
+
 .access {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,7 @@
   gap: $base;
   margin: $baseXL auto;
   padding-bottom: $base;
+  padding-top: $baseM;
   margin-top: $baseXXL;
   width: 234px;
 

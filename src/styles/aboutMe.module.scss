@@ -100,7 +100,7 @@
         }
 
         header {
-            margin-top: $baseXXXL;
+            margin-top: $baseXXL;
 
             div {
                 &:nth-child(2) {
@@ -121,6 +121,8 @@
 @media (min-width: 799px) {
     .container {
         header {
+            padding-top: $baseXL;
+
             div {
 
                 // max-width: 320px;
@@ -147,7 +149,7 @@
         main {
             margin: $baseXL auto;
             padding: $base 0;
-            background-color: #f6f6f6;
+            background-color: $darkBackground ;
 
             div {
                 &:first-child {

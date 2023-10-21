@@ -83,13 +83,16 @@
 .main {
   position: relative;
 
+  .darkContainer {
+    background-color: $darkBackground;
+  }
+
   .courses {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: auto;
     max-width: 999px;
-    padding: $baseL $baseM;
-    background-color: #f6f6f6;
+    padding: $baseL $baseM 0 $baseM;
     gap: $baseM;
 
 
@@ -103,7 +106,7 @@
       margin: auto;
       height: 100%;
       border-radius: $base;
-      background-color: #f6f6f6;
+      background-color: $darkBackground ;
 
 
       h2 {
@@ -136,11 +139,13 @@
     }
 
     .bodyContainer {
-      padding: $base;
+      padding: 0 $base;
       min-height: 140px;
       border-radius: 0 0 24px 24px;
     }
   }
+
+
 
   .teacherHeader {
     text-align: center;
@@ -229,12 +234,13 @@
     justify-content: space-around;
     gap: $baseM;
     padding: 0 $baseM $baseL;
-    background-color: #f6f6f6;
+    background-color: $darkBackground;
 
     h2,
     a {
       position: absolute;
       margin: auto;
+      padding-top: $baseS;
     }
 
     h2 {
@@ -363,7 +369,7 @@
       margin-top: $baseL;
       margin-bottom: $baseXXL;
       gap: $baseM;
-      padding-bottom: 0;
+      padding: $baseL 0 0 0;
 
       &>div {
         max-width: 300px;

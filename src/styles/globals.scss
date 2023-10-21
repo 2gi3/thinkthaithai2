@@ -85,6 +85,11 @@ body {
   }
 }
 
+@media (min-width: 699px) and (max-width: 999px) {
+  body {
+    padding-top: $baseM;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   html {

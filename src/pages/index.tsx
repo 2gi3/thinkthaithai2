@@ -62,62 +62,64 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
       </header>
 
       <main className={styles.main}>
-        <section className={styles.courses}>
-          <div className={styles.course}>
-            <div className={styles.imageContainer}>
-              <Image src="/conversation.webp"
-                width={320}
-                height={320}
-                alt="A tourist asking for directions"
-              />
+        <div className={styles.darkContainer}>
+          <section className={styles.courses}>
+            <div className={styles.course}>
+              <div className={styles.imageContainer}>
+                <Image src="/conversation.png"
+                  width={320}
+                  height={320}
+                  alt="A tourist asking for directions"
+                />
+              </div>
+              <div className={styles.bodyContainer}>
+                <h2>{t("Speaking & Listening")}</h2>
+                <p>
+                  {t(
+                    "Simulate real life situations\nWatch Thai drama\nlearn your favourite songs\nand listen to podcasts"
+                  )}
+                </p>
+              </div>
             </div>
-            <div className={styles.bodyContainer}>
-              <h2>{t("Speaking & Listening")}</h2>
-              <p>
-                {t(
-                  "Simulate real life situations\nWatch Thai drama\nlearn your favourite songs\nand listen to podcasts"
-                )}
-              </p>
+            <div className={styles.course}>
+              <div className={styles.imageContainer}>
+                <Image src="/studying.png"
+                  width={320}
+                  height={320}
+                  alt="A tourist asking for directions"
+                />
+              </div>
+              <div className={styles.bodyContainer}>
+                <h2>{t("Reading & Writing")}</h2>
+                <p>
+                  {t(
+                    "Thai alphabet and grammar\nLearn & practice Thai tones\nUse primary school books\nQuick daily exercises "
+                  )}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className={styles.course}>
-            <div className={styles.imageContainer}>
-              <Image src="/studying.webp"
-                width={320}
-                height={320}
-                alt="A tourist asking for directions"
-              />
+            <div className={styles.course}>
+              <div className={styles.imageContainer}>
+                <Image className={styles.beach} src="/videocall.png"
+                  width={320}
+                  height={320}
+                  alt="A tourist asking for directions"
+                />
+              </div>
+              <div className={styles.bodyContainer}>
+                <h2>
+                  <span>{t("Gain the ")}</span>
+                  {t("Confidence")}
+                </h2>
+                <p>
+                  {t(
+                    "to engage in daily conversations,\nexplore Thai social media, chats, news and literature"
+                  )}
+                </p>
+              </div>
             </div>
-            <div className={styles.bodyContainer}>
-              <h2>{t("Reading & Writing")}</h2>
-              <p>
-                {t(
-                  "Thai alphabet and grammar\nLearn & practice Thai tones\nUse primary school books\nQuick daily exercises "
-                )}
-              </p>
-            </div>
-          </div>
-          <div className={styles.course}>
-            <div className={styles.imageContainer}>
-              <Image className={styles.beach} src="/videocall.webp"
-                width={320}
-                height={320}
-                alt="A tourist asking for directions"
-              />
-            </div>
-            <div className={styles.bodyContainer}>
-              <h2>
-                <span>{t("Gain the ")}</span>
-                {t("Confidence")}
-              </h2>
-              <p>
-                {t(
-                  "to engage in daily conversations,\nexplore Thai social media, chats, news and literature"
-                )}
-              </p>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
         <h2 className={styles.teacherHeader}>{t("My name is Natt")}</h2>
 
         <section className={styles.teacher}>
@@ -166,17 +168,19 @@ export default function Home({ feedbacks }: { feedbacks: DatabaseFeedback[] }) {
           </div>
         </section>
         {/* <div className={styles.feedbacksContainer}> */}
-        <section className={styles.feedbacks}>
-          <h2 className={styles.teacherHeader}>{t("My students say")}</h2>
+        <div className={styles.darkContainer}>
+          <section className={styles.feedbacks}>
+            <h2 className={styles.teacherHeader}>{t("My students say")}</h2>
 
-          {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
-            return (
-              index < 3 && <FeedbackCard feedback={feedback} key={`${index}`} />
-            )
-          })}
-          <Link href='/feedbacks'> <p>{t("all feedbacks")} <FaArrowRight /></p></Link>
+            {feedbacks.map((feedback: DatabaseFeedback, index: number) => {
+              return (
+                index < 3 && <FeedbackCard feedback={feedback} key={`${index}`} />
+              )
+            })}
+            <Link href='/feedbacks'> <p>{t("all feedbacks")} <FaArrowRight /></p></Link>
 
-        </section>
+          </section>
+        </div>
         {/* </div> */}
         <section className={styles.price}>
           <h2>{t("Start Learning Now!")}</h2>
