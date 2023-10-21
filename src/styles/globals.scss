@@ -1,6 +1,6 @@
 @use "@/styles" as *;
 
-@media (prefers-color-scheme: dark) {}
+// @media (prefers-color-scheme: dark) {}
 
 * {
   box-sizing: border-box;
@@ -91,11 +91,11 @@ body {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+// }
 
 
 .DnfDraUHXqoGVynhCDxv {
