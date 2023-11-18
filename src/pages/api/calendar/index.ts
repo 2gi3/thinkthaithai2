@@ -17,7 +17,7 @@ export default async function handler(
 
     case 'POST':
       console.log('Hello :)')
-      console.log({ req })
+      console.log({ 'req': req.body })
       console.log({ 'Webhook payload': req.body.payload })
       const { email, name, event, cancel_url, reschedule_url, tracking } = req.body.payload;
       let studentId = tracking.utm_source;

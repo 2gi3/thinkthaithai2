@@ -91,19 +91,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   - create web-hooks subscription
     - example: [Useful example](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
 
-    - Calendly [create webhook documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
+    - Calendly create webhook: [documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
 
     - Instructions: 
       - Log in to Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
       - Make a post request as follows:
       ```
        $headers = @{
-      "authorization" = "Bearer TOKEN"
-      }
+    "authorization" = "Bearer TOKEN"
+}
 
-      $response = Invoke-RestMethod -Uri "https://api.calendly.com/      users/me" -Headers $headers
+$response = Invoke-RestMethod -Uri "https://api.calendly.com/users/me" -Headers $headers
 
-      $response | Format-List
+$response | Format-List
 
 
       ```
