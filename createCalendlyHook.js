@@ -13,7 +13,7 @@
 //     uri: 'https://api.calendly.com/users/XXX'
 //   }
 // }
-const token = 'GET TOKEN AND ADD IT HERE'
+const token = 'eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzAwMzIwNzMwLCJqdGkiOiI3NDAzNmRmMi1jZGQ1LTRmZTUtYjdjZS0xYmViNWZhYzBiZDYiLCJ1c2VyX3V1aWQiOiJFRkFHN1BKTVVOV1BEUE5JIn0.gV2g796i9LjO8n7hm0C6qIWbdV9TjLnboPX8a2KqDDkYwbkjqu3o_uHBeyqKqXTh2Z_fFQDWDYxiQ9XtW94fsg'
 const headers = {
   'Authorization': `Bearer ${token}`,
   'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const getUserInfo = async () => {
     console.log({ data });
     const postData = {
       organization: data.resource.current_organization,
-      url: 'https://thinkthaithai.com/api/calendar',
+      url: 'https://www.thinkthaithai.com/api/calendar',
       events: ['invitee.created', 'invitee.canceled'],
       user: data.resource.uri,
       scope: 'user',
