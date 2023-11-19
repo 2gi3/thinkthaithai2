@@ -10,8 +10,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-  console.log('Hello :)')
-  console.log({ 'req': req.body })
   console.log({ 'Webhook payload': req.body.payload })
 
   switch (req.method) {
@@ -21,6 +19,11 @@ export default async function handler(
       break;
 
     case 'POST':
+
+      //If this function stops working (i.e.: when a student books a lesson, the database doesn't update),
+      //it is possible that Calendly has deactivated the webhook, in that case delete the webhook and create it again, 
+      //Follow the instruction in the README.md ## Bookings
+
       const { email, name, event, cancel_url, reschedule_url, tracking } = req.body.payload;
       let studentId = tracking.utm_source;
       const studentIdAsObjectId = new ObjectId(studentId);

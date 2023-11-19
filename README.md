@@ -86,47 +86,55 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 
  ## Bookings:
+ If the lesson booking feature stops updating the database, try deleting the webhook subscription from Calendly and the re-creating it.
+ This is due to the fact that calendly can deactivate the webhook.
 
  
-  - create web-hooks subscription
-    - example: [Useful example](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
+  - create a web-hooks subscription
+    - [Useful example for development](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
 
     - Calendly create webhook: [documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
 
     - Instructions: 
       - Log in to Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
-      - Make a post request as follows:
-      ```
-       $headers = @{
-    "authorization" = "Bearer TOKEN"
-}
 
-$response = Invoke-RestMethod -Uri "https://api.calendly.com/users/me" -Headers $headers
+      - Open ./createCalendlyHook.js and assign the Token you just created to the token variable.
+      - Assign the base URL where the POST request will be received to the productionUrl variable
+      - Run the following command: ```node createCalendlyHook.js```
 
-$response | Format-List
+      - Alternatively you can create the webhook subscription in your terminal by following the following steps for powershell:
+          - Make a post request as follows:
+          ```
+           $headers = @{
+        "authorization" = "Bearer TOKEN"
+         }
+
+         $response = Invoke-RestMethod -Uri "https://     api.calendly.com/users/me" -Headers $headers
+
+         $response | Format-List
 
 
-      ```
-      - Use the informations received in the response to make a POST request as follows: 
-      ```
-       $headers = @{
-            'Authorization' = 'Bearer TOKEN'
-           'Content-Type'  = 'application/json'
-        }
+          ```
+          - Use the informations received in the response to make a POST request as follows: 
+          ```
+           $headers = @{
+                'Authorization' = 'Bearer TOKEN'
+               'Content-Type'  = 'application/json'
+            }
 
-      $data = @{
-       'url'         = 'API endpoint that receives the POST request'
-       'events'      = @('invitee.created', 'invitee.canceled')
-       'user'        = 'https://api.calendly.com/users/XXXXXXX'
-       'scope'       = 'user'
-  
-      $jsonData = $data | ConvertTo-Json
+          $data = @{
+           'url'         = 'API endpoint that receives the POST request'
+           'events'      = @('invitee.created', 'invitee.canceled')
+           'user'        = 'https://api.calendly.com/users/XXXXXXX'
+           'scope'       = 'user'
+          }
+          $jsonData = $data | ConvertTo-Json
    
-      $response = Invoke-RestMethod -Method Post -Uri 'https://api.calendly.com/webhook_subscriptions' -Headers $headers -Body $jsonData
+          $response = Invoke-RestMethod -Method Post -Uri 'https://api.calendly.com/webhook_subscriptions'     -Headers $headers -Body $jsonData
    
-      $response
-      ```
-      }
+          $response
+          ```
+      
 
 
 

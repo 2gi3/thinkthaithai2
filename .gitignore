@@ -5,6 +5,8 @@ developerNotes.txt
 /.pnp
 .pnp.js
 
+
+localInfo.json
 # testing
 /coverage
 
