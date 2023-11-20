@@ -39,3 +39,13 @@ export const fetcherStudents = async (...args: FetcherArgs) => {
 };
 
 
+export const formatParagraph = (text: string) => {
+  // Format the text so that every time there is a dot, a new paragraph will be rendered for the following text
+  const paragraphs = text.split('.');
+  const formattedParagraphs = paragraphs.map((paragraph, index) => (
+    index < paragraphs.length - 1 ? paragraph + '.' : paragraph
+  ));
+  const nonEmptyParagraphs = formattedParagraphs.filter(para => para.trim() !== '');
+
+  return nonEmptyParagraphs;
+};

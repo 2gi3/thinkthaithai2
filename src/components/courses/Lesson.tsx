@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LessonProps } from "@/types";
 import styles from '@/pages/courses/courses.module.scss';
+import { formatParagraph } from '@/functions';
 
 const Lesson = ({ lesson }: LessonProps) => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,15 +25,23 @@ const Lesson = ({ lesson }: LessonProps) => {
 
     }, [lesson]);
 
+
     return (
         <div className={styles.lesson}>
             <video ref={videoRef} controls>
                 <source src={video} type="video/mp4" />
             </video>
             <h3>{lesson.title}</h3>
-            <p>{lesson.header}</p>
-            <p>{lesson.body}</p>
-            <p>{lesson.footer}</p>
+            {formatParagraph(lesson.header).map((paragraph: string, index: number) => (
+                <p key={index}>{paragraph}</p>
+            ))}
+            {formatParagraph(lesson.body).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+            ))}
+            {formatParagraph(lesson.footer).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+            ))}
+
         </div>
 
     )
