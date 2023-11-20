@@ -162,7 +162,7 @@ function Student({ courses }: { courses: DatabaseCourse[] }) {
     <div className={accountStyles.container}>
       <header className={accountStyles.header}>
         <h2>Error</h2>
-        <p>There is a problem rethriving the student&apos;s data</p>
+        <p>There is a problem retrieving the student&apos;s data</p>
       </header>
       <main>
         <h4>Please try again later</h4>
@@ -177,20 +177,19 @@ export default Student;
 
 export async function getStaticPaths() {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/students`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/students?pwd=${process.env.STATICPATHSPASSWORD}`, {
     method: "GET",
   });
-  const studentsData = await res.json();
-  console.log({ studentsData })
+  const studentsIds = await res.json();
+  console.log({ studentsIdsClient: studentsIds })
 
   // const students: databaseStudent[] = await res.json();
-  const students: databaseStudent[] = Object.values(studentsData);
 
 
+  const studentsIdsArray = Object.values(studentsIds);
 
-
-  const paths = students.map((student) => ({
-    params: { id: student._id },
+  const paths = studentsIdsArray.map((studentId: any) => ({
+    params: { id: studentId },
   }));
 
   return {
