@@ -14,17 +14,8 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions)
   const { pwd } = req.query;
 
-  // Authorization in development mode is used to test the Stripe webhook
-  // if (process.env.NODE_ENV !== 'development' && !session) {
-
-  //   return res.status(401).json({
-  //     "error": "Unauthorized",
-  //     "message": "Access denied. Please provide valid credentials. abc"
-  //   });
-
-  // } else 
   if (pwd === process.env.STATICPATHSPASSWORD && req.method === 'GET') {
-    // Get one student by id: /api/students?pwd=<ID>
+    // Get one student by id: /api/students?pwd=<PASSWORD>
     const client = await clientPromise;
     const db = client.db();
     const studentsData = await db.collection('users').find().toArray();
@@ -32,6 +23,13 @@ export default async function handler(
     const studentsIds = studentsData.map((student) => student._id);
     console.log({ studentsIdsServer: studentsIds })
     res.status(200).json({ ...studentsIds });
+  } else if (process.env.NODE_ENV !== 'development' && !session) {
+    // Authorization in development mode is used to test the Stripe webhook
+
+    return res.status(401).json({
+      "error": "Unauthorized",
+      "message": "Access denied. Please provide valid credentials."
+    });
 
   } else {
 

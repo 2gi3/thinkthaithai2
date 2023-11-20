@@ -188,9 +188,10 @@ export async function getStaticPaths() {
 
   const studentsIdsArray = Object.values(studentsIds);
 
-  const paths = studentsIdsArray.map((studentId: any) => ({
+  const paths = studentsIdsArray.map((studentId: any, index: number) => ({
     params: { id: studentId },
   }));
+  console.log(JSON.stringify(paths))
 
   return {
     paths,
