@@ -55,7 +55,7 @@ const CreateFeedbackForm = () => {
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -184,8 +184,7 @@ const CreateFeedbackForm = () => {
         </div>
         <div>
           <label htmlFor="title">Title:</label>
-          <input
-            type="text"
+          <textarea
             id="title"
             name="title"
             value={formData.title}
@@ -194,8 +193,7 @@ const CreateFeedbackForm = () => {
         </div>
         <div>
           <label htmlFor="body">Body:</label>
-          <input
-            type="text"
+          <textarea
             id="body"
             name="body"
             value={formData.body}
