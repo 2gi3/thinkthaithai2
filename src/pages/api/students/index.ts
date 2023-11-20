@@ -13,8 +13,9 @@ export default async function handler(
 ) {
   const session = await getServerSession(req, res, authOptions)
   const { pwd } = req.query;
-
-  if (pwd === process.env.STATICPATHSPASSWORD && req.method === 'GET') {
+  console.log({ pwd })
+  const localPwd = process.env.STATICPATHSPASSWORD
+  if (pwd === localPwd && req.method === 'GET') {
     // Get one student by id: /api/students?pwd=<PASSWORD>
     const client = await clientPromise;
     const db = client.db();
@@ -23,7 +24,7 @@ export default async function handler(
     const studentsIds = studentsData.map((student) => student._id);
     console.log({ studentsIdsServer: studentsIds })
     res.status(200).json({ ...studentsIds });
-  } else if (process.env.NODE_ENV !== 'development' && !session) {
+  } else if (process.env.NODE_ENV !== 'development' && !session && pwd !== localPwd) {
     // Authorization in development mode is used to test the Stripe webhook
 
     return res.status(401).json({
