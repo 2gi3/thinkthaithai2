@@ -1,6 +1,7 @@
 import { DatabaseCourse } from '@/types';
 import styles from '../../courses/courses.module.scss'
 import Link from "next/link";
+import TeacherNav from '@/components/NavBar/TeacerNav';
 
 
 export const getStaticProps = async () => {
@@ -34,6 +35,9 @@ export default function TeacherCourses(
     console.log(courses)
     return (
         <div className={styles.container}>
+            <TeacherNav>
+
+            </TeacherNav>
             <header>
                 <h1>
                     The&nbsp;best&nbsp;time to&nbsp;start&nbsp;learning is&nbsp;Now!

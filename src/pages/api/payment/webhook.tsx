@@ -80,8 +80,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 amountPaid === 209.00 ? 10 :
                     amountPaid === 380.00 ? 20 : 0;
             const paidLessons = student?.paidLessons || 0;
+            const previousTally = student?.lessonsTally || 0;
+
             const totalLessons = paidLessons + addedLessons
+            const updatedTally = previousTally + addedLessons;
+
             await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { paidLessons: totalLessons } });
+            await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { lessonsTally: updatedTally } });
 
             console.log({ successfulPayment: successfulPayment })
 

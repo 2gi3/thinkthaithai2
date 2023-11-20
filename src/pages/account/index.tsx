@@ -78,7 +78,7 @@ const Account = (
             {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
               <Link className={data?.paidLessons && data?.paidLessons > 0 ? "secondaryButton" : "primaryButton"} href='/courses'>Start a free course</Link>
             </div>
-              : <h3>{t('Your courses:')}</h3>}
+              : <h4>{t('Your courses:')}</h4>}
             {courseDetails.map((course) => {
               const courseProgress = startedCourses?.[course.id]?.length ?? 0;
               const progressPercentage = Math.ceil((courseProgress / course.sessionsLength!) * 100);
@@ -98,7 +98,7 @@ const Account = (
               );
             })}</div>
 
-          {data?.paidLessons && <div className={styles.remainingLessons}><h3>{t('Remaining lessons:')} <span>{data.paidLessons}</span></h3></div>}
+          {data?.paidLessons && <div className={styles.remainingLessons}><h4>{t('Remaining lessons:')} <span>{data.paidLessons}</span></h4></div>}
           {data?.paidLessons && data?.paidLessons > 0 ?
             <div className='primaryButton'><Calendar
               className={styles.button}

@@ -169,6 +169,7 @@
     .actions {
         display: flex;
         justify-content: space-between;
+        gap: $baseS;
 
         button {
             position: static;

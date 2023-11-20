@@ -27,5 +27,15 @@ export const fetcherStudent = async (...args: FetcherArgs) => {
   // console.log(response)
   return response
 };
+export const fetcherCustomer = async (...args: FetcherArgs) => {
+  const response: databaseStudent = await fetch(...args).then((res) => res.json());
+  // console.log(response)
+  return response
+};
+export const fetcherStudents = async (...args: FetcherArgs) => {
+  const response: databaseStudent[] = await fetch(...args).then((res) => res.json());
+  // console.log(response)
+  return response
+};
 
 

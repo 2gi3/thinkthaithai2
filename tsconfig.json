@@ -37,7 +37,8 @@
     "mongoDB/clientPromise.ts",
     "src/pages/api/auth/[...nextauth].js",
     "cypress/e2e/navBar.cy.js",
-    "cypress/e2e/prices.cy.js"
+    "cypress/e2e/prices.cy.js",
+    "createCalendlyHook.js"
   ],
   "exclude": [
     "node_modules"

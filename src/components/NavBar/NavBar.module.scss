@@ -32,6 +32,14 @@
   animation: slideIn 450ms ease-in-out forwards;
 }
 
+.teacherNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $baseS;
+  justify-content: center;
+  margin: auto;
+}
+
 .container,
 .hiddenBar {
   position: fixed;

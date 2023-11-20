@@ -67,6 +67,8 @@ export interface databaseStudent {
   // startedCourses?: string[];
   startedCourses?: { [key: string]: string[] };
   _id: string;
+  lessonsTally?: number;
+
 }
 
 // startedCourses?: { [key: string]: string[] };
