@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { DatabaseFeedback } from '@/types';
 import styles from './feedback.module.scss';
 import Image from 'next/image';
+import { formatParagraph } from '@/functions';
 
 const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
   const [isOverflow, setIsOverflow] = useState(false);
@@ -35,11 +36,16 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
             <p>{feedback.location}</p>
           </div>
           <h4>{feedback.title}</h4>
-          <p id={`feedback-body-${feedback._id}`}
-          // style={{ height: height }}
-          >
-            {feedback.body}
-          </p>
+          {/* <p id={`feedback-body-${feedback._id}`} */}
+          {formatParagraph(feedback.body).map((paragraph: string, index: number) => {
+            console.log({ paragraph })
+
+            return (
+              <p key={index} id={`feedback-body-${feedback._id}`}
+              >{paragraph}</p>
+            )
+          })}
+
         </div>
       </div>
       {/* {isOverflow && <button className="secondaryButton" style={{

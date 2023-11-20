@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { DatabaseFeedback } from '@/types';
 import styles from './feedback.module.scss';
 import Image from 'next/image';
-import { formatParagraph } from '@/functions';
 
 const FeedbackCard = ({ feedback }: { feedback: DatabaseFeedback }) => {
     const [isOverflow, setIsOverflow] = useState(false);
@@ -43,7 +42,7 @@ const FeedbackCard = ({ feedback }: { feedback: DatabaseFeedback }) => {
                     <p id={`feedback-body-${feedback._id}`}
                         style={{ height: height }}
                     >
-                        {formatParagraph(feedback.body)}
+                        {feedback.body}
                     </p>
                 </div>
                 {isOverflow && <button className="secondaryButton"
