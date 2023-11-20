@@ -105,8 +105,7 @@ const CreateCourseForm = () => {
             <div className={styles.section}>
                 <h2>Course Informations:</h2>
                 <label htmlFor="title">Title</label>
-                <input
-                    type="text"
+                <textarea
                     id="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -114,8 +113,7 @@ const CreateCourseForm = () => {
                 />
 
                 <label htmlFor="description">Description</label>
-                <input
-                    type="text"
+                <textarea
                     id="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -141,8 +139,7 @@ const CreateCourseForm = () => {
                 />
 
                 <label htmlFor="prerequisites">Prerequisites</label>
-                <input
-                    type="text"
+                <textarea
                     id="prerequisites"
                     value={prerequisites.join(',')}
                     onChange={(e) => setPrerequisites(e.target.value.split(','))}
@@ -166,8 +163,7 @@ const CreateCourseForm = () => {
                 />
 
                 <label htmlFor="header">Header</label>
-                <input
-                    type="text"
+                <textarea
                     id="header"
                     value={introduction.header}
                     onChange={(e) =>
@@ -179,8 +175,7 @@ const CreateCourseForm = () => {
                 />
 
                 <label htmlFor="body">Body</label>
-                <input
-                    type="text"
+                <textarea
                     id="body"
                     value={introduction.body}
                     onChange={(e) =>
@@ -192,8 +187,7 @@ const CreateCourseForm = () => {
                 />
 
                 <label htmlFor="footer">Footer</label>
-                <input
-                    type="text"
+                <textarea
                     id="footer"
                     value={introduction.footer}
                     onChange={(e) =>
@@ -213,8 +207,7 @@ const CreateCourseForm = () => {
             {lessons.map((intro, index) => (
                 <div className={styles.section} key={index}>
                     <label htmlFor={`title-${index}`}>Title</label>
-                    <input
-                        type="text"
+                    <textarea
                         id={`title-${index}`}
                         value={intro.title}
                         onChange={(e) => handleLessonsChange(index, 'title', e.target.value)}
@@ -229,24 +222,21 @@ const CreateCourseForm = () => {
                     />
 
                     <label htmlFor={`header-${index}`}>Header</label>
-                    <input
-                        type="text"
+                    <textarea
                         id={`header-${index}`}
                         value={intro.header}
                         onChange={(e) => handleLessonsChange(index, 'header', e.target.value)}
                     />
 
                     <label htmlFor={`body-${index}`}>Body</label>
-                    <input
-                        type="text"
+                    <textarea
                         id={`body-${index}`}
                         value={intro.body}
                         onChange={(e) => handleLessonsChange(index, 'body', e.target.value)}
                     />
 
                     <label htmlFor={`footer-${index}`}>Footer</label>
-                    <input
-                        type="text"
+                    <textarea
                         id={`footer-${index}`}
                         value={intro.footer}
                         onChange={(e) => handleLessonsChange(index, 'footer', e.target.value)}
