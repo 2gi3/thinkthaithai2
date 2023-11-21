@@ -38,8 +38,6 @@ const Feedback = ({ feedback }: { feedback: DatabaseFeedback }) => {
           <h4>{feedback.title}</h4>
           {/* <p id={`feedback-body-${feedback._id}`} */}
           {formatParagraph(feedback.body).map((paragraph: string, index: number) => {
-            console.log({ paragraph })
-
             return (
               <p key={index} id={`feedback-body-${feedback._id}`}
               >{paragraph}</p>
