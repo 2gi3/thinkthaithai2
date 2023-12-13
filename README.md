@@ -89,11 +89,23 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
  If the lesson booking feature stops updating the database, try deleting the webhook subscription from Calendly and the re-creating it.
  This is due to the fact that calendly can deactivate the webhook.
 
- 
-  - create a web-hooks subscription
+  - [List all subscriptions](https://developer.calendly.com/api-docs/faac832d7c57d-list-webhook-subscriptions)
+
+    - Log in to Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
+
+    - use the token to run the createCalendlyHook.js file in the root directory
+
+    - get a list of all subscriptions from [this page](https://developer.calendly.com/api-docs/    faac832d7c57d-list-webhook-subscriptions)
+      - select 'Auth': Bearer Auth, and paste the token in the token input
+      - select 'scope' : user
+      - 'organization' and 'user' values sre whole URLs, not just the ID
+  
+    - get the organization and user values by running createCalendlyHook.js in the root directory
+
+  - Create a web-hooks subscription
     - [Useful example for development](https://ngrok.com/docs/integrations/calendly/webhooks/#setup-webhook)
 
-    - Calendly create webhook: [documentation](https://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
+    - Calendly create webhook: [documentation](httcrps://developer.calendly.com/api-docs/c1ddc06ce1f1b-create-webhook-subscription)
 
     - Instructions: 
       - Log in to Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
@@ -137,6 +149,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
       
 
 
+
+  - [Delete webhook subscription](https://developer.calendly.com/api-docs/565b97f62dafe-delete-webhook-subscription)
+
+    - Log in to Calendly and get a TOKEN from [this page](https://calendly.com/integrations/api_webhooks)
+
+    - select 'Auth': Bearer Auth, and paste the token in the token input
+
+    - Fill in input for 'webhook_uuid'
+      - to get this value get a list of all subscriptions, the uuid is the last part of the uri for the hook: 
+      -  Example from 'list all webhooks' response:  "uri": "https://api.calendly.com/webhook_subscriptions/f74830e6-4h61-4j45-b9oe-42c87sfdg0sfg"
+        - 'webhook_uuid' from the example above = f74830e6-4h61-4j45-b9oe-42c87sfdg0sfg
 
  ## Drag, Drop and Crop 
    There was a bug that caused the cropped image to not be precisely identical to the area inside the selected circle in the original image,

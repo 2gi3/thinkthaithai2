@@ -1,7 +1,7 @@
 // Log in to Calendly and get a TOKEN from this page: https://calendly.com/integrations/api_webhooks
 
-const token = 'CREATE WEB TOKEN'
-const productionUrl = 'BASE DOMAIN Of YOUR PRODUCTION URL' //DO NOT add the path
+const token = 'get a token from calendly'
+const productionUrl = 'Add the base url here' //DO NOT add the path eg: (https://www.thinkthaithai.com)
 const headers = {
   'Authorization': `Bearer ${token}`,
   'Content-Type': 'application/json'
