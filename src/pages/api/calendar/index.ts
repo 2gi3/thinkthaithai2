@@ -45,6 +45,7 @@ export default async function handler(
           const paidLessons = student.paidLessons
           const totalLessons = paidLessons - 1
           await db.collection("users").updateOne({ _id: studentIdAsObjectId }, { $set: { paidLessons: totalLessons } });
+          res.status(200).json({ message: 'User lessons updated successfully.' });
 
         } else {
 
@@ -57,10 +58,6 @@ export default async function handler(
 
         console.error(error);
         res.status(500).json({ message: 'Error creating feedback TEST' });
-
-      } finally {
-
-        res.end();
 
       }
       break;
