@@ -23,7 +23,7 @@ const Footer = () => {
           <p>{t("Website by")}</p>
           <h3>{t("Giuseppe Ippolito")}</h3>
           <p >
-            © 2023 All rights reserved
+            © 2023
           </p>
           {/* <p>{t("Web-Developer")}</p>
           <p>{t("London")}</p> */}

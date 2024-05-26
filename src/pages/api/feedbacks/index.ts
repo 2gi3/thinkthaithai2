@@ -70,7 +70,7 @@ export default async function handler(
         res.status(200).json(feedbacks);
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error retrieving feedbacks' });
+        res.status(500).json({ 'Error retrieving feedbacks': error });
       }
       break;
 
