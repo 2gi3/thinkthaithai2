@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useSWR from 'swr';
 import Link from "next/link";
 import Head from "next/head";
@@ -14,6 +14,7 @@ import Calendar from "@/components/calendar";
 import styles from "./account.module.scss";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { RootState } from "@/redux/store";
 
 
 
@@ -23,6 +24,8 @@ import { useTranslation } from "next-i18next";
 const Account = (
   { courses }: { courses: DatabaseCourse[] }
 ) => {
+  const count = useSelector((state: RootState) => state.counter.value);
+
   const { t } = useTranslation("common");
   const dispatch = useDispatch();
   const { data: session, status } = useSession({ required: true });
@@ -36,6 +39,18 @@ const Account = (
   useEffect(() => {
     data ? dispatch(updateStudent(data)) : null
   }, [data, dispatch])
+
+  useEffect(() => {
+    // Fetch student data again
+    const fetchStudentData = async () => {
+      const updatedData: databaseStudent = await fetcherStudent(`/api/students?searchBy=email&value=${session?.user?.email}`);
+      dispatch(updateStudent(updatedData));
+    };
+
+    if (count !== undefined) {
+      fetchStudentData();
+    }
+  }, [count, session?.user?.email, dispatch]);
 
 
   const handleLogOut = async () => {

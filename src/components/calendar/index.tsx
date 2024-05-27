@@ -3,6 +3,8 @@
 
 import { useEffect } from "react";
 import { CalendarProps } from "@/types";
+import { useDispatch } from "react-redux";
+import { increment } from "@/redux/slices/counterSlice";
 
 declare global {
   interface Window {
@@ -11,6 +13,7 @@ declare global {
 }
 
 function Calendar({ label, eventURL, email, name, className, studentId }: CalendarProps) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -36,6 +39,9 @@ function Calendar({ label, eventURL, email, name, className, studentId }: Calend
         },
         utm: {
           utmSource: studentId,
+        },
+        onClose: function () {
+          dispatch(increment())
         }
       });
     }
