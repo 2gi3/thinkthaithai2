@@ -28,7 +28,6 @@ export default async function handler(
       let studentId = tracking.utm_source;
       const studentIdAsObjectId = new ObjectId(studentId);
 
-      sendTwilioMessage('Da Giuseppe, Pollo fammi sapere se ricevi questo messaggio, questo è un test')
 
       try {
 
@@ -49,7 +48,8 @@ export default async function handler(
           await db.collection("users").updateOne({ _id: studentIdAsObjectId }, { $set: { paidLessons: totalLessons } });
           res.status(200).json({ message: 'User lessons updated successfully.' });
         } else {
-          sendTwilioMessage(`From ThinkThaiThai.com: Student (ID: ${studentId}) tried to book a lesson but it's data was not found in the database`);
+          //Must update wettings in Twilio account to use this function
+          // sendTwilioMessage(`From ThinkThaiThai.com: Student (ID: ${studentId}) tried to book a lesson but it's data was not found in the database`);
 
           res.status(404).json({ message: "User not found." });
 
@@ -57,8 +57,9 @@ export default async function handler(
 
 
       } catch (error: any) {
-        const errorMessage = `Error occurred during the booking process for student ID: ${studentId}. Error: ${error.message}`;
-        sendTwilioMessage(`From ThinkThaiThai.com: ${errorMessage}`);
+        //Must update wettings in Twilio account to use this function
+        // const errorMessage = `Error occurred during the booking process for student ID: ${studentId}. Error: ${error.message}`;
+        // sendTwilioMessage(`From ThinkThaiThai.com: ${errorMessage}`);
         console.error({ error });
         res.status(500).json({ message: 'Error creating feedback TEST' });
 
