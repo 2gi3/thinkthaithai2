@@ -86,8 +86,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 
  ## Bookings:
- If the lesson booking feature stops updating the database, try deleting the webhook subscription from Calendly and the re-creating it.
- This is due to the fact that calendly can deactivate the webhook.
+ If the lesson booking feature stops updating the database, try deleting the webhook subscription from Calendly and then re-creating it.
+ This is due to the fact that calendly can deactivate the webhook (Time to fix it > 20 minutes).
 
   - [List all subscriptions](https://developer.calendly.com/api-docs/faac832d7c57d-list-webhook-subscriptions)
 
