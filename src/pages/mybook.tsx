@@ -4,16 +4,19 @@ import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from '@/styles/aboutMe.module.scss';
+import Alert from "@/components/Alert/Alert";
+import { useState } from "react";
 
 
 export default function About() {
-    const { t } = useTranslation("aboutme");
+    const { t } = useTranslation("myBook");
+    const [alertOpened, setAlertOpened] = useState(false)
 
 
     return (
         <>
             <Head>
-                <title>Online Thai language teacher</title>
+                <title>Thai language travel book</title>
                 <meta name="google-site-verification" content="Gsh6SUTRHzoVK6K6CHNPp2eNiowwXRXE5zR14fimbGo" />
                 <meta name="description" content="Learn more about teacher Nat and her teaching style" />
                 <meta property="og:url" content="https://www.thikthaithai.com/aboutme" />
@@ -27,18 +30,16 @@ export default function About() {
             <div className={styles.container}>
                 <header>
                     <div>
-                        <h2>your perfect companion</h2>
+                        <h2>{t('your perfect companion')}</h2>
                         {/* <p>your perfect companion</p> */}
-                        <h1>Essential Thai Phrases for Travelers</h1>
+                        <h1>{t('Essential Thai Phrases for Travelers')}</h1>
                         <p>
-                            A book designed to make your travel experience smoother,
-                            more enjoyable, and deeply enriching.
+                            {t('A book designed to make your travel experience smoother, more enjoyable, and deeply enriching.')}
                         </p>
                         <p>
-                            Take it with you anywhere for quick reference on the go.
+                            {t('Take it with you anywhere for quick reference on the go.')}
                         </p>
-                        <p style={{ width: "100%" }}>                            Audio included
-                        </p>
+                        <p style={{ width: "100%" }}>                            {t('Audio included')}                        </p>
                     </div>
                     <div>
                         <Image src='/book_cover.webp' alt="Teacher Natt" width={320} height={320} />
@@ -50,31 +51,40 @@ export default function About() {
                         <Image src='/lesson_example.webp' alt="Teacher Natt" width={320} height={320} />
                     </div>
                     <div>
-                        <p>Learn basic phrases for:                        </p>
+                        <p>{t('Learn basic phrases for')} :     </p>
                         <ul style={{ marginBottom: 12 }}>
-                            <li>✔️ Going to restaurants</li>
-                            <li>✔️Traveling</li>
-                            <li>✔️Shopping</li>
-                            <li>✔️Asking direction</li>
+                            <li>✔️ {t('Going to restaurants')}</li>
+                            <li>✔️{t('Traveling')}</li>
+                            <li>✔️{t('Shopping')}</li>
+                            <li>✔️{t('Asking for directions')}</li>
                         </ul>
-                        <p>You will also learn about
-                            Interesting places and
-                            Famous festivals, <br />
-                            Popular street food to try and
-                            Thai Etiquette
+                        <p>{t('You will also learn about Interesting places and Famous festivals,')}<br />
+                            {t('Popular street food to try and Thai Etiquette')}
                         </p>
 
-                        <p>Easy-to-Understand Pronunciations: Phonetic transcriptions make it easy to speak like a local.
-                        </p>
-                        <p>Pages: 104
-                        </p>
+                        <p>{t('Phonetic transcriptions make it easy to understand the pronounciation')} </p>
+                        <p>{t('104 pages')}</p>
                     </div>
                 </main>
 
                 <div className={styles.CTA}>
-                    <p>Begins with the right words</p>
-                    <Link href='/feedbacks'> grab your guide now!</Link>
+                    <p>{t('Begin with the right words')}</p>
+                    <button
+                        className={'primaryButton'}
+                        type="button"
+                        onClick={() => setAlertOpened(true)}>
+                        {t('grab your guide now!')}
+                    </button>
                 </div>
+                {alertOpened && (
+                    <Alert
+                        heading="This function is not available yet"
+                        message="Please contact the teacher to buy this book"
+                        onClose={() => {
+                            setAlertOpened(false);
+                        }}
+                    />
+                )}
             </div>
         </>
     );
@@ -83,7 +93,7 @@ export default function About() {
 export async function getStaticProps({ locale }: any) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, ["common", "aboutme"])),
+            ...(await serverSideTranslations(locale, ["common", "myBook"])),
         },
     };
 }
