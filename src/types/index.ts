@@ -42,6 +42,7 @@ export interface IStudent {
   imageURL?: string;
   startedCourses?: string[];
   completedCourses?: string[];
+  boughtBooks?: string[];
   provider?: string;
   expires_at?: {
     $numberInt: number
@@ -64,6 +65,7 @@ export interface databaseStudent {
   image?: string;
   name?: string;
   paidLessons?: number;
+  boughtBooks?: string[];
   // startedCourses?: string[];
   startedCourses?: { [key: string]: string[] };
   _id: string;

@@ -16,7 +16,8 @@ interface Products {
 const products: Products = {
   '5 lessons': 109,
   '10 lessons': 209,
-  '20 Lessons': 380
+  '20 Lessons': 380,
+  'b1': 1
 }
 
 

@@ -6,11 +6,54 @@ import Image from "next/image";
 import styles from '@/styles/aboutMe.module.scss';
 import Alert from "@/components/Alert/Alert";
 import { useState } from "react";
+import Price from "@/components/Currency/Price";
+import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useRouter } from "next/router";
 
 
 export default function About() {
     const { t } = useTranslation("myBook");
+    const router = useRouter();
+    const { data, status } = useSession();
+    const student = useSelector(
+        (state: RootState) => state.student
+    );
     const [alertOpened, setAlertOpened] = useState(false)
+
+
+    const makePayment = async (product: string) => {
+        if (!data) {
+            setAlertOpened(true)
+        } else {
+            try {
+                const response = await fetch("/api/payment", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        product,
+                        studentEmail: student?.email,
+                        studentID: student._id
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorResponse = await response.json();
+                    throw new Error(errorResponse.message || "Payment failed");
+                }
+
+                const { url } = await response.json();
+                console.log(`The response from the API is: ${url}`)
+                router.push(url);
+            } catch (error) {
+                console.error("Payment error:", error);
+            } finally {
+            }
+        }
+    };
 
 
     return (
@@ -66,20 +109,39 @@ export default function About() {
                         <p>{t('104 pages')}</p>
                     </div>
                 </main>
+                {student?.boughtBooks?.includes('b1') ? (
+                    <div className={styles.CTA}>
+                        <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
+                            <button className={'primaryButton'} type="button">
+                                {'Download book'}
+                            </button>
+                        </a>
+                    </div>
 
-                <div className={styles.CTA}>
-                    <p>{t('Begin with the right words')}</p>
-                    <button
-                        className={'primaryButton'}
-                        type="button"
-                        onClick={() => setAlertOpened(true)}>
-                        {t('grab your guide now!')}
-                    </button>
-                </div>
+                ) : (
+                    <div className={styles.CTA}>
+                        <p>{t('Begin with the right words')}</p>
+                        <Price USD={1} />
+
+                        <button
+                            className={'primaryButton'}
+                            type="button"
+                            onClick={() => {
+                                if (status === "authenticated" && data && data.user) {
+                                    setAlertOpened(false);
+                                } else {
+                                    makePayment("b1")
+                                }
+                            }}>
+                            {t('grab your guide now!')}
+                        </button>
+                    </div>
+                )}
+
                 {alertOpened && (
                     <Alert
-                        heading="This function is not available yet"
-                        message="Please contact the teacher to buy this book"
+                        heading="Please log in"
+                        message="to buy this book"
                         onClose={() => {
                             setAlertOpened(false);
                         }}

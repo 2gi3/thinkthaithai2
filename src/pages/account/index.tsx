@@ -132,6 +132,17 @@ const Account = (
             </button>
             {showHistory && <PaymentsHistory />}</div>}
 
+          {/* {data?.boughtBooks?.includes('b1') && ( */}
+          <div>
+            <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
+              <button className={'secondaryButton'} type="button">
+                {'Download Book'}
+              </button>
+            </a>
+          </div>
+          {/* )} */}
+
+
 
         </div>
       </>

@@ -76,21 +76,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             db.collection('payments').insertOne(successfulPayment);
             const student = await db.collection("users").findOne({ _id: successfulPayment.studentId });
             const amountPaid = Number(successfulPayment.amountPaid)
-            const addedLessons = amountPaid === 109 ? 5 :
-                amountPaid === 209.00 ? 10 :
-                    amountPaid === 380.00 ? 20 : 0;
-            const paidLessons = student?.paidLessons || 0;
-            const previousTally = student?.lessonsTally || 0;
 
-            const totalLessons = paidLessons + addedLessons
-            const updatedTally = previousTally + addedLessons;
 
-            await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { paidLessons: totalLessons } });
-            await db.collection("users").updateOne({ _id: successfulPayment.studentId }, { $set: { lessonsTally: updatedTally } });
+            if (amountPaid === 1) {
+                const boughtBooks = student?.boughtBooks || [];
+                boughtBooks.push('b1');
+                await db.collection("users").updateOne(
+                    { _id: successfulPayment.studentId },
+                    { $set: { boughtBooks: boughtBooks } }
+                );
+            } else {
+                const addedLessons = amountPaid === 109 ? 5 :
+                    amountPaid === 209 ? 10 :
+                        amountPaid === 380 ? 20 : 0;
+                const paidLessons = student?.paidLessons || 0;
+                const previousTally = student?.lessonsTally || 0;
 
-            console.log({ successfulPayment: successfulPayment })
+                const totalLessons = paidLessons + addedLessons;
+                const updatedTally = previousTally + addedLessons;
 
+                await db.collection("users").updateOne(
+                    { _id: successfulPayment.studentId },
+                    { $set: { paidLessons: totalLessons, lessonsTally: updatedTally } }
+                );
+            }
+
+            console.log({ successfulPayment: successfulPayment });
             break;
+
         case 'checkout.session.expired':
             const checkoutSessionExpired = event.data.object;
             console.log({ checkoutSessionExpired: checkoutSessionExpired })
