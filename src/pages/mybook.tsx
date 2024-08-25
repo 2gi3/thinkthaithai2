@@ -111,10 +111,10 @@ export default function About() {
                 </main>
                 {student?.boughtBooks?.includes('b1') ? (
                     <div className={styles.CTA}>
-                        <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
-                            <button className={'primaryButton'} type="button">
-                                {'Download book'}
-                            </button>
+                        <a className={'primaryButton'} href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
+                            {/* <button className={'primaryButton'} type="button"> */}
+                            {'Download book'}
+                            {/* </button> */}
                         </a>
                     </div>
 

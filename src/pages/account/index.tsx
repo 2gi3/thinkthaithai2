@@ -91,7 +91,7 @@ const Account = (
           {data?.boughtBooks?.includes('b1') && (
             <div>
               <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
-                <button className={'secondaryButton'} type="button">
+                <button className={'primaryButton'} type="button">
                   {'Download Book'}
                 </button>
               </a>
