@@ -88,7 +88,15 @@ const Account = (
           <header>
             <h2>{session.user.name}</h2>
           </header>
-
+          {data?.boughtBooks?.includes('b1') && (
+            <div>
+              <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
+                <button className={'secondaryButton'} type="button">
+                  {'Download Book'}
+                </button>
+              </a>
+            </div>
+          )}
           <div>
             {filteredCourses.length === 0 ? <div style={{ paddingBottom: 24 }}>
               <Link className={data?.paidLessons && data?.paidLessons > 0 ? "secondaryButton" : "primaryButton"} href='/courses'>Start a free course</Link>
@@ -131,18 +139,6 @@ const Account = (
               {showHistory ? <FaTimes /> : t('Payments history')}
             </button>
             {showHistory && <PaymentsHistory />}</div>}
-
-          {/* {data?.boughtBooks?.includes('b1') && ( */}
-          <div>
-            <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
-              <button className={'secondaryButton'} type="button">
-                {'Download Book'}
-              </button>
-            </a>
-          </div>
-          {/* )} */}
-
-
 
         </div>
       </>

@@ -128,9 +128,9 @@ export default function About() {
                             type="button"
                             onClick={() => {
                                 if (status === "authenticated" && data && data.user) {
-                                    setAlertOpened(false);
-                                } else {
                                     makePayment("b1")
+                                } else {
+                                    setAlertOpened(true);
                                 }
                             }}>
                             {t('grab your guide now!')}
