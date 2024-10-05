@@ -15,6 +15,7 @@ import styles from "./account.module.scss";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { RootState } from "@/redux/store";
+import BookDownload from "@/components/BookDownload";
 
 
 
@@ -88,6 +89,7 @@ const Account = (
           <header>
             <h2>{session.user.name}</h2>
           </header>
+          <BookDownload />
           {data?.boughtBooks?.includes('b1') && (
             <div>
               <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>

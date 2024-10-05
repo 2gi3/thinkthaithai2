@@ -159,6 +159,11 @@ export interface AlertProps {
   onClose: () => void;
 }
 
+export interface BookDownloadProps {
+  onClose: () => void;
+}
+
+
 export interface CheckoutSession {
   id: string;
   payment_status: string

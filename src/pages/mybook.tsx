@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/router";
+import BookDownload from "@/components/BookDownload";
 
 
 export default function About() {
@@ -21,6 +22,7 @@ export default function About() {
         (state: RootState) => state.student
     );
     const [alertOpened, setAlertOpened] = useState(false)
+    const [bookDownloadOpen, setBookDownloadOpen] = useState(false)
 
 
     const makePayment = async (product: string) => {
@@ -110,13 +112,25 @@ export default function About() {
                     </div>
                 </main>
                 {student?.boughtBooks?.includes('b1') ? (
-                    <div className={styles.CTA}>
-                        <a className={'primaryButton'} href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
-                            {/* <button className={'primaryButton'} type="button"> */}
-                            {'Download book'}
-                            {/* </button> */}
-                        </a>
-                    </div>
+                    //<div className={styles.CTA}>
+
+
+
+                    bookDownloadOpen ? (
+                        <BookDownload onClose={() => setBookDownloadOpen(!bookDownloadOpen)} />
+                    ) : (
+                        <div className={styles.CTA}>
+                            <button
+                                className="primaryButton" onClick={() => setBookDownloadOpen(!bookDownloadOpen)}>
+                                Download Book
+                            </button>
+                        </div>
+                    )
+
+
+
+
+                    // </div>
 
                 ) : (
                     <div className={styles.CTA}>
