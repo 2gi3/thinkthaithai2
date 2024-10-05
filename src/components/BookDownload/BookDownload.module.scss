@@ -37,4 +37,36 @@
         flex-direction: row;
         justify-content: space-between;
     }
+
+    .audioFilesList {
+        max-height: 300px; // Adjust this value as needed
+        overflow-y: auto;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        border: 1px solid #ddd; // Optional: to add a border around the list
+        border-radius: 5px;
+        background-color: #f9f9f9; // Optional: light background for clarity
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                margin: 0.5rem 0;
+
+                a {
+                    text-decoration: none;
+                    color: #007bff;
+                    font-weight: 500;
+                    transition: color 0.3s;
+
+                    &:hover {
+                        color: #0056b3;
+                    }
+                }
+            }
+        }
+    }
+
 }
