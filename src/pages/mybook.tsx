@@ -112,20 +112,25 @@ export default function About() {
                     </div>
                 </main>
                 {student?.boughtBooks?.includes('b1') ? (
-                    //<div className={styles.CTA}>
+                    <div className={styles.CTA}>
 
-
-
-                    bookDownloadOpen ? (
-                        <BookDownload onClose={() => setBookDownloadOpen(!bookDownloadOpen)} />
-                    ) : (
-                        <div className={styles.CTA}>
-                            <button
-                                className="primaryButton" onClick={() => setBookDownloadOpen(!bookDownloadOpen)}>
-                                Download Book
-                            </button>
-                        </div>
-                    )
+                        <a href="https://drive.google.com/drive/u/1/folders/1-9hDbIQX20qqq5TNujY-f7_qe2202jDh"
+                            target="_blank" >
+                            {/* <button className={'primaryButton'} type="button"> */}
+                            {'Download Book'}
+                            {/* </button> */}
+                        </a>
+                    </div>
+                    // bookDownloadOpen ? (
+                    //     <BookDownload onClose={() => setBookDownloadOpen(!bookDownloadOpen)} />
+                    // ) : (
+                    //     <div className={styles.CTA}>
+                    //         <button
+                    //             className="primaryButton" onClick={() => setBookDownloadOpen(!bookDownloadOpen)}>
+                    //             Download Book
+                    //         </button>
+                    //     </div>
+                    // )
 
 
 

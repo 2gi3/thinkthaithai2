@@ -89,10 +89,10 @@ const Account = (
           <header>
             <h2>{session.user.name}</h2>
           </header>
-          <BookDownload />
           {data?.boughtBooks?.includes('b1') && (
             <div>
-              <a href="/pdf/Essential_Thai_Phrases_for_Travelers.pdf" download>
+              <a href="https://drive.google.com/drive/u/1/folders/1-9hDbIQX20qqq5TNujY-f7_qe2202jDh"
+                target="_blank"  >
                 <button className={'primaryButton'} type="button">
                   {'Download Book'}
                 </button>
