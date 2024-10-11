@@ -140,7 +140,7 @@ export default function About() {
                 ) : (
                     <div className={styles.CTA}>
                         <p>{t('Begin with the right words')}</p>
-                        <Price USD={1} />
+                        <Price USD={20} />
 
                         <button
                             className={'primaryButton'}
