@@ -78,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const amountPaid = Number(successfulPayment.amountPaid)
 
 
-            if (amountPaid === 1) {
+            if (amountPaid === 20) {
                 const boughtBooks = student?.boughtBooks || [];
                 boughtBooks.push('b1');
                 await db.collection("users").updateOne(
